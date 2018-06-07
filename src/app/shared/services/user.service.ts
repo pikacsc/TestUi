@@ -20,14 +20,14 @@ export class UserService {
     lon: null
   };
 
-  url='http://localhost:8080/toma/login/';
+  loginUrl='http://localhost:8080/toma/login/';
 
   constructor(private http: HttpClient) {
     // this.getUsers();
   }
 
   getUsers(login: Login) {
-    return this.http.post(this.url, login);
+    return this.http.post(this.loginUrl, login);
     // this.users = this.db.list("clients");
     // return this.users;
   }

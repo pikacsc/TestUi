@@ -1,13 +1,13 @@
 <p>
-  {{user.userName}}//
-  {{user.userAddr1}}//
-  {{user.userGender}}
+  {{user.uname}}//
+  {{user.uaddr1}}//
+  {{user.ugender}}
 </p>
 <br>
 <section class="container">
   <!-- Login form -->
   <div class="col-sm-6">
-    <form style="width:22rem" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <form style="width:22rem" #loginForm="ngForm" (ngSubmit)="login()">
       <p class="h5 text-center mb-4">Sign in</p>
 
       <div class="md-form">
