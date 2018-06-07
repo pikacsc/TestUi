@@ -16,7 +16,7 @@ import { UserAccountComponent } from "./user-account/user-account.component";
 import { UserFavouriteProductsComponent } from "./user-favourite-products/user-favourite-products.component";
 import { UserCartItemsComponent } from "./user-cart-items/user-cart-items.component";
 import { SharedModule } from "../shared/shared.module";
-
+import { UserService } from "../shared/services/user.service";
 
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(UserRoutes)],
@@ -27,7 +27,7 @@ import { SharedModule } from "../shared/shared.module";
     UserCartItemsComponent
 
   ],
-  providers: [],
+  providers: [UserService],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UserModule {}
