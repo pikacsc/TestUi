@@ -66,8 +66,15 @@ export class LoginComponent implements OnInit {
     this.userService.getUsers(this.login1)
       .subscribe((user:User) => {
         this.user = user;
-      });
 
+        this.userService.loginUser=this.user;
+        console.log(this.userService.loginUser.uaddr1);
+
+        if(this.userService.loginUser!=null){
+          this.router.navigate(["index"]);
+        }
+
+      });
     // if (this.authService.loginCheck(userForm.value["userId"], userForm.value["userPassword"]) === true) {
     //   const toastOption: ToastOptions = {
     //     title: "Authentication Success",

@@ -13,7 +13,7 @@ import { Login } from "../models/login";
 @Injectable()
 export class UserService {
   selectedUser: User = new User();
-  users: User;
+  loginUser: User;
 
   location = {
     lat: null,
@@ -24,6 +24,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     // this.getUsers();
+    this.loginUser=new User();
   }
 
   getUsers(login: Login) {
