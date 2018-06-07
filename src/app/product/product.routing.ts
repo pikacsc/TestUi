@@ -18,6 +18,12 @@ export const ProductRoutes: Routes = [
       {
         path: "product/:id",
         component: ProductDetailComponent
+      },
+
+      {
+        path:":id",
+        component : ProductListComponent
+
       }
     ]
   }

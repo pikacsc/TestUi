@@ -14,7 +14,7 @@ import { AgmCoreModule } from "@agm/core";
 import { NoAccessComponent } from "./components/no-access/no-access.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 // import { FireBaseConfig } from "../../environments/firebaseConfigDummy";
-import { FilterByBrandPipe } from "./pipes/filterByBrand.pipe";
+import { FilterByKindPipe } from "./pipes/filterByKind.pipe";
 import { ProductService } from "./services/product.service";
 import { AdminGaurd } from "./services/admin-gaurd";
 // import { AuthGuard } from "./services/auth_gaurd";
@@ -44,7 +44,7 @@ import { LoaderSpinnerService } from "./loader-spinner/loader-spinner";
   ],
   declarations: [
     NoProductsFoundComponent,
-    FilterByBrandPipe,
+    FilterByKindPipe,
     NoAccessComponent,
     PageNotFoundComponent
   ],
@@ -59,7 +59,7 @@ import { LoaderSpinnerService } from "./loader-spinner/loader-spinner";
     RouterModule,
     OwlModule,
     NgxPaginationModule,
-    FilterByBrandPipe,
+    FilterByKindPipe,
     AgmCoreModule,
     NoAccessComponent,
     PageNotFoundComponent
