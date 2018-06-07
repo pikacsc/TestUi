@@ -1,0 +1,49 @@
+<hr class="between-sections">
+
+<div class="card card-cascade wider reverse">
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>1:1 질문하기</strong></h4>
+  </div>
+
+</div>
+
+<hr class="between-sections">
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/index']">Home</a>
+  </li>
+  <li class="breadcrumb-item">고객센터</li>
+  <li class="breadcrumb-item">1:1 질문하기</li>
+</ol>
+
+<!--Table-->
+<table class="table">
+    <!--Table head-->
+    <thead class="table-success">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>답변</th>
+        </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+        <tr *ngFor="let qna of qnas">
+            <th scope="row">{{ qna.q_no }}</th>
+            <th><a [routerLink]="['/detail/qna', qnas.q_no]" routerLinkActive="router-link-active">
+              {{ qna.q_title }}</a>
+            </th>
+            <th>{{ qna.q_date }}</th>
+            <th>{{ qna.q_reply }}</th>
+        </tr>
+    </tbody>
+    <!--Table body-->
+</table>
