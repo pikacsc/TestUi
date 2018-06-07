@@ -8,10 +8,22 @@ import { ToastOptions, ToastyService, ToastyConfig } from "ng2-toasty";
 import { Observable } from "rxjs";
 import { Product } from "../models/product";
 // import { AuthService } from "./auth.service";
+//*****동현임포트수정
 import { UserService } from "./user.service";
+import { HttpClientModule,HttpHeaders, HttpClient } from '@angular/common/http';
+//*****동현임포트수정끝
+import { CachcingServiceBase } from "./cachcing.service";
+
+let count = 0;
+
 
 @Injectable()
-export class ProductService {
+export class ProductService extends CachcingServiceBase{
+
+
+  productlistUrl = 'http://localhost:8080/toma/';
+  private products: Observable<Product[]>;
+
   // products: AngularFireList<Product>;
   // product: AngularFireObject<Product>;
 
@@ -23,29 +35,65 @@ export class ProductService {
   navbarCartCount = 0;
   navbarFavProdCount = 0;
 
-  constructor(
-    // private db: AngularFireDatabase,
-    // private authService: AuthService,
-    private userService: UserService,
-    private toastyService: ToastyService,
-    private toastyConfig: ToastyConfig
-  ) {
-    // Toaster Config
-    this.toastyConfig.position = "top-right";
-    this.toastyConfig.theme = "material";
+  // constructor()(
+  //   // private db: AngularFireDatabase,
+  //   // private authService: AuthService,
+  //   // 동현생성자수정
+  //   private userService: UserService,
+  //   private http:HttpClient,
+  //   // 동현생성자수정끝
+  //   private toastyService: ToastyService,
+  //   private toastyConfig: ToastyConfig
+  // ) {
+  //   // Toaster Config
+  //   this.toastyConfig.position = "top-right";
+  //   this.toastyConfig.theme = "material";
+  //
+  //   // if (this.authService.isLoggedIn()) {
+  //   //   this.calculateFavProductCounts();
+  //   //   this.calculateCartProductCounts();
+  //   // } else {
+  //   //   this.calculateLocalFavProdCounts();
+  //   //   this.calculateLocalCartProdCounts();
+  //   // }
+  // }
 
-    // if (this.authService.isLoggedIn()) {
-    //   this.calculateFavProductCounts();
-    //   this.calculateCartProductCounts();
-    // } else {
-    //   this.calculateLocalFavProdCounts();
-    //   this.calculateLocalCartProdCounts();
-    // }
+  public constructor(
+    // 동현생성자수정
+    private userService: UserService,
+    private http:HttpClient,
+    // 동현생성자수정끝
+    private toastyService: ToastyService,
+    private toastyConfig: ToastyConfig){
+
+      super();
+      this.toastyConfig.position = "top-right";
+      this.toastyConfig.theme = "material";
+
+
+
   }
 
-  getProducts() {
+
+
+
+  public getProducts(){
     // this.products = this.db.list("products");
     // return this.products;
+
+    // return this.cache<Product[]>(() => this.products,
+    //                            (val: Observable<Product[]>) => this.products = val,
+    //                            () => this.http
+    //                                      .get("http://localhost:8080/toma")
+    //                                      .map((response) => response.json()
+    //                                                                 .map((item) => {
+    //                                                                   let model = new Product();
+    //                                                                   model.updateFrom(item);
+    //                                                                   return model;
+    //                                                                 })));
+
+    return this.http.get(this.productlistUrl);
+
   }
 
   createProduct(data: Product) {
@@ -119,14 +167,14 @@ export class ProductService {
       // setTimeout(() => {
       //   this.favouriteProducts.push({
       //     product: data,
-      //     productId: productKey,
+          // productId: productKey,
       //     userId: user.$key
       //   });
       //
       //   this.calculateFavProductCounts();
       // }, 1500);
     }
-  }
+  // }
 
   // Fetching unsigned users favourite proucts
   // getLocalFavouriteProducts(): Product[] {
@@ -177,13 +225,16 @@ export class ProductService {
   */
 
   // Fetching Cart Products based on userId
-  // getUsersCartProducts() {
+  // **********동현카트구현중*************
+  cartUrl='http://localhost:8080/toma/cart/';
+  getUsersCartProducts() {
   //   const user = this.authService.getLoggedInUser();
     // this.cartProducts = this.db.list("cartProducts", ref =>
     //   ref.orderByChild("userId").equalTo(user.$key)
     // );
     // return this.cartProducts;
-  // }
+    return this.http.get(this.cartUrl+this.userService.loginUser.uid);
+  }
 
   // Adding new Product to cart db if logged in else localStorage
   // addToCart(data: Product): void {
@@ -277,10 +328,11 @@ export class ProductService {
     //     this.navbarCartCount = data.length;
     //   });
 //   }
-// }
+}
+
 
 export class FavouriteProduct {
   product: Product;
-  productId: string;
-  userId: string;
+  p_code: string;
+  u_id: string;
 }

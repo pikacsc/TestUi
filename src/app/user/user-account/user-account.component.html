@@ -2,19 +2,21 @@
   <div class="row">
     <div class="col-md-8 mb-3">
       <label for="userName">User Name</label>
-      <input type="text" class="form-control" [ngClass]="(userName.invalid)?'is-invalid':'is-valid'" id="userName" [ngModel]="loggedUser.userName"
-        name="userName" #userName="ngModel" value="Mark" (ngModelChange)="enbUpdBut = !enbUpdBut" required>
+      <input type="text" class="form-control" [ngClass]="(userName.invalid)?'is-invalid':'is-valid'" id="userName" [(ngModel)]="userService.loginUser.uname"
+        name="userName" #userName="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" required>
       <div class="invalid-feedback">
         username is Mandatory.
       </div>
     </div>
     <div class="col-md-8 mb-3">
-      <!-- <label for="emailId">Email Id</label>
-      <input type="text" class="form-control is-valid" [value]="loggedUser.emailId" id="emailId" [disabled]="true"> -->
-    </div>
-    <div class="col-md-8 mb-3">
       <!-- <label for="contactNumber">Contact Number</label>
       <input type="tel" class="form-control" name="phoneNumber" [ngModel]="loggedUser.phoneNumber" #phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut"> -->
+      <label for="emailId">Email Id</label>
+      <input type="text" class="form-control is-valid" id="emailId" [disabled]="true" name="userEmail" [(ngModel)]="userService.loginUser">
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="contactNumber">Contact Number</label>
+      <input type="tel" class="form-control" name="phoneNumber" [(ngModel)]="userService.loginUser.uphone" #phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut">
     </div>
   </div>
   <!--

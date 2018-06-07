@@ -14,10 +14,9 @@ import { SharedModule } from "./shared/shared.module";
 import { NoticeModule } from "./notice/notice.module"
 
 import { AppRoutes } from "./app.routing";
-import { NoticeListComponent } from './notice/notice-list/notice-list.component';
 
 @NgModule({
-  declarations: [AppComponent, NoticeListComponent],
+  declarations: [AppComponent],
   imports: [
     HttpModule,
     HttpClientModule,

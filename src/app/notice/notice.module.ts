@@ -10,14 +10,17 @@ import { UserModule } from "../user/user.module";
 import { SharedModule } from "../shared/shared.module";
 
 import { NoticeComponent } from './notice.component';
+import { NoticeListComponent } from './notice-list/notice-list.component'
 import { FaqComponent } from './faq/faq.component';
 import { QnaComponent } from './qna/qna.component';
+
 import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
 import { FaqDetailComponent } from './faq-detail/faq-detail.component';
 import { QnaDetailComponent } from './qna-detail/qna-detail.component';
 
 @NgModule({
-  declarations: [NoticeComponent, FaqComponent, QnaComponent, NoticeDetailComponent, FaqDetailComponent, QnaDetailComponent],
+  declarations: [NoticeComponent, NoticeListComponent, FaqComponent, QnaComponent,
+    NoticeDetailComponent, FaqDetailComponent, QnaDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(NoticeRoutes),

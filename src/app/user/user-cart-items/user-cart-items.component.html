@@ -1,7 +1,10 @@
-<div *ngIf="products.length > 0">
+<!-- <div *ngIf="products.length > 0"> -->
+<div *ngIf='cartList.length>0'>
   <div class="row">
     <!-- List of Products -->
-    <div class="col-sm-4" *ngFor="let cartItem of products | paginate: { itemsPerPage: 6, currentPage: page }">
+    <!-- <div class="col-sm-4" *ngFor="let cartItem of products | paginate: { itemsPerPage: 6, currentPage: page }"> -->
+    <div class="col-sm-4" *ngFor="let cartItem of cartList | paginate: { itemsPerPage: 6, currentPage: page }">
+
       <div class="item">
         <div class=" mb-r">
 
@@ -12,7 +15,7 @@
             <a [routerLink]="['/products/product', cartItem.productId]">
 
               <div class="view overlay hm-white-slight">
-                <img [src]="cartItem.product.productImageUrl" class="img-fluid" alt="" width="360px" height="640px">
+                <img src="./assets/ProductImg/{{cartItem.p_img}}.jpg" class="img-fluid" alt="" width="360px" height="640px">
                 <a>
                   <div class="mask waves-effect waves-light" mdbRippleRadius></div>
                 </a>
@@ -25,22 +28,23 @@
             <div class="card-body text-center no-padding">
               <!--Category & Title-->
               <a class="text-muted">
-                <h5>{{ cartItem.product.productCategory }}</h5>
+                <h5>{{cartItem.p_kind}}</h5>
               </a>
               <p class="card-title">
                 <strong>
-                  <a [routerLink]="['/products/product', cartItem.productId]" routerLinkActive="router-link-active">{{ cartItem.product.productName }}</a>
+                  <a [routerLink]="['/products/product', cartItem.productId]" routerLinkActive="router-link-active">{{ cartItem.p_name }}</a>
                 </strong>
               </p>
 
               <!--Description-->
-              <p class="card-text">{{ cartItem.product.productDescription }}
+              <p class="card-text">{{cartItem.p_content}}
               </p>
 
               <!--Card footer-->
               <div class="card-footer">
-                <span class="left">{{ cartItem.product.productPrice }} $</span>
-                <span class="right" *ngIf="authService.isLoggedIn()">
+                <span class="left">{{cartItem.p_sellprice}}$</span>
+                <!-- <span class="right" *ngIf="authService.isLoggedIn()"> -->
+                <span class="right">
                   <a placement="top" mdbTooltip="Remove Product" container="body" (click)="removeFromCart(cartItem.$key)">
                     <i class="fa fa-trash"></i>
                   </a>
@@ -62,6 +66,7 @@
   </div>
 </div>
 
-<div *ngIf="products.length == 0">
+<!-- <div *ngIf="products.length == 0"> -->
+<div>
   <app-no-products-found [title]="messageTitle" [description]="messageDescription"></app-no-products-found>
 </div>

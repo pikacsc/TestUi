@@ -3,7 +3,10 @@ import {
   FavouriteProduct,
   ProductService
 } from "../../shared/services/product.service";
+
 // import { AuthService } from "../../shared/services/auth.service";
+import {UserService} from '../../shared/services/user.service';
+import {Cart} from '../../shared/models/cart';
 
 @Component({
   selector: "app-user-cart-items",
@@ -18,10 +21,14 @@ export class UserCartItemsComponent implements OnInit {
   messageTitle = "No Products Found in Cart";
   messageDescription = "Please, Add Products to your cart";
 
+  cartList: Cart[]=[];
   constructor(
-    private productService: ProductService,
+    private userService:UserService,
+    private productService: ProductService
     // public authService: AuthService
-  ) {}
+  ) {
+
+}
 
   ngOnInit() {
     this.getCartProducts();
@@ -37,6 +44,10 @@ export class UserCartItemsComponent implements OnInit {
     //     this.products.push(y);
     //   });
     // });
+    const x = this.productService.getUsersCartProducts();
+    x.subscribe((cartList:Cart[])=>{
+      this.cartList=cartList;
+    });
   }
 
   removeFromCart($key: string) {
