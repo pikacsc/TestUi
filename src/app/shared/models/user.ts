@@ -1,15 +1,15 @@
 export class User {
-  userId: string;
-  userPassword: string;
-  userName: string;
-  userPhone: string;
-  userAddr1: string;
-  userAddr2: string;
-  userAddr3: string;
-  userAddrCheck: number;
-  userBirth: string;
-  userGender: string;
-  userSMSYN: string;
-  userEmailYN: string;
-  userJoinDate: Date;
+  public uid: string;
+  public upw: string;
+  public uname: string;
+  public uphone: string;
+  public uaddr1: string;
+  public uaddr2: string;
+  public uaddr3: string;
+  public uaddrcheck: number;
+  public ubirth: string;
+  public ugender: string;
+  public ujoindate : Date;
+  public usmsyn: string;
+  public uemailyn:string;
 }

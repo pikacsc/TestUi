@@ -12,8 +12,8 @@ import { Login } from "../models/login";
 
 @Injectable()
 export class UserService {
-  selectedUser: User = new User();
-  users: User;
+  // selectedUser: User = new User();
+  // users: User;
 
   location = {
     lat: null,
@@ -21,26 +21,29 @@ export class UserService {
   };
 
   url='http://localhost:8080/toma/login/';
+  joinUrl='http://localhost:8080/toma/join/';
 
   constructor(private http: HttpClient) {
     // this.getUsers();
   }
 
-  getUsers(login: Login) {
-    return this.http.post(this.url, login);
-    // this.users = this.db.list("clients");
-    // return this.users;
-  }
+  // getUsers(login: Login) {
+  //   return this.http.post(this.url, login);
+  //   // this.users = this.db.list("clients");
+  //   // return this.users;
+  // }
 
   createUser(data: User) {
     // data.location = this.location;
     // data.createdOn = moment(new Date()).format("X");
     // this.users.push(data);
+
+    return this.http.post(this.joinUrl,data);
   }
 
-  updateUser(user: User) {
-    // this.users.update(user.$key, user);
-  }
+  // updateUser(user: User) {
+  //   // this.users.update(user.$key, user);
+  // }
 
   setLocation(lat, lon) {
     this.location.lat = lat;
