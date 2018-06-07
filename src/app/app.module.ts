@@ -14,6 +14,7 @@ import { SharedModule } from "./shared/shared.module";
 import { AppRoutes } from "./app.routing";
 
 @NgModule({
+
   declarations: [AppComponent],
   imports: [
     HttpModule,
