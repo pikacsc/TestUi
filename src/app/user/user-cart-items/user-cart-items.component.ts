@@ -16,7 +16,7 @@ import {Cart} from '../../shared/models/cart';
 export class UserCartItemsComponent implements OnInit {
   products: FavouriteProduct[] = [];
   page = 1;
-
+  orderList:number[]=[];
   // Not Found Message
   messageTitle = "No Products Found in Cart";
   messageDescription = "Please, Add Products to your cart";
@@ -50,8 +50,14 @@ export class UserCartItemsComponent implements OnInit {
     });
   }
 
-  removeFromCart($key: string) {
-    // this.productService.removeCart($key);
-    this.getCartProducts();
+  removeFromCart(cno: number):void {
+    this.productService.removeFromCart(cno).subscribe(data=>{
+      this.getCartProducts();
+    });
+  }
+
+  addCno(){
+    console.log(this.orderList.pop);
+
   }
 }

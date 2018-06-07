@@ -16,6 +16,8 @@ import { UserAccountComponent } from "./user-account/user-account.component";
 import { UserFavouriteProductsComponent } from "./user-favourite-products/user-favourite-products.component";
 import { UserCartItemsComponent } from "./user-cart-items/user-cart-items.component";
 import { SharedModule } from "../shared/shared.module";
+import { UserOrderWriteComponent } from './user-order-write/user-order-write.component';
+import { UserOrderListComponent } from './user-order-list/user-order-list.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { SharedModule } from "../shared/shared.module";
     UserComponent,
     UserAccountComponent,
     UserFavouriteProductsComponent,
-    UserCartItemsComponent
+    UserCartItemsComponent,
+    UserOrderWriteComponent,
+    UserOrderListComponent
 
   ],
   providers: [],

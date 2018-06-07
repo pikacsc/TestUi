@@ -1,0 +1,125 @@
+
+<!------ Include the above in your HEAD tag ---------->
+<!-- Bootstrap CDN -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<div class="container">
+<div class="row">
+	 <br>
+            <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-push-12 col-sm-push-12">
+
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-12 col-sm-pull-12">
+                    <!--SHIPPING METHOD-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center"><h4>Current Cart</h4></div>
+                        <div class="panel-body">
+                           <table class="table borderless">
+    						<thead>
+                                <tr>
+        							<!-- <td><strong>Your Cart: # item</strong></td> -->
+        							<td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
+        							<td>가격</td>
+        							<td>수량</td>
+                      <td>배송비</td>
+        							<td>합계</td>
+                      <td>Del</td>
+                                </tr>
+    						</thead>
+    						<tbody>
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+    							<tr>
+    								<!-- <td class="col-md-3"> -->
+                    <td>
+    								    <div class="media">
+    								         <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://lorempixel.com/460/250/" style="width: 72px; height: 72px;"> </a>
+    								         <div class="media-body">
+    								             <h5 class="media-heading"> Product Name</h5>
+                                 <p>Product Comment</p>
+    								         </div>
+    								    </div>
+    								</td>
+    								<td>$10.99</td>
+    								<td>1</td>
+    								<td>$32.99</td>
+                    <td>$sum</td>
+    								<td><button type="button" class="btn btn-danger" style="width:50px;">X</button></td>
+    							</tr>
+
+    						</tbody>
+    					</table>
+                        </div>
+                    </div>
+                    <!--SHIPPING METHOD END-->
+                </div>
+                </div>
+                </div>
+</div>
+
+<!-- 배송지 -->
+
+<div class="panel-body">
+                                       <div class="form-group">
+                                           <div class="col-md-12">
+                                               <h4>Shipping Address</h4>
+                                           </div>
+                                       </div>
+
+                                       <div class="form-group">
+                                           <div class="span1"></div>
+                                           <div class="col-md-6 col-xs-12">
+                                               <strong>Name</strong>
+                                               <input type="text" name="last_name" class="form-control" value="" />
+                                           </div>
+                                       </div>
+                                       <div class="form-group">
+                                           <div class="col-md-12"><strong>Address:</strong></div>
+                                           <div class="col-md-12">
+                                               <input type="text" name="address" class="form-control" value="" />
+                                           </div>
+                                       </div>
+
+                                       <div class="form-group">
+                                           <div class="col-md-12"><strong>Phone Number:</strong></div>
+                                           <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="" /></div>
+                                       </div>
+                                       <div class="form-group">
+                                           <div class="col-md-12"><strong>Email Address:</strong></div>
+                                           <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="" /></div>
+                                       </div>
+                                   </div>
+
+<!-- 배송지 끝 -->
+<!--REVIEW ORDER-->
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        <h4>Review Order</h4>
+    </div>
+    <div class="panel-body">
+            <div class="col-md-12">
+                <strong>Subtotal (# item)</strong>
+                <div class="pull-right"><span>$</span><span>200.00</span></div>
+            </div>
+            <div class="col-md-12">
+                <strong>Tax</strong>
+                <div class="pull-right"><span>$</span><span>200.00</span></div>
+            </div>
+            <div class="col-md-12">
+                <small>Shipping</small>
+                <div class="pull-right"><span>-</span></div>
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <strong>Order Total</strong>
+                <div class="pull-right"><span>$</span><span>150.00</span></div>
+                <hr>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+
+    </div>
+
+</div>
+<!--REVIEW ORDER END-->

@@ -42,13 +42,17 @@
 
               <!--Card footer-->
               <div class="card-footer">
-                <span class="left">{{cartItem.p_sellprice}}$</span>
+
+                <span class="left">수량 : {{cartItem.camount}}</span><br />
+                <span class="left">금액 : {{cartItem.p_sellprice*cartItem.camount}}원</span>
                 <!-- <span class="right" *ngIf="authService.isLoggedIn()"> -->
+
                 <span class="right">
-                  <a placement="top" mdbTooltip="Remove Product" container="body" (click)="removeFromCart(cartItem.$key)">
+                  <a placement="top" mdbTooltip="Remove Product" container="body" (click)="removeFromCart(cartItem.cno)">
                     <i class="fa fa-trash"></i>
                   </a>
                 </span>
+                <input type="checkbox" [(ngModel)]="orderList" (checked)='orderList.push(cartItem.cno)' (click)='addCno()'/>
               </div>
 
             </div>

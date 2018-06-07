@@ -11,6 +11,7 @@ import { Product } from "../models/product";
 //*****동현임포트수정
 import { UserService } from "./user.service";
 import { HttpClientModule,HttpHeaders, HttpClient } from '@angular/common/http';
+// import {Cart} from '../models/cart';
 //*****동현임포트수정끝
 @Injectable()
 export class ProductService {
@@ -185,12 +186,16 @@ export class ProductService {
   // **********동현카트구현중*************
   cartUrl='http://localhost:8080/toma/cart/';
   getUsersCartProducts() {
+  return this.http.get(this.cartUrl+this.userService.loginUser.uid);
   //   const user = this.authService.getLoggedInUser();
     // this.cartProducts = this.db.list("cartProducts", ref =>
     //   ref.orderByChild("userId").equalTo(user.$key)
     // );
     // return this.cartProducts;
-    return this.http.get(this.cartUrl+this.userService.loginUser.uid);
+  }
+  removeFromCart(cno:number){
+    console.log('serviceremove'+cno);
+    return this.http.delete(this.cartUrl+cno);
   }
 
   // Adding new Product to cart db if logged in else localStorage
