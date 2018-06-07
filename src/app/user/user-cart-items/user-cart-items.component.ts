@@ -20,7 +20,7 @@ export class UserCartItemsComponent implements OnInit {
   // Not Found Message
   messageTitle = "No Products Found in Cart";
   messageDescription = "Please, Add Products to your cart";
-
+  check:boolean=false;
   cartList: Cart[]=[];
   constructor(
     private userService:UserService,
@@ -56,8 +56,18 @@ export class UserCartItemsComponent implements OnInit {
     });
   }
 
-  addCno(){
-    console.log(this.orderList.pop);
+  pushCno(cno:number){
+    if(this.check==true){
+      this.orderList.push(cno);
+      console.log(this.orderList);
+    }
+    else{
+      const index: number = this.orderList.indexOf(cno);
+      console.log(index);
+      this.orderList.slice(index,1);
+      // delete this.orderList[index];
+      // this.orderList.slice(index,1);
 
+    }
   }
 }

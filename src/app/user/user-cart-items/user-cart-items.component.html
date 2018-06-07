@@ -52,7 +52,7 @@
                     <i class="fa fa-trash"></i>
                   </a>
                 </span>
-                <input type="checkbox" [(ngModel)]="orderList" (checked)='orderList.push(cartItem.cno)' (click)='addCno()'/>
+                <input type="checkbox" [(ngModel)]="check" (change)='pushCno(cartItem.cno)' />
               </div>
 
             </div>
