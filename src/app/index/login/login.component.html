@@ -89,19 +89,39 @@
               <input mdbActive type="text" id="userBirth" class="form-control" mdbInputValidate [(ngModel)]="createUser.ubirth" name="ubirth">
               <label for="userBirth">생년월일</label>
             </div>
+
             <div class="md-form form-sm">
               <i class="fa fa-lock prefix"></i>
-              <input mdbActive type="text" id="userGender" class="form-control" mdbInputValidate [(ngModel)]="createUser.ugender" name="ugender" >
+              <select class="mdb-select" [(ngModel)]="createUser.ugender" name="ugender" id="ugenderlist" style="margin-left:180px; margin-top:10px; width:100px;">
+                <option value="" disabled selected>성별을 선택해주세요</option>
+                <option value="M">남자</option>
+                <option value="F">여자</option>
+              </select>
+              <!-- 라디오버튼 디자인 수정필요 -->
+              <!-- <input type="radio" [(ngModel)]="createUser.ugender" name="ugender" id="ugenderlist" value="M" style="margint-left: 60px; margin-top:10px"/>남자
+              <input type="radio" [(ngModel)]="createUser.ugender" name="ugender" id="ugenderlist2" value="F" style="margint-left: 120px; margin-top:-10px"/>여자 -->
+
               <label for="ugenderlist">성별</label>
             </div>
+
             <div class="md-form form-sm">
               <i class="fa fa-lock prefix"></i>
-              <input mdbActive type="text" id="userSmsyn" class="form-control" mdbInputValidate [(ngModel)]="createUser.smsyn" name="usmsyn">
+              <!-- <input mdbActive type="text" id="userSmsyn" class="form-control" mdbInputValidate [(ngModel)]="createUser.smsyn" name="usmsyn"> -->
+              <select class="mdb-select" [(ngModel)]="createUser.usmsyn" name="usmsyn" id="userSmsyn" style="margin-left:180px; margin-top:10px; width:100px;">
+                <option value="" disabled selected>SMS로 정보를 수신하시겠습니까?</option>
+                <option value="Y">예</option>
+                <option value="N">아니오</option>
+              </select>
               <label for="userSmsyn">sms 수신여부</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-lock prefix"></i>
-              <input mdbActive type="text" id="userEmailyn" class="form-control" mdbInputValidate [(ngModel)]="createUser.emailyn" name="uemailyn">
+              <!-- <input mdbActive type="text" id="userEmailyn" class="form-control" mdbInputValidate [(ngModel)]="createUser.emailyn" name="uemailyn"> -->
+              <select class="mdb-select" [(ngModel)]="createUser.uemailyn" name="uemailyn" id="userEmailyn" style="margin-left:180px; margin-top:10px; width:100px;">
+                <option value="" disabled selected>이메일로 정보를 수신하시겠습니까?</option>
+                <option value="Y">예</option>
+                <option value="N">아니오</option>
+              </select>
               <label for="userEmailyn">이메일 수신여부</label>
             </div>
             <div class="text-center mt-2">

@@ -1,10 +1,8 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo scrolling-navbar">
 
-  <!-- Collapsible content -->
   <links>
 
-    <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/' ]">Home
@@ -17,40 +15,22 @@
       <li class="nav-item">
         <a class="nav-link waves-light" mdbRippleRadius>Pricing</a>
       </li>
-
     </ul>
-    <!-- Links -->
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <!-- <div *ngIf="authService.isLoggedIn() ; else favCountNotLogged">
-          <a class="nav-link" href="javascript:;;" [routerLink]="['/users', {outlets: {'profileOutlet': ['favourite-products']}}]">
-            <i class="fa fa-heart">
-              <span class="mt-2"> {{productService.navbarFavProdCount}}</span>
-            </i>
-          </a>
-        </div> -->
         <ng-template #favCountNotLogged>
           <a class="nav-link" href="javascript:;;" [routerLink]="['/index/favourites']">
             <i class="fa fa-heart">
-              <!-- <span class="mt-2"> {{productService.navbarFavProdCount}}</span> -->
             </i>
           </a>
         </ng-template>
 
       </li>
       <li class="nav-item">
-        <!-- <div *ngIf="authService.isLoggedIn() ; else cartCountNotLogged">
-          <a class="nav-link" href="javascript:;;" [routerLink]="['/users', {outlets: {'profileOutlet': ['cart-items']}}]">
-            <i class="fa fa-shopping-cart">
-              <span class="mt-2"> {{productService.navbarCartCount}}</span>
-            </i>
-          </a>
-        </div> -->
         <ng-template #cartCountNotLogged>
           <a class="nav-link" href="javascript:;;" [routerLink]="['/index/cartItems']">
             <i class="fa fa-shopping-cart">
-              <!-- <span class="mt-2"> {{productService.navbarCartCount}}</span> -->
             </i>
           </a>
         </ng-template>
@@ -77,6 +57,18 @@
         </a>
       </li>
 
+      <!-- Dropdown -->
+      <li class="nav-item dropdown btn-group" dropdown>
+        <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>고객센터
+        </a>
+        <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+          <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice']">공지사항</a>
+          <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice/faq']">자주하는 질문</a>
+          <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice/qna']">1:1 질문하기</a>
+        </div>
+      </li>
+
       <!-- <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" [routerLink]="['/users']">
           <i class="fa fa-user"></i> My Account</a>
@@ -84,14 +76,11 @@
       <!-- <li class="nav-item" *ngIf="!authService.isLoggedIn()">
         <a class="nav-link" [routerLink]="[ '/index/login' ]">
           <i class="fa fa-sign-in"></i> Signin / Signup</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.isLoggedIn()">
-        <a class="nav-link" (click)="logout()">
-          <i class="fa fa-sign-in"></i>Logout</a>
       </li> -->
+
     </ul>
+
   </links>
-  <!-- Collapsible content -->
 
 </mdb-navbar>
 <!--/.Navbar-->

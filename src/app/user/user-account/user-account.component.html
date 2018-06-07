@@ -1,21 +1,73 @@
 <form #updatePerson="ngForm" (ngSubmit)="updateProfile(updatePerson)" name="profileForm">
   <div class="row">
     <div class="col-md-8 mb-3">
-      <label for="userName">User Name</label>
+      <label for="userName">회원이름</label>
       <input type="text" class="form-control" [ngClass]="(userName.invalid)?'is-invalid':'is-valid'" id="userName" [(ngModel)]="userService.loginUser.uname"
-        name="userName" #userName="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" required>
+        name="userName" #userName="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" required [disabled]="true">
       <div class="invalid-feedback">
         username is Mandatory.
       </div>
     </div>
     <div class="col-md-8 mb-3">
-      <label for="emailId">Email Id</label>
-      <input type="text" class="form-control is-valid" id="emailId" [disabled]="true" name="userEmail" [(ngModel)]="userService.loginUser">
+      <label for="userId">아이디</label>
+      <input type="text" class="form-control is-valid" id="userId" [disabled]="true" name="userId" [(ngModel)]="userService.loginUser.uid">
     </div>
     <div class="col-md-8 mb-3">
-      <label for="contactNumber">Contact Number</label>
-      <input type="tel" class="form-control" name="phoneNumber" [(ngModel)]="userService.loginUser.uphone" #phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut">
+      <label for="userPwd">비밀번호</label>
+      <input type="password" class="form-control is-valid" id="userPwd" name="userPwd" [(ngModel)]="userService.loginUser.upw">
     </div>
+    <div class="col-md-8 mb-3">
+      <label for="userPhone">연락처</label>
+      <input type="tel" class="form-control" id="userPhone" name="userPhone" [(ngModel)]="userService.loginUser.uphone"> <!--#phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" 지운속성-->
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userAddr1">기본주소지</label>
+      <input type="text" class="form-control" name="userAddr1" [(ngModel)]="userService.loginUser.uaddr1">
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userAddr2">추가주소지</label>
+      <input type="text" class="form-control" name="userAddr2" [(ngModel)]="userService.loginUser.uaddr2">
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userAddr3">추가주소지2</label>
+      <input type="text" class="form-control" name="userAddr3" [(ngModel)]="userService.loginUser.uaddr3">
+    </div>
+    <!-- selectbox로 고쳐야함 -->
+    <!-- <div class="col-md-8 mb-3">
+      <label for="userAddr1">주소선택란</label>
+      <select class="mdb-select" [(ngModel)]="loginUser.uaddrcheck" name="uAddrcheck" id="uAddrcheck" style="">
+        <option value="" disabled selected>기본적으로 사용할 주소지를 선택해주세요</option>
+        <option value=1>기본주소지</option>
+        <option value=2>추가주소지</option>
+        <option value=3>추가주소지2</option>
+      </select>
+    </div> -->
+    <div class="col-md-8 mb-3">
+      <label for="userBirth">생년월일</label>
+      <input type="text" class="form-control" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
+    </div>
+
+    <!-- selectbox로 고쳐야함 -->
+    <!-- <div class="col-md-8 mb-3">
+      <label for="userBirth">성별</label>
+      <input type="text" class="form-control" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
+    </div> -->
+
+    <!-- <div class="col-md-8 mb-3">
+      <label for="userBirth">SMS 수신여부</label>
+      <input type="text" class="form-control" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
+    </div> -->
+
+    <!-- <div class="col-md-8 mb-3">
+      <label for="userEmailyn">이메일 수신여부</label>
+      <input type="text" class="form-control" id="userEmailyn" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
+    </div> -->
+
+    <div class="col-md-8 mb-3">
+      <label for="userJoindate">가입일</label>
+      <input type="text" class="form-control" id="userJoindate" name="userJoindate" [(ngModel)]="userService.loginUser.ujoindate" [disabled]="true">
+    </div>
+
   </div>
   <!--
   <div class="row">
@@ -42,5 +94,5 @@
     </div>
   </div>
  -->
-  <button class="btn btn-primary" type="submit" [hidden]="enbUpdBut">Update</button>
+  <button class="btn btn-primary" type="submit" style="margin-left:320px">정보수정하기</button>
 </form>

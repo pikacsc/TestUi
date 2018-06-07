@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
 
   signup() {
     // this.authService.signup(this.emailId, this.password);
-    this.loginUser.userId = this.loginUser.userPassword = "";
+    this.loginUser.userId= this.login1.uid;
+    this.loginUser.userPassword= this.login1.upw;
   }
 
   addUser(userForm: NgForm) {
@@ -55,9 +56,9 @@ export class LoginComponent implements OnInit {
       this.createUser = data;
     });
 
-    const toastOption: ToastOptions = {
-      title: "User Registeration",
-      msg: "Registering",
+    const toastOption: ToastOptions = { //3초동안 우측상단 회원가입중... 창 띄워줌
+      title: "회원가입 확인중",
+      msg: "회원가입 확인중...",
       showClose: true,
       timeout: 3000,
       theme: "material"
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
     this.toastyService.wait(toastOption);
     setTimeout((router: Router) => {
       $("#createUserForm").modal("hide");
+      this.router.navigate(["index"]);    // 회원가입 작성 후 완료누르면 index페이지로
     }, 1500);
 
   }

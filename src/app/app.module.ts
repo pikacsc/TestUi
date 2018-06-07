@@ -11,6 +11,8 @@ import { IndexModule } from "./index/index.module";
 import { ProductModule } from "./product/product.module";
 import { UserModule } from "./user/user.module";
 import { SharedModule } from "./shared/shared.module";
+import { NoticeModule } from "./notice/notice.module"
+
 import { AppRoutes } from "./app.routing";
 
 @NgModule({
@@ -23,7 +25,8 @@ import { AppRoutes } from "./app.routing";
     ProductModule,
     UserModule,
     SharedModule,
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes),
+    NoticeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
