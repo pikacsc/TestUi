@@ -1,4 +1,5 @@
 export class User {
+
   public uid: string;
   public upw: string;
   public uname: string;
@@ -12,4 +13,6 @@ export class User {
   public ujoindate : Date;
   public usmsyn: string;
   public uemailyn:string;
+
+
 }

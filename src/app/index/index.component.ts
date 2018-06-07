@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { UserService } from "../shared/services/user.service"
 declare var $: any;
 
 @Component({
@@ -7,7 +8,11 @@ declare var $: any;
   styleUrls: ["./index.component.scss"]
 })
 export class IndexComponent implements OnInit {
-  constructor() {}
+  constructor(private userService:UserService) {
+    console.log(userService.loginUser.uid);
+    console.log(userService.loginUser.uname);
+    console.log(userService.loginUser.uaddr1);
+  }
 
   ngOnInit() {
     $(document).ready(function() {

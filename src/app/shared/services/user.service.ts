@@ -12,26 +12,34 @@ import { Login } from "../models/login";
 
 @Injectable()
 export class UserService {
-  // selectedUser: User = new User();
-  // users: User;
+  selectedUser: User = new User();
+  loginUser: User;
 
   location = {
     lat: null,
     lon: null
   };
 
-  url='http://localhost:8080/toma/login/';
   joinUrl='http://localhost:8080/toma/join/';
-
+  loginUrl='http://localhost:8080/toma/login/';
   constructor(private http: HttpClient) {
     // this.getUsers();
+    this.loginUser=new User();
   }
+
 
   // getUsers(login: Login) {
   //   return this.http.post(this.url, login);
   //   // this.users = this.db.list("clients");
   //   // return this.users;
   // }
+
+  getUsers(login: Login) {
+    return this.http.post(this.loginUrl, login);
+    // this.users = this.db.list("clients");
+    // return this.users;
+  }
+
 
   createUser(data: User) {
     // data.location = this.location;

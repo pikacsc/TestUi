@@ -8,8 +8,10 @@ import { ToastOptions, ToastyService, ToastyConfig } from "ng2-toasty";
 import { Observable } from "rxjs";
 import { Product } from "../models/product";
 // import { AuthService } from "./auth.service";
+//*****동현임포트수정
 import { UserService } from "./user.service";
-
+import { HttpClientModule,HttpHeaders, HttpClient } from '@angular/common/http';
+//*****동현임포트수정끝
 @Injectable()
 export class ProductService {
   // products: AngularFireList<Product>;
@@ -26,7 +28,10 @@ export class ProductService {
   constructor(
     // private db: AngularFireDatabase,
     // private authService: AuthService,
+    // 동현생성자수정
     private userService: UserService,
+    private http:HttpClient,
+    // 동현생성자수정끝
     private toastyService: ToastyService,
     private toastyConfig: ToastyConfig
   ) {
@@ -119,14 +124,14 @@ export class ProductService {
       // setTimeout(() => {
       //   this.favouriteProducts.push({
       //     product: data,
-      //     productId: productKey,
+          // productId: productKey,
       //     userId: user.$key
       //   });
       //
       //   this.calculateFavProductCounts();
       // }, 1500);
     }
-  }
+  // }
 
   // Fetching unsigned users favourite proucts
   // getLocalFavouriteProducts(): Product[] {
@@ -177,13 +182,16 @@ export class ProductService {
   */
 
   // Fetching Cart Products based on userId
-  // getUsersCartProducts() {
+  // **********동현카트구현중*************
+  cartUrl='http://localhost:8080/toma/cart/';
+  getUsersCartProducts() {
   //   const user = this.authService.getLoggedInUser();
     // this.cartProducts = this.db.list("cartProducts", ref =>
     //   ref.orderByChild("userId").equalTo(user.$key)
     // );
     // return this.cartProducts;
-  // }
+    return this.http.get(this.cartUrl+this.userService.loginUser.uid);
+  }
 
   // Adding new Product to cart db if logged in else localStorage
   // addToCart(data: Product): void {
@@ -277,7 +285,7 @@ export class ProductService {
     //     this.navbarCartCount = data.length;
     //   });
 //   }
-// }
+}
 
 export class FavouriteProduct {
   product: Product;
