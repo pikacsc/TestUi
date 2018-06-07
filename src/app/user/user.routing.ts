@@ -13,16 +13,19 @@ export const UserRoutes: Routes = [
         path: "",
         component: UserAccountComponent,
         outlet: "profileOutlet"
+
       },
       {
         path: "favourite-products",
         component: UserFavouriteProductsComponent,
         outlet: "profileOutlet"
+
       },
       {
         path: "cart-items",
         component: UserCartItemsComponent,
         outlet: "profileOutlet"
+
       }
     ]
   }
