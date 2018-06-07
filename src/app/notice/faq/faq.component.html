@@ -1,0 +1,53 @@
+<hr class="between-sections">
+
+<div class="card card-cascade wider reverse">
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>자주하는 질문</strong></h4>
+  </div>
+
+</div>
+
+<hr class="between-sections">
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/index']">Home</a>
+  </li>
+  <li class="breadcrumb-item">고객센터</li>
+  <li class="breadcrumb-item">자주하는 질문</li>
+</ol>
+
+<!--Table-->
+<table class="table">
+    <!--Table head-->
+    <thead class="table-success">
+        <tr>
+            <th>번호</th>
+            <th>카테고리</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+        </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+        <tr *ngFor="let faq of faqs">
+            <th scope="row">{{ faq.f_no }}</th>
+            <th>{{ faq.f_category }}</th>
+            <th><a [routerLink]="['/detail/faq', faqs.f_no]" routerLinkActive="router-link-active">
+              {{ faq.f_title }}</a>
+            </th>
+            <th>{{ faq.a_id }}</th>
+            <th>{{ faq.f_date }}</th>
+            <th>{{ faq.f_hits }}</th>
+        </tr>
+    </tbody>
+    <!--Table body-->
+</table>
