@@ -50,15 +50,8 @@
         </a>
       </li>
 
-      <li class="nav-item" *ngIf="authService.isLoggedIn()">
-        <a class="nav-link" [routerLink]="['/users']">
-          <i class="fa fa-envelope"></i> User
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-
       <!-- Dropdown -->
-      <li class="nav-item dropdown btn-group" dropdown *ngIf="authService.isLoggedIn()">
+      <li class="nav-item dropdown btn-group" dropdown >
         <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>고객센터
         </a>
@@ -71,7 +64,7 @@
 
       <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" [routerLink]="['/users']">
-          <i class="fa fa-user"></i> My Account</a>
+          <i class="fa fa-user"></i>My Page</a>
       </li>
       <li class="nav-item" *ngIf="authService.isLoggedIn()">
        <a class="nav-link" (click)="logout()">

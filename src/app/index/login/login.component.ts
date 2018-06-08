@@ -66,7 +66,8 @@ export class LoginComponent implements OnInit {
     this.toastyService.wait(toastOption);
     setTimeout((router: Router) => {
       $("#createUserForm").modal("hide");
-      this.router.navigate(["index"]);    // 회원가입 작성 후 완료누르면 index페이지로
+      alert("회원가입 완료. 로그인 해주세요");
+      this.router.navigate(["index/login"]);
     }, 1500);
 
   }

@@ -24,6 +24,15 @@ export class AuthService {
     sessionStorage.setItem("token", token);
   }
 
+  updateUserToken(user:User){
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    const objStr = JSON.stringify(user);
+    const token = new Buffer(objStr).toString("base64");
+    localStorage.setItem("token", token);
+    sessionStorage.setItem("token", token);
+  }
+
 
   loginCheck(id: string, password: string): boolean {
     console.log("id", id);
