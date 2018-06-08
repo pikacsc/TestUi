@@ -11,9 +11,9 @@ import { UserService } from "../../shared/services/user.service";
   styleUrls: ["./user-account.component.scss"]
 })
 export class UserAccountComponent implements OnInit {
-  loggedUser: User;
+  // loggedUser: User;
   // Enable Update Button
-  enbUpdBut: Boolean = true;
+  // enbUpdBut: Boolean = true;
 
   // private authService: AuthService,
   constructor(private userService:UserService,private fb: FormBuilder) {}
@@ -22,5 +22,7 @@ export class UserAccountComponent implements OnInit {
     // this.loggedUser = this.authService.getLoggedInUser();
   }
 
-  updateProfile(form: NgForm) {}
+  updateProfile(form: NgForm) {
+
+  }
 }

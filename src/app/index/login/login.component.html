@@ -1,16 +1,7 @@
-<p>
-  {{user.uname}}//
-  {{user.uaddr1}}//
-  {{user.ugender}}
-
-  {{userService.loginUser.uname}}//
-  {{userService.loginUser.uaddr1}}//
-  {{userService.loginUser.ugender}}
-</p>
-<br>
-<section class="container">
+<br /><br />
+<section class="container" style="position:relative;">
   <!-- Login form -->
-  <div class="col-sm-6">
+  <div class="col-sm-6" style="margin:auto;">
     <form style="width:22rem" #loginForm="ngForm" (ngSubmit)="login()">
       <p class="h5 text-center mb-4">Sign in</p>
 
@@ -32,11 +23,17 @@
         <button type="submit" class="btn btn-primary waves-light" id="loginButton" mdbRippleRadius>Login</button>
       </div>
     </form>
+    <br />
+    <br />
+    <br />
+    <p>회원이 아니십니까?
+      <a data-toggle="modal" data-target="#createUserForm" style="color:dodgerblue"><strong>회원가입하기</strong></a>
+    </p>
   </div>
   <br>
-  <p>회원이 아니십니까 ?
-    <a data-toggle="modal" data-target="#createUserForm" style="color:dodgerblue">회원가입하기</a>
-  </p>
+
+
+
   <!-- Login form -->
 
   <!--Modal: Register Form-->
