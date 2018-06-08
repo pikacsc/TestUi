@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../shared/models/user";
-// import { AuthService } from "../../shared/services/auth.service";
+import { AuthService } from "../../shared/services/auth.service";
 
 import { UserService } from "../../shared/services/user.service";
 
@@ -15,11 +15,12 @@ export class UserAccountComponent implements OnInit {
   // Enable Update Button
   enbUpdBut: Boolean = true;
 
-  // private authService: AuthService,
-  constructor(private userService:UserService,private fb: FormBuilder) {}
+
+  constructor(private authService:AuthService,private fb: FormBuilder) {}
+
 
   ngOnInit() {
-    // this.loggedUser = this.authService.getLoggedInUser();
+     this.loggedUser = this.authService.getLoggedInUser();
   }
 
   updateProfile(form: NgForm) {}

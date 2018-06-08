@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { Router } from "@angular/router";
-// import { AuthService } from "../../shared/services/auth.service";
+import { AuthService } from "../../shared/services/auth.service";
 import { ProductService } from "../../shared/services/product.service";
 declare var $: any;
 
@@ -11,7 +11,7 @@ declare var $: any;
 })
 export class NavbarComponent implements OnInit {
   constructor(
-    // public authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     public productService: ProductService
   ) {}
@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {}
 
   logout() {
-    // this.authService.logout();
+    this.authService.logout();
     this.router.navigate(["/"]);
     location.reload();
   }
