@@ -9,7 +9,9 @@ import { Notice } from "../models/notice";
 })
 export class NoticeService {
   notices: any;
-  private url = 'http://localhost:8080/toma/notice';
+  n_no: number;
+  url = 'http://localhost:8080/toma/notice';
+  detailUrl = 'http://localhost:8080/toma/detail/notice/';
 
   constructor(private http: HttpClient) {
 
@@ -19,4 +21,13 @@ export class NoticeService {
     return this.http.get(this.url);
     // return this.notices = this.http.get(this.url);
   }
+
+  getNoticeNo() {
+    return this.http.get(this.detailUrl + this.n_no);
+  }
+
+  setNoticeNo(n_no: number) {
+    this.n_no = n_no;
+  }
+
 }

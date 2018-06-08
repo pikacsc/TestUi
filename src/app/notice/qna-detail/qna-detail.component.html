@@ -1,3 +1,66 @@
-<p>
-  qna-detail works!
-</p>
+<hr class="between-sections">
+
+<div class="card card-cascade wider reverse">
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>1:1 질문하기</strong></h4>
+  </div>
+
+</div>
+
+<hr class="between-sections">
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/index']">Home</a>
+  </li>
+  <li class="breadcrumb-item">고객센터</li>
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/notice/qna']">1:1 질문하기</a>
+  </li>
+</ol>
+
+<!--Table-->
+<table class="table table-bordered">
+
+  <!--Table body-->
+  <tbody>
+    <tr>
+      <th>제목</th>
+      <td colspan="3">{{ qna?.q_title }}</td>
+    </tr>
+    <tr>
+      <th>작성자</th>
+      <td colspan="3">{{ qna?.u_id }}</td>
+    </tr>
+    <tr>
+      <th>작성일</th>
+      <td>{{ qna?.q_date }}</td>
+      <th>답변여부</th>
+      <td>{{ qna?.q_reply }}</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <p>{{ qna?.q_content }}</p>
+      </td>
+    </tr>
+  </tbody>
+  <!--Table body-->
+
+</table>
+<!--Table-->
+
+<button type="button" class="btn btn-outline-danger waves-effect" (click)="deleteQna(qna?.q_no)">
+  삭제
+</button>
+
+<button type="button" class="btn btn-outline-info waves-effect" id="qna_back_button"
+    [routerLink]="['/notice/qna']">목록
+</button>
+
+<button type="button" class="btn btn-outline-info waves-effect" id="qna_update_button"
+    [routerLink]="['/notice/qna/update']">수정</button>
+    <!-- qna/update component 및 구현할 차례 -->

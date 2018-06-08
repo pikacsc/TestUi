@@ -20,4 +20,8 @@ export class QnaComponent implements OnInit {
       })
   }
 
+  setQnaNo(q_no: number) {
+    this.qnaService.setQnaNo(q_no);
+  }
+
 }

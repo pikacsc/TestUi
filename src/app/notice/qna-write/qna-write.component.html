@@ -1,0 +1,42 @@
+<hr class="between-sections">
+
+<div class="card card-cascade wider reverse">
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>1:1 질문하기</strong></h4>
+  </div>
+
+</div>
+
+<hr class="between-sections">
+
+<!-- Default form contact -->
+<form (ngSubmit)="insertQna()">
+  <!--Table-->
+  <table class="table table-bordered">
+    <!--Table body-->
+    <tbody>
+      <tr>
+        <th>제목</th>
+        <td>
+          <input type="text" id="exampleForm2" class="form-control" placeholder="제목을 입력해주세요."
+            required [(ngModel)]="qna.q_title" [ngModelOptions]="{standalone: true}"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <textarea name="qnaContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control"
+            required [(ngModel)]="qna.q_content" [ngModelOptions]="{standalone: true}"></textarea>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center mt-4" [hidden]="submit">
+    <button type="submit" class="btn btn-outline-danger waves-effect">등록</button>
+    <button type="button" class="btn btn-outline-info waves-effect" [routerLink]="['/notice/qna']">취소</button>
+  </div>
+</form>

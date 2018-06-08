@@ -20,4 +20,8 @@ export class FaqComponent implements OnInit {
       })
   }
 
+  setFaqNo(f_no: number) {
+    this.faqService.setFaqNo(f_no);
+  }
+
 }

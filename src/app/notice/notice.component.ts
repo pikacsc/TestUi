@@ -9,7 +9,9 @@ import { Notice } from '../shared/models/notice'
   styleUrls: ['./notice.component.css']
 })
 export class NoticeComponent implements OnInit {
+  page = 1;
   notices: Notice[];
+  search: string;
 
   constructor(private noticeService: NoticeService) { }
 
@@ -18,6 +20,10 @@ export class NoticeComponent implements OnInit {
       .subscribe((notices:Notice[]) => {
         this.notices = notices;
       });
+  }
+
+  setNoticeNo(n_no: number) {
+    this.noticeService.setNoticeNo(n_no);
   }
 
 }

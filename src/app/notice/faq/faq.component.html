@@ -41,8 +41,10 @@
         <tr *ngFor="let faq of faqs">
             <th scope="row">{{ faq.f_no }}</th>
             <th>{{ faq.f_category }}</th>
-            <th><a [routerLink]="['/detail/faq', faqs.f_no]" routerLinkActive="router-link-active">
-              {{ faq.f_title }}</a>
+            <th>
+              <a [routerLink]="['/detail/faq']" routerLinkActive="router-link-active"
+                  (click)="setFaqNo(faq.f_no)">{{ faq.f_title }}
+              </a>
             </th>
             <th>{{ faq.a_id }}</th>
             <th>{{ faq.f_date }}</th>
@@ -51,3 +53,12 @@
     </tbody>
     <!--Table body-->
 </table>
+
+<div class="input-group md-form form-sm form-1 pl-0">
+    <div class="input-group-prepend">
+        <span class="input-group-text cyan lighten-2" id="basic-text1">
+          <i class="fa fa-search text-white" aria-hidden="true"></i>
+        </span>
+    </div>
+    <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search">
+</div>

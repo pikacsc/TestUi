@@ -23,31 +23,43 @@
 
 <!--Table-->
 <table class="table">
-    <!--Table head-->
-    <thead class="table-success">
-        <tr>
-            <th>번호</th>
-            <th>카테고리</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회수</th>
-        </tr>
-    </thead>
-    <!--Table head-->
+  <!--Table head-->
+  <thead class="table-success">
+    <tr>
+      <th>번호</th>
+      <th>카테고리</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>작성일</th>
+      <th>조회수</th>
+    </tr>
+  </thead>
+  <!--Table head-->
 
-    <!--Table body-->
-    <tbody>
-        <tr *ngFor="let notice of notices">
-            <th scope="row">{{ notice.n_no }}</th>
-            <th>{{ notice.n_category }}</th>
-            <th><a [routerLink]="['/detail/notice', notices.n_no]" routerLinkActive="router-link-active">
-              {{ notice.n_title }}</a>
-            </th>
-            <th>{{ notice.a_id }}</th>
-            <th>{{ notice.n_date }}</th>
-            <th>{{ notice.n_hits }}</th>
-        </tr>
-    </tbody>
-    <!--Table body-->
+  <!--Table body-->
+  <tbody>
+    <tr *ngFor="let notice of notices">
+      <th scope="row">{{ notice.n_no }}</th>
+      <th>{{ notice.n_category }}</th>
+      <th>
+        <a [routerLink]="['/detail/notice']" routerLinkActive="router-link-active"
+            (click)="setNoticeNo(notice.n_no)">{{ notice.n_title }}
+        </a>
+      </th>
+      <th>{{ notice.a_id }}</th>
+      <th>{{ notice.n_date }}</th>
+      <th>{{ notice.n_hits }}</th>
+    </tr>
+  </tbody>
+  <!--Table body-->
+
 </table>
+
+<div class="input-group md-form form-sm form-1 pl-0">
+    <div class="input-group-prepend">
+        <span class="input-group-text cyan lighten-2" id="basic-text1">
+          <i class="fa fa-search text-white" aria-hidden="true"></i>
+        </span>
+    </div>
+    <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="search">
+</div>

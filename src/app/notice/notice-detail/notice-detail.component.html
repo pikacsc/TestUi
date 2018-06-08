@@ -1,3 +1,58 @@
-<p>
-  notice-detail works!
-</p>
+<hr class="between-sections">
+
+<div class="card card-cascade wider reverse">
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>공지사항</strong></h4>
+  </div>
+
+</div>
+
+<hr class="between-sections">
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/index']">Home</a>
+  </li>
+  <li class="breadcrumb-item">고객센터</li>
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/notice']">공지사항</a>
+  </li>
+</ol>
+
+<!--Table-->
+<table class="table table-bordered">
+
+  <!--Table body-->
+  <tbody>
+    <tr>
+      <th>제목</th>
+      <td colspan="3">{{ notice?.n_title }}</td>
+    </tr>
+    <tr>
+      <th>작성자</th>
+      <td colspan="3">{{ notice?.a_id }}</td>
+    </tr>
+    <tr>
+      <th>작성일</th>
+      <td>{{ notice?.n_date }}</td>
+      <th>조회수</th>
+      <td>{{ notice?.n_hits }}</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <p>{{ notice?.n_content }}</p>
+      </td>
+    </tr>
+  </tbody>
+  <!--Table body-->
+
+</table>
+<!--Table-->
+
+<button type="button" class="btn btn-outline-info waves-effect"
+  [routerLink]="['/notice']">목록
+</button>
