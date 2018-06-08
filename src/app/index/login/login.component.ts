@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ToastyService, ToastOptions, ToastData, ToastyConfig } from "ng2-toasty";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from "../../shared/services/user.service";
-// import { AuthService } from "../../shared/services/auth.service";
+import { AuthService } from "../../shared/services/auth.service";
 import { User } from "../../shared/models/user";
 import { Login } from "../../shared/models/login";
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    // private authService: AuthService,
+    private authService: AuthService,
     private toastyService: ToastyService,
     private router: Router,
     private route: ActivatedRoute,
@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
         console.log(this.userService.loginUser.uaddr1);
 
         if(this.userService.loginUser!=null){
+          this.authService.saveUserToken();
           this.router.navigate(["index"]);
         }
 
