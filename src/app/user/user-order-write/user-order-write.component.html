@@ -14,7 +14,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-12 col-sm-pull-12">
                     <!--SHIPPING METHOD-->
                     <div class="panel panel-default">
-                        <div class="panel-heading text-center"><h4>Current Cart</h4></div>
+                        <div class="panel-heading text-center"><h4>주문 정보</h4></div>
                         <div class="panel-body">
                            <table class="table borderless">
     						<thead>
@@ -24,7 +24,6 @@
         							<td>가격</td>
         							<td>수량</td>
         							<td>합계</td>
-                      <td>Del</td>
                                 </tr>
     						</thead>
     						<tbody>
@@ -33,7 +32,7 @@
     								<!-- <td class="col-md-3"> -->
                     <td>
     								    <div class="media">
-    								         <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/{{item.p_img}}" style="width: 72px; height: 72px;"> </a>
+    								         <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/ProductImg/{{item.p_img}}.jpg" style="width: 72px; height: 72px;"> </a>
     								         <div class="media-body">
     								             <h5 class="media-heading"> {{item.p_name}}</h5>
                                  <p>{{item.p_content}}</p>
@@ -43,7 +42,7 @@
     								<td>{{item.p_sellprice}}</td>
     								<td>{{item.camount}}</td>
                     <td>{{item.p_sellprice*item.camount}}</td>
-    								<td><button type="button" class="btn btn-danger" style="width:50px;">X</button></td>
+
     							</tr>
 
     						</tbody>
@@ -61,31 +60,31 @@
 <div class="panel-body">
                                        <div class="form-group">
                                            <div class="col-md-12">
-                                               <h4>Shipping Address</h4>
+                                               <div class="panel-heading text-center"><h4>배송지 정보</h4></div>
                                            </div>
                                        </div>
 
                                        <div class="form-group">
                                            <div class="span1"></div>
                                            <div class="col-md-6 col-xs-12">
-                                               <strong>Name</strong>
-                                               <input type="text" name="last_name" class="form-control" value="" />
+                                               <strong>이름</strong>
+                                               <input type="text" name="last_name" class="form-control" value="{{loggedUser.uname}}" />
                                            </div>
                                        </div>
                                        <div class="form-group">
-                                           <div class="col-md-12"><strong>Address:</strong></div>
+                                           <div class="col-md-12"><strong>주소</strong></div>
                                            <div class="col-md-12">
-                                               <input type="text" name="address" class="form-control" value="" />
+                                               <input type="text" name="address" class="form-control" value="{{loggedUser.uaddr1}}" />
                                            </div>
                                        </div>
 
                                        <div class="form-group">
-                                           <div class="col-md-12"><strong>Phone Number:</strong></div>
-                                           <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="" /></div>
+                                           <div class="col-md-12"><strong>연락처</strong></div>
+                                           <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="{{loggedUser.uphone}}" /></div>
                                        </div>
                                        <div class="form-group">
-                                           <div class="col-md-12"><strong>Email Address:</strong></div>
-                                           <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="" /></div>
+                                           <div class="col-md-12"><strong>이메일</strong></div>
+                                           <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="{{loggedUser.uid}}" /></div>
                                        </div>
                                    </div>
 
@@ -93,7 +92,7 @@
 <!--REVIEW ORDER-->
 <div class="panel panel-default">
     <div class="panel-heading text-center">
-        <h4>Review Order</h4>
+        <h4>결재 정보</h4>
     </div>
     <div class="panel-body">
             <div class="col-md-12">

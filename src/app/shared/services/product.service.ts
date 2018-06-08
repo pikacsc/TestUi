@@ -14,6 +14,8 @@ import { HttpClientModule,HttpHeaders, HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import { CommonModule } from "@angular/common";
+import { User } from "../models/user";
+import { AuthService } from "./auth.service";
 // import {Cart} from '../models/cart';
 //*****동현임포트수정끝
 import { CachcingServiceBase } from "./cachcing.service";
@@ -66,6 +68,7 @@ export class ProductService extends CachcingServiceBase{
   public constructor(
     // 동현생성자수정
     private userService: UserService,
+    private authService: AuthService,
     private http:HttpClient,
     // 동현생성자수정끝
     private toastyService: ToastyService,
@@ -236,7 +239,7 @@ export class ProductService extends CachcingServiceBase{
   // **********동현카트구현중*************
   cartUrl='http://localhost:8080/toma/cart/';
   getUsersCartProducts() {
-  return this.http.get(this.cartUrl+this.userService.loginUser.uid);
+  return this.http.get(this.cartUrl+this.authService.getLoggedInUser().uid);
   //   const user = this.authService.getLoggedInUser();
     // this.cartProducts = this.db.list("cartProducts", ref =>
     //   ref.orderByChild("userId").equalTo(user.$key)

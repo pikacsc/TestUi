@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from "../../shared/services/product.service";
 import {Cart} from '../../shared/models/cart';
+import {User} from '../../shared/models/user';
 import { UserService } from "../../shared/services/user.service";
+import { AuthService } from "../../shared/services/auth.service";
 @Component({
   selector: 'app-user-order-write',
   templateUrl: './user-order-write.component.html',
@@ -9,12 +11,16 @@ import { UserService } from "../../shared/services/user.service";
 })
 export class UserOrderWriteComponent implements OnInit {
 
-  constructor(private productService:ProductService) { }
-
+  constructor(
+    private productService:ProductService,
+    private authService:AuthService
+  ) { }
+  loggedUser:User;
   orderList:number[]=[];
   cartList:Cart[]=[];
   totalPrice:number=0;
   ngOnInit() {
+    this.loggedUser=this.authService.getLoggedInUser();
     this.orderListToOrderWrite();
   }
 

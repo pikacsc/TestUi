@@ -21,6 +21,8 @@ import { UserOrderListComponent } from './user-order-list/user-order-list.compon
 
 import { UserService } from "../shared/services/user.service";
 import { ProductService } from '../shared/services/product.service';
+import { AuthGuard } from "../shared/services/auth_gaurd";
+import { AuthService } from "../shared/services/auth.service";
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(UserRoutes)],
   declarations: [
@@ -34,7 +36,9 @@ import { ProductService } from '../shared/services/product.service';
   ],
   providers: [
     UserService,
-    ProductService
+    ProductService,
+    AuthGuard,
+    AuthService
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -8,45 +8,34 @@ import {
 import {UserService} from '../../shared/services/user.service';
 import {Cart} from '../../shared/models/cart';
 import { Router, ActivatedRoute } from "@angular/router";
-
+import { AuthService } from "../../shared/services/auth.service";
+import { User } from "../../shared/models/user";
 @Component({
   selector: "app-user-cart-items",
   templateUrl: "./user-cart-items.component.html",
   styleUrls: ["./user-cart-items.component.scss"]
 })
 export class UserCartItemsComponent implements OnInit {
-  products: FavouriteProduct[] = [];
+
   page = 1;
   orderList:number[]=[];
-  // Not Found Message
-  messageTitle = "No Products Found in Cart";
-  messageDescription = "Please, Add Products to your cart";
 
+  loggedUser:User;
   cartList: Cart[]=[];
   constructor(
-    private userService:UserService,
+    private authService:AuthService,
     private productService: ProductService,
-    // public authService: AuthService
     private router: Router,
     private route: ActivatedRoute
   ) {
 
 }
-
   ngOnInit() {
+    this.loggedUser = this.authService.getLoggedInUser();
     this.getCartProducts();
   }
 
   getCartProducts() {
-    // const x = this.productService.getUsersCartProducts();
-    // x.snapshotChanges().subscribe(data => {
-    //   this.products = [];
-    //   data.forEach(product => {
-    //     const y = product.payload.toJSON() as FavouriteProduct;
-    //     y["$key"] = product.key;
-    //     this.products.push(y);
-    //   });
-    // });
     const x = this.productService.getUsersCartProducts();
     x.subscribe((cartList:Cart[])=>{
       this.cartList=cartList;
@@ -59,6 +48,7 @@ export class UserCartItemsComponent implements OnInit {
     });
   }
 
+//장바구니 체크 / 체크해제 시 array에 C_NO를 추가/삭제한다.
   pushCno(e, cno:number){
     if(e.target.checked){
       this.orderList.push(cno);
@@ -70,13 +60,10 @@ export class UserCartItemsComponent implements OnInit {
     }
   }
 
-  gotoOrderWirte(){
-    console.log('ProductService 전'+this.productService.cartToOrder+'||'+this.orderList);
-    // this.productService.setCartToOrderList(this.orderList);
-
+//주문진행 페이지로 가기 전 저장된 배열을 service에 저장한다.
+  gotoOrderWirte():boolean{
     this.productService.cartToOrder=this.orderList;
-    console.log('ProductService 후'+this.productService.cartToOrder+'||'+this.orderList);
-    // this.router.navigate(["users/order-write"]);
+
     return true;
   }
 
