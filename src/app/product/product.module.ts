@@ -13,7 +13,9 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { AddProductComponent } from "./add-product/add-product.component";
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
 import { SharedModule } from "../shared/shared.module";
-
+//동현임포트수정
+import { ProductService } from "../shared/services/product.service";
+//동현임포트수정끝
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule],
   declarations: [
@@ -23,6 +25,9 @@ import { SharedModule } from "../shared/shared.module";
     AddProductComponent,
     ProductDetailComponent
   ],
-  exports: [BestProductComponent]
+  exports: [BestProductComponent],
+  providers: [
+    ProductService
+  ],
 })
 export class ProductModule {}

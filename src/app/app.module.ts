@@ -14,7 +14,9 @@ import { SharedModule } from "./shared/shared.module";
 import { NoticeModule } from "./notice/notice.module"
 
 import { AppRoutes } from "./app.routing";
-
+//동현임포트수정
+import { ProductService } from "./shared/services/product.service";
+//동현임포트수정끝
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,7 +30,9 @@ import { AppRoutes } from "./app.routing";
     RouterModule.forRoot(AppRoutes),
     NoticeModule
   ],
-  providers: [],
+  providers: [
+    ProductService
+  ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

@@ -23,28 +23,26 @@
         							<td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
         							<td>가격</td>
         							<td>수량</td>
-                      <td>배송비</td>
         							<td>합계</td>
                       <td>Del</td>
                                 </tr>
     						</thead>
     						<tbody>
-    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
-    							<tr>
+
+    							<tr *ngFor="let item of cartList">
     								<!-- <td class="col-md-3"> -->
                     <td>
     								    <div class="media">
-    								         <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://lorempixel.com/460/250/" style="width: 72px; height: 72px;"> </a>
+    								         <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/{{item.p_img}}" style="width: 72px; height: 72px;"> </a>
     								         <div class="media-body">
-    								             <h5 class="media-heading"> Product Name</h5>
-                                 <p>Product Comment</p>
+    								             <h5 class="media-heading"> {{item.p_name}}</h5>
+                                 <p>{{item.p_content}}</p>
     								         </div>
     								    </div>
     								</td>
-    								<td>$10.99</td>
-    								<td>1</td>
-    								<td>$32.99</td>
-                    <td>$sum</td>
+    								<td>{{item.p_sellprice}}</td>
+    								<td>{{item.camount}}</td>
+                    <td>{{item.p_sellprice*item.camount}}</td>
     								<td><button type="button" class="btn btn-danger" style="width:50px;">X</button></td>
     							</tr>
 
@@ -99,25 +97,20 @@
     </div>
     <div class="panel-body">
             <div class="col-md-12">
-                <strong>Subtotal (# item)</strong>
-                <div class="pull-right"><span>$</span><span>200.00</span></div>
+                <strong>물품가격합계</strong>
+                <div class="pull-right"><span>{{totalPrice}}</span></div>
             </div>
             <div class="col-md-12">
-                <strong>Tax</strong>
-                <div class="pull-right"><span>$</span><span>200.00</span></div>
+                <strong>배송비</strong>
+                <div class="pull-right"><span>2500</span></div>
             </div>
             <div class="col-md-12">
-                <small>Shipping</small>
-                <div class="pull-right"><span>-</span></div>
-                <hr>
-            </div>
-            <div class="col-md-12">
-                <strong>Order Total</strong>
-                <div class="pull-right"><span>$</span><span>150.00</span></div>
+                <strong>총 가격</strong>
+                <div class="pull-right"><span>{{totalPrice+2500}}</span><span></span></div>
                 <hr>
             </div>
 
-            <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block">결재하기</button>
 
     </div>
 
