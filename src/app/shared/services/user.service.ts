@@ -22,7 +22,7 @@ export class UserService {
 
   joinUrl='http://localhost:8080/toma/join/';
   loginUrl='http://localhost:8080/toma/login/';
-  updateUrl='http://localhost;8080/toma/updateUser';
+  updateUrl='http://localhost:8080/toma/user/Update/'; // +user객체
   constructor(private http: HttpClient) {
     // this.getUsers();
     this.loginUser=new User();
@@ -51,7 +51,7 @@ export class UserService {
   }
 
   updateUser(data:User){
-    return this.http.post(this.updateUrl,data);
+    return this.http.put(this.updateUrl,data);
   }
 
   // updateUser(user: User) {

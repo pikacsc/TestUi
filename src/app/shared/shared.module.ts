@@ -17,8 +17,8 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { FilterByKindPipe } from "./pipes/filterByKind.pipe";
 import { ProductService } from "./services/product.service";
 import { AdminGaurd } from "./services/admin-gaurd";
-// import { AuthGuard } from "./services/auth_gaurd";
-// import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./services/auth_gaurd";
+import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service";
 import { LoaderSpinnerService } from "./loader-spinner/loader-spinner";
 
@@ -65,8 +65,8 @@ import { LoaderSpinnerService } from "./loader-spinner/loader-spinner";
     PageNotFoundComponent
   ],
   providers: [
-    // AuthService,
-    // AuthGuard,
+    AuthService,
+    AuthGuard,
     AdminGaurd,
     ProductService,
     UserService,
