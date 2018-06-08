@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "filterByBrand"
+  name: "filterByKind"
 })
-export class FilterByBrandPipe implements PipeTransform {
+export class FilterByKindPipe implements PipeTransform {
   transform(items: any, select?: any): any {
     if (select !== "All") {
       return select

@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ToastyService, ToastOptions, ToastData, ToastyConfig } from "ng2-toasty";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from "../../shared/services/user.service";
-// import { AuthService } from "../../shared/services/auth.service";
+import { AuthService } from "../../shared/services/auth.service";
 import { User } from "../../shared/models/user";
 import { Login } from "../../shared/models/login";
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    // private authService: AuthService,
+    private authService: AuthService,
     private toastyService: ToastyService,
     private router: Router,
     private route: ActivatedRoute,
@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
 
   signup() {
     // this.authService.signup(this.emailId, this.password);
-    this.loginUser.userId = this.loginUser.userPassword = "";
+    this.loginUser.userId= this.login1.uid;
+    this.loginUser.userPassword= this.login1.upw;
   }
 
   addUser(userForm: NgForm) {
@@ -55,9 +56,9 @@ export class LoginComponent implements OnInit {
       this.createUser = data;
     });
 
-    const toastOption: ToastOptions = {
-      title: "User Registeration",
-      msg: "Registering",
+    const toastOption: ToastOptions = { //3초동안 우측상단 회원가입중... 창 띄워줌
+      title: "회원가입 확인중",
+      msg: "회원가입 확인중...",
       showClose: true,
       timeout: 3000,
       theme: "material"
@@ -65,6 +66,8 @@ export class LoginComponent implements OnInit {
     this.toastyService.wait(toastOption);
     setTimeout((router: Router) => {
       $("#createUserForm").modal("hide");
+      alert("회원가입 완료. 로그인 해주세요");
+      this.router.navigate(["index/login"]);
     }, 1500);
 
   }
@@ -79,6 +82,7 @@ export class LoginComponent implements OnInit {
         console.log(this.userService.loginUser.uaddr1);
 
         if(this.userService.loginUser!=null){
+          this.authService.saveUserToken();
           this.router.navigate(["index"]);
         }
 

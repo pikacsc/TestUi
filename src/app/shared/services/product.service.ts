@@ -11,6 +11,12 @@ import { Product } from "../models/product";
 //*****동현임포트수정
 import { UserService } from "./user.service";
 import { HttpClientModule,HttpHeaders, HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+
+import { CommonModule } from "@angular/common";
+import { User } from "../models/user";
+import { AuthService } from "./auth.service";
+// import {Cart} from '../models/cart';
 //*****동현임포트수정끝
 import { CachcingServiceBase } from "./cachcing.service";
 
@@ -58,15 +64,20 @@ export class ProductService extends CachcingServiceBase{
   //   // }
   // }
 
+  cartToOrder:number[]=[];
   public constructor(
     // 동현생성자수정
     private userService: UserService,
+    private authService: AuthService,
     private http:HttpClient,
     // 동현생성자수정끝
     private toastyService: ToastyService,
     private toastyConfig: ToastyConfig){
 
       super();
+
+
+      //동현 카트에서가져온리스트를 담을 nuber[]
       this.toastyConfig.position = "top-right";
       this.toastyConfig.theme = "material";
 
@@ -228,14 +239,29 @@ export class ProductService extends CachcingServiceBase{
   // **********동현카트구현중*************
   cartUrl='http://localhost:8080/toma/cart/';
   getUsersCartProducts() {
+  return this.http.get(this.cartUrl+this.authService.getLoggedInUser().uid);
   //   const user = this.authService.getLoggedInUser();
     // this.cartProducts = this.db.list("cartProducts", ref =>
     //   ref.orderByChild("userId").equalTo(user.$key)
     // );
     // return this.cartProducts;
-    return this.http.get(this.cartUrl+this.userService.loginUser.uid);
+  }
+  removeFromCart(cno:number){
+    console.log('serviceremove'+cno);
+    return this.http.delete(this.cartUrl+cno);
+  }
+  //************동현카트끝***********************
+  //*************동현orderWrite*****************
+
+  orderListToOrderWrite(cartToOrder:number[]) {
+    return this.http.put(this.cartUrl+'goOrderWrite',cartToOrder);
   }
 
+
+
+
+
+  //*************동현orderwrite끝*****************
   // Adding new Product to cart db if logged in else localStorage
   // addToCart(data: Product): void {
   //   if (this.authService.isLoggedIn() === false) {

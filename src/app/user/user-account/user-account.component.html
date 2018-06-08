@@ -1,23 +1,100 @@
 <form #updatePerson="ngForm" (ngSubmit)="updateProfile(updatePerson)" name="profileForm">
   <div class="row">
     <div class="col-md-8 mb-3">
-      <label for="userName">User Name</label>
-      <input type="text" class="form-control" [ngClass]="(userName.invalid)?'is-invalid':'is-valid'" id="userName" [(ngModel)]="userService.loginUser.uname"
-        name="userName" #userName="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" required>
+      <label for="userName">회원이름</label>
+      <input type="text" class="form-control is-valid" id="userName" [(ngModel)]="loggedUser.uname"
+        name="userName" #userName="ngModel" [disabled]="true">
+        <!-- 삭제한속성 : (ngModelChange)="enbUpdBut = !enbUpdBut" / [(ngClass)] : 초록색테두리 / required-->
       <div class="invalid-feedback">
         username is Mandatory.
       </div>
     </div>
     <div class="col-md-8 mb-3">
-      <!-- <label for="contactNumber">Contact Number</label>
-      <input type="tel" class="form-control" name="phoneNumber" [ngModel]="loggedUser.phoneNumber" #phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut"> -->
-      <label for="emailId">Email Id</label>
-      <input type="text" class="form-control is-valid" id="emailId" [disabled]="true" name="userEmail" [(ngModel)]="userService.loginUser">
+      <label for="userId">아이디</label>
+      <input type="text" class="form-control is-valid" id="userId" [disabled]="true" name="userId" [(ngModel)]="loggedUser.uid">
     </div>
     <div class="col-md-8 mb-3">
-      <label for="contactNumber">Contact Number</label>
-      <input type="tel" class="form-control" name="phoneNumber" [(ngModel)]="userService.loginUser.uphone" #phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut">
+      <label for="userJoindate">가입일</label>
+      <input type="text" class="form-control is-valid" id="userJoindate" name="userJoindate" [(ngModel)]="loggedUser.ujoindate" [disabled]="true">
     </div>
+    <div class="col-md-8 mb-3">
+      <label for="userPwd">비밀번호</label>
+      <input type="password" class="form-control" id="userPwd" name="userPwd" [(ngModel)]="loggedUser.upw">
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userPhone">연락처</label>
+      <input type="tel" class="form-control" id="userPhone" name="userPhone" [(ngModel)]="loggedUser.uphone"> <!--#phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" 지운속성-->
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userAddr1">기본주소</label>
+      <input type="text" class="form-control" id="userAddr1" name="userAddr1" [(ngModel)]="loggedUser.uaddr1">
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userAddr2">추가주소</label>
+      <input type="text" class="form-control" id="userAddr2" name="userAddr2" [(ngModel)]="loggedUser.uaddr2">
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userAddr3">추가주소 2</label>
+      <input type="text" class="form-control" id="userAddr3" name="userAddr3" [(ngModel)]="loggedUser.uaddr3">
+    </div>
+    <!-- selectbox로 고쳐야함 -->
+    <div class="col-md-8 mb-3">
+      <label for="userBirth">생년월일</label>
+      <input type="text" class="form-control" id="userBirth" name="userBirth" [(ngModel)]="loggedUser.ubirth">
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userAddrcheck">주소선택란</label>
+      <br />
+      <select class="mdb-select" [(ngModel)]="loggedUser.uaddrcheck" name="userAddrcheck" id="userAddrcheck" style="width:100%;">
+        <option value="" disabled selected>기본적으로 사용할 주소지를 선택해주세요</option>
+        <option value=1>&nbsp;기본주소</option>
+        <option value=2>&nbsp;추가주소</option>
+        <option value=3>&nbsp;추가주소 2</option>
+      </select>
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userGender">성별</label>
+      <br />
+      <select class="mdb-select" [(ngModel)]="loggedUser.ugender" name="userGender" id="userGender" style="width:100%;">
+        <option value="" disabled selected>성별을 선택해주세요</option>
+        <option value="M">&nbsp;남자</option>
+        <option value="F">&nbsp;여자</option>
+      </select>
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userSmsyn">SMS 수신여부</label>
+      <br />
+      <select class="mdb-select" [(ngModel)]="loggedUser.usmsyn" name="userSmsyn" id="userSmsyn" style="width:100%;">
+        <option value="" disabled selected>SMS를 통해 정보를 받으시겠습니까 ?</option>
+        <option value="Y">&nbsp;예</option>
+        <option value="N">&nbsp;아니오</option>
+      </select>
+    </div>
+    <div class="col-md-8 mb-3">
+      <label for="userEmailyn">Email 수신여부</label>
+      <br />
+      <select class="mdb-select" [(ngModel)]="loggedUser.uemailyn" name="userEmailyn" id="userEmailyn" style="width:100%;">
+        <option value="" disabled selected>Email을 통해 정보를 받으시겠습니까 ?</option>
+        <option value="Y" >&nbsp;예</option>
+        <option value="N">&nbsp;아니오</option>
+      </select>
+    </div>
+
+    <!-- selectbox로 고쳐야함 -->
+    <!-- <div class="col-md-8 mb-3">
+      <label for="userBirth">성별</label>
+      <input type="text" class="form-control" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
+    </div> -->
+
+    <!-- <div class="col-md-8 mb-3">
+      <label for="userBirth">SMS 수신여부</label>
+      <input type="text" class="form-control" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
+    </div> -->
+
+    <!-- <div class="col-md-8 mb-3">
+      <label for="userEmailyn">이메일 수신여부</label>
+      <input type="text" class="form-control" id="userEmailyn" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
+    </div> -->
   </div>
   <!--
   <div class="row">
@@ -44,5 +121,5 @@
     </div>
   </div>
  -->
-  <button class="btn btn-primary" type="submit" [hidden]="enbUpdBut">Update</button>
+  <button class="btn btn-primary" type="submit" style="margin-left:320px">정보수정하기</button>
 </form>

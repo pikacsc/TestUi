@@ -1,4 +1,5 @@
 <!-- <div *ngIf="products.length > 0"> -->
+
 <div *ngIf='cartList.length>0'>
   <div class="row">
     <!-- List of Products -->
@@ -42,13 +43,25 @@
 
               <!--Card footer-->
               <div class="card-footer">
-                <span class="left">{{cartItem.p_sellprice}}$</span>
+
+                <span class="left">수량 : {{cartItem.camount}}
+                  <!-- <a class="incr-btn" data-action="decrease" href="#">–</a>
+                  <!-- <input class="quantity" type="text" name="quantity" value="1"/> -->
+                  <!-- <a class="incr-btn" data-action="increase" href="#">&plus;</a> -->
+                  <!-- 수량조정 minus/plus -->
+                  <a placement="top" mdbTooltip="Remove Product" container="body" (click)="removeFromCart(cartItem.cno)">
+                    <i class="fa fa-edit prefix"></i>
+                  </a>
+                </span><br />
+                <span class="left">금액 : {{cartItem.p_sellprice*cartItem.camount}}원</span>
                 <!-- <span class="right" *ngIf="authService.isLoggedIn()"> -->
+
                 <span class="right">
-                  <a placement="top" mdbTooltip="Remove Product" container="body" (click)="removeFromCart(cartItem.$key)">
+                  <a placement="top" mdbTooltip="Remove Product" container="body" (click)="removeFromCart(cartItem.cno)">
                     <i class="fa fa-trash"></i>
                   </a>
                 </span>
+                <input type="checkbox" (change)='pushCno($event, cartItem.cno)' />
               </div>
 
             </div>
@@ -60,6 +73,11 @@
         </div>
       </div>
     </div>
+
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="gotoOrderWirte()"
+    [routerLink]="['/users', {outlets: {'profileOutlet': ['order-write']}}]">
+      구매하기
+    </button>
   </div>
   <div class="text-center">
     <pagination-controls (pageChange)="page = $event"></pagination-controls>
@@ -67,6 +85,6 @@
 </div>
 
 <!-- <div *ngIf="products.length == 0"> -->
-<div>
+<div *ngIf="cartList.length==0">
   <app-no-products-found [title]="messageTitle" [description]="messageDescription"></app-no-products-found>
 </div>
