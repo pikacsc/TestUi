@@ -20,7 +20,7 @@ import { UserOrderWriteComponent } from './user-order-write/user-order-write.com
 import { UserOrderListComponent } from './user-order-list/user-order-list.component';
 
 import { UserService } from "../shared/services/user.service";
-
+import { ProductService } from '../shared/services/product.service';
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(UserRoutes)],
   declarations: [
@@ -32,7 +32,10 @@ import { UserService } from "../shared/services/user.service";
     UserOrderListComponent
 
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    ProductService
+  ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UserModule {}

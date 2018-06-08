@@ -7,6 +7,7 @@ import {
 // import { AuthService } from "../../shared/services/auth.service";
 import {UserService} from '../../shared/services/user.service';
 import {Cart} from '../../shared/models/cart';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-user-cart-items",
@@ -20,12 +21,14 @@ export class UserCartItemsComponent implements OnInit {
   // Not Found Message
   messageTitle = "No Products Found in Cart";
   messageDescription = "Please, Add Products to your cart";
-  check:boolean=false;
+
   cartList: Cart[]=[];
   constructor(
     private userService:UserService,
-    private productService: ProductService
+    private productService: ProductService,
     // public authService: AuthService
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
 }
@@ -56,18 +59,26 @@ export class UserCartItemsComponent implements OnInit {
     });
   }
 
-  pushCno(cno:number){
-    if(this.check==true){
+  pushCno(e, cno:number){
+    if(e.target.checked){
       this.orderList.push(cno);
       console.log(this.orderList);
-    }
-    else{
-      const index: number = this.orderList.indexOf(cno);
-      console.log(index);
-      this.orderList.slice(index,1);
-      // delete this.orderList[index];
-      // this.orderList.slice(index,1);
-
+    }else{
+      const index:number = this.orderList.indexOf(cno);
+      this.orderList.splice(index,1);
+      console.log(this.orderList);
     }
   }
+
+  gotoOrderWirte(){
+    console.log('ProductService 전'+this.productService.cartToOrder+'||'+this.orderList);
+    // this.productService.setCartToOrderList(this.orderList);
+
+    this.productService.cartToOrder=this.orderList;
+    console.log('ProductService 후'+this.productService.cartToOrder+'||'+this.orderList);
+    // this.router.navigate(["users/order-write"]);
+    return true;
+  }
+
+
 }
