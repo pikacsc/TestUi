@@ -250,6 +250,14 @@ export class ProductService extends CachcingServiceBase{
     console.log('serviceremove'+cno);
     return this.http.delete(this.cartUrl+cno);
   }
+
+  addToCart(cart:Cart):void{
+    return this.http.post(this.cartUrl, cart);
+  }
+
+  updateCart(cno:number,camount:number):void{
+    return this.http.put(this.cartUrl, cno, camount);
+  }
   //************동현카트끝***********************
   //*************동현orderWrite*****************
 
