@@ -47,22 +47,25 @@ export class UserOrderWriteComponent implements OnInit {
     this.order.ototal=this.totalPrice;
     this.order.oaddr=this.authService.getLoggedInUser().uaddr1;
     this.productService.checkOutOrder(this.order).subscribe(data=>{
-      console.log('after checkOutOrder by productService');
-    });
-    console.log('after checkOutOrder');
     //주문상세 테이블(TM_ORDER_DETAIL)
-    for(let i=0;i<this.cartList.length;i++){
-      this.orderDetails[i]=new OrderDetail();
-      this.orderDetails[i].odimg=this.cartList[i].p_img;
-      this.orderDetails[i].odpname=this.cartList[i].p_name;
-      this.orderDetails[i].odpprice=this.cartList[i].p_sellprice;
-      this.orderDetails[i].odpamount=this.cartList[i].camount;
-    }
-    console.log('after For');
-    this.productService.checkOutOrderDetail(this.orderDetails).subscribe(data=>{
-      console.log('after checkOutOrderDetail by productService');
+      for(let i=0;i<this.cartList.length;i++){
+        this.orderDetails[i]=new OrderDetail();
+        this.orderDetails[i].odimg=this.cartList[i].p_img;
+        this.orderDetails[i].odpname=this.cartList[i].p_name;
+        this.orderDetails[i].odpprice=this.cartList[i].p_sellprice;
+        this.orderDetails[i].odpamount=this.cartList[i].camount;
+      }
+      console.log('after For');
+      this.productService.checkOutOrderDetail(this.orderDetails).subscribe(data=>{
+        //구매완료 후 장바구니에서 삭제
+        for(let i=0;i<this.cartList.length;i++){
+          this.productService.removeFromCart(this.cartList[i].cno).subscribe(data=>
+          {
+          });
+        }
+      alert("구매가 완료 되었습니다.");
+      });
     });
-
   }
 //물품 + 배송비 => 총 가격
   getTotalPrice(){
