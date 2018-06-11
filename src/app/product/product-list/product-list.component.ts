@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ToastyConfig, ToastOptions, ToastyService } from "ng2-toasty";
 import { Product } from "../../shared/models/product";
-// import { AuthService } from "../../shared/services/auth.service";
+import { AuthService } from "../../shared/services/auth.service";
 import { ProductService } from "../../shared/services/product.service";
 import { LoaderSpinnerService } from "../../shared/loader-spinner/loader-spinner";
 
+//**동현
+import {Cart} from "../../shared/models/cart";
 @Component({
   selector: "app-product-list",
   templateUrl: "./product-list.component.html",
@@ -21,8 +23,12 @@ export class ProductListComponent implements OnInit {
 
 
   page = 1;
+
+  //** 동현 변수
+  cart:Cart=new Cart();
+  // 동현 변수끝
   constructor(
-    // public authService: AuthService,
+    private authService: AuthService,
     private productService: ProductService,
     private spinnerService: LoaderSpinnerService,
     private toastyConfig: ToastyConfig,
@@ -59,7 +65,18 @@ export class ProductListComponent implements OnInit {
     this.productService.addFavouriteProduct(product);
   }
 
+  //동현 장바구니에 물품추가기능
   addToCart(product: Product) {
-    // this.productService.addToCart(product);
+    this.cart.uid=this.authService.getLoggedInUser().uid;
+    this.cart.pcode=product.p_code;
+    this.cart.camount=1;
+    this.cart.p_img=product.p_img;
+    this.cart.p_sellprice=product.p_sellprice;
+    this.cart.p_name=product.p_name;
+    this.cart.p_kind=product.p_kind;
+    this.cart.p_content=product.p_content;
+    this.productService.addToCart(this.cart).subscribe((cart: Cart)=>{
+      alert('장바구니에 담았습니다.');
+    });
   }
 }

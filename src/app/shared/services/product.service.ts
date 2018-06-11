@@ -16,7 +16,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { User } from "../models/user";
 import { AuthService } from "./auth.service";
-// import {Cart} from '../models/cart';
+import {Cart} from '../models/cart';
+import {Order} from '../../shared/models/order';
+import {OrderDetail} from '../../shared/models/orderDetail';
 //*****동현임포트수정끝
 import { CachcingServiceBase } from "./cachcing.service";
 
@@ -63,8 +65,10 @@ export class ProductService extends CachcingServiceBase{
   //   //   this.calculateLocalCartProdCounts();
   //   // }
   // }
-
+//동현변수
   cartToOrder:number[]=[];
+
+//동현변수끝
   public constructor(
     // 동현생성자수정
     private userService: UserService,
@@ -75,9 +79,6 @@ export class ProductService extends CachcingServiceBase{
     private toastyConfig: ToastyConfig){
 
       super();
-
-
-      //동현 카트에서가져온리스트를 담을 nuber[]
       this.toastyConfig.position = "top-right";
       this.toastyConfig.theme = "material";
 
@@ -250,14 +251,28 @@ export class ProductService extends CachcingServiceBase{
     console.log('serviceremove'+cno);
     return this.http.delete(this.cartUrl+cno);
   }
+
+  addToCart(cart:Cart){
+    return this.http.post(this.cartUrl, cart);
+  }
+
+  updateCart(cart:Cart){
+    return this.http.put(this.cartUrl,cart);
+  }
   //************동현카트끝***********************
   //*************동현orderWrite*****************
 
+  orderUrl='http://localhost:8080/toma/order/';
   orderListToOrderWrite(cartToOrder:number[]) {
     return this.http.put(this.cartUrl+'goOrderWrite',cartToOrder);
   }
+  checkOutOrder(order:Order){
+    return this.http.post(this.orderUrl+'insert/order',order);
+  }
 
-
+  checkOutOrderDetail(orderDetails:OrderDetail[]){
+    return this.http.post(this.orderUrl+'insert/detail',orderDetails);
+  }
 
 
 
