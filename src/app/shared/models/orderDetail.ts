@@ -5,4 +5,5 @@ export class OrderDetail{
   public odpname:string;
   public odpprice:number;
   public odpamount:number;
+
 }
