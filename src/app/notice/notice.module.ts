@@ -19,10 +19,11 @@ import { FaqDetailComponent } from './faq-detail/faq-detail.component';
 import { QnaDetailComponent } from './qna-detail/qna-detail.component';
 
 import { QnaWriteComponent } from './qna-write/qna-write.component';
+import { QnaUpdateComponent } from './qna-update/qna-update.component';
 
 @NgModule({
   declarations: [NoticeComponent, NoticeListComponent, FaqComponent, QnaComponent,
-    NoticeDetailComponent, FaqDetailComponent, QnaDetailComponent, QnaWriteComponent],
+    NoticeDetailComponent, FaqDetailComponent, QnaDetailComponent, QnaWriteComponent, QnaUpdateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(NoticeRoutes),
