@@ -4,13 +4,14 @@
     <div class="col-sm-4">
       <div class="product-image">
         <div class="view hm-zoom z-depth-2" style="cursor: pointer">
-          <img [src]="product.productImageUrl" [alt]="product.productName" width="100%" class="img-fluid rounded">
+          <img src="./assets/ProductImg/{{product.p_img}}.jpg" [alt]="product.productName" width="100%" class="img-fluid rounded">
+
         </div>
         <div class="z-depth-1" style="margin-top:15px">
           <ul class="list-group">
             <li class="list-group-item"> Product Price:
               <span style="margin-left:15px; color:crimson">
-                <i class="fa fa-inr" aria-hidden="true"></i> {{product.productPrice}}</span>
+                <i class="fa fa-inr" aria-hidden="true"></i> {{product.p_sellPrice}}</span>
             </li>
             <li class="list-group-item"> Product Seller:
               <span style="margin-left:15px; color:darkblue">
@@ -27,15 +28,15 @@
           <tbody>
             <tr>
               <th scope="row">Product Name</th>
-              <td>{{product.productName}}</td>
+              <td>{{product.p_name}}</td>
             </tr>
             <tr>
               <th scope="row">Product Description</th>
-              <td>{{product.productDescription}}</td>
+              <td>{{product.p_content}}</td>
             </tr>
             <tr>
               <th scope="row">Product Category</th>
-              <td>{{product.productCategory}}</td>
+              <td>{{product.p_kind}}</td>
             </tr>
             <tr>
               <th scope="row">No. of quantity available</th>
