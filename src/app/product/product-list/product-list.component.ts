@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit {
   page = 1;
 
   //** 동현 변수
-  cart:Cart;
+  cart:Cart=new Cart();
   // 동현 변수끝
   constructor(
     private authService: AuthService,
@@ -68,7 +68,7 @@ export class ProductListComponent implements OnInit {
   //동현 장바구니에 물품추가기능
   addToCart(product: Product) {
     this.cart.uid=this.authService.getLoggedInUser().uid;
-    this.cart.pcode=product.p_code
+    this.cart.pcode=product.p_code;
     this.cart.camount=1;
     this.cart.p_img=product.p_img;
     this.cart.p_sellprice=product.p_sellprice;
