@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit {
   };
   login1 = new Login;
   user = new User;
+  user2 = new User;
 
   //가입하는 유저
   createUser;
 
-
+  //아이디/비밀번호를 분실한 유저
+  findIDUser=new User;
+  findPWUser=new User;
 
   constructor(
     private userService: UserService,
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
     this.toastyConfig.theme = "material";
 
     this.createUser = new User();
+
   }
 
   ngOnInit() { }
@@ -48,6 +52,28 @@ export class LoginComponent implements OnInit {
     // this.authService.signup(this.emailId, this.password);
     this.loginUser.userId= this.login1.uid;
     this.loginUser.userPassword= this.login1.upw;
+  }
+
+
+  FindUserId(FindIdForm: NgForm){
+    this.userService.findUserID(this.findIDUser).subscribe((data:User)=>{
+      this.user = data;
+
+    },(error: any)=>{
+      alert("일치하는 데이터가 없습니다.");
+      this.user = new User;
+  });
+
+  }
+
+  FindUserPw(FindPwForm:NgForm){
+    this.userService.findUserPW(this.findPWUser).subscribe((data:User)=>{
+      this.user2 = data;
+    },(error: any)=>{
+      alert("일치하는 데이터가 없습니다.");
+      this.user2 = new User;
+    }
+  );
   }
 
   addUser(userForm: NgForm) {
@@ -86,7 +112,9 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["index"]);
         }
 
-      });
+      },(error: any)=>{
+
+    });
     // if (this.authService.loginCheck(userForm.value["userId"], userForm.value["userPassword"]) === true) {
     //   const toastOption: ToastOptions = {
     //     title: "Authentication Success",

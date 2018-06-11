@@ -7,15 +7,13 @@
 
       <div class="md-form">
         <i class="fa fa-envelope prefix grey-text"></i>
-        <input mdbActive type="text" id="loginUserId" class="form-control" name="uid" [(ngModel)]="login1.uid" mdbInputValidate
-          [email]="true">
+        <input mdbActive type="text" id="loginUserId" class="form-control" name="uid" [(ngModel)]="login1.uid" mdbInputValidate [email]="true">
         <label for="userId">Your ID</label>
       </div>
 
       <div class="md-form">
         <i class="fa fa-lock prefix grey-text"></i>
-        <input type="password" id="userPassword" name="upw" [(ngModel)]="login1.upw" class="form-control"
-          mdbActive>
+        <input type="password" id="userPassword" name="upw" [(ngModel)]="login1.upw" class="form-control" mdbActive>
         <label for="defaultForm-pass">Your password</label>
       </div>
 
@@ -27,7 +25,13 @@
     <br />
     <br />
     <p>회원이 아니십니까?
-      <a data-toggle="modal" data-target="#createUserForm" style="color:dodgerblue"><strong>회원가입하기</strong></a>
+      <a data-toggle="modal" data-target="#createUserForm" style="color:dodgerblue; font-weight:bold;">회원가입하기</a>
+    </p>
+    <p>아이디를 분실하셨나요?
+      <a data-toggle="modal" data-target="#FindUserIDInfoForm" style="color:dodgerblue; font-weight:bold;">아이디찾기</a>
+    </p>
+    <p>비밀번호를 분실하셨나요?
+      <a data-toggle="modal" data-target="#FindUserPWInfoForm" style="color:dodgerblue; font-weight:bold;">비밀번호찾기</a>
     </p>
   </div>
   <br>
@@ -44,7 +48,7 @@
 
           <div class="modal-header light-blue darken-3 white-text">
             <h4 class="title">
-              <i class="fa fa-user-plus"></i> Register</h4>
+              <i class="fa fa-user-plus"></i> 회원가입</h4>
             <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
@@ -52,8 +56,7 @@
           <div class="modal-body">
             <div class="md-form form-sm">
               <i class="fa fa-envelope prefix"></i>
-              <input mdbActive type="text" id="userId" class="form-control" name="uid" [(ngModel)]="createUser.uid" mdbInputValidate
-                [email]="true">
+              <input mdbActive type="text" id="userId" class="form-control" name="uid" [(ngModel)]="createUser.uid" mdbInputValidate [email]="true">
               <label for="userId">아이디</label>
             </div>
             <div class="md-form form-sm">
@@ -126,6 +129,106 @@
                 <i class="fa fa-sign-in ml-1"></i>
               </button>
             </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 아이디 찾기 -->
+  <div class="modal fade" id="FindUserIDInfoForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+      <!-- 이름,주민등록번호,연락처로 아이디찾기 -->
+      <form #FindIdForm="ngForm" (ngSubmit)="FindUserId(FindIdForm)">
+        <div class="modal-content">
+          <!-- 메뉴타이틀 -->
+          <div class="modal-header light-blue darken-3 white-text">
+            <h4 class="title">
+              <i class="fa fa-user-plus"></i>아이디 찾기</h4>
+            <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <!-- 입력박스 -->
+          <div class="modal-body">
+            <div class="md-form form-sm">
+              <i class="fa fa-user prefix"></i>
+              <input mdbActive type="text" id="FindID_userName" class="form-control" mdbInputValidate [(ngModel)]="findIDUser.uname" name="FindID_uname">
+              <label for="FindID_userName">이름</label>
+            </div>
+            <div class="md-form form-sm">
+              <i class="fa fa-phone prefix"></i>
+              <input mdbActive type="text" id="FindID_userPhone" class="form-control" mdbInputValidate [(ngModel)]="findIDUser.uphone" name="FindID_uphone">
+              <label for="FindID_userPhone">연락처</label>
+            </div>
+            <div class="md-form form-sm">
+              <i class="fa fa-calendar prefix"></i>
+              <input mdbActive type="text" id="FindID_userBirth" class="form-control" mdbInputValidate [(ngModel)]="findIDUser.ubirth" name="FindID_ubirth">
+              <label for="FindID_userBirth">생년월일</label>
+            </div>
+            <div class="text-center mt-2">
+              <button type="submit" class="btn btn-info waves-light" id="FindID_Button" mdbRippleRadius>아이디찾기
+                <i class="fa fa-sign-in ml-1"></i>
+              </button>
+            </div>
+            <br />
+            <ng-template [ngIf]="user.uid == null">위 항목들을 작성해주세요</ng-template>
+            <ng-template [ngIf]="user.uid != null"><p style="text-align: center; font-weight:bold; font-size:16px;">일치하는 아이디 : {{user.uid}}</p></ng-template>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- 비밀번호 찾기 -->
+  <div class="modal fade" id="FindUserPWInfoForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+      <!-- 아이디,이름,주민등록번호,연락처로 아이디찾기 -->
+      <form #FindPwForm="ngForm" (ngSubmit)="FindUserPw(FindPwForm)">
+        <div class="modal-content">
+          <!-- 메뉴타이틀 -->
+          <div class="modal-header light-blue darken-3 white-text">
+            <h4 class="title">
+              <i class="fa fa-user-plus"></i>비밀번호 찾기</h4>
+            <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <!-- 입력박스 -->
+          <div class="modal-body">
+            <div class="md-form form-sm">
+              <i class="fa fa-envelope prefix"></i>
+              <input mdbActive type="text" id="FindPW_userId" class="form-control"  mdbInputValidate [(ngModel)]="findPWUser.uid" name="FindPW_uid">
+              <label for="FindPW_userId">아이디</label>
+            </div>
+            <div class="md-form form-sm">
+              <i class="fa fa-user prefix"></i>
+              <input mdbActive type="text" id="FindPW_userName" class="form-control" mdbInputValidate [(ngModel)]="findPWUser.uname" name="FindPW_uname">
+              <label for="FindPW_userName">이름</label>
+            </div>
+            <div class="md-form form-sm">
+              <i class="fa fa-phone prefix"></i>
+              <input mdbActive type="text" id="FindPW_userPhone" class="form-control" mdbInputValidate [(ngModel)]="findPWUser.uphone" name="FindPW_uphone">
+              <label for="FindPW_userPhone">연락처</label>
+            </div>
+            <div class="md-form form-sm">
+              <i class="fa fa-calendar prefix"></i>
+              <input mdbActive type="text" id="FindPW_userBirth" class="form-control" mdbInputValidate [(ngModel)]="findPWUser.ubirth" name="FindPW_ubirth">
+              <label for="FindPW_userBirth">생년월일</label>
+            </div>
+            <div class="text-center mt-2">
+              <button type="submit" class="btn btn-info waves-light" id="FindPW_Button" mdbRippleRadius>비밀번호찾기
+                <i class="fa fa-sign-in ml-1"></i>
+              </button>
+            </div>
+            <br />
+            <ng-template [ngIf]="user2.upw == null">위 항목들을 작성해주세요</ng-template>
+            <ng-template [ngIf]="user2.upw != null"><p style="text-align: center; font-weight:bold; font-size:16px;">비밀번호 : {{user2.upw}}</p></ng-template>
+
           </div>
         </div>
       </form>

@@ -10,6 +10,7 @@ import * as moment from "moment";
 import { User } from "../models/user";
 import { Login } from "../models/login";
 
+
 @Injectable()
 export class UserService {
   selectedUser: User = new User();
@@ -23,6 +24,8 @@ export class UserService {
   joinUrl='http://localhost:8080/toma/join/';
   loginUrl='http://localhost:8080/toma/login/';
   updateUrl='http://localhost:8080/toma/user/Update/'; // +user객체
+  findUserIDUrl='http://localhost:8080/toma/user/findID/';
+  findUserPWUrl='http://localhost:8080/toma/user/findPW/';
   constructor(private http: HttpClient) {
     // this.getUsers();
     this.loginUser=new User();
@@ -58,6 +61,14 @@ export class UserService {
   //   // this.users.update(user.$key, user);
   // }
 
+
+  findUserID(data : User){
+    return this.http.post(this.findUserIDUrl,data);
+  }
+
+  findUserPW(data : User){
+    return this.http.post(this.findUserPWUrl,data);
+  }
   setLocation(lat, lon) {
     this.location.lat = lat;
     this.location.lon = lon;

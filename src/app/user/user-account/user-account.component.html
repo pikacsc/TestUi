@@ -1,3 +1,6 @@
+<h6 style="text-align:right; font-weight:bold; color:#232BDB">마이페이지 > 회원정보수정</h6>
+<br />
+
 <form #updatePerson="ngForm" (ngSubmit)="updateProfile(updatePerson)" name="profileForm">
   <div class="row">
     <div class="col-md-8 mb-3">
@@ -80,7 +83,7 @@
       </select>
     </div>
 
-    <!-- selectbox로 고쳐야함 -->
+    <!-- input으로 했을때 -->
     <!-- <div class="col-md-8 mb-3">
       <label for="userBirth">성별</label>
       <input type="text" class="form-control" name="userBirth" [(ngModel)]="userService.loginUser.ubirth">
