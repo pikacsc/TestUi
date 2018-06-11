@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from "../../shared/services/product.service";
 import {Cart} from '../../shared/models/cart';
 import {User} from '../../shared/models/user';
+import {Order} from '../../shared/models/order';
+import {OrderDetail} from '../../shared/models/orderDetail';
 import { UserService } from "../../shared/services/user.service";
 import { AuthService } from "../../shared/services/auth.service";
 @Component({
@@ -19,6 +21,8 @@ export class UserOrderWriteComponent implements OnInit {
   orderList:number[]=[];
   cartList:Cart[]=[];
   totalPrice:number=0;
+  order:Order=new Order();
+  orderDetails:OrderDetail[]=[];
   ngOnInit() {
     this.loggedUser=this.authService.getLoggedInUser();
     this.orderListToOrderWrite();
@@ -35,8 +39,34 @@ export class UserOrderWriteComponent implements OnInit {
     });
   }
 
+//결재하기
+  checkOut(){
+    //주문 테이블(TM_ORDER)
+    console.log('in the checkOut');
+    this.order.uid=this.authService.getLoggedInUser().uid;
+    this.order.ototal=this.totalPrice;
+    this.order.oaddr=this.authService.getLoggedInUser().uaddr1;
+    this.productService.checkOutOrder(this.order).subscribe(data=>{
+      console.log('after checkOutOrder by productService');
+    });
+    console.log('after checkOutOrder');
+    //주문상세 테이블(TM_ORDER_DETAIL)
+    for(let i=0;i<this.cartList.length;i++){
+      this.orderDetails[i]=new OrderDetail();
+      this.orderDetails[i].odimg=this.cartList[i].p_img;
+      this.orderDetails[i].odpname=this.cartList[i].p_name;
+      this.orderDetails[i].odpprice=this.cartList[i].p_sellprice;
+      this.orderDetails[i].odpamount=this.cartList[i].camount;
+    }
+    console.log('after For');
+    this.productService.checkOutOrderDetail(this.orderDetails).subscribe(data=>{
+      console.log('after checkOutOrderDetail by productService');
+    });
+
+  }
+//물품 + 배송비 => 총 가격
   getTotalPrice(){
-    var i=0;
+    let i=0;
     while(i<this.cartList.length){
       this.totalPrice+=this.cartList[i].p_sellprice*this.cartList[i].camount;
 
