@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { User } from "../models/user";
 import { AuthService } from "./auth.service";
-// import {Cart} from '../models/cart';
+import {Cart} from '../models/cart';
 //*****동현임포트수정끝
 import { CachcingServiceBase } from "./cachcing.service";
 
@@ -251,12 +251,12 @@ export class ProductService extends CachcingServiceBase{
     return this.http.delete(this.cartUrl+cno);
   }
 
-  addToCart(cart:Cart):void{
+  addToCart(cart:Cart){
     return this.http.post(this.cartUrl, cart);
   }
 
-  updateCart(cno:number,camount:number):void{
-    return this.http.put(this.cartUrl, cno, camount);
+  updateCart(cart:Cart){
+    return this.http.put(this.cartUrl,cart);
   }
   //************동현카트끝***********************
   //*************동현orderWrite*****************
