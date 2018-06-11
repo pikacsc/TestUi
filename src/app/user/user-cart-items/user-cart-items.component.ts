@@ -22,6 +22,7 @@ export class UserCartItemsComponent implements OnInit {
 
   loggedUser:User;
   cartList: Cart[]=[];
+  change:boolean=false;
   constructor(
     private authService:AuthService,
     private productService: ProductService,
@@ -42,11 +43,17 @@ export class UserCartItemsComponent implements OnInit {
     });
   }
 
-  removeFromCart(cno: number):void {
+  removeFromCart(cno: number) {
     this.productService.removeFromCart(cno).subscribe(data=>{
       this.getCartProducts();
     });
   }
+
+    updateCart(cart:Cart){
+      this.productService.updateCart(cart).subscribe((cart:Cart)=>{
+        alert("수정 되었습니다.");
+      });
+    }
 
 //장바구니 체크 / 체크해제 시 array에 C_NO를 추가/삭제한다.
   pushCno(e, cno:number){
@@ -59,6 +66,8 @@ export class UserCartItemsComponent implements OnInit {
       console.log(this.orderList);
     }
   }
+
+
 
 //주문진행 페이지로 가기 전 저장된 배열을 service에 저장한다.
   gotoOrderWirte():boolean{

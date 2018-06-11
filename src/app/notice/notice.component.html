@@ -54,12 +54,15 @@
   <!--Table body-->
 
 </table>
-
-<div class="input-group md-form form-sm form-1 pl-0">
-    <div class="input-group-prepend">
-        <span class="input-group-text cyan lighten-2" id="basic-text1">
-          <i class="fa fa-search text-white" aria-hidden="true"></i>
-        </span>
-    </div>
-    <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="search">
+<!-- Pagination -->
+<div class="text-center mt-3">
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>
+
+<form class="form-inline mr-auto" (ngSubmit)="searchTerm()">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchInput"
+      [(ngModel)]="search" [ngModelOptions]="{standalone: true}"/>
+    <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">
+      Search
+    </button>
+</form>
