@@ -22,6 +22,7 @@ export class UserCartItemsComponent implements OnInit {
 
   loggedUser:User;
   cartList: Cart[]=[];
+  change:boolean=false;
   constructor(
     private authService:AuthService,
     private productService: ProductService,
@@ -65,6 +66,7 @@ export class UserCartItemsComponent implements OnInit {
       console.log(this.orderList);
     }
   }
+
 
 
 //주문진행 페이지로 가기 전 저장된 배열을 service에 저장한다.

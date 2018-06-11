@@ -5,17 +5,17 @@
   <div class="row">
     <div class="col-sm-4">
       <ul class="list-group">
-        <li class="list-group-item hoverable">
-          <a [routerLink]="['/users']">Your Profile</a>
+        <li class="list-group-item list-group-item-action">
+          <a [routerLink]="['/users']">회원 정보 수정</a>
         </li>
-        <li class="list-group-item hoverable">
-          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['favourite-products']}}]">Your Wishlist</a>
+        <li class="list-group-item list-group-item-action">
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['favourite-products']}}]">WishList</a>
         </li>
-        <li class="list-group-item hoverable">
-          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['cart-items']}}]">Your Cart</a>
+        <li class="list-group-item list-group-item-action">
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['cart-items']}}]">장바구니</a>
         </li>
 
-        <li class="list-group-item hoverable">
+        <li class="list-group-item list-group-item-action">
           <a [routerLink]="['/users', {outlets: {'profileOutlet': ['order-write']}}]">orderwirte 나중에 상품상세쪽으로</a>
         </li>
       </ul>

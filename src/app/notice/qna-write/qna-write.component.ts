@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { QnaService } from '../../shared/services/qna.service';
 import { Qna } from '../../shared/models/qna';
 
+import { AuthService } from '../../shared/services/auth.service';
+import { User } from '../../shared/models/user';
+
 @Component({
   selector: 'app-qna-write',
   templateUrl: './qna-write.component.html',
@@ -16,11 +19,12 @@ export class QnaWriteComponent implements OnInit {
 
   constructor(
     private qnaService: QnaService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-
+    this.qna.u_id = this.authService.getLoggedInUser().uid;
   }
 
   insertQna() {

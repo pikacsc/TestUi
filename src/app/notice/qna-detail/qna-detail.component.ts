@@ -26,6 +26,10 @@ export class QnaDetailComponent implements OnInit {
       });
   }
 
+  setQnaObject() {
+    this.qnaService.setQnaObject(this.qna);
+  }
+
   deleteQna(q_no: number) {
     return this.qnaService.deleteQna(q_no)
       .subscribe(() => {

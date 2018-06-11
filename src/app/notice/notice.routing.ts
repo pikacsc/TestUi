@@ -1,5 +1,7 @@
 import { Routes } from "@angular/router";
 
+import { AuthGuard } from "../shared/services/auth_gaurd";
+
 import { NoticeComponent } from "./notice.component";
 import { FaqComponent } from "./faq/faq.component";
 import { QnaComponent } from "./qna/qna.component";
@@ -9,6 +11,7 @@ import { FaqDetailComponent } from "./faq-detail/faq-detail.component";
 import { QnaDetailComponent } from "./qna-detail/qna-detail.component";
 
 import { QnaWriteComponent } from "./qna-write/qna-write.component";
+import { QnaUpdateComponent } from "./qna-update/qna-update.component";
 
 export const NoticeRoutes: Routes = [
   {
@@ -24,11 +27,18 @@ export const NoticeRoutes: Routes = [
       },
       {
         path: "qna",
-        component: QnaComponent
+        component: QnaComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: "qna/write",
-        component: QnaWriteComponent
+        component: QnaWriteComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "qna/update",
+        component: QnaUpdateComponent,
+        canActivate: [AuthGuard]
       }
     ]
   },
@@ -45,7 +55,8 @@ export const NoticeRoutes: Routes = [
       },
       {
         path: "qna",
-        component: QnaDetailComponent
+        component: QnaDetailComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }
