@@ -20,7 +20,7 @@
     max-width: 100%;
     height: auto;
   }
-  
+
   .card.card-cascade.narrower {
     margin-top: 10px;
   }
@@ -30,7 +30,7 @@
   .card:not([class*="card-outline-"]) {
     border: 0;
   }
-  
+
   .card.card-cascade.narrower .view {
     margin-left: 4%;
     margin-right: 4%;
@@ -53,7 +53,7 @@
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  
+
   .card.card-cascade .card-body {
     padding-top: 1.8rem;
   }
@@ -78,21 +78,21 @@
   .rating {
     padding: 0;
   }
-  
+
   .card-text {
     line-height: 20px;
     height: 60px;
     overflow: hidden;
   }
-  
+
   .card .card-footer {
     background-color: transparent;
   }
-  
+
   .card .card-footer .left {
     float: left;
   }
-  
+
   .card .card-footer .right {
     float: right;
     display: -webkit-box;
@@ -100,7 +100,7 @@
     display: -ms-flexbox;
     display: flex;
   }
-  
+
   .card .card-footer .right a.active {
     color: #d50000;
   }
@@ -110,7 +110,7 @@
     -webkit-transition: 0.4s;
     transition: 0.4s;
   }
-  
+
   body {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABHklEQVRIib2Vyw6EIAxFW5idr///Qx9sfG3pLEyJ3tAwi5EmBqRo7vHawiEEERHS6x7MTMxMVv6+z3tPMUYSkfTM/R0fEaG2bbMv+Gc4nZzn+dN4HAcREa3r+hi3bcuu68jLskhVIlW073tWaYlQ9+F9IpqmSfq+fwskhdO/AwmUTJXrOuaRQNeRkOd5lq7rXmS5InmERKoER/QMvUAPlZDHcZRhGN4CSeGY+aHMqgcks5RrHv/eeh455x5KrMq2yHQdibDO6ncG/KZWL7M8xDyS1/MIO0NJqdULLS81X6/X6aR0nqBSJcPeZnlZrzN477NKURn2Nus8sjzmEII0TfMiyxUuxphVWjpJkbx0btUnshRihVv70Bv8ItXq6Asoi/ZiCbU6YgAAAABJRU5ErkJggg==);
   }
@@ -125,4 +125,67 @@
   .error-actions .btn {
     margin-right: 10px;
   }
-  
+
+
+
+
+
+
+  .count-input {
+  	position: relative;
+  	// width: 100%;
+  	// max-width: 165px;
+  	margin: 10px 0;
+    // border: 1px solid;
+    overflow: hidden;
+
+  	input {
+  		width: 40px;
+  		height: 20px;
+  		// border: 1px solid #000;
+  		// border-radius: 2px;
+  		background: none;
+  		text-align: center;
+
+      float: left;
+  		&:focus {
+  			outline: none;
+  		}
+  	}
+    .decre-btn {
+  		display: block;
+  		position: relative;
+  		width: 20px;
+  		// height: 30px;
+  		// font-weight: 300;
+  		text-align: center;
+  		// line-height: 30px;
+  		top: 50%;
+  		left: 0;
+  		margin-top: 0px;
+  		text-decoration: none;
+
+      border: 1px solid #000;
+      float: left;
+      height: 20px;
+      border-radius: 2px;
+  	}
+  	.incr-btn {
+  		display: block;
+  		position: relative;
+  		width: 20px;
+  		// height: 30px;
+  		// font-weight: 300;
+  		text-align: center;
+  		// line-height: 30px;
+  		top: 50%;
+  		right: 0;
+  		margin-top: 0px;
+  		text-decoration: none;
+
+      border: 1px solid #000;
+      float: left;
+      height: 20px;
+      border-radius: 2px;
+  	}
+  }

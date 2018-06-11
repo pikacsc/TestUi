@@ -44,15 +44,23 @@
               <!--Card footer-->
               <div class="card-footer">
 
-                <span class="left">수량 : {{cartItem.camount}}
-                  <!-- <a class="incr-btn" data-action="decrease" href="#">–</a>
-                  <!-- <input class="quantity" type="text" name="quantity" value="1"/> -->
-                  <!-- <a class="incr-btn" data-action="increase" href="#">&plus;</a> -->
-                  <!-- 수량조정 minus/plus -->
+                <!-- <span class="left">수량 : {{cartItem.camount}}
                   <a placement="top" mdbTooltip="Remove Product" container="body" (click)="removeFromCart(cartItem.cno)">
                     <i class="fa fa-edit prefix"></i>
                   </a>
-                </span><br />
+                </span> -->
+	                          <div class="count-input space-bottom">
+                              <span class="left"><p style="float:left;">수량 : </p>
+                                <a class="decre-btn" data-action="decrease" href="#">–</a>
+                                <input class="quantity" type="text" name="quantity" [(ngModel)]="cartItem.camount" />
+                                <a class="incr-btn" data-action="increase" href="#">+</a>
+
+                                <a (click)="updateCart(cartItem)">
+                                  <i class="fa fa-edit prefix"></i>
+                                </a>
+                                </span>
+                            </div>
+                <br />
                 <span class="left">금액 : {{cartItem.p_sellprice*cartItem.camount}}원</span>
                 <!-- <span class="right" *ngIf="authService.isLoggedIn()"> -->
 
