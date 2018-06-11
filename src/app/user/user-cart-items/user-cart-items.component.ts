@@ -48,12 +48,6 @@ export class UserCartItemsComponent implements OnInit {
     });
   }
 
-  updateCart(cno:number, camount:number):void{
-    this.productService.updateCart(cno,camount).subscribe(data=>{
-      this.getCartProducts();
-    })
-  }
-
 //장바구니 체크 / 체크해제 시 array에 C_NO를 추가/삭제한다.
   pushCno(e, cno:number){
     if(e.target.checked){
