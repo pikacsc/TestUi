@@ -4,7 +4,7 @@
     <div class="col-sm-4">
       <div class="product-image">
         <div class="view hm-zoom z-depth-2" style="cursor: pointer">
-          <img src="./assets/ProductImg/{{product.p_img}}.jpg" [alt]="product.productName" width="100%" class="img-fluid rounded">
+          <img src="./assets/ProductImg/{{product.p_img}}.jpg" [alt]="product.p_name" width="100%" class="img-fluid rounded">
 
         </div>
         <div class="z-depth-1" style="margin-top:15px">
@@ -49,9 +49,21 @@
           </tbody>
         </table>
       </div>
+      <ul id="btn">
+        <li>
+         <span>
+          <button type="button" class="btn btn-outline-warning waves-effect">장바구니담기</button>
+          <button type="button" class="btn btn-warning">구매하기</button>
+          </span>
+        </li>
+      </ul>
     </div>
+
+
     <div class="col-sm-2">
-      <div class="product-ship border border-dark"></div>
+      <!-- <div class="product-ship border border-dark"></div> -->
     </div>
   </div>
 </div>
+<br>
+<app-product-review></app-product-review>

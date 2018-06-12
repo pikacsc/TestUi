@@ -19,7 +19,7 @@ import { AuthService } from "./auth.service";
 import {Cart} from '../models/cart';
 import {Order} from '../../shared/models/order';
 import {OrderDetail} from '../../shared/models/orderDetail';
-//*****동현임포트수정끝
+//*****  동현임포트수정끝
 import { CachcingServiceBase } from "./cachcing.service";
 
 let count = 0;
@@ -30,6 +30,9 @@ export class ProductService extends CachcingServiceBase{
 
 
   productlistUrl = 'http://localhost:8080/toma/';
+  private url = 'http://localhost:8080/toma/review/';
+
+
 
 
   private products: Observable<Product[]>;
@@ -92,6 +95,14 @@ export class ProductService extends CachcingServiceBase{
 
   setProductCode(p_code: string) {
     this.p_code = p_code;
+  }
+
+  getProductCode(){
+    return this.p_code;
+  }
+
+  getReview(){
+    return this.http.get(this.url + this.p_code);
   }
 
 
@@ -294,10 +305,14 @@ export class ProductService extends CachcingServiceBase{
   checkOutOrderDetail(orderDetails:OrderDetail[]){
     return this.http.post(this.orderUrl+'insert/detail',orderDetails);
   }
-
-
-
   //*************동현orderwrite끝*****************
+  //*************동현 orderList*******************
+  getOrderList(uid:string){
+    return this.http.get(this.orderUrl+uid);
+  }
+  getDetailList(ono:number){
+    return this.http.get(this.orderUrl+'orderdetail/'+ono);
+  }
   // Adding new Product to cart db if logged in else localStorage
   // addToCart(data: Product): void {
   //   if (this.authService.isLoggedIn() === false) {

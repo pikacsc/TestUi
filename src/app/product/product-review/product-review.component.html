@@ -1,0 +1,34 @@
+<hr class="between-sections">
+
+<ol class="breadcrumb">
+  <li>상품 후기</li>
+</ol>
+
+<table class="table table-responsive-md">
+  <thead class="amber lighten-3">
+  <tr>
+    <th>번호</th>
+    <th>제목</th>
+    <th>작성자</th>
+    <th>작성일</th>
+    <th>조회</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let review of reviews | paginate : {itemsPerPage: 10, currentPage : page }">
+    <th>{{review.rev_no}}</th>
+    <th>
+      <a [routerLink]="['/review']" routerLinkActive="router-link-active"
+      (click)="setReviewNo(review.rev_no)">
+      {{review.rev_title}}
+    </a>
+    </th>
+    <th>{{review.u_id}}</th>
+    <th>{{review.rev_date | date : 'yyyy-MM-dd'}}</th>
+    <th>{{review.rev_hits}}</th>
+  </tr>
+  </tbody>
+
+</table>
