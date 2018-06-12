@@ -9,7 +9,7 @@ import { LoaderSpinnerService } from "../../shared/loader-spinner/loader-spinner
   templateUrl: "./product-detail.component.html",
   styleUrls: ["./product-detail.component.scss"]
 })
-export class ProductDetailComponent implements OnInit, OnDestroy {
+export class ProductDetailComponent implements OnInit {
   private sub: any;
   product: Product;
 
@@ -58,7 +58,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     // });
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
 }

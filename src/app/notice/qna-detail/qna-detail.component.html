@@ -38,7 +38,7 @@
     </tr>
     <tr>
       <th>작성일</th>
-      <td>{{ qna?.q_date }}</td>
+      <td>{{ qna?.q_date | date:'yyyy-MM-dd' }}</td>
       <th>답변여부</th>
       <td>{{ qna?.q_reply }}</td>
     </tr>

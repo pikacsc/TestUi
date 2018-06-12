@@ -22,9 +22,10 @@ import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service";
 import { LoaderSpinnerService } from "./loader-spinner/loader-spinner";
 
-
-
-
+import { NoticeService } from "./services/notice.service";
+import { FaqService } from "./services/faq.service";
+import { QnaService } from "./services/qna.service";
+import { SearchService } from "./services/search.service";
 
 @NgModule({
   imports: [
@@ -71,7 +72,11 @@ import { LoaderSpinnerService } from "./loader-spinner/loader-spinner";
     ProductService,
     UserService,
     FormBuilder,
-    LoaderSpinnerService
+    LoaderSpinnerService,
+    NoticeService,
+    FaqService,
+    QnaService,
+    SearchService
   ]
 })
 export class SharedModule {}
