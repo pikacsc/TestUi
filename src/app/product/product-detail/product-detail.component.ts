@@ -39,13 +39,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
   getProductDetail(p_code: string) {
     // this.spinnerService.show();
     // const x = this.productService.getProductById(p_code);

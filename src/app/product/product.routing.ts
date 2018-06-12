@@ -2,6 +2,7 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { Routes } from "@angular/router";
 import { IndexComponent } from "../index/index.component";
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
+import {ReviewDetailComponent} from "./product-review-detail/review-detail.component";
 
 export const ProductRoutes: Routes = [
   {
@@ -23,7 +24,14 @@ export const ProductRoutes: Routes = [
       {
         path:":p_kind",
         component : ProductListComponent
+      },
+
+      {
+        path:":review",
+        component: ReviewDetailComponent
+
       }
+
     ]
   }
 ];
