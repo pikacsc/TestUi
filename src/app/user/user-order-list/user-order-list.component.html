@@ -9,8 +9,11 @@
         <!--SHIPPING METHOD-->
         <div class="panel panel-default">
           <div class="panel-heading text-center">
-            <h4>주문 조회</h4></div>
+            <h4>주문 조회</h4>
+          </div>
+
           <div class="panel-body">
+            <div class="col-md-12">
             <table class="table borderless">
               <thead>
                 <tr>
@@ -23,6 +26,7 @@
                   <td></td>
                 </tr>
               </thead>
+
               <tbody *ngFor="let order of orderLists" style="position:relative;">
 
                 <!-- <tr *ngFor="let item of cartList"> -->
@@ -46,7 +50,6 @@
                     </tr>
                   </thead>
                   <tbody *ngIf="order.ono==detail.ono">
-
                     <tr>
                       <!-- <td class="col-md-3"> -->
                       <td>
@@ -66,11 +69,11 @@
                   </tbody>
                 </table>
                 </div>
-              </tbody>
-
+                </tbody>
             </table>
-
           </div>
+          </div>
+
         </div>
         <!--SHIPPING METHOD END-->
       </div>
