@@ -30,6 +30,8 @@ export class ProductService extends CachcingServiceBase{
 
 
   productlistUrl = 'http://localhost:8080/toma/';
+
+
   private products: Observable<Product[]>;
 
   // products: AngularFireList<Product>;
@@ -86,7 +88,11 @@ export class ProductService extends CachcingServiceBase{
 
   }
 
+  p_code : string;
 
+  setProductCode(p_code: string) {
+    this.p_code = p_code;
+  }
 
 
   public getProducts(){
@@ -112,10 +118,25 @@ export class ProductService extends CachcingServiceBase{
     // this.products.push(data);
   }
 
-  getProductById(key: string) {
+  getProductByKind(p_kind: string) {
     // this.product = this.db.object("products/" + key);
     // return this.product;
+
+    return this.http.get(this.productlistUrl + 'product/'+ p_kind);
+
+
   }
+
+  getProductById() {
+    // this.product = this.db.object("products/" + key);
+    // return this.product;
+
+    return this.http.get(this.productlistUrl + 'detail/product/'+ this.p_code);
+
+
+  }
+
+
 
   updateProduct(data: Product) {
     // this.products.update(data.$key, data);

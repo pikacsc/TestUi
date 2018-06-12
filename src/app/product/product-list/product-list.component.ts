@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
 
 
 
-  kinds = ["All", "Bakery", "Sauce", "Drink", "Instance","Snack", "맥주", "와인"];
+  kinds = ["All", "Bakery", "Sauce", "Drink", "Instant","Snack"];
   selectedKind : "All";
 
 
@@ -43,19 +43,43 @@ export class ProductListComponent implements OnInit {
 
   }
 
-  getAllProducts() {
-    this.spinnerService.show();
-    const x = this.productService.getProducts();
-    // x.snapshotChanges().subscribe(product => {
-    //   this.spinnerService.hide();
-    //   this.productList = [];
-    //   product.forEach(element => {
-    //     const y = element.payload.toJSON();
-    //     y["$key"] = element.key;
-    //     this.productList.push(y as Product);
-    //   });
-    // });
+
+  p_code : string;
+
+  setProductCode(p_code: string) {
+     this.productService.setProductCode(p_code);
   }
+
+  // getAllProducts() {
+  //   // this.spinnerService.show();
+  //   // const x = this.productService.getProducts();
+  //   // x.snapshotChanges().subscribe(product => {
+  //   //   this.spinnerService.hide();
+  //   //   this.productList = [];
+  //   //   product.forEach(element => {
+  //   //     const y = element.payload.toJSON();
+  //   //     y["$key"] = element.key;
+  //   //     this.productList.push(y as Product);
+  //   //   });
+  //   // });
+  //
+  //
+  //
+  // }
+
+  getProductByKind(p_kind: string) {
+    // this.product = this.db.object("products/" + key);
+    // return this.product;
+
+     this.productService.getProductByKind(this.selectedKind)
+     .subscribe((productList : Product[]) => {
+       this.productList = productList;
+     })
+
+  }
+
+
+
 
   removeProduct(key: string) {
     this.productService.deleteProduct(key);

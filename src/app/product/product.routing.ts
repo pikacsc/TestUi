@@ -16,14 +16,13 @@ export const ProductRoutes: Routes = [
         component: ProductListComponent
       },
       {
-        path: "product/:id",
+        path: "product/:p_code",
         component: ProductDetailComponent
       },
 
       {
-        path:":id",
+        path:":p_kind",
         component : ProductListComponent
-
       }
     ]
   }

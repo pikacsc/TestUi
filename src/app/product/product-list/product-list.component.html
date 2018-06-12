@@ -35,30 +35,33 @@
                 <div class="card card-cascade wider">
                   <!--Card image-->
 
-                  <a [routerLink]="['/products', product.p_kind]">
+                  <!-- <a [routerLink]="['/products', product.p_kind]">
                     <div class="view overlay hm-white-slight">
                       <img [src]="product.productImageUrl" class="img-fluid" alt="" width="360px" height="640px">
+                      <p>{{p_name}}</p>
                       <a>
                         <div class="mask waves-effect waves-light" mdbRippleRadius></div>
                       </a>
                     </div>
-                  </a>
+                  </a> -->
                   <!--/.Card image-->
                   <!--Card content-->
                   <div class="card-body text-center no-padding">
                     <!--Category & Title-->
                     <a class="text-muted">
                       <!-- <h5>{{ product.p_content }}</h5> -->
+
+
                       <div>
 
-                        <a [routerLink]="['/products/product', product.p_code]" routerLinkActive="router-link-active">
+                        <a [routerLink]="['/products/product', product.p_code]" routerLinkActive="router-link-active" (click)="setProductCode(product.p_code)">
                               <img src="./assets/ProductImg/{{product.p_img}}.jpg" class="product_image" width="200px" height="200px"/>
                         </a>
                       </div>
                     </a>
                     <p class="card-title">
                       <strong>
-                        <a [routerLink]="['/products/product', product.p_code]" routerLinkActive="router-link-active">{{ product.p_name }}</a>
+                        <a [routerLink]="['/products/product', product.p_code]" routerLinkActive="router-link-active" (click)="setProductCode(product.p_code)">{{ product.p_name }}</a>
                       </strong>
                     </p>
                     <!--Description-->
