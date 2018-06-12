@@ -11,10 +11,11 @@ import { ProductService } from "../../shared/services/product.service";
 })
 export class UserOrderListComponent implements OnInit {
 
-  checkNum:number=0;
+  // checkNum:number=0;
   uid:string;
   orderLists:Order[]=[];
   detailLists:OrderDetail[]=[];
+  orderNum:number=0;
   constructor(
     private productService:ProductService,
     private authService:AuthService
@@ -28,17 +29,15 @@ export class UserOrderListComponent implements OnInit {
   getOrderList(uid:string){
     this.productService.getOrderList(uid).subscribe((lists:Order[])=>{
       this.orderLists=lists;
+      for(let i=0;i<this.orderLists.length;i++){
+        this.orderLists[i].oViewNum=++this.orderNum;
+      }
     });
   }
   getDetailList(ono:number){
-    if(this.checkNum==0){
       this.productService.getDetailList(ono).subscribe((details:OrderDetail[])=>{
         this.detailLists=details;
-        this.checkNum=1;
+        console.log(this.detailLists);
       });
-    }else{
-      this.detailLists=null;
-      this.checkNum=0;
-    }
   }
 }
