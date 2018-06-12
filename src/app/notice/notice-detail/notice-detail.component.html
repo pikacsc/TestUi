@@ -38,7 +38,7 @@
     </tr>
     <tr>
       <th>작성일</th>
-      <td>{{ notice?.n_date }}</td>
+      <td>{{ notice?.n_date | date:'yyyy-MM-dd' }}</td>
       <th>조회수</th>
       <td>{{ notice?.n_hits }}</td>
     </tr>

@@ -38,7 +38,7 @@
     </tr>
     <tr>
       <th>작성일</th>
-      <td>{{ faq?.f_date }}</td>
+      <td>{{ faq?.f_date | date:'yyyy-MM-dd' }}</td>
       <th>조회수</th>
       <td>{{ faq?.f_hits }}</td>
     </tr>

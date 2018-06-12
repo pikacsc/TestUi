@@ -38,7 +38,7 @@
 
     <!--Table body-->
     <tbody>
-        <tr *ngFor="let faq of faqs">
+        <tr *ngFor="let faq of faqs | paginate: { itemsPerPage: 10, currentPage: page }">
             <th scope="row">{{ faq.f_no }}</th>
             <th>{{ faq.f_category }}</th>
             <th>
@@ -47,7 +47,7 @@
               </a>
             </th>
             <th>{{ faq.a_id }}</th>
-            <th>{{ faq.f_date }}</th>
+            <th>{{ faq.f_date | date:'yyyy-MM-dd' }}</th>
             <th>{{ faq.f_hits }}</th>
         </tr>
     </tbody>
