@@ -37,7 +37,7 @@
   <!--Table head-->
 
   <!--Table body-->
-  <tbody>
+  <tbody class="view overlay">
     <tr *ngFor="let notice of notices | paginate: { itemsPerPage: 10, currentPage: page }">
       <th scope="row">{{ notice.n_no }}</th>
       <th>{{ notice.n_category }}</th>
@@ -60,9 +60,7 @@
 </div>
 
 <form class="form-inline mr-auto" (ngSubmit)="searchTerm()">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchInput"
+    <input class="form-control mr-sm-2 w-50 p-1" type="text" placeholder="검색할 제목을 입력해주세요." id="searchInput"
       [(ngModel)]="search" [ngModelOptions]="{standalone: true}"/>
-    <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">
-      Search
-    </button>
+    <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">검색</button>
 </form>

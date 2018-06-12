@@ -3,7 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 import { AppComponent } from "./app.component";
 import { IndexModule } from "./index/index.module";

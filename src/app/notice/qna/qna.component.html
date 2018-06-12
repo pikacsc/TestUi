@@ -36,8 +36,8 @@
 
   <!--Table body-->
   <tbody>
-    <tr *ngFor="let qna of qnas | paginate: { itemsPerPage: 10, currentPage: page }">
-      <th scope="row">{{ qna.q_no }}</th>
+    <tr *ngFor="let qna of qnas | paginate: { itemsPerPage: 10, currentPage: page }; let i= index">
+      <th >{{ i+1 }}</th>
       <th>
         <a [routerLink]="['/detail/qna']" routerLinkActive="router-link-active" (click)="setQnaNo(qna.q_no)">{{ qna.q_title }}
               </a>
@@ -59,7 +59,7 @@
 </div>
 
 <form class="form-inline mr-auto" (ngSubmit)="searchTerm()">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+    <input class="form-control mr-sm-2 w-50 p-1" type="text" placeholder="검색할 제목을 입력해주세요" aria-label="Search"
       [(ngModel)]="search" [ngModelOptions]="{standalone: true}"/>
-    <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">Search</button>
+    <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">검색</button>
 </form>

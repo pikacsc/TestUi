@@ -51,7 +51,5 @@ export class ProductDetailComponent implements OnInit {
     // });
   }
 
-  // ngOnDestroy() {
-  //   this.sub.unsubscribe();
-  // }
+
 }
