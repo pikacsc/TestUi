@@ -18,6 +18,7 @@ export class QnaComponent implements OnInit {
   qna: Qna;
   u_id: string;
   search: string;
+  number: number = 1;
 
   constructor(
     private qnaService: QnaService,
