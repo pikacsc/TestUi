@@ -6,7 +6,10 @@
     <div class="col-sm-4">
       <ul class="list-group">
         <li class="list-group-item list-group-item-action">
-          <a [routerLink]="['/users']">회원 정보 수정</a>
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['user-main']}}]">마이페이지</a>
+        </li>
+        <li class="list-group-item list-group-item-action">
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['user-info']}}]">회원 정보 수정</a>
         </li>
         <li class="list-group-item list-group-item-action">
           <a [routerLink]="['/users', {outlets: {'profileOutlet': ['favourite-products']}}]">WishList</a>

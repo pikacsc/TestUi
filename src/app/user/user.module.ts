@@ -23,6 +23,7 @@ import { UserService } from "../shared/services/user.service";
 import { ProductService } from '../shared/services/product.service';
 import { AuthGuard } from "../shared/services/auth_gaurd";
 import { AuthService } from "../shared/services/auth.service";
+import { UserMainComponent } from './user-main/user-main.component';
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(UserRoutes)],
   declarations: [
@@ -31,7 +32,8 @@ import { AuthService } from "../shared/services/auth.service";
     UserFavouriteProductsComponent,
     UserCartItemsComponent,
     UserOrderWriteComponent,
-    UserOrderListComponent
+    UserOrderListComponent,
+    UserMainComponent
 
   ],
   providers: [
