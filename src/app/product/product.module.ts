@@ -13,8 +13,14 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { AddProductComponent } from "./add-product/add-product.component";
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
 import { SharedModule } from "../shared/shared.module";
-//동현임포트수정
+import { ProductReviewComponent} from "./product-review/product-review.component";
+import { ReviewDetailComponent} from "./product-review-detail/review-detail.component";
+
 import { ProductService } from "../shared/services/product.service";
+import { ReviewService } from "../shared/services/review.service";
+
+//동현임포트수정
+
 //동현임포트수정끝
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule],
@@ -23,11 +29,15 @@ import { ProductService } from "../shared/services/product.service";
     BestProductComponent,
     ProductListComponent,
     AddProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductReviewComponent,
+    ReviewDetailComponent
+
   ],
   exports: [BestProductComponent],
   providers: [
-    ProductService
+    ProductService,
+    ReviewService
   ],
 })
 export class ProductModule {}
