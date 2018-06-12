@@ -1,63 +1,48 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<!-- <link src="http://bootswatch.com/flatly/bootstrap.css" type="text/css"> -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- 여기링크된 부트스트랩이 원래 쓰고있던 부트스트랩링크와 달라서 기존에있던것들이 사이즈가 달라짐. -->
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<h6 style="text-align:right; font-weight:bold; color:#232BDB; font-size:16px;">마이페이지 > 메인</h6>
+<br />
+
+<!-- <link src="http://bootswatch.com/flatly/bootstrap.css" type="text/css"> order 건수 표시 -->
 <!------ Include the above in your HEAD tag ---------->
     <div class="row">
       <!-- 세개 다 같은 넓이로 하려면 col-md-4 로 통일하면됨 -->
         <div class="col-xs-6 col-md-3" >
-
             <div class="panel status panel-danger">
                 <div class="panel-heading">
                     <h1 class="panel-title text-center">주문취소</h1>
                 </div>
                 <div class="panel-body text-center">
-                    <strong>n건</strong>
+                    <strong>{{OrderCancle}}건</strong>
                 </div>
             </div>
-
         </div>
         <div class="col-xs-6 col-md-3">
-
-            <div class="panel status panel-warning" >
+            <div class="panel status panel-success" >
                 <div class="panel-heading">
                     <h1 class="panel-title text-center">주문완료</h1>
                 </div>
                 <div class="panel-body text-center">
-                    <strong>n건</strong>
+                    <strong>{{OrderCommit}}건</strong>
                 </div>
             </div>
-
         </div>
         <div class="col-xs-6 col-md-6">
-
-            <div class="panel status panel-success" >
+            <div class="panel status panel-info" >
                 <div class="panel-heading">
-                    <h1 class="panel-title text-center">전체주문상태</h1>
+                    <h1 class="panel-title text-center">총 주문</h1>
                 </div>
                 <div class="panel-body text-center">
-                    <strong>n건</strong>
+                    <strong>{{AllOrders}}건</strong>
                 </div>
             </div>
-
-
         </div>
-        <!--
-        <div class="col-xs-6 col-md-3">
+    </div> <!--orderlist 끝-->
 
-            <div class="panel status panel-info">
-                <div class="panel-heading">
-                    <h1 class="panel-title text-center">18</h1>
-                </div>
-                <div class="panel-body text-center">
-                    <strong>Never Die</strong>
-                </div>
-            </div>
-
-
-        </div> -->
-    </div>
-
-
+    <!-- 새 컨텐츠 -->
 
 <hr>

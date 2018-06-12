@@ -12,12 +12,11 @@
           <a [routerLink]="['/users', {outlets: {'profileOutlet': ['user-info']}}]">회원 정보 수정</a>
         </li>
         <li class="list-group-item list-group-item-action">
-          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['favourite-products']}}]">WishList</a>
-        </li>
-        <li class="list-group-item list-group-item-action">
           <a [routerLink]="['/users', {outlets: {'profileOutlet': ['cart-items']}}]">장바구니</a>
         </li>
-
+        <li class="list-group-item list-group-item-action">
+          <a [routerLink]="['/notice/qna']">게시물 관리</a>
+        </li>
         <li class="list-group-item list-group-item-action">
           <a [routerLink]="['/users', {outlets: {'profileOutlet': ['order-write']}}]">orderwirte 나중에 상품상세쪽으로</a>
         </li>
