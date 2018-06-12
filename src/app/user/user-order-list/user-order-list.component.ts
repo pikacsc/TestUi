@@ -11,6 +11,7 @@ import { ProductService } from "../../shared/services/product.service";
 })
 export class UserOrderListComponent implements OnInit {
 
+  checkNum:number=0;
   uid:string;
   orderLists:Order[]=[];
   detailLists:OrderDetail[]=[];
@@ -27,12 +28,17 @@ export class UserOrderListComponent implements OnInit {
   getOrderList(uid:string){
     this.productService.getOrderList(uid).subscribe((lists:Order[])=>{
       this.orderLists=lists;
-      for(let i=0;i<this.orderLists.length;i++){
-        this.productService.getDetailList(this.orderLists[i].ono).
-        subscribe((lists:OrderDetail[])=>{
-          this.detailLists=lists;
-        });
-      }
     });
+  }
+  getDetailList(ono:number){
+    if(this.checkNum==0){
+      this.productService.getDetailList(ono).subscribe((details:OrderDetail[])=>{
+        this.detailLists=details;
+        this.checkNum=1;
+      });
+    }else{
+      this.detailLists=null;
+      this.checkNum=0;
+    }
   }
 }
