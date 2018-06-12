@@ -1,78 +1,110 @@
-<!-- <div class="container">
-<div class="row">
-	 <br>
-            <div class="col-md-12">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-push-12 col-sm-push-12">
+<div class="container">
+  <div class="row">
+    <br>
+    <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12 col-md-push-12 col-sm-push-12">
 
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-12 col-sm-pull-12"> -->
-<!--SHIPPING METHOD-->
-<!-- <div class="panel panel-default">
-                        <div class="panel-heading text-center"><h4>주문 조회</h4></div>
-                        <div class="panel-body">
-                           <table class="table borderless">
-    						<thead>
-                                <tr> -->
-<!-- <td><strong>Your Cart: # item</strong></td> -->
-<!-- <td>일자</td>
-        							<td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
-        							<td>가격</td>
-        							<td>수량</td>
-        							<td>상태</td>
-                                </tr>
-    						</thead>
-    						<tbody> -->
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-12 col-sm-pull-12">
+        <!--SHIPPING METHOD-->
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+            <h4>주문 조회</h4></div>
+          <div class="panel-body">
+            <table class="table borderless">
+              <thead>
+                <tr>
+                  <!-- <td><strong>Your Cart: # item</strong></td> -->
+                  <td>번호</td>
+                  <td>일자</td>
+                  <td>가격</td>
+                  <td>상태</td>
+                  <td>주소</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody *ngFor="let order of orderLists" style="position:relative;">
 
-<!-- <tr *ngFor="let item of cartList"> -->
-<!-- <td class="col-md-3"> -->
-<!-- <tr *ngFor="let order of orderLists">
-                    <td>{{order.odate}}</td>
-                    <div *ngFor="let detail of detailLists">
+                <!-- <tr *ngFor="let item of cartList"> -->
+                <!-- <td class="col-md-3"> -->
+                <tr>
+                  <td>{{order.ono}}</td>
+                  <td>{{order.odate}}</td>
+                  <td>{{order.ototal}}</td>
+                  <td>{{order.ostatus}}</td>
+                  <td>{{order.oaddr}}</td>
+                  <td><button (click)="getDetailList(order.ono)">상세</button></td>
+                </tr>
+                <div class="col-md-12">
+                <table class="kdh" *ngFor="let detail of detailLists">
+                  <thead *ngIf="order.ono==detail.ono">
+                    <tr>
+                      <td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
+                      <td>가격</td>
+                      <td>수량</td>
+                      <td>합계</td>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="order.ono==detail.ono">
+
+                    <tr>
+                      <!-- <td class="col-md-3"> -->
                       <td>
-      								    <div class="media">
-      								         <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/ProductImg/{{item.p_img}}.jpg" style="width: 72px; height: 72px;"> </a>
-      								         <div class="media-body">
-      								             <h5 class="media-heading"> {{detail.odpname}}</h5>
-      								         </div>
-      								    </div>
-      								</td>
-      								<td>{{detail.odpprice}}</td>
-      								<td>&nbsp;&nbsp;&nbsp;{{detail.odpamount}}&nbsp;&nbsp;&nbsp;</td>
-                      <td>{{detail.odpprice*detail.odpamount}}</td>
-                      <td>status</td>
-                    </div>
-    							</tr>
-
-    						</tbody>
-    					</table>
+                        <div class="media">
+                          <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/ProductImg/{{detail.odimg}}.jpg" style="width: 72px; height: 72px;"> </a>
+                          <div class="media-body">
+                            <h5 class="media-heading"> {{detail.odpname}}</h5>
+                          </div>
                         </div>
-                    </div> -->
-<!--SHIPPING METHOD END-->
-<!-- </div>
-                </div>
-                </div>
-</div> -->
+                      </td>
+                      <td>{{detail.odpprice}}</td>
+                      <td>&nbsp;&nbsp;&nbsp;{{detail.odpamount}}&nbsp;&nbsp;&nbsp;</td>
+                      <td>{{detail.odpprice*detail.odpamount}}</td>
 
-<div class="divTable">
-  <div class="divTableBody">
-    <div class="divTableRow">
-      <div class="divTableCell">일자</div>
-      <div class="divTableCell">이미지</div>
-      <div class="divTableCell">제목</div>
-      <div class="divTableCell">수량</div>
-      <div class="divTableCell">가격</div>
-      <div class="divTableCell">상태</div>
-    </div>
-    <div class="divTableRow">
-      <div class="divTableCell">&nbsp;</div>
-      <div class="divTableCell">&nbsp;</div>
-      <div class="divTableCell">&nbsp;</div>
-      <div class="divTableCell">&nbsp;</div>
-      <div class="divTableCell">&nbsp;</div>
-      <div class="divTableCell">&nbsp;</div>
+                    </tr>
+
+                  </tbody>
+                </table>
+                </div>
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+        <!--SHIPPING METHOD END-->
+      </div>
     </div>
   </div>
 </div>
+
+
+
+
+<!-- <div class="divTable">
+  <div class="divTableBody">
+    <div class="divTableRow">
+      <div class="divTableCell">일자</div>
+      <div class="divK">
+        <div class="divD">이미지</div>
+        <div class="divD">제목</div>
+        <div class="divD">수량</div>
+        <div class="divD">가격</div>
+        <div class="divD">상태</div>
+    </div>
+    </div>
+    <div class="divTableRow">
+      <div class="divTableCell">asdasd</div>
+      <div class="divK">
+        <div class="divD">&nbsp;</div>
+        <div class="divD">&nbsp;</div>
+        <div class="divD">&nbsp;</div>
+        <div class="divD">&nbsp;</div>
+        <div class="divD">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+</div> -->
 <!-- DivTable.com -->
 
 <!-- 배송지 -->
