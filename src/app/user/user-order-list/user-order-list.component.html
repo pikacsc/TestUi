@@ -31,7 +31,7 @@
                   <td>{{order.odate}}</td>
                   <td>{{order.ototal}}</td>
                   <td>{{order.ostatus}}</td>
-                  <td><a data-toggle="modal" data-target="#orderDetail" style="color:dodgerblue; font-weight:bold;" (click)="getDetailList(order.ono)">상세</a></td>
+                  <td><a data-toggle="modal" data-target="#orderDetail" style="color:dodgerblue; font-weight:bold;" (click)="getDetailList(order.ono,order.oaddr)">상세</a></td>
                 </tr>
               </tbody>
 
@@ -51,50 +51,60 @@
 <!-- OrderDetail Modal -->
 <div class="modal fade" id="orderDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
-      <div class="modal-content">
+    <div class="modal-content">
 
-        <div class="modal-header light-blue darken-3 white-text">
-          <h4 class="title">
+      <div class="modal-header light-blue darken-3 white-text">
+        <h4 class="title">
             <i class="fa fa-user-plus"></i>주문상세</h4>
-          <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
+      </div>
+      <div class="modal-body">
+
+
+        <table class="table">
+          <thead class="table-success">
+            <tr>
+              <!-- <td><strong>Your Cart: # item</strong></td> -->
+              <td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
+              <td>가격</td>
+              <td>수량</td>
+              <td>합계</td>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let detail of detailLists">
+              <!-- <td class="col-md-3"> -->
+              <td>
+                <div class="media">
+                  <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/ProductImg/{{detail.odimg}}.jpg" style="width: 72px; height: 72px;"> </a>
+                  <div class="media-body">
+                    <h5 class="media-heading"> <br />{{detail.odpname}}</h5>
+                  </div>
+                </div>
+              </td>
+              <td><br />{{detail.odpprice}}</td>
+              <td><br />&nbsp;&nbsp;&nbsp;{{detail.odpamount}}&nbsp;&nbsp;&nbsp;</td>
+              <td><br />{{detail.odpprice*detail.odpamount}}</td>
+
+            </tr>
+
+          </tbody>
+        </table>
+
+
+        <div class="col-md-12">
+          <div class="panel-heading text-center">
+            <h4>배송지 정보</h4></div>
         </div>
-        <div class="modal-body">
-
-
-             <table class="table">
-  <thead class="table-success">
-                  <tr>
-        <!-- <td><strong>Your Cart: # item</strong></td> -->
-        <td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
-        <td>가격</td>
-        <td>수량</td>
-        <td>합계</td>
-                  </tr>
-  </thead>
-  <tbody>
-
-    <tr *ngFor="let detail of detailLists">
-      <!-- <td class="col-md-3"> -->
-      <td>
-          <div class="media">
-               <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/ProductImg/{{detail.odimg}}.jpg" style="width: 72px; height: 72px;"> </a>
-               <div class="media-body">
-                   <h5 class="media-heading"> <br />{{detail.odpname}}</h5>
-               </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <input type="text" name="address4" class="form-control" value='{{oAddress}}' />
           </div>
-      </td>
-      <td><br />{{detail.odpprice}}</td>
-      <td><br />&nbsp;&nbsp;&nbsp;{{detail.odpamount}}&nbsp;&nbsp;&nbsp;</td>
-      <td><br />{{detail.odpprice*detail.odpamount}}</td>
-
-    </tr>
-
-  </tbody>
-</table>
-
         </div>
       </div>
+    </div>
   </div>
 </div>

@@ -16,6 +16,7 @@ export class UserOrderListComponent implements OnInit {
   orderLists:Order[]=[];
   detailLists:OrderDetail[]=[];
   orderNum:number=0;
+  oAddress:string;
   constructor(
     private productService:ProductService,
     private authService:AuthService
@@ -34,7 +35,8 @@ export class UserOrderListComponent implements OnInit {
       }
     });
   }
-  getDetailList(ono:number){
+  getDetailList(ono:number,oaddr:string){
+    this.oAddress=oaddr;
       this.productService.getDetailList(ono).subscribe((details:OrderDetail[])=>{
         this.detailLists=details;
         console.log(this.detailLists);
