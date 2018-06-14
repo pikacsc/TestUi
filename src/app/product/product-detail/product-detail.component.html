@@ -40,7 +40,10 @@
             </tr>
             <tr>
               <th scope="row">No. of quantity available</th>
-              <td>{{product.productQuatity}}</td>
+              <td><input [(ngModel)]='pQuantity' />
+                <button (click)='pQuantityUp()'>+</button>
+                <button (click)='pQuantityDown()'>-</button>
+              </td>
             </tr>
             <tr>
               <th scope="row">Product Added on</th>
@@ -52,8 +55,8 @@
       <ul id="btn">
         <li>
          <span>
-          <button type="button" class="btn btn-outline-warning waves-effect">장바구니담기</button>
-          <button type="button" class="btn btn-warning">구매하기</button>
+          <button type="button" class="btn btn-outline-warning waves-effect" (click)="addToCart()">장바구니담기</button>
+          <button type="button" class="btn btn-warning" (click)="gotoOrderWirte()">구매하기</button>
           </span>
         </li>
       </ul>

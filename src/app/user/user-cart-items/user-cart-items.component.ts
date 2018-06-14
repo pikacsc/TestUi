@@ -70,10 +70,11 @@ export class UserCartItemsComponent implements OnInit {
 
 
 //주문진행 페이지로 가기 전 저장된 배열을 service에 저장한다.
-  gotoOrderWirte():boolean{
+  gotoOrderWirte(){
     this.productService.cartToOrder=this.orderList;
+    this.productService.fromCart=true;
+    this.router.navigate(["/users",{outlets:{profileOutlet:['order-write']}}]);
 
-    return true;
   }
 
 

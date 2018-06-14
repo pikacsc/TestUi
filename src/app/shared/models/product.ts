@@ -17,7 +17,7 @@ export class Product {
   public p_count: number;
   public p_kind: string;
   public p_price : number;
-  public p_sellprice: number;
+  public p_sellPrice: number;
   public p_profit : number;
   public p_content : string;
   public p_img : string;
@@ -29,7 +29,7 @@ export class Product {
     this.p_count = src.p_count;
     this.p_kind = src.p_kind;
     this.p_price = src.p_price;
-    this.p_sellprice = src.p_sellprice;
+    this.p_sellPrice = src.p_sellPrice;
     this.p_profit = src.p_profit;
     this.p_content = src.p_content;
     this.p_img = src.p_img;

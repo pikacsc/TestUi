@@ -6,20 +6,22 @@
     <div class="col-sm-4">
       <ul class="list-group">
         <li class="list-group-item list-group-item-action">
-          <a [routerLink]="['/users']">회원 정보 수정</a>
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['user-main']}}]">마이페이지</a>
         </li>
         <li class="list-group-item list-group-item-action">
-          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['favourite-products']}}]">WishList</a>
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['user-info']}}]">회원 정보 수정</a>
         </li>
         <li class="list-group-item list-group-item-action">
           <a [routerLink]="['/users', {outlets: {'profileOutlet': ['cart-items']}}]">장바구니</a>
         </li>
-
         <li class="list-group-item list-group-item-action">
-          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['order-write']}}]">orderwirte 나중에 상품상세쪽으로</a>
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['qna-list']}}]">게시물 관리</a>
         </li>
+        <!-- <li class="list-group-item list-group-item-action">
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['order-write']}}]">orderwirte 나중에 상품상세쪽으로</a>
+        </li> -->
         <li class="list-group-item list-group-item-action">
-          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['order-list']}}]">orderlist 나중에 Mypage쪽으로</a>
+          <a [routerLink]="['/users', {outlets: {'profileOutlet': ['order-list']}}]">주문목록</a>
         </li>
       </ul>
     </div>
