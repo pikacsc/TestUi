@@ -95,7 +95,7 @@ export class ProductListComponent implements OnInit {
     this.cart.pcode=product.p_code;
     this.cart.camount=1;
     this.cart.p_img=product.p_img;
-    this.cart.p_sellprice=product.p_sellprice;
+    this.cart.p_sellprice=product.p_sellPrice;
     this.cart.p_name=product.p_name;
     this.cart.p_kind=product.p_kind;
     this.cart.p_content=product.p_content;

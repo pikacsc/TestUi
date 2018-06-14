@@ -1,1 +1,16 @@
+thead tr th {
+  font-weight: bold;
+  text-align: center;
+}
 
+tbody tr:hover {
+  background-color: lightblue;
+}
+
+tbody tr a:hover {
+  color: red;
+}
+
+tbody tr th {
+  text-align: center;
+}

@@ -5,3 +5,15 @@
 #qna_back_button {
   float: right;
 }
+
+tbody th {
+  background-color: lightgray;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13pt;
+  padding: 10px;
+}
+
+tbody tr td p {
+  padding: 20px;
+}

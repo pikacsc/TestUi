@@ -20,8 +20,13 @@ export class LoginComponent implements OnInit {
     userId: "",
     userPassword: ""
   };
+  //로그인할때만 쓰는 로그인객체
   login1 = new Login;
+
+
   user = new User;
+
+  //아이디 찾은 user로 토큰을 유지하고있기때문에 새로운 user2로 비번찾기시도용도
   user2 = new User;
 
   //가입하는 유저
@@ -41,9 +46,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.toastyConfig.position = "top-right";
     this.toastyConfig.theme = "material";
-
     this.createUser = new User();
-
   }
 
   ngOnInit() { }
@@ -102,18 +105,32 @@ export class LoginComponent implements OnInit {
     // console.log("loginForm" + this.loginUser.userId);
     this.userService.getUsers(this.login1)
       .subscribe((user:User) => {
+        if(user==null){
+          console.log("아이디 불일치");
+          alert("아이디가 없습니다");
+          // this.router.navigate(["index/login"]);
+          // this.user = new User;
+          return false;
+        }
         this.user = user;
-
+        if(this.user.uaddr1=='err'){
+          console.log("비밀번호 불일치");
+          alert("비밀번호가 틀립니다");
+          // this.router.navigate(["index/login"]);
+          // this.user = new User;
+          return false;
+        }
+        //서비스에 로그인된 객체를 저장
         this.userService.loginUser=this.user;
         console.log(this.userService.loginUser.uaddr1);
 
+        //토큰부여(세션유지)
         if(this.userService.loginUser!=null){
           this.authService.saveUserToken();
           this.router.navigate(["index"]);
         }
 
       },(error: any)=>{
-
     });
     // if (this.authService.loginCheck(userForm.value["userId"], userForm.value["userPassword"]) === true) {
     //   const toastOption: ToastOptions = {

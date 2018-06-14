@@ -5,4 +5,5 @@ export class Order{
   public odate:Date;
   public ostatus:string;
   public oaddr:string;
+  public oViewNum:number;
 }

@@ -31,7 +31,14 @@ export class UserOrderWriteComponent implements OnInit {
   oneUseAddr:string;
   ngOnInit() {
     this.loggedUser=this.authService.getLoggedInUser();
-    this.orderListToOrderWrite();
+
+    if(this.productService.fromCart==true){//장바구니에서 온 경우
+      this.orderList=this.productService.cartToOrder;
+      this.orderListToOrderWrite();
+    }else if(this.productService.fromCart==false){//즉시구매에서 온 경우
+      this.cartList[0]=this.productService.cart
+    }
+
     if(this.authService.getLoggedInUser().uaddrcheck==1){
       this.addrCheck1=1;
     }else if(this.authService.getLoggedInUser().uaddrcheck==2){
@@ -43,7 +50,6 @@ export class UserOrderWriteComponent implements OnInit {
 
   orderListToOrderWrite(){
     // 장바구니에서 선택한 상품의 CNO로 ProductService를 통해 Spring에 요청함
-    this.orderList=this.productService.cartToOrder;
     console.log(this.orderList);
     this.productService.orderListToOrderWrite(this.orderList)
     .subscribe((carts:Cart[])=>{

@@ -37,5 +37,4 @@ export class QnaDetailComponent implements OnInit {
         this.router.navigate(["notice/qna"]);
       });
   }
-
 }

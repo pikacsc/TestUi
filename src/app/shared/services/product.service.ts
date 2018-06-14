@@ -72,7 +72,8 @@ export class ProductService extends CachcingServiceBase{
   // }
 //동현변수
   cartToOrder:number[]=[];
-
+  cart:Cart;
+  fromCart:boolean=false;
 //동현변수끝
   public constructor(
     // 동현생성자수정
