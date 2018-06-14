@@ -41,5 +41,9 @@ export class TokenService {
       return false;
     }
 
+    removeToken(tokenName:string){
+      localStorage.removeItem(tokenName);
+      sessionStorage.removeItem(tokenName);
+    }
 
 }
