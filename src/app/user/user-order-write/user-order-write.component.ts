@@ -6,6 +6,7 @@ import {Order} from '../../shared/models/order';
 import {OrderDetail} from '../../shared/models/orderDetail';
 import { UserService } from "../../shared/services/user.service";
 import { AuthService } from "../../shared/services/auth.service";
+import { TokenService } from "../../shared/services/token.service";
 @Component({
   selector: 'app-user-order-write',
   templateUrl: './user-order-write.component.html',
@@ -15,10 +16,12 @@ export class UserOrderWriteComponent implements OnInit {
 
   constructor(
     private productService:ProductService,
-    private authService:AuthService
+    private authService:AuthService,
+    private tokenService:TokenService
   ) { }
   loggedUser:User;
   orderList:number[]=[];
+  orderLists:Order[]=[];
   cartList:Cart[]=[];
   totalPrice:number=0;
   order:Order=new Order();
@@ -32,12 +35,18 @@ export class UserOrderWriteComponent implements OnInit {
   ngOnInit() {
     this.loggedUser=this.authService.getLoggedInUser();
 
-    if(this.productService.fromCart==true){//장바구니에서 온 경우
-      this.orderList=this.productService.cartToOrder;
-      this.orderListToOrderWrite();
-    }else if(this.productService.fromCart==false){//즉시구매에서 온 경우
-      this.cartList[0]=this.productService.cart
-    }
+    // if(this.tokenService.isToken('orderWriteLists')){
+    //   this.cartList=this.tokenService.getToken('orderWriteLists');
+    // }else{
+      if(this.tokenService.getToken('fromCart')==true){//장바구니에서 온 경우
+        this.orderList=this.tokenService.getToken('cartToOrder');
+        this.orderListToOrderWrite();
+      }else if(this.tokenService.getToken('fromCart')==false){//즉시구매에서 온 경우
+        this.cartList[0]=this.tokenService.getToken('OWcart');
+        // this.tokenService.saveToken('orderWriteLists',this.cartList);
+        this.getTotalPrice();
+      }
+    // }
 
     if(this.authService.getLoggedInUser().uaddrcheck==1){
       this.addrCheck1=1;
@@ -54,16 +63,16 @@ export class UserOrderWriteComponent implements OnInit {
     this.productService.orderListToOrderWrite(this.orderList)
     .subscribe((carts:Cart[])=>{
       this.cartList=carts;
+      this.tokenService.saveToken('orderWriteLists',this.cartList);
       this.getTotalPrice();
     });
   }
 
-//결재하기
+//결재하기 자바스크립트 체크로직
   checkOut(){
     //주문 테이블(TM_ORDER)
     console.log('in the checkOut');
-    this.order.uid=this.authService.getLoggedInUser().uid;
-    this.order.ototal=this.totalPrice;
+
     //배송지 체크에 따라 적용 주소 변경
     if((this.addrCheck1+this.addrCheck2+this.addrCheck3+this.addrCheck4)>1){
       alert('배송지를 하나만 선택하세요');
@@ -82,8 +91,13 @@ export class UserOrderWriteComponent implements OnInit {
       return;
     }
     console.log(this.order.oaddr);
+    //주문테이블에 주문객체 삽입
+    this.order.uid=this.authService.getLoggedInUser().uid;
+    this.order.ototal=this.totalPrice;
     this.productService.checkOutOrder(this.order).subscribe(data=>{
-    //주문상세 테이블(TM_ORDER_DETAIL)
+
+
+    //주문상세 테이블(TM_ORDER_DETAIL)에 삽입할 주문상세 배열 생성
       for(let i=0;i<this.cartList.length;i++){
         this.orderDetails[i]=new OrderDetail();
         this.orderDetails[i].odimg=this.cartList[i].p_img;
@@ -92,6 +106,7 @@ export class UserOrderWriteComponent implements OnInit {
         this.orderDetails[i].odpamount=this.cartList[i].camount;
       }
       console.log('after For');
+      //주문상세 테이블에 주문상세 배열 삽입
       this.productService.checkOutOrderDetail(this.orderDetails).subscribe(data=>{
         //구매완료 후 장바구니에서 삭제
         for(let i=0;i<this.cartList.length;i++){
@@ -100,6 +115,7 @@ export class UserOrderWriteComponent implements OnInit {
           });
         }
       alert("구매가 완료 되었습니다.");
+      this.tokenService.removeToken('orderLists');
       });
     });
   }

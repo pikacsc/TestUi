@@ -4,6 +4,7 @@ import { Product } from "../../shared/models/product";
 import { AuthService } from "../../shared/services/auth.service";
 import { ProductService } from "../../shared/services/product.service";
 import { LoaderSpinnerService } from "../../shared/loader-spinner/loader-spinner";
+import { TokenService } from "../../shared/services/token.service";
 
 //**동현
 import {Cart} from "../../shared/models/cart";
@@ -32,15 +33,24 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService,
     private spinnerService: LoaderSpinnerService,
     private toastyConfig: ToastyConfig,
-    private toastyService: ToastyService
+    private toastyService: ToastyService,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit() {
-    this.productService.getProducts()
-    .subscribe((productList : Product[]) => {
-      this.productList = productList;
-    })
 
+    if(this.tokenService.isToken("productListToken")){
+      this.productList = this.tokenService.getToken("productListToken");
+    }else{
+
+      this.productService.getProducts()
+      .subscribe((productList : Product[]) => {
+        this.tokenService.saveToken("productListToken" , productList );
+        this.productList = productList;
+      })
+
+
+    }
   }
 
 
@@ -91,16 +101,18 @@ export class ProductListComponent implements OnInit {
 
   //동현 장바구니에 물품추가기능
   addToCart(product: Product) {
-    this.cart.uid=this.authService.getLoggedInUser().uid;
-    this.cart.pcode=product.p_code;
-    this.cart.camount=1;
-    this.cart.p_img=product.p_img;
-    this.cart.p_sellprice=product.p_sellPrice;
-    this.cart.p_name=product.p_name;
-    this.cart.p_kind=product.p_kind;
-    this.cart.p_content=product.p_content;
-    this.productService.addToCart(this.cart).subscribe((cart: Cart)=>{
-      alert('장바구니에 담았습니다.');
-    });
-  }
+  this.cart.uid=this.authService.getLoggedInUser().uid;
+ this.cart.pcode=product.p_code;
+ this.cart.camount=1;
+ this.cart.p_img=product.p_img;
+ this.cart.p_sellprice=product.p_sellPrice;
+ this.cart.p_name=product.p_name;
+ this.cart.p_kind=product.p_kind;
+ this.cart.p_content=product.p_content;
+ this.productService.addToCart(this.cart).subscribe((cart: Cart)=>{
+  this.tokenService.removeToken('cartLists');
+  alert('장바구니에 담았습니다.');
+});
+
+}
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../shared/models/product";
 import { ProductService } from "../../shared/services/product.service";
 import { LoaderSpinnerService } from "../../shared/loader-spinner/loader-spinner";
+import { TokenService } from "../../shared/services/token.service";
 
 import { Cart } from "../../shared/models/cart";
 import { AuthService} from "../../shared/services/auth.service";
@@ -24,7 +25,8 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductService,
     private spinnerService: LoaderSpinnerService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {
     this.product = new Product();
 
@@ -37,14 +39,22 @@ export class ProductDetailComponent implements OnInit {
     //   this.getProductDetail(id);
     // });
 
-   this.productService.getProductById()
-   .subscribe((product : Product) =>
-    {this.product = product;
-      console.log(this.product.p_price);
-      console.log(this.product.p_sellPrice);
-      console.log(this.product.p_name);
-      console.log(this.product.p_profit);
-    });
+    if(this.tokenService.isToken("productDetailToken")){
+      this.product = this.tokenService.getToken("productDetailToken");
+    }else{
+
+      this.productService.getProductById()
+      .subscribe((product : Product) =>
+       {this.product = product;
+        this.tokenService.saveToken("productDetailToken", product);
+         console.log(this.product.p_price);
+         console.log(this.product.p_sellPrice);
+         console.log(this.product.p_name);
+         console.log(this.product.p_profit);
+       });
+
+    }
+
 
   }
 
@@ -67,13 +77,14 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(){
     this.cart=new Cart();
-    this.cart.uid=this.authService.getLoggedInUser().uid;
-    this.cart.pcode=this.product.p_code;
-    this.cart.camount=this.pQuantity;
-    this.productService.addToCart(this.cart).subscribe((cart:Cart)=>{
-      this.cart=cart;
-      alert('장바구니에 담았습니다.');
-    });
+   this.cart.uid=this.authService.getLoggedInUser().uid;
+   this.cart.pcode=this.product.p_code;
+   this.cart.camount=this.pQuantity;
+   this.productService.addToCart(this.cart).subscribe((cart:Cart)=>{
+   this.cart=cart;
+   this.tokenService.removeToken('cartLists');
+   alert('장바구니에 담았습니다.');
+   });
   }
 
   gotoOrderWirte(){
@@ -87,8 +98,19 @@ export class ProductDetailComponent implements OnInit {
     this.cart.p_kind=this.product.p_kind;
     this.cart.p_content=this.product.p_content;
 
-    this.productService.cart=this.cart;
-    this.productService.fromCart=false;
+    if(this.tokenService.isToken('OWCart')){
+      this.tokenService.updateToken('OWcart',this.cart);
+    }else{
+      this.tokenService.saveToken('OWcart',this.cart);
+    }
+    if(this.tokenService.isToken('fromCart')){
+      this.tokenService.updateToken('fromCart',false);
+    }else{
+      this.tokenService.saveToken('fromCart',false);
+    }
+
+    // this.productService.cart=this.cart;
+    // this.productService.fromCart=false;
     console.log(this.cart);
     this.router.navigate(["/users",{outlets:{profileOutlet:['order-write']}}]);
   }
