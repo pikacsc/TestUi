@@ -33,6 +33,11 @@ export class TokenService {
       sessionStorage.setItem(tokenName, Token);
     }
 
+    removeToken(tokenName:string){
+      localStorage.removeItem(tokenName);
+      sessionStorage.removeItem(tokenName);
+    }
+
     isToken(tokenName:string): Boolean {
       const token = sessionStorage.getItem(tokenName);
       if (token) {
