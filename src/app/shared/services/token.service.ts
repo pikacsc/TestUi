@@ -24,6 +24,16 @@ export class TokenService {
       sessionStorage.setItem(tokenName, Token);
     }
 
+    removeToken(tokenName : string){
+      if(this.isToken(tokenName)){
+      localStorage.removeItem(tokenName);
+      sessionStorage.removeItem(tokenName);
+          return 1;//토큰 삭제됨
+      }else{
+          return 0;//토큰이 애초에 존재하지 않음
+      }
+    }
+
     updateToken(tokenName:string,object:Object){
       localStorage.removeItem(tokenName);
       sessionStorage.removeItem(tokenName);

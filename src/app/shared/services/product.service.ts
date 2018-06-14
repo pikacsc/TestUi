@@ -29,8 +29,9 @@ let count = 0;
 export class ProductService extends CachcingServiceBase{
 
 
-  productlistUrl = 'http://localhost:8080/toma/';
-  private url = 'http://localhost:8080/toma/review/';
+  private productListUrl = 'http://localhost:8080/toma/';
+  private productReviewUrl = 'http://localhost:8080/toma/review/';
+  private productQnaUrl = 'http://localhost:8080/toma/productqna/';
 
 
 
@@ -94,6 +95,11 @@ export class ProductService extends CachcingServiceBase{
 
   p_code : string;
 
+  getProductQna(){
+    return this.http.get(this.productQnaUrl + this.p_code);
+  }
+
+
   setProductCode(p_code: string) {
     this.p_code = p_code;
   }
@@ -103,7 +109,7 @@ export class ProductService extends CachcingServiceBase{
   }
 
   getReview(){
-    return this.http.get(this.url + this.p_code);
+    return this.http.get(this.productReviewUrl + this.p_code);
   }
 
 
@@ -122,7 +128,7 @@ export class ProductService extends CachcingServiceBase{
     //                                                                   return model;
     //                                                                 })));
 
-    return this.http.get(this.productlistUrl);
+    return this.http.get(this.productListUrl);
 
   }
 
@@ -134,7 +140,7 @@ export class ProductService extends CachcingServiceBase{
     // this.product = this.db.object("products/" + key);
     // return this.product;
 
-    return this.http.get(this.productlistUrl + 'product/'+ p_kind);
+    return this.http.get(this.productListUrl + 'product/'+ p_kind);
 
 
   }
@@ -143,7 +149,7 @@ export class ProductService extends CachcingServiceBase{
     // this.product = this.db.object("products/" + key);
     // return this.product;
 
-    return this.http.get(this.productlistUrl + 'detail/product/'+ this.p_code);
+    return this.http.get(this.productListUrl + 'detail/product/'+ this.p_code);
 
 
   }

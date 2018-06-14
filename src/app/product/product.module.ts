@@ -18,6 +18,8 @@ import { ReviewDetailComponent} from "./product-review-detail/review-detail.comp
 
 import { ProductService } from "../shared/services/product.service";
 import { ReviewService } from "../shared/services/review.service";
+import { ProductQnaComponent } from './product-qna/product-qna.component';
+import { ProductQnaService} from "../shared/services/product-qna.service";
 
 //동현임포트수정
 
@@ -31,13 +33,15 @@ import { ReviewService } from "../shared/services/review.service";
     AddProductComponent,
     ProductDetailComponent,
     ProductReviewComponent,
+    ProductQnaComponent,
     ReviewDetailComponent
 
   ],
   exports: [BestProductComponent],
   providers: [
     ProductService,
-    ReviewService
+    ReviewService,
+    ProductQnaService
   ],
 })
 export class ProductModule {}
