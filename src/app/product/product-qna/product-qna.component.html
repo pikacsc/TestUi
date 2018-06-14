@@ -1,13 +1,14 @@
 <hr class="between-sections">
 
 <ol class="breadcrumb">
-  <li>상품 후기</li>
+  <li>상품 문의</li>
 </ol>
 
 <table class="table table-responsive-md">
   <thead class="amber lighten-3">
   <tr>
     <th>번호</th>
+    <th>카테고리</th>
     <th>제목</th>
     <th>작성자</th>
     <th>작성일</th>
@@ -17,18 +18,19 @@
 
   <tbody>
 
-    <tr *ngFor="let review of reviews | paginate : {itemsPerPage: 10, currentPage : page }">
-    <th>{{review.rev_no}}</th>
+    <tr *ngFor="let productQna of productQnas | paginate : {itemsPerPage: 10, currentPage : page }">
+    <th>{{productQna.pq_no}}</th>
+    <th>{{productQna.pq_category}}</th>
     <th>
       <a [routerLink]="['/review']" routerLinkActive="router-link-active"
       (click)="setReviewNo(review.rev_no)">
-      {{review.rev_title}}
+      {{productQna.pq_title}}
     </a>
     </th>
-    <th>{{review.u_id}}</th>
-    <th>{{review.rev_date | date : 'yyyy-MM-dd'}}</th>
-    <th>{{review.rev_hits}}</th>
-    <p>{{review.review_content}}</p>
+    <th>{{productQna.u_id}}</th>
+    <th>{{productQna.pq_date | date : 'yyyy-MM-dd'}}</th>
+    <th>{{productQna.pq_hits}}</th>
+    <!-- <p>{{productQna.pq_content}}</p> -->
   </tr>
 
   </tbody>

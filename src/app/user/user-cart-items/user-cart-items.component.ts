@@ -10,6 +10,7 @@ import {Cart} from '../../shared/models/cart';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../shared/services/auth.service";
 import { User } from "../../shared/models/user";
+import { TokenService } from "../../shared/services/token.service";
 @Component({
   selector: "app-user-cart-items",
   templateUrl: "./user-cart-items.component.html",
@@ -27,30 +28,37 @@ export class UserCartItemsComponent implements OnInit {
     private authService:AuthService,
     private productService: ProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tokenService:TokenService
   ) {
 
 }
   ngOnInit() {
     this.loggedUser = this.authService.getLoggedInUser();
-    this.getCartProducts();
+    if(this.tokenService.isToken('cartLists')){
+      this.cartList=this.tokenService.getToken('cartLists');
+    }else{
+      this.getCartProducts();
+    }
   }
 
   getCartProducts() {
-    const x = this.productService.getUsersCartProducts();
-    x.subscribe((cartList:Cart[])=>{
+    this.productService.getUsersCartProducts().subscribe((cartList:Cart[])=>{
       this.cartList=cartList;
+      this.tokenService.saveToken('cartLists',this.cartList);
     });
   }
 
   removeFromCart(cno: number) {
     this.productService.removeFromCart(cno).subscribe(data=>{
-      this.getCartProducts();
+      this.tokenService.removeToken('cartLists');
+      alert("삭제 되었습니다.");
     });
   }
 
     updateCart(cart:Cart){
       this.productService.updateCart(cart).subscribe((cart:Cart)=>{
+        this.tokenService.removeToken('cartLists');
         alert("수정 되었습니다.");
       });
     }
@@ -72,7 +80,19 @@ export class UserCartItemsComponent implements OnInit {
 //주문진행 페이지로 가기 전 저장된 배열을 service에 저장한다.
   gotoOrderWirte(){
     this.productService.cartToOrder=this.orderList;
-    this.productService.fromCart=true;
+    // this.productService.fromCart=true;
+
+    if(this.tokenService.isToken('fromCart')){
+      this.tokenService.updateToken('fromCart',true);
+    }else{
+      this.tokenService.saveToken('fromCart',true);
+    }
+
+    if(this.tokenService.isToken('cartToOrder')){
+      this.tokenService.updateToken('cartToOrder',this.orderList);
+    }else{
+      this.tokenService.saveToken('cartToOrder',this.orderList);
+    }
     this.router.navigate(["/users",{outlets:{profileOutlet:['order-write']}}]);
 
   }

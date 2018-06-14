@@ -36,6 +36,10 @@ export class LoginComponent implements OnInit {
   findIDUser=new User;
   findPWUser=new User;
 
+  //upw2.value (비밀번호확인)
+  upw2;
+
+
   constructor(
     private userService: UserService,
     private authService: AuthService,
@@ -50,7 +54,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() { }
-
+  // signupcheck(){
+  //   this.submitStatus=true;
+  //   if(
+  //     this.createUser.uid==!null,
+  //     this.createUser.upw==!null,
+  //     this.createUser.uname==!null,
+  //     this.createUser.uphone==!null,
+  //     this.createUser.uaddr1==!null,
+  //     this.createUser.ubirth==!null,
+  //     this.createUser.ugender==!null,
+  //     this.createUser.usmsyn==!null,
+  //     this.createUser.uemailyn==!null
+  //   ){
+  //     this.submitStatus=false;
+  //   }
+  // }
   signup() {
     // this.authService.signup(this.emailId, this.password);
     this.loginUser.userId= this.login1.uid;
@@ -81,25 +100,69 @@ export class LoginComponent implements OnInit {
 
   addUser(userForm: NgForm) {
     userForm.value["isAdmin"] = false;
+
+    // 회원가입 폼 입력필터
+    let submitStatus:Boolean=false;
+    if(
+      this.createUser.uid!=null &&
+      this.createUser.upw!=null &&
+      this.createUser.uname!=null &&
+      this.createUser.uphone!=null &&
+      this.createUser.uaddr1!=null &&
+      this.createUser.ubirth!=null &&
+      this.createUser.ugender!=null &&
+      this.createUser.usmsyn!=null &&
+      this.createUser.uemailyn!=null
+    ){
+      // let numPattern = /[^0-9]/;
+
+        if(this.upw2!=this.createUser.upw){ //비밀번호 틀렸을때
+          submitStatus=false;
+          alert('비밀번호를 다시 확인해주세요');
+        }if(this.createUser.ubirth.length!=6 || (this.createUser.ubirth*=1).constructor!=Number){
+          submitStatus=false;
+          alert('생년월일을 다시 확인해주세요.');
+        }
+        else{ //모든 항목 입력완료, 비밀번호 확인완료
+          console.log(submitStatus);
+          submitStatus=true;
+          // console.log('if문 실행됨. 가입조건만족. submitStatus='+submitStatus);
+        }
+    }else{
+      submitStatus=false;
+      // console.log('else문 실행됨. submitStatus='+submitStatus);
+      alert('모든 항목을 입력해주세요.');
+    }
+
+    //submitStatus 가 true일 경우에만 실행
+    if(submitStatus){
     this.userService.createUser(userForm.value).subscribe((data:User) => {
       this.createUser = data;
-    });
 
-    const toastOption: ToastOptions = { //3초동안 우측상단 회원가입중... 창 띄워줌
-      title: "회원가입 확인중",
-      msg: "회원가입 확인중...",
-      showClose: true,
-      timeout: 3000,
-      theme: "material"
-    };
-    this.toastyService.wait(toastOption);
-    setTimeout((router: Router) => {
-      $("#createUserForm").modal("hide");
-      alert("회원가입 완료. 로그인 해주세요");
-      this.router.navigate(["index/login"]);
-    }, 1500);
-
+      const toastOption: ToastOptions = { //3초동안 우측상단 회원가입중... 창 띄워줌
+        title: "회원가입 확인중",
+        msg: "회원가입 확인중...",
+        showClose: true,
+        timeout: 3000,
+        theme: "material"
+      };
+      this.toastyService.wait(toastOption);
+      setTimeout((router: Router) => {
+        $("#createUserForm").modal("hide");
+        alert("회원가입 완료. 로그인 해주세요.");
+        this.router.navigate(["index/login"]);
+      }, 1500);
+    },
+      (error:any) => {
+          alert('이미 존재하는 아이디입니다.');
+          return false;
+      }
+    );//subscribe끝
+  }else if(submitStatus==false){
+    console.log('회원가입 취소');
+    return false;
   }
+}//addUser() 끝
 
   login() {
     // console.log("loginForm" + this.loginUser.userId);
