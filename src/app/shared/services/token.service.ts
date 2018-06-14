@@ -8,6 +8,7 @@ export class TokenService {
 
   constructor() { }
 
+//tokenName : productlsit, user ,...
   getToken(tokenName:string){
     const token = sessionStorage.getItem(tokenName);
     if (!token) {
@@ -17,6 +18,7 @@ export class TokenService {
     return JSON.parse(strObj);
   }
 
+//ex) orderToken,this.orderlist ...
     saveToken(tokenName:string,object:Object){
       const objStr = JSON.stringify(object);
       const Token = new Buffer(objStr).toString("base64");
@@ -33,6 +35,7 @@ export class TokenService {
       sessionStorage.setItem(tokenName, Token);
     }
 
+//체크만하는 함수
     isToken(tokenName:string): Boolean {
       const token = sessionStorage.getItem(tokenName);
       if (token) {
