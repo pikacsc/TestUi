@@ -58,12 +58,12 @@
             <div class="md-form form-sm">
               <i class="fa fa-envelope prefix"></i>
               <input mdbActive type="text" id="userId" class="form-control" name="uid" [(ngModel)]="createUser.uid">
-              <label for="userId">아이디</label>
+              <label for="userId">아이디(20자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-lock prefix"></i>
               <input mdbActive type="password" id="userPw" class="form-control" [(ngModel)]="createUser.upw" name="upw" >
-              <label for="userPw">비밀번호</label>
+              <label for="userPw">비밀번호(10자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-lock prefix"></i>
@@ -73,22 +73,22 @@
             <div class="md-form form-sm">
               <i class="fa fa-user prefix"></i>
               <input mdbActive type="text" id="userName" class="form-control"  [(ngModel)]="createUser.uname" name="uname">
-              <label for="userName">이름</label>
+              <label for="userName">이름(10자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-phone prefix"></i>
-              <input mdbActive type="number" id="userPhone" class="form-control"  [(ngModel)]="createUser.uphone" name="uphone">
-              <label for="userPhone">연락처</label>
+              <input mdbActive type="text" id="userPhone" class="form-control"  [(ngModel)]="createUser.uphone" name="uphone">
+              <label for="userPhone">연락처( '-' 제외, 숫자만입력)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-map-marker prefix"></i>
               <input mdbActive type="text" id="userAddr1" class="form-control"  [(ngModel)]="createUser.uaddr1" name="uaddr1">
-              <label for="userAddr1">주소</label>
+              <label for="userAddr1">주소(100자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-calendar prefix"></i>
               <input mdbActive type="text" id="userBirth" class="form-control"  [(ngModel)]="createUser.ubirth" name="ubirth" >
-              <label for="userBirth">생년월일</label>
+              <label for="userBirth">생년월일(주민등록번호 앞6자리만 입력)</label>
             </div>
 
             <div class="md-form form-sm">
