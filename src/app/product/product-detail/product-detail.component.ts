@@ -111,19 +111,30 @@ this.product = product;
     });
   }
 
-  gotoOrderWirte() {
-    this.cart = new Cart();
-    this.cart.uid = this.authService.getLoggedInUser().uid;
-    this.cart.pcode = this.product.p_code;
-    this.cart.camount = this.pQuantity;
-    this.cart.p_img = this.product.p_img;
-    this.cart.p_sellprice = this.product.p_sellPrice;
-    this.cart.p_name = this.product.p_name;
-    this.cart.p_kind = this.product.p_kind;
-    this.cart.p_content = this.product.p_content;
+  gotoOrderWirte(){
+    this.cart=new Cart();
+    this.cart.uid=this.authService.getLoggedInUser().uid;
+    this.cart.pcode=this.product.p_code;
+    this.cart.camount=this.pQuantity;
+    this.cart.p_img=this.product.p_img;
+    this.cart.p_sellprice=this.product.p_sellPrice;
+    this.cart.p_name=this.product.p_name;
+    this.cart.p_kind=this.product.p_kind;
+    this.cart.p_content=this.product.p_content;
 
-    this.productService.cart = this.cart;
-    this.productService.fromCart = false;
+    if(this.tokenService.isToken('OWCart')){
+      this.tokenService.updateToken('OWcart',this.cart);
+    }else{
+      this.tokenService.saveToken('OWcart',this.cart);
+    }
+    if(this.tokenService.isToken('fromCart')){
+      this.tokenService.updateToken('fromCart',false);
+    }else{
+      this.tokenService.saveToken('fromCart',false);
+    }
+
+    // this.productService.cart=this.cart;
+    // this.productService.fromCart=false;
     console.log(this.cart);
     this.router.navigate(["/users", { outlets: { profileOutlet: ['order-write'] } }]);
   }

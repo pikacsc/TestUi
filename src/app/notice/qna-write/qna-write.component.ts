@@ -6,6 +6,7 @@ import { Qna } from '../../shared/models/qna';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../shared/models/user';
+import { TokenService } from '../../shared/services/token.service';
 
 @Component({
   selector: 'app-qna-write',
@@ -20,7 +21,8 @@ export class QnaWriteComponent implements OnInit {
   constructor(
     private qnaService: QnaService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class QnaWriteComponent implements OnInit {
     this.qnaService.insertQna(this.qna)
       .subscribe(() => {
         alert("질문이 등록되었습니다.");
+        this.tokenService.removeToken("qnaToken");
         this.router.navigate(["/notice/qna"]);
       });
   }

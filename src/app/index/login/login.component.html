@@ -21,6 +21,9 @@
         <button type="submit" class="btn btn-primary waves-light" id="loginButton" mdbRippleRadius>Login</button>
       </div>
     </form>
+    <!-- 로그인 폼 끝-->
+
+    <!-- 모달 활성화 링크들 -->
     <br />
     <br />
     <br />
@@ -37,13 +40,10 @@
   <br>
 
 
-
-  <!-- Login form -->
-
-  <!--Modal: Register Form-->
+  <!--회원가입폼 (모달)-->
   <div class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
-      <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+      <form #userForm="ngForm" (ngSubmit)="addUser(userForm)" name="JoinForm">
         <div class="modal-content">
 
           <div class="modal-header light-blue darken-3 white-text">
@@ -53,60 +53,56 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
+          <!-- mdbInputValidate: 만족하면 success, 실패하면 false. 글씨가 뜨게해주는 속성 삭제 -->
           <div class="modal-body">
             <div class="md-form form-sm">
               <i class="fa fa-envelope prefix"></i>
-              <input mdbActive type="text" id="userId" class="form-control" name="uid" [(ngModel)]="createUser.uid" mdbInputValidate [email]="true">
-              <label for="userId">아이디</label>
+              <input mdbActive type="text" id="userId" class="form-control" name="uid" [(ngModel)]="createUser.uid">
+              <label for="userId">아이디(20자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-lock prefix"></i>
-              <input mdbActive type="password" id="userPw" class="form-control" [(ngModel)]="createUser.upw" name="upw" mdbInputValidate>
-              <label for="userPw">비밀번호</label>
+              <input mdbActive type="password" id="userPw" class="form-control" [(ngModel)]="createUser.upw" name="upw" >
+              <label for="userPw">비밀번호(10자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-lock prefix"></i>
-              <input mdbActive type="password" id="userPw2" class="form-control">
+              <input mdbActive type="password" id="userPw2" class="form-control" name="upw2" [(ngModel)]="upw2">
               <label for="userPw2">비밀번호 확인</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-user prefix"></i>
-              <input mdbActive type="text" id="userName" class="form-control" mdbInputValidate [(ngModel)]="createUser.uname" name="uname">
-              <label for="userName">이름</label>
+              <input mdbActive type="text" id="userName" class="form-control"  [(ngModel)]="createUser.uname" name="uname">
+              <label for="userName">이름(10자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-phone prefix"></i>
-              <input mdbActive type="text" id="userPhone" class="form-control" mdbInputValidate [(ngModel)]="createUser.uphone" name="uphone">
-              <label for="userPhone">연락처</label>
+              <input mdbActive type="text" id="userPhone" class="form-control"  [(ngModel)]="createUser.uphone" name="uphone">
+              <label for="userPhone">연락처( '-' 제외, 숫자만입력)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-map-marker prefix"></i>
-              <input mdbActive type="text" id="userAddr1" class="form-control" mdbInputValidate [(ngModel)]="createUser.uaddr1" name="uaddr1">
-              <label for="userAddr1">주소</label>
+              <input mdbActive type="text" id="userAddr1" class="form-control"  [(ngModel)]="createUser.uaddr1" name="uaddr1">
+              <label for="userAddr1">주소(100자이내)</label>
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-calendar prefix"></i>
-              <input mdbActive type="text" id="userBirth" class="form-control" mdbInputValidate [(ngModel)]="createUser.ubirth" name="ubirth">
-              <label for="userBirth">생년월일</label>
+              <input mdbActive type="text" id="userBirth" class="form-control"  [(ngModel)]="createUser.ubirth" name="ubirth" >
+              <label for="userBirth">생년월일(주민등록번호 앞6자리만 입력)</label>
             </div>
 
             <div class="md-form form-sm">
               <i class="fa fa-transgender prefix"></i>
-              <select class="mdb-select" [(ngModel)]="createUser.ugender" name="ugender" id="ugenderlist" style="margin-left:180px; margin-top:10px; width:100px;">
+              <select class="mdb-select" [(ngModel)]="createUser.ugender" name="ugender" id="ugenderlist" style="margin-left:180px; margin-top:10px; width:100px;" >
                 <option value="" disabled selected>성별을 선택해주세요</option>
                 <option value="M">남자</option>
                 <option value="F">여자</option>
               </select>
-              <!-- 라디오버튼 디자인 수정필요 -->
-              <!-- <input type="radio" [(ngModel)]="createUser.ugender" name="ugender" id="ugenderlist" value="M" style="margint-left: 60px; margin-top:10px"/>남자
-              <input type="radio" [(ngModel)]="createUser.ugender" name="ugender" id="ugenderlist2" value="F" style="margint-left: 120px; margin-top:-10px"/>여자 -->
-
               <label for="ugenderlist">성별</label>
             </div>
 
             <div class="md-form form-sm">
               <i class="fa fa-twitter-square prefix"></i>
-              <!-- <input mdbActive type="text" id="userSmsyn" class="form-control" mdbInputValidate [(ngModel)]="createUser.smsyn" name="usmsyn"> -->
               <select class="mdb-select" [(ngModel)]="createUser.usmsyn" name="usmsyn" id="userSmsyn" style="margin-left:180px; margin-top:10px; width:100px;">
                 <option value="" disabled selected>SMS로 정보를 수신하시겠습니까?</option>
                 <option value="Y">예</option>
@@ -116,7 +112,6 @@
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-twitch prefix"></i>
-              <!-- <input mdbActive type="text" id="userEmailyn" class="form-control" mdbInputValidate [(ngModel)]="createUser.emailyn" name="uemailyn"> -->
               <select class="mdb-select" [(ngModel)]="createUser.uemailyn" name="uemailyn" id="userEmailyn" style="margin-left:180px; margin-top:10px; width:100px;">
                 <option value="" disabled selected>이메일로 정보를 수신하시겠습니까?</option>
                 <option value="Y">예</option>
@@ -134,6 +129,7 @@
       </form>
     </div>
   </div>
+  <!-- 회원가입모달 끝 -->
 
   <!-- 아이디 찾기 -->
   <div class="modal fade" id="FindUserIDInfoForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

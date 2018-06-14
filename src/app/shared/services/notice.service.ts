@@ -1,32 +1,52 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Notice } from "../models/notice";
+import { TokenService } from "./token.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NoticeService {
-  notices: any;
   n_no: number;
+  notice: Notice;
   url = 'http://localhost:8080/toma/notice';
   detailUrl = 'http://localhost:8080/toma/detail/notice/';
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) {
 
   }
 
-  getNotice() {
+  incrementNoticeHits(notice) {
+    return this.http.put(this.detailUrl + this.n_no, notice);
+  }
+
+  getNoticeList() {
     return this.http.get(this.url);
     // return this.notices = this.http.get(this.url);
   }
 
-  getNoticeNo() {
-    return this.http.get(this.detailUrl + this.n_no);
+  // getNoticeNo() {
+  //   return this.http.get(this.detailUrl + this.n_no);
+  // }
+
+  getNoticeNoObject() {
+    return this.notice;
   }
 
   setNoticeNo(n_no: number) {
     this.n_no = n_no;
+  }
+
+  setNoticeNoObject(notice: Notice) {
+    // this.notice = notice;
+    this.incrementNoticeHits(notice).subscribe(() => {
+      this.notice = notice;
+    });
   }
 
 }

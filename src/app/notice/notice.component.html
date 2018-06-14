@@ -38,7 +38,7 @@
 
   <!--Table body-->
   <tbody class="view overlay">
-    <tr *ngFor="let notice of notices | paginate: { itemsPerPage: 10, currentPage: page }">
+    <tr *ngFor="let notice of noticeList | paginate: { itemsPerPage: 10, currentPage: page }">
       <th scope="row">{{ notice.n_no }}</th>
       <th>{{ notice.n_category }}</th>
       <th>

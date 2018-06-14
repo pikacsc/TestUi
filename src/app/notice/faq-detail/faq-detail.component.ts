@@ -3,6 +3,7 @@ import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http'
 
 import { FaqService } from '../../shared/services/faq.service';
 import { Faq } from '../../shared/models/faq';
+import { TokenService } from '../../shared/services/token.service';
 
 @Component({
   selector: 'app-faq-detail',
@@ -14,14 +15,25 @@ export class FaqDetailComponent implements OnInit {
 
   constructor(
     private faqService: FaqService,
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
-    this.faqService.getFaqNo()
-      .subscribe((faq:Faq) => {
-        this.faq = faq;
-      })
+    this.faq = this.faqService.getFaqNoObject();
+
+    if(this.faq == null) {
+      var f_no = this.tokenService.getToken("faqDetailToken");
+      var faqList = this.tokenService.getToken("faqToken");
+      var faq = faqList.find(function(item){
+        return item.f_no === f_no;
+      });
+      this.faq = faq;
+    }
+  }
+
+  removeToken() {
+    this.tokenService.removeToken("faqToken");
   }
 
 }
