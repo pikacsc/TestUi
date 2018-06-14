@@ -38,7 +38,7 @@
 
     <!--Table body-->
     <tbody>
-        <tr *ngFor="let faq of faqs | paginate: { itemsPerPage: 10, currentPage: page }">
+        <tr *ngFor="let faq of faqList | paginate: { itemsPerPage: 10, currentPage: page }">
             <th scope="row">{{ faq.f_no }}</th>
             <th>{{ faq.f_category }}</th>
             <th>

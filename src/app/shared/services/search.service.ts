@@ -7,7 +7,9 @@ import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http'
 export class SearchService {
   private url = 'http://localhost:8080/toma';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   noticeSearch(title: string) {
     return this.http.get(this.url + "/notice/search/" + title);

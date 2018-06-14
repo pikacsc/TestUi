@@ -36,14 +36,14 @@
 
   <!--Table body-->
   <tbody>
-    <tr *ngFor="let qna of qnas | paginate: { itemsPerPage: 10, currentPage: page }; let i= index">
+    <tr *ngFor="let qna of qnaList | paginate: { itemsPerPage: 10, currentPage: page }; let i= index">
       <th >{{ i+1 }}</th>
       <th>
         <a [routerLink]="['/detail/qna']" routerLinkActive="router-link-active" (click)="setQnaNo(qna.q_no)">{{ qna.q_title }}
               </a>
       </th>
       <th>{{ qna.q_date | date:'yyyy-MM-dd' }}</th>
-      <th>{{ qna.q_reply }}</th>
+      <th>{{ qna.q_reply | uppercase }}</th>
     </tr>
   </tbody>
   <!--Table body-->

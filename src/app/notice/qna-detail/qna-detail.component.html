@@ -40,7 +40,7 @@
       <th>작성일</th>
       <td>{{ qna?.q_date | date:'yyyy-MM-dd' }}</td>
       <th>답변여부</th>
-      <td>{{ qna?.q_reply }}</td>
+      <td>{{ qna?.q_reply | uppercase }}</td>
     </tr>
     <tr>
       <td colspan="4">
