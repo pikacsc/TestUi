@@ -27,6 +27,10 @@ export const AppRoutes: Routes = [
       {
         path: "notice",
         loadChildren: "./notice/notice.module#NoticeModule"
+      },
+      {
+          path: "admin",
+          loadChildren: "./admin/admin.module#AdminModule"
       }
     ]
   },
