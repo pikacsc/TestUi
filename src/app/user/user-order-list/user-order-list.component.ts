@@ -27,10 +27,8 @@ export class UserOrderListComponent implements OnInit {
   ngOnInit() {
     this.uid=this.authService.getLoggedInUser().uid;
     if(this.tokenService.isToken('orderLists')){
-      alert("토큰가져옴");
       this.orderLists=this.tokenService.getToken('orderLists');
     }else{
-      alert("토큰없음");
       this.getOrderList(this.uid);
     }
 

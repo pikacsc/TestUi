@@ -98,8 +98,19 @@ export class ProductDetailComponent implements OnInit {
     this.cart.p_kind=this.product.p_kind;
     this.cart.p_content=this.product.p_content;
 
-    this.productService.cart=this.cart;
-    this.productService.fromCart=false;
+    if(this.tokenService.isToken('OWCart')){
+      this.tokenService.updateToken('OWcart',this.cart);
+    }else{
+      this.tokenService.saveToken('OWcart',this.cart);
+    }
+    if(this.tokenService.isToken('fromCart')){
+      this.tokenService.updateToken('fromCart',false);
+    }else{
+      this.tokenService.saveToken('fromCart',false);
+    }
+
+    // this.productService.cart=this.cart;
+    // this.productService.fromCart=false;
     console.log(this.cart);
     this.router.navigate(["/users",{outlets:{profileOutlet:['order-write']}}]);
   }
