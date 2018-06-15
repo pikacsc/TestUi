@@ -23,18 +23,17 @@ import { UserService } from "../shared/services/user.service";
 import { ProductService } from '../shared/services/product.service';
 import { AuthGuard } from "../shared/services/auth_gaurd";
 import { AuthService } from "../shared/services/auth.service";
-import { UserMainComponent } from './user-main/user-main.component';
+import { NgDaumAddressModule } from 'ng2-daum-address';
+
 @NgModule({
-  imports: [CommonModule, SharedModule, RouterModule.forChild(UserRoutes)],
+  imports: [CommonModule, SharedModule, NgDaumAddressModule, RouterModule.forChild(UserRoutes)],
   declarations: [
     UserComponent,
     UserAccountComponent,
     UserFavouriteProductsComponent,
     UserCartItemsComponent,
     UserOrderWriteComponent,
-    UserOrderListComponent,
-    UserMainComponent
-
+    UserOrderListComponent
   ],
   providers: [
     UserService,

@@ -107,13 +107,13 @@ export class LoginComponent implements OnInit {
   setDaumAddressApi(AddrSearch){
   // 여기로 주소값이 반환
     console.log(AddrSearch);
-    this.AddrSearch2 = AddrSearch.zip+" "+AddrSearch.addr;
+    this.AddrSearch2 = AddrSearch.zip+" / "+AddrSearch.addr;
   }
 
 
   addUser(userForm: NgForm) {
     userForm.value["isAdmin"] = false;
-    this.createUser.uaddr1 = this.AddrSearch2+" "+this.AddrSearch3;
+    this.createUser.uaddr1 = this.AddrSearch2+" / "+this.AddrSearch3;
     // 회원가입 폼 입력필터
     let submitStatus:Boolean=false;
     if(
