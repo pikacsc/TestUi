@@ -7,6 +7,8 @@ import {
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
+
+import { NgDaumAddressModule } from 'ng2-daum-address';
 // Configuration and Services
 import { UserRoutes } from "./user.routing";
 
@@ -25,7 +27,7 @@ import { AuthGuard } from "../shared/services/auth_gaurd";
 import { AuthService } from "../shared/services/auth.service";
 import { UserMainComponent } from './user-main/user-main.component';
 @NgModule({
-  imports: [CommonModule, SharedModule, RouterModule.forChild(UserRoutes)],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(UserRoutes), NgDaumAddressModule],
   declarations: [
     UserComponent,
     UserAccountComponent,

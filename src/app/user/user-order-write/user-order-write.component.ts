@@ -34,6 +34,16 @@ export class UserOrderWriteComponent implements OnInit {
   addrCheck3:number=0;
   addrCheck4:number=0;
   oneUseAddr:string;
+
+  //daum 주소 api
+  daumAddressOptions =  {
+    class: ['btn', 'btn-primary']
+  };
+
+  setDaumAddressApi(data){
+    this.oneUseAddr=data.zip+" "+data.addr;
+  }
+
   ngOnInit() {
     this.loggedUser=this.authService.getLoggedInUser();
 
@@ -50,13 +60,6 @@ export class UserOrderWriteComponent implements OnInit {
       }
     // }
 
-    if(this.authService.getLoggedInUser().uaddrcheck==1){
-      this.addrCheck1=1;
-    }else if(this.authService.getLoggedInUser().uaddrcheck==2){
-      this.addrCheck2=1;
-    }else if(this.authService.getLoggedInUser().uaddrcheck==3){
-      this.addrCheck3=1;
-    }
   }
 
   orderListToOrderWrite(){
@@ -140,32 +143,41 @@ export class UserOrderWriteComponent implements OnInit {
 
   //주소 체크박스 선택/해제 시 Check값 Toggle
   addrCheckF1(){
-    if(this.addrCheck1==0)
+    if(this.addrCheck1==0){
       this.addrCheck1=1;
-    else
+    }
+    else{
       this.addrCheck1=0;
+    }
 
       console.log(this.addrCheck1);
   }
   addrCheckF2(){
-    if(this.addrCheck2==0)
+    if(this.addrCheck2==0){
       this.addrCheck2=1;
-    else
+    }
+    else{
       this.addrCheck2=0;
+    }
       console.log(this.addrCheck2);
   }
   addrCheckF3(){
-    if(this.addrCheck3==0)
+    if(this.addrCheck3==0){
       this.addrCheck3=1;
-    else
-      this.addrCheck3==0;
+    }
+    else{
+      this.addrCheck3=0;
+    }
       console.log(this.addrCheck3);
   }
   addrCheckF4(){
-    if(this.addrCheck4==0)
+    if(this.addrCheck4==0){
       this.addrCheck4=1;
-    else
+    }
+
+    else{
       this.addrCheck4=0;
+    }
       console.log(this.addrCheck4);
   }
 }

@@ -1,144 +1,153 @@
-
 <!------ Include the above in your HEAD tag ---------->
 <!-- Bootstrap CDN -->
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 <div class="container">
-<div class="row">
-	 <br>
-            <div class="col-md-12">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-push-12 col-sm-push-12">
+  <div class="row">
+    <br>
+    <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12 col-md-push-12 col-sm-push-12">
 
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-12 col-sm-pull-12">
-                    <!--SHIPPING METHOD-->
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center"><h4>주문 정보</h4></div>
-                        <div class="panel-body">
-                           <table class="table">
-  							<thead class="table-success">
-                                <tr>
-        							<!-- <td><strong>Your Cart: # item</strong></td> -->
-        							<td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
-        							<td>가격</td>
-        							<td>수량</td>
-        							<td>합계</td>
-                                </tr>
-    						</thead>
-    						<tbody>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-12 col-sm-pull-12">
+        <!--SHIPPING METHOD-->
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+            <h4>주문 정보</h4></div>
+          <div class="panel-body">
+            <table class="table">
+              <thead class="table-success">
+                <tr>
+                  <!-- <td><strong>Your Cart: # item</strong></td> -->
+                  <td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
+                  <td>가격</td>
+                  <td>수량</td>
+                  <td>합계</td>
+                </tr>
+              </thead>
+              <tbody>
 
-    							<tr *ngFor="let item of cartList">
-    								<!-- <td class="col-md-3"> -->
-                    <td>
-    								    <div class="media">
-    								         <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/ProductImg/{{item.p_img}}.jpg" style="width: 72px; height: 72px;"> </a>
-    								         <div class="media-body">
-    								             <h5 class="media-heading"> {{item.p_name}}</h5>
-                                 <p>{{item.p_content}}</p>
-    								         </div>
-    								    </div>
-    								</td>
-    								<td>{{item.p_sellprice}}</td>
-    								<td>&nbsp;&nbsp;&nbsp;{{item.camount}}&nbsp;&nbsp;&nbsp;</td>
-                    <td>{{item.p_sellprice*item.camount}}</td>
-
-    							</tr>
-
-    						</tbody>
-    					</table>
-                        </div>
+                <tr *ngFor="let item of cartList">
+                  <!-- <td class="col-md-3"> -->
+                  <td>
+                    <div class="media">
+                      <a class="thumbnail pull-left" href="#"> <img class="media-object" src="./assets/ProductImg/{{item.p_img}}.jpg" style="width: 72px; height: 72px;"> </a>
+                      <div class="media-body">
+                        <h5 class="media-heading"> {{item.p_name}}</h5>
+                        <p>{{item.p_content}}</p>
+                      </div>
                     </div>
-                    <!--SHIPPING METHOD END-->
-                </div>
-                </div>
-                </div>
+                  </td>
+                  <td>{{item.p_sellprice}}</td>
+                  <td>&nbsp;&nbsp;&nbsp;{{item.camount}}&nbsp;&nbsp;&nbsp;</td>
+                  <td>{{item.p_sellprice*item.camount}}</td>
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!--SHIPPING METHOD END-->
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- 배송지 -->
 
 <div class="panel-body">
-                                       <div class="form-group">
-                                           <div class="col-md-12">
-                                               <div class="panel-heading text-center"><h4>배송지 정보</h4></div>
-                                           </div>
-                                       </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <div class="panel-heading text-center">
+        <h4>배송지 정보</h4></div>
+    </div>
+  </div>
 
-                                       <div class="form-group">
-                                           <div class="span1"></div>
-                                           <div class="col-md-6 col-xs-12">
-                                               <strong>이름</strong>
-                                               <input type="text" name="last_name" class="form-control" value="{{loggedUser.uname}}" />
-                                           </div>
-                                       </div>
-                                       <div class="form-group">
-                                         <p>* 미 선택 시 기본 배송지로 배달됩니다.</p>
-                                       <div class="col-md-12"><strong>주소1</strong>
-                                             <input type="checkbox" [(ngModel)]='addrCheck1' (change)='addrCheckF1()'/>
-                                           </div>
-                                           <div class="col-md-12">
-                                               <input type="text" name="address1" class="form-control" value="{{loggedUser.uaddr1}}" />
-                                           </div>
-                                       </div>
-                                       <div class="form-group">
-                                           <div class="col-md-12"><strong>주소2</strong>
-                                             <input type="checkbox" (ngModel)='addrCheck2' (change)='addrCheckF2()'/>
-                                           </div>
-                                           <div class="col-md-12">
-                                               <input type="text" name="address2" class="form-control" value="{{loggedUser.uaddr2}}" />
-                                           </div>
-                                       </div>
-                                       <div class="form-group">
-                                           <div class="col-md-12"><strong>주소3</strong>
-                                             <input type="checkbox" (ngModel)='addrCheck3' (change)='addrCheckF3()'/>
-                                           </div>
-                                           <div class="col-md-12">
-                                               <input type="text" name="address3" class="form-control" value="{{loggedUser.uaddr3}}" />
-                                           </div>
-                                       </div>
-                                       <div class="form-group">
-                                           <div class="col-md-12"><strong>일회용 주소</strong>
-                                             <input type="checkbox" (ngModel)='addrCheck4' (change)='addrCheckF4()'/>
-                                           </div>
-                                           <div class="col-md-12">
-                                               <input type="text" name="address4" class="form-control" [(ngModel)]='oneUseAddr' />
-                                           </div>
-                                       </div>
+  <div class="form-group">
+    <div class="span1"></div>
+    <div class="col-md-6 col-xs-12">
+      <strong>이름</strong>
+      <input type="text" name="last_name" class="form-control" value="{{loggedUser.uname}}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <p>* 희망 배송지에 체크하세요.</p>
+    <div class="col-md-12"><strong>주소1</strong>
+      <input type="checkbox" (ngModel)='addrCheck1' (change)='addrCheckF1()' />
+    </div>
+    <div class="col-md-12">
+      <input type="text" name="address1" class="form-control" value="{{loggedUser.uaddr1}}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12"><strong>주소2</strong>
+      <input type="checkbox" (ngModel)='addrCheck2' (change)='addrCheckF2()' />
+    </div>
+    <div class="col-md-12">
+      <input type="text" name="address2" class="form-control" value="{{loggedUser.uaddr2}}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12"><strong>주소3</strong>
+      <input type="checkbox" (ngModel)='addrCheck3' (change)='addrCheckF3()' />
+    </div>
+    <div class="col-md-12">
+      <input type="text" name="address3" class="form-control" value="{{loggedUser.uaddr3}}" />
+    </div>
+  </div>
 
-                                       <div class="form-group">
-                                           <div class="col-md-12"><strong>연락처</strong></div>
-                                           <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="{{loggedUser.uphone}}" /></div>
-                                       </div>
-                                       <div class="form-group">
-                                           <div class="col-md-12"><strong>이메일</strong></div>
-                                           <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="{{loggedUser.uid}}" /></div>
-                                       </div>
-                                   </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <!-- <i class="fa fa-map-marker prefix"></i><br /> -->
+      <strong>일회용 주소</strong><input type="checkbox" (ngModel)='addrCheck4' (change)='addrCheckF4()' />
+      <btn-daum-address (result)="setDaumAddressApi($event)" [options]="daumAddressOptions"></btn-daum-address>
+    </div>
+    <div class="col-md-12">
+      <input mdbActive type="text" name="address4" class="form-control" [(ngModel)]='oneUseAddr' />
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="form-group">
+    <div class="col-md-12"><strong>연락처</strong></div>
+    <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="{{loggedUser.uphone}}" /></div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12"><strong>이메일</strong></div>
+    <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="{{loggedUser.uid}}" /></div>
+  </div>
+</div>
 
 <!-- 배송지 끝 -->
 <!--REVIEW ORDER-->
 <div class="panel panel-default">
-    <div class="panel-heading text-center">
-        <h4>결재 정보</h4>
+  <div class="panel-heading text-center">
+    <h4>결재 정보</h4>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-12">
+      <strong>물품가격합계</strong>
+      <div class="pull-right"><span>{{totalPrice}}</span></div>
     </div>
-    <div class="panel-body">
-            <div class="col-md-12">
-                <strong>물품가격합계</strong>
-                <div class="pull-right"><span>{{totalPrice}}</span></div>
-            </div>
-            <div class="col-md-12">
-                <strong>배송비</strong>
-                <div class="pull-right"><span>2500</span></div>
-            </div>
-            <div class="col-md-12">
-                <strong>총 가격</strong>
-                <div class="pull-right"><span>{{totalPrice+2500}}</span><span></span></div>
-                <hr>
-            </div>
-
-            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="checkOut()">결재하기</button>
-
+    <div class="col-md-12">
+      <strong>배송비</strong>
+      <div class="pull-right"><span>2500</span></div>
     </div>
+    <div class="col-md-12">
+      <strong>총 가격</strong>
+      <div class="pull-right"><span>{{totalPrice+2500}}</span><span></span></div>
+      <hr>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="checkOut()">결재하기</button>
+
+  </div>
 
 </div>
 <!--REVIEW ORDER END-->
