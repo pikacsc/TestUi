@@ -12,8 +12,8 @@ import { ProductService } from "../../shared/services/product.service";
 })
 export class UserMainComponent implements OnInit {
 
-  orderLists : Order[]=[];
-  loggedInUser:User;
+  orderLists : Order[]=[]; //
+  loggedInUser:User; //
 
   OrderCancle=0; // 주문취소건수
   OrderCommit=0; // 주문완료건수

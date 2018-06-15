@@ -7,7 +7,7 @@ import {UserOrderWriteComponent} from './user-order-write/user-order-write.compo
 import {UserOrderListComponent} from './user-order-list/user-order-list.component';
 import { AuthGuard } from "../shared/services/auth_gaurd";
 import { AuthService } from "../shared/services/auth.service";
-import { UserMainComponent } from './user-main/user-main.component';
+
 import { QnaComponent } from '../notice/qna/qna.component';
 export const UserRoutes: Routes = [
   {
@@ -16,13 +16,7 @@ export const UserRoutes: Routes = [
     children: [
       {
         path: "",
-        component: UserMainComponent,
-        outlet: "profileOutlet"
-        ,canActivate:[AuthGuard]
-      }
-      ,{
-        path: "user-main",
-        component: UserMainComponent,
+        component: UserOrderListComponent,
         outlet: "profileOutlet"
         ,canActivate:[AuthGuard]
       },
