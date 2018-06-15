@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "../../shared/models/product";
 import { ProductService } from "../../shared/services/product.service";
+import { TokenService } from "../../shared/services/token.service";
 declare var $: any;
 
 @Component({
@@ -10,8 +11,13 @@ declare var $: any;
 })
 export class BestProductComponent implements OnInit {
   bestProducts: Product[] = [];
+  productList: Product[];
+  p_code: string;
   options: any;
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit() {
     this.options = {
@@ -31,7 +37,17 @@ export class BestProductComponent implements OnInit {
   }
 
   getAllProducts() {
-    const x = this.productService.getProducts();
+    if(this.tokenService.isToken("productListToken")){
+      this.productList = this.tokenService.getToken("productListToken");
+    }else{
+
+      this.productService.getProducts()
+      .subscribe((productList : Product[]) => {
+        this.tokenService.saveToken("productListToken" , productList );
+        this.productList = productList;
+      })
+    }
+    // const x = this.productService.getProducts();
     // x.snapshotChanges().subscribe(product => {
     //   this.bestProducts = [];
     //   for (let i = 0; i < 5; i++) {
@@ -45,5 +61,14 @@ export class BestProductComponent implements OnInit {
     //   //   this.bestProducts.push(y as Product);
     //   // });
     // });
+  }
+
+  setProductCode(p_code: string) {
+     this.productService.setProductCode(p_code);
+     if(this.tokenService.isToken("pcodeToken")){
+       this.tokenService.removeToken("pcodeToken");
+     }
+     this.tokenService.saveToken("pcodeToken", p_code);
+     this.p_code = p_code;
   }
 }
