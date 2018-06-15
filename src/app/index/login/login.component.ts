@@ -98,9 +98,22 @@ export class LoginComponent implements OnInit {
   );
   }
 
+  //daum 주소 api
+  daumAddressOptions =  {
+    class: ['btn', 'btn-primary']
+  };
+  AddrSearch2:string; //우편번호(zip)+기본주소(addr)
+  AddrSearch3:string=""; //상세주소
+  setDaumAddressApi(AddrSearch){
+  // 여기로 주소값이 반환
+    console.log(AddrSearch);
+    this.AddrSearch2 = AddrSearch.zip+" "+AddrSearch.addr;
+  }
+
+
   addUser(userForm: NgForm) {
     userForm.value["isAdmin"] = false;
-
+    this.createUser.uaddr1 = this.AddrSearch2+" "+this.AddrSearch3;
     // 회원가입 폼 입력필터
     let submitStatus:Boolean=false;
     if(
@@ -109,6 +122,8 @@ export class LoginComponent implements OnInit {
       this.createUser.uname!=null &&
       this.createUser.uphone!=null &&
       this.createUser.uaddr1!=null &&
+      this.AddrSearch2!=null &&
+      this.AddrSearch3!="" &&
       this.createUser.ubirth!=null &&
       this.createUser.ugender!=null &&
       this.createUser.usmsyn!=null &&
@@ -116,24 +131,23 @@ export class LoginComponent implements OnInit {
     ){
       let emailcheck=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
-        if(this.upw2!=this.createUser.upw || this.createUser.upw.length>=11){ //비밀번호 틀리거나 11자 이상일때
+        if(this.upw2!=this.createUser.upw || this.createUser.upw.length>20){ //비밀번호 틀리거나 21자 이상일때
           submitStatus=false;
           alert('비밀번호를 다시 확인해주세요');
           return;
-        }if(this.createUser.uid.length>=21){
+        }if(this.createUser.uid.length>=40){
           submitStatus=false;
-          alert('아이디는 20자를 넘을 수 없습니다.');
+          alert('아이디는 40자를 넘을 수 없습니다.');
           return;
         }if(emailcheck.test(this.createUser.uid)==false){
           submitStatus=false;
           alert('이메일 형식이 아닙니다.');
           return;
-        }
-        if(this.createUser.uname.length>10){
+        }if(this.createUser.uname.length>10){
           submitStatus=false;
           alert('이름의 길이가 너무 깁니다.');
           return;
-        }if(!isNaN(this.createUser.uname)){
+        }if(!isNaN(this.createUser.uname*1)){
           submitStatus=false;
           alert('이름에 숫자를 입력할 수 없습니다.');
           return;
@@ -141,16 +155,14 @@ export class LoginComponent implements OnInit {
           submitStatus=false;
           alert('연락처를 정확히 기재해주세요. (9~11자 이내로 숫자만 입력)');
           return;
-        }
-        if(this.createUser.ubirth.length!=6 || isNaN(this.createUser.ubirth*1)){
+        }if(this.createUser.ubirth.length!=6 || isNaN(this.createUser.ubirth*1)){
           alert('생년월일을 다시 확인해주세요');
           return;
         }if(this.createUser.uaddr1.length>=101){
           submitStatus=false;
           alert('주소를 100자 이내로 입력해주세요.');
           return;
-        }
-        else{ //모든 항목 입력완료, 비밀번호 확인완료
+        }else{ //모든 항목 입력완료, 비밀번호 확인완료
           submitStatus=true;
           // console.log('if문 실행됨. 가입조건만족. submitStatus='+submitStatus);
         }
@@ -162,8 +174,9 @@ export class LoginComponent implements OnInit {
 
     //submitStatus 가 true일 경우에만 실행
     if(submitStatus){
-    this.userService.createUser(userForm.value).subscribe((data:User) => {
+    this.userService.createUser(this.createUser).subscribe((data:User) => {
       console.log('섭스크라이브중');
+
       this.createUser = data;
 
       const toastOption: ToastOptions = { //3초동안 우측상단 회원가입중... 창 띄워줌
@@ -223,63 +236,8 @@ export class LoginComponent implements OnInit {
 
       },(error: any)=>{
     });
-    // if (this.authService.loginCheck(userForm.value["userId"], userForm.value["userPassword"]) === true) {
-    //   const toastOption: ToastOptions = {
-    //     title: "Authentication Success",
-    //     msg: "Logging in please wait",
-    //     showClose: true,
-    //     timeout: 5000,
-    //     theme: "material"
-    //   };
-    //   this.toastyService.wait(toastOption);
-    //   const returnUrl = this.route.snapshot.queryParamMap.get("http://localhost:8080/toma/login/");
-    //   setTimeout((router: Router) => {
-    //     this.router.navigate([returnUrl || "/"]);
-    //   }, 1500);
-    // } else {
-    //   const toastOption: ToastOptions = {
-    //     title: "Authentication Failed",
-    //     msg: "Invalid Credentials, Please Check your credentials",
-    //     showClose: true,
-    //     timeout: 5000,
-    //     theme: "material"
-    //   };
-    // this.toastyService.error(toastOption);
-    //     this.loginUser.userId = this.loginUser.userPassword = "";
-    //   }
-
   }
 
-  // login() {
-  //   // console.log("loginForm" + this.loginUser.userId);
-  //   this.userService.getUsers(this.login1)
-  //     .subscribe((user:User) => {
-  //       this.user = user;
-  //     });
-  //
-  //   // if (this.authService.loginCheck(userForm.value["userId"], userForm.value["userPassword"]) === true) {
-  //   //   const toastOption: ToastOptions = {
-  //   //     title: "Authentication Success",
-  //   //     msg: "Logging in please wait",
-  //   //     showClose: true,
-  //   //     timeout: 5000,
-  //   //     theme: "material"
-  //   //   };
-  //   //   this.toastyService.wait(toastOption);
-  //   //   const returnUrl = this.route.snapshot.queryParamMap.get("http://localhost:8080/toma/login/");
-  //   //   setTimeout((router: Router) => {
-  //   //     this.router.navigate([returnUrl || "/"]);
-  //   //   }, 1500);
-  //   // } else {
-  //   //   const toastOption: ToastOptions = {
-  //   //     title: "Authentication Failed",
-  //   //     msg: "Invalid Credentials, Please Check your credentials",
-  //   //     showClose: true,
-  //   //     timeout: 5000,
-  //   //     theme: "material"
-  //   //   };
-  //   // this.toastyService.error(toastOption);
-  //   //     this.loginUser.userId = this.loginUser.userPassword = "";
-  //   //   }
-  // }
+
+
 }
