@@ -18,6 +18,7 @@ export class UserOrderListComponent implements OnInit {
   detailLists:OrderDetail[]=[];
   orderNum:number=0; //총 주문량이 될 수 있음 = oViewNum
   OrderCancle=0; // 주문취소건수
+  OrderWait=0; // 주문대기건수 (평소)
   OrderCommit=0; // 주문완료건수
   oAddress:string;
   constructor(
@@ -31,6 +32,7 @@ export class UserOrderListComponent implements OnInit {
     if(this.tokenService.isToken('orderLists')){
       this.orderLists=this.tokenService.getToken('orderLists');
       this.OrderCancle=this.tokenService.getToken('OrderCancle');
+      this.OrderWait = this.tokenService.getToken('OrderWait');
       this.OrderCommit=this.tokenService.getToken('OrderCommit');
       this.orderNum=this.tokenService.getToken('orderNum');
     }else{
@@ -46,14 +48,17 @@ export class UserOrderListComponent implements OnInit {
         this.orderLists=lists;
         for(let i=0;i<this.orderLists.length;i++){
           this.orderLists[i].oViewNum=++this.orderNum;
-          if(this.orderLists[i].ostatus=='N'){
+          if(this.orderLists[i].ostatus=='C'){
             this.OrderCancle++;
+          }else if(this.orderLists[i].ostatus=='N'){
+            this.OrderWait++;
           }else if(this.orderLists[i].ostatus=='Y'){
             this.OrderCommit++;
           }
         }
         this.tokenService.saveToken('orderLists',this.orderLists);
         this.tokenService.saveToken('OrderCancle',this.OrderCancle);
+        this.tokenService.saveToken('OrderWait',this.OrderWait);
         this.tokenService.saveToken('OrderCommit',this.OrderCommit);
         this.tokenService.saveToken('orderNum',this.orderNum);
       });
