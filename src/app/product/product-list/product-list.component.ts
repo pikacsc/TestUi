@@ -16,12 +16,8 @@ import {Cart} from "../../shared/models/cart";
 export class ProductListComponent implements OnInit {
   productList: Product[];
 
-
-
   kinds = ["All", "Bakery", "Sauce", "Drink", "Instant","Snack"];
-  selectedKind : "All";
-
-
+  selectedKind = "All";
 
   page = 1;
 
