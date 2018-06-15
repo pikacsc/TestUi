@@ -46,6 +46,10 @@ export class UserOrderListComponent implements OnInit {
     if(this.tokenService.isToken('orderLists')==false){
       this.productService.getOrderList(uid).subscribe((lists:Order[])=>{
         this.orderLists=lists;
+        this.orderNum=0;
+        this.OrderCancle=0;
+        this.OrderWait=0;
+        this.OrderCommit=0;
         for(let i=0;i<this.orderLists.length;i++){
           this.orderLists[i].oViewNum=++this.orderNum;
           if(this.orderLists[i].ostatus=='C'){
@@ -82,6 +86,8 @@ export class UserOrderListComponent implements OnInit {
     this.tokenService.removeToken('OrderCommit');
     this.tokenService.removeToken('orderLists');
     this.tokenService.removeToken('orderNum');
+
+    this.getOrderList(this.authService.getLoggedInUser().uid);
     return;
     }else if(order.ostatus=='C'){
       alert('이미 취소된 상품입니다.');
