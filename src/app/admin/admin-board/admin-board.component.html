@@ -1,0 +1,11 @@
+<li class="nav-item dropdown btn-group" dropdown >
+  <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+    게시판 선택
+  </a>
+  <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+    <a class="dropdown-item" href="javascript:;;" [routerLink]="[{ outlets: { adminBoardOutlet: ['notice']}}]" >공지사항</a>
+    <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice/faq']">자주하는 질문</a>
+    <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice/qna']">1:1 질문하기</a>
+  </div>
+</li>
+<router-outlet name="adminBoardOutlet"></router-outlet>

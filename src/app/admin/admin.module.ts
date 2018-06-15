@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FileUploadModule } from 'primeng/fileupload';
 import { RouterModule } from "@angular/router";
 import { AdminComponent } from './admin.component';
 import { AdminProductComponent } from './admin-product/admin-product.component';
@@ -12,13 +13,15 @@ import { ProductService } from "../shared/services/product.service";
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { TokenService } from '../shared/services/token.service';
+import { AdminBoardComponent } from './admin-board/admin-board.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminRoutes),
     SharedModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    FileUploadModule
   ],
   declarations: [
     AdminComponent,
@@ -26,7 +29,8 @@ import { TokenService } from '../shared/services/token.service';
     AdminBannerComponent,
     AdminLoginComponent,
     AdminEmployeeComponent,
-    AdminOrderComponent
+    AdminOrderComponent,
+    AdminBoardComponent
   ],
   exports: [AdminLoginComponent]
   ,providers: [ProductService,TokenService]

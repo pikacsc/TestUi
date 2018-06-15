@@ -1,3 +1,37 @@
-<p>
-  admin-employee works!
-</p>
+<ng2-smart-table
+    [settings]="settings"
+    [source]="adminList">
+</ng2-smart-table>
+<div class="modal fade" id="inputPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)" name="JoinForm">
+      <div class="modal-content">
+        <div class="modal-header light-blue darken-3 white-text">
+          <h4 class="title">
+            <i class="fa fa-user-plus"></i>Password</h4>
+          <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!-- mdbInputValidate: 만족하면 success, 실패하면 false. 글씨가 뜨게해주는 속성 삭제 -->
+        <div class="modal-body">
+          <div class="md-form form-sm">
+            <i class="fa fa-lock prefix"></i>
+            <input mdbActive type="password" id="userPw" class="form-control" [(ngModel)]="createUser.upw" name="upw" >
+            <label for="userPw">비밀번호(10자이내)</label>
+          </div>
+          <div class="md-form form-sm">
+            <i class="fa fa-lock prefix"></i>
+            <input mdbActive type="password" id="userPw2" class="form-control" name="upw2" [(ngModel)]="upw2">
+            <label for="userPw2">비밀번호 확인</label>
+          </div>
+          <div class="text-center mt-2">
+            <button type="submit" class="btn btn-info waves-light" id="confirmBtn" mdbRippleRadius>등록
+              <i class="fa fa-sign-in ml-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
