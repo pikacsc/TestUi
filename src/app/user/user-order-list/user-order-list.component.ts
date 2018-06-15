@@ -16,7 +16,10 @@ export class UserOrderListComponent implements OnInit {
   uid:string;
   orderLists:Order[]=[];
   detailLists:OrderDetail[]=[];
-  orderNum:number=0;
+  orderNum:number=0; //총 주문량이 될 수 있음 = oViewNum
+  OrderCancle=0; // 주문취소건수
+  OrderWait=0; // 주문대기건수 (평소)
+  OrderCommit=0; // 주문완료건수
   oAddress:string;
   constructor(
     private productService:ProductService,
@@ -28,20 +31,36 @@ export class UserOrderListComponent implements OnInit {
     this.uid=this.authService.getLoggedInUser().uid;
     if(this.tokenService.isToken('orderLists')){
       this.orderLists=this.tokenService.getToken('orderLists');
+      this.OrderCancle=this.tokenService.getToken('OrderCancle');
+      this.OrderWait = this.tokenService.getToken('OrderWait');
+      this.OrderCommit=this.tokenService.getToken('OrderCommit');
+      this.orderNum=this.tokenService.getToken('orderNum');
     }else{
       this.getOrderList(this.uid);
     }
 
 
   }
+  //select
   getOrderList(uid:string){
     if(this.tokenService.isToken('orderLists')==false){
       this.productService.getOrderList(uid).subscribe((lists:Order[])=>{
         this.orderLists=lists;
         for(let i=0;i<this.orderLists.length;i++){
           this.orderLists[i].oViewNum=++this.orderNum;
+          if(this.orderLists[i].ostatus=='C'){
+            this.OrderCancle++;
+          }else if(this.orderLists[i].ostatus=='N'){
+            this.OrderWait++;
+          }else if(this.orderLists[i].ostatus=='Y'){
+            this.OrderCommit++;
+          }
         }
         this.tokenService.saveToken('orderLists',this.orderLists);
+        this.tokenService.saveToken('OrderCancle',this.OrderCancle);
+        this.tokenService.saveToken('OrderWait',this.OrderWait);
+        this.tokenService.saveToken('OrderCommit',this.OrderCommit);
+        this.tokenService.saveToken('orderNum',this.orderNum);
       });
     }
   }
@@ -51,5 +70,25 @@ export class UserOrderListComponent implements OnInit {
         this.detailLists=details;
         console.log(this.detailLists);
       });
+  }
+
+  cancleOrder(order:Order){
+    if(order.ostatus=='N'){
+      this.productService.cancleOrder(order.ono).subscribe(data=>{
+        alert('주문 취소가 완료 되었습니다.');
+    });
+    this.tokenService.removeToken('OrderCancle');
+    this.tokenService.removeToken('OrderWait');
+    this.tokenService.removeToken('OrderCommit');
+    this.tokenService.removeToken('orderLists');
+    this.tokenService.removeToken('orderNum');
+    return;
+    }else if(order.ostatus=='C'){
+      alert('이미 취소된 상품입니다.');
+      return;
+    }else{
+    alert('처리 완료된 상품은 취소가 불가능합니다.');
+      return;
+    }
   }
 }

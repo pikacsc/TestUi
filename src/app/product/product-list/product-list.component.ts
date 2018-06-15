@@ -7,6 +7,7 @@ import { LoaderSpinnerService } from "../../shared/loader-spinner/loader-spinner
 import { TokenService } from "../../shared/services/token.service";
 
 //**동현
+import { Router } from '@angular/router';
 import {Cart} from "../../shared/models/cart";
 @Component({
   selector: "app-product-list",
@@ -30,7 +31,8 @@ export class ProductListComponent implements OnInit {
     private spinnerService: LoaderSpinnerService,
     private toastyConfig: ToastyConfig,
     private toastyService: ToastyService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -101,6 +103,11 @@ export class ProductListComponent implements OnInit {
 
   //동현 장바구니에 물품추가기능
   addToCart(product: Product) {
+  if(this.authService.getLoggedInUser()==null){
+    alert('로그인 후 이용해주세요.');
+    this.router.navigate(['/index/login']);
+    return;
+  }
   this.cart.uid=this.authService.getLoggedInUser().uid;
  this.cart.pcode=product.p_code;
  this.cart.camount=1;
@@ -112,6 +119,7 @@ export class ProductListComponent implements OnInit {
  this.productService.addToCart(this.cart).subscribe((cart: Cart)=>{
   this.tokenService.removeToken('cartLists');
   alert('장바구니에 담았습니다.');
+  return;
 });
 
 }

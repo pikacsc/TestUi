@@ -119,6 +119,9 @@ export class UserOrderWriteComponent implements OnInit {
       alert("구매가 완료 되었습니다.");
       this.tokenService.removeToken('orderLists');
       this.tokenService.removeToken('cartLists');
+      this.tokenService.removeToken('orderNum');
+      this.tokenService.removeToken('OrderWait');
+      this.tokenService.removeToken('OrderCommit');
       this.router.navigate(["/users",{outlets:{profileOutlet:['order-list']}}])
 
       });
