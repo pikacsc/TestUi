@@ -73,7 +73,9 @@
                   <td>{{order.odate}}</td>
                   <td>{{order.ototal}}</td>
                   <td>{{order.ostatus}}</td>
-                  <td><a data-toggle="modal" data-target="#orderDetail" style="color:dodgerblue; font-weight:bold;" (click)="getDetailList(order.ono,order.oaddr)">상세</a></td>
+                  <td><a data-toggle="modal" data-target="#orderDetail" style="color:dodgerblue; font-weight:bold;" (click)="getDetailList(order.ono,order.oaddr)">상세</a>
+                      <a data-toggle="modal" data-target="#orderDetail" style="color:red; font-weight:bold;" (click)="cancleOrder(order)">취소</a>
+                  </td>
                 </tr>
               </tbody>
 

@@ -67,4 +67,23 @@ export class UserOrderListComponent implements OnInit {
       });
   }
 
+  cancleOrder(order:Order){
+    if(order.ostatus=='N'){
+      this.productService.cancleOrder(order.ono).subscribe(data=>{
+        alert('주문 취소가 완료 되었습니다.');
+    });
+    this.tokenService.removeToken('OrderCancle');
+    this.tokenService.removeToken('OrderWait');
+    this.tokenService.removeToken('OrderCommit');
+    this.tokenService.removeToken('orderLists');
+    this.tokenService.removeToken('orderNum');
+    return;
+    }else if(order.ostatus=='C'){
+      alert('이미 취소된 상품입니다.');
+      return;
+    }else{
+    alert('처리 완료된 상품은 취소가 불가능합니다.');
+      return;
+    }
+  }
 }
