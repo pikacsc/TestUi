@@ -100,6 +100,11 @@ this.product = product;
   }
 
   addToCart() {
+    if(this.authService.getLoggedInUser()==null){
+      alert('로그인 후 이용해주세요.');
+      this.router.navigate(['/index/login']);
+      return;
+    }
     this.cart = new Cart();
     this.cart.uid = this.authService.getLoggedInUser().uid;
     this.cart.pcode = this.product.p_code;
