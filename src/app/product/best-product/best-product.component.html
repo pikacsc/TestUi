@@ -11,16 +11,16 @@
       <a class="btn btn-default float-right" [routerLink]="[ '/products/all-products' ]">View All</a>
     </div>
   </div>
-  <owl-carousel [options]="options" [items]="bestProducts" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+  <owl-carousel [options]="options" [items]="productList" [carouselClasses]="['owl-theme', 'row', 'sliding']">
     <!--First column-->
-    <div class="item" style="padding:20px" *ngFor="let product of bestProducts;let i = index">
+    <div class="item" style="padding:20px" *ngFor="let product of productList; let i = index">
       <div class=" mb-r">
 
         <!--Card-->
         <div class="card card-cascade wider">
 
           <!--Card image-->
-          <a [routerLink]="['/products/product', product.$key]">
+          <a [routerLink]="['/products/product', product.p_code]">
             <div class="view overlay hm-white-slight">
               <img [src]="product.productImageUrl" class="img-fluid" alt="">
               <a>
@@ -34,21 +34,23 @@
           <div class="card-body text-center no-padding">
             <!--Category & Title-->
             <a href="" class="text-muted">
-              <h5>{{ product.productCategory }}</h5>
+              <h5>{{ product.p_kind }}</h5>
             </a>
             <h5 class="card-title">
               <strong>
-                <a [routerLink]="['/products/product', product.$key]">{{ product.productName }}</a>
+                <a [routerLink]="['/products/product', product.p_code]" routerLinkActive="router-link-active"
+                    (click)="setProductCode(product.p_code)">
+                  {{ product.p_name }}</a>
               </strong>
             </h5>
 
             <!--Description-->
-            <p class="card-text">{{ product.productDescription }}
+            <p class="card-text">{{ product.p_content }}
             </p>
 
             <!--Card footer-->
             <div class="card-footer">
-              <span class="left">{{ product.productPrice }}$</span>
+              <span class="left">{{ product.p_sellPrice }}원</span>
               <span class="right">
                 <a placement="top" mdbTooltip="Add to Wishlist" container="body">
                   <i class="fa fa-heart"></i>

@@ -28,6 +28,8 @@ export class FaqDetailComponent implements OnInit,OnDestroy {
       var faq = faqList.find(function(item){
         return item.f_no === f_no;
       });
+      var f_content = faq.f_content;
+      faq.f_content = faq.f_content.replace("\r\n","<br>");
       this.faq = faq;
     }
   }
