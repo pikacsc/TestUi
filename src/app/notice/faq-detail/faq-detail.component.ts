@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
 
 import { FaqService } from '../../shared/services/faq.service';
@@ -10,7 +10,7 @@ import { TokenService } from '../../shared/services/token.service';
   templateUrl: './faq-detail.component.html',
   styleUrls: ['./faq-detail.component.css']
 })
-export class FaqDetailComponent implements OnInit {
+export class FaqDetailComponent implements OnInit,OnDestroy {
   faq: Faq;
 
   constructor(
@@ -30,6 +30,10 @@ export class FaqDetailComponent implements OnInit {
       });
       this.faq = faq;
     }
+  }
+
+  ngOnDestroy() {
+    this.removeToken();
   }
 
   removeToken() {

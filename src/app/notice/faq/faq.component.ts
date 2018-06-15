@@ -13,6 +13,7 @@ import { TokenService } from '../../shared/services/token.service';
 })
 export class FaqComponent implements OnInit {
   page = 1;
+  categoryList = ["전체조회", "배송", "환불", "기타"];
   faqList: Faq[];
   search = '';
 
@@ -34,6 +35,17 @@ export class FaqComponent implements OnInit {
     }
   }
 
+  getFaqByCategory(f_category: string) {
+    if(f_category == "전체조회" || f_category == "") {
+      this.faqList = this.tokenService.getToken("faqToken");
+    } else {
+      this.faqService.getFaqCategory(f_category)
+        .subscribe((faqList: Faq[]) => {
+          this.faqList = faqList;
+        });
+    }
+  }
+
   setFaqNo(f_no: number) {
     this.faqService.setFaqNo(f_no);
     this.setFaqNoObject(f_no);
@@ -49,6 +61,11 @@ export class FaqComponent implements OnInit {
       return item.f_no === f_no;
     });
     this.faqService.setFaqNoObject(faq);
+    this.check(faq);
+  }
+
+  check(faq: Faq) {
+    this.faqService.checkFaq(faq);
   }
 
   searchTerm() {

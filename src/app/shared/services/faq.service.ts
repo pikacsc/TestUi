@@ -24,9 +24,9 @@ export class FaqService {
     return this.http.get(this.url);
   }
 
-  // getFaqNo() {
-  //   return this.http.get(this.detailUrl + this.f_no);
-  // }
+  getFaqCategory(f_category: string) {
+    return this.http.get(this.url + "/" + f_category);
+  }
 
   getFaqNoObject() {
     return this.faq;
@@ -40,5 +40,13 @@ export class FaqService {
     this.incrementFaqHits(faq).subscribe(()=>{
       this.faq = faq;
     });
+  }
+
+  checkFaq(faq: Faq) {
+    if(this.faq == faq) {
+      return this.faq;
+    } else {
+      return this.faq = faq;
+    }
   }
 }
