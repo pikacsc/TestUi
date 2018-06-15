@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
 
 import { NoticeService } from '../../shared/services/notice.service';
@@ -10,7 +10,7 @@ import { TokenService } from '../../shared/services/token.service';
   templateUrl: './notice-detail.component.html',
   styleUrls: ['./notice-detail.component.css']
 })
-export class NoticeDetailComponent implements OnInit {
+export class NoticeDetailComponent implements OnInit, OnDestroy {
   notice: Notice;
 
   constructor(
@@ -28,8 +28,15 @@ export class NoticeDetailComponent implements OnInit {
       var notice = noticeList.find(function (item) {
         return item.n_no === n_no;
       });
+      var n_content = notice.n_content;
+      notice.n_content = notice.n_content.replace("\r\n", "<br>");
       this.notice = notice;
     }
+
+  }
+
+  ngOnDestroy() {
+    this.removeToken();
   }
 
   removeToken() {

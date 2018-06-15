@@ -4,15 +4,15 @@
   <links>
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item" [ngClass]="{'active': select==='Home'}" (click)="select='Home'">
         <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/' ]">Home
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" [ngClass]="{'active': select==='Our Products'}" (click)="select='Our Products'">
         <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/products/all-products' ]">Our Products</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" [ngClass]="{'active': select==='관리자'}" (click)="select='관리자'">
         <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/admin/' ]">관리자</a>
       </li>
     </ul>
@@ -35,38 +35,30 @@
           </a>
         </ng-template>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="javascript:;;">
-          <i class="fa fa-envelope"></i> Contact
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-
-      <li class="nav-item active" *ngIf="!authService.isLoggedIn()">
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()" [ngClass]="{'active': select==='Login'}" (click)="select='Login'">
         <a class="nav-link" [routerLink]="[ '/index/login' ]">
-
-          <i class="fa fa-envelope"></i> Login
+          <i class="fa fa-sign-in" aria-hidden="true"></i> Login
           <span class="sr-only">(current)</span>
         </a>
       </li>
 
       <!-- Dropdown -->
-      <li class="nav-item dropdown btn-group" dropdown >
+      <li class="nav-item dropdown btn-group" dropdown [ngClass]="{'active': select==='고객센터'}" (click)="select='고객센터'">
         <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>고객센터
         </a>
         <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
-          <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice']">공지사항</a>
-          <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice/faq']">자주하는 질문</a>
-          <a class="dropdown-item" href="javascript:;;" [routerLink]="['/notice/qna']">1:1 질문하기</a>
+          <a class="dropdown-item" [routerLink]="['/notice']">공지사항</a>
+          <a class="dropdown-item" [routerLink]="['/notice/faq']">자주하는 질문</a>
+          <a class="dropdown-item" [routerLink]="['/notice/qna']">1:1 질문하기</a>
         </div>
       </li>
 
-      <li class="nav-item" *ngIf="authService.isLoggedIn()">
+      <li class="nav-item" *ngIf="authService.isLoggedIn()" [ngClass]="{'active': select==='My Page'}" (click)="select='My Page'">
         <a class="nav-link" [routerLink]="['/users']">
           <i class="fa fa-user"></i>My Page</a>
       </li>
-      <li class="nav-item" *ngIf="authService.isLoggedIn()">
+      <li class="nav-item" *ngIf="authService.isLoggedIn()" (click)="select='Home'">
        <a class="nav-link" (click)="logout()">
          <i class="fa fa-sign-in"></i>Logout</a>
       </li>

@@ -21,7 +21,7 @@ export class NoticeService {
 
   }
 
-  incrementNoticeHits(notice) {
+  incrementNoticeHits(notice: Notice) {
     return this.http.put(this.detailUrl + this.n_no, notice);
   }
 
@@ -30,9 +30,9 @@ export class NoticeService {
     // return this.notices = this.http.get(this.url);
   }
 
-  // getNoticeNo() {
-  //   return this.http.get(this.detailUrl + this.n_no);
-  // }
+  getNoticeCategory(n_category: string) {
+    return this.http.get(this.url + "/" + n_category);
+  }
 
   getNoticeNoObject() {
     return this.notice;
@@ -47,6 +47,14 @@ export class NoticeService {
     this.incrementNoticeHits(notice).subscribe(() => {
       this.notice = notice;
     });
+  }
+
+  checkNotice(notice: Notice) {
+    if(this.notice == notice) {
+      return this.notice;
+    } else {
+      return this.notice = notice;
+    }
   }
 
 }

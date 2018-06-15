@@ -14,3 +14,8 @@ tbody tr a:hover {
 tbody tr th {
   text-align: center;
 }
+
+#selectDiv {
+  padding-top: 0px;
+  padding-bottom: 10px;
+}

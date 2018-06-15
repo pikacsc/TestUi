@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { NoticeService } from '../shared/services/notice.service';
 import { Notice } from '../shared/models/notice'
-
 import { SearchService } from '../shared/services/search.service';
 import { TokenService } from '../shared/services/token.service';
 
@@ -14,12 +12,12 @@ import { TokenService } from '../shared/services/token.service';
 })
 export class NoticeComponent implements OnInit {
   page = 1;
+  categoryList = ["전체조회", "공지", "이벤트"];
   noticeList: Notice[];
   search = '';
 
   constructor(
     private noticeService: NoticeService,
-    private router: Router,
     private searchService: SearchService,
     private tokenService: TokenService
   ) {
@@ -38,6 +36,17 @@ export class NoticeComponent implements OnInit {
 
   }
 
+  getNoticeByCategory(n_category: string) {
+    if(n_category == "전체조회" || n_category == "") {
+      this.noticeList = this.tokenService.getToken("noticeToken");
+    } else {
+      this.noticeService.getNoticeCategory(n_category)
+        .subscribe((noticeList: Notice[]) => {
+          this.noticeList = noticeList;
+        });
+    }
+  }
+
   setNoticeNo(n_no: number) {
     this.noticeService.setNoticeNo(n_no);
     this.setNoticeNoObject(n_no);
@@ -53,6 +62,11 @@ export class NoticeComponent implements OnInit {
       return item.n_no === n_no;
     });
     this.noticeService.setNoticeNoObject(notice);
+    this.check(notice);
+  }
+
+  check(notice:Notice) {
+    this.noticeService.checkNotice(notice);
   }
 
   searchTerm() {

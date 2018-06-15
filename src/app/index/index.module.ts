@@ -17,13 +17,14 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { LocalFavouritePageComponent } from "./local-favourite-page/local-favourite-page.component";
 import { LocalCartItemComponent } from "./local-cart-item/local-cart-item.component";
 import { SharedModule } from "../shared/shared.module";
-
+import { NgDaumAddressModule } from 'ng2-daum-address';
 @NgModule({
   imports: [
     CommonModule,
     ProductModule,
     SharedModule,
-    RouterModule.forChild(IndexRoutes)
+    RouterModule.forChild(IndexRoutes),
+    NgDaumAddressModule
   ],
   declarations: [
     IndexComponent,

@@ -29,16 +29,23 @@
       <input type="tel" class="form-control" id="userPhone" name="userPhone" [(ngModel)]="loggedUser.uphone"> <!--#phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" 지운속성-->
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userAddr1">기본주소</label>
-      <input type="text" class="form-control" id="userAddr1" name="userAddr1" [(ngModel)]="loggedUser.uaddr1">
+      <label>주소1 </label><span style="margin-left:30px;"><btn-daum-address (result)="setDaumAddressApi($event)" [options]="daumAddressOptions"></btn-daum-address></span>
+      <p style="font-size:12px;">{{loggedUser.uaddr1}}</p>
+      <!-- <input type="text" class="form-control" id="userAddr1" name="userAddr1" [(ngModel)]="loggedUser.uaddr1"> -->
+      <input type="text" id="AcountDetailAddr" class="form-control"  [(ngModel)]="AddrSearch1_3" name="AcountDetailAddr" placeholder="상세주소(50자이내)">
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userAddr2">추가주소</label>
-      <input type="text" class="form-control" id="userAddr2" name="userAddr2" [(ngModel)]="loggedUser.uaddr2">
+      <!-- <label for="userAddr2">추가주소</label> -->
+      <label>주소2 </label><span style="margin-left:30px;"><btn-daum-address (result)="setDaumAddressApi2($event)" [options]="daumAddressOptions"></btn-daum-address></span>
+      <p style="font-size:12px;">{{loggedUser.uaddr2}}</p>
+      <!-- <input type="text" class="form-control" id="userAddr2" name="userAddr2" [(ngModel)]="loggedUser.uaddr2"> -->
+      <input type="text" id="AcountDetailAddr2" class="form-control"  [(ngModel)]="AddrSearch2_3" name="AcountDetailAddr2" placeholder="상세주소(50자이내)">
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userAddr3">추가주소 2</label>
-      <input type="text" class="form-control" id="userAddr3" name="userAddr3" [(ngModel)]="loggedUser.uaddr3">
+      <label>주소3 </label><span style="margin-left:30px;"><btn-daum-address (result)="setDaumAddressApi3($event)" [options]="daumAddressOptions"></btn-daum-address></span>
+      <p style="font-size:12px;">{{loggedUser.uaddr3}}</p>
+      <!-- <input type="text" class="form-control" id="userAddr2" name="userAddr2" [(ngModel)]="loggedUser.uaddr2"> -->
+      <input type="text" id="AcountDetailAddr3" class="form-control"  [(ngModel)]="AddrSearch3_3" name="AcountDetailAddr3" placeholder="상세주소(50자이내)">
     </div>
     <!-- selectbox로 고쳐야함 -->
     <div class="col-md-8 mb-3">

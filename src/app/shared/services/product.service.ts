@@ -328,6 +328,9 @@ export class ProductService extends CachcingServiceBase{
   getDetailList(ono:number){
     return this.http.get(this.orderUrl+'orderdetail/'+ono);
   }
+  cancleOrder(ono:number){
+    return this.http.put(this.orderUrl+'cancle',ono);
+  }
   // Adding new Product to cart db if logged in else localStorage
   // addToCart(data: Product): void {
   //   if (this.authService.isLoggedIn() === false) {
