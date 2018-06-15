@@ -7,6 +7,7 @@ import { Buffer } from "buffer";
 import { User } from "../models/user";
 import { UserService } from "./user.service";
 import { HttpClient } from '@angular/common/http';
+import { TokenService } from "./token.service";
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -15,22 +16,25 @@ export class AuthService {
   private users: Observable<User[]>;
   usersList: User[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private tokenService:TokenService
+  ) {}
 
   saveUserToken(){
     const objStr = JSON.stringify(this.userService.loginUser);
     const token = new Buffer(objStr).toString("base64");
-    localStorage.setItem("token", token);
-    sessionStorage.setItem("token", token);
+    localStorage.setItem("loginToken", token);
+    sessionStorage.setItem("loginToken", token);
   }
 
   updateUserToken(user:User){
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("loginToken");
+    sessionStorage.removeItem("loginToken");
     const objStr = JSON.stringify(user);
     const token = new Buffer(objStr).toString("base64");
-    localStorage.setItem("token", token);
-    sessionStorage.setItem("token", token);
+    localStorage.setItem("loginToken", token);
+    sessionStorage.setItem("loginToken", token);
   }
 
 
@@ -45,8 +49,8 @@ export class AuthService {
         const loggedInUser = el;
         const objStr = JSON.stringify(loggedInUser);
         const token = new Buffer(objStr).toString("base64");
-        localStorage.setItem("token", token);
-        sessionStorage.setItem("token", token);
+        localStorage.setItem("loginToken", token);
+        sessionStorage.setItem("loginToken", token);
         status = true;
         break;
       }
@@ -56,12 +60,14 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
+    //localStorage.removeItem("loginToken");
+    //sessionStorage.removeItem("loginToken");
+    localStorage.clear();
+    sessionStorage.clear();
   }
 
   isLoggedIn(): Boolean {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("loginToken");
     if (token) {
       return true;
     }
@@ -69,7 +75,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("adminToken");
 
     if (!token) {
       return false;
@@ -84,7 +90,7 @@ export class AuthService {
   }
 
   getLoggedInUser(): User {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("loginToken");
 
     if (!token) {
       return null;

@@ -28,17 +28,24 @@ export class ProductReviewComponent implements OnInit {
   ngOnInit() {
 
     if(this.tokenService.isToken("productReviewToken")){
+      var p_code = this.productService.getProductCode();
+
+      if (p_code == null) {
+        p_code = this.tokenService.getToken("pcodeToken");
+      }
 
       this.reviews = this.tokenService.getToken("productReviewToken");
+
+
 
     }else{
 
        this.productService.getReview()
       .subscribe((reviews: Review[])=>{
-        this.tokenService.saveToken("productReviewToken", reviews);
+        // this.tokenService.saveToken("productReviewToken", reviews);
         this.reviews = reviews;
       })
-      
+
     }
 
   }

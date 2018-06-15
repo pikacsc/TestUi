@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../../shared/services/auth.service";
 import { ProductService } from "../../shared/services/product.service";
+import { TokenService } from "../../shared/services/token.service";
 declare var $: any;
 
 @Component({
@@ -13,7 +14,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
-    public productService: ProductService
+    public productService: ProductService,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit() {}
@@ -23,4 +25,5 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(["/"]);
     location.reload();
   }
+
 }

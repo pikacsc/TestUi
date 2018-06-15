@@ -53,11 +53,15 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-
   p_code : string;
 
   setProductCode(p_code: string) {
      this.productService.setProductCode(p_code);
+     if(this.tokenService.isToken("pcodeToken")){
+       this.tokenService.removeToken("pcodeToken");
+     }
+     this.tokenService.saveToken("pcodeToken", p_code);
+     this.p_code = p_code;
   }
 
   // getAllProducts() {

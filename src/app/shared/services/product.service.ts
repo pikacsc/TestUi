@@ -21,6 +21,7 @@ import {Order} from '../../shared/models/order';
 import {OrderDetail} from '../../shared/models/orderDetail';
 //*****  동현임포트수정끝
 import { CachcingServiceBase } from "./cachcing.service";
+import { TokenService } from "./token.service";
 
 let count = 0;
 
@@ -83,6 +84,7 @@ export class ProductService extends CachcingServiceBase{
     private http:HttpClient,
     // 동현생성자수정끝
     private toastyService: ToastyService,
+    private tokenService : TokenService,
     private toastyConfig: ToastyConfig){
 
       super();
@@ -94,6 +96,9 @@ export class ProductService extends CachcingServiceBase{
   }
 
   p_code : string;
+
+
+
 
   getProductQna(){
     return this.http.get(this.productQnaUrl + this.p_code);
@@ -109,6 +114,9 @@ export class ProductService extends CachcingServiceBase{
   }
 
   getReview(){
+    if(this.tokenService.isToken("productReviewToken")){
+      this.tokenService.removeToken("productReviewToken");
+    }
     return this.http.get(this.productReviewUrl + this.p_code);
   }
 

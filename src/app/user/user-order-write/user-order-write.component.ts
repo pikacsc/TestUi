@@ -7,6 +7,7 @@ import {OrderDetail} from '../../shared/models/orderDetail';
 import { UserService } from "../../shared/services/user.service";
 import { AuthService } from "../../shared/services/auth.service";
 import { TokenService } from "../../shared/services/token.service";
+import { Router, ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-user-order-write',
   templateUrl: './user-order-write.component.html',
@@ -17,7 +18,8 @@ export class UserOrderWriteComponent implements OnInit {
   constructor(
     private productService:ProductService,
     private authService:AuthService,
-    private tokenService:TokenService
+    private tokenService:TokenService,
+    private router:Router
   ) { }
   loggedUser:User;
   orderList:number[]=[];
@@ -116,6 +118,9 @@ export class UserOrderWriteComponent implements OnInit {
         }
       alert("구매가 완료 되었습니다.");
       this.tokenService.removeToken('orderLists');
+      this.tokenService.removeToken('cartLists');
+      this.router.navigate(["/users",{outlets:{profileOutlet:['order-list']}}])
+
       });
     });
   }
