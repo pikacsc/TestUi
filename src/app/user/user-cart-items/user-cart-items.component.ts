@@ -52,6 +52,7 @@ export class UserCartItemsComponent implements OnInit {
   removeFromCart(cno: number) {
     this.productService.removeFromCart(cno).subscribe(data=>{
       this.tokenService.removeToken('cartLists');
+      this.getCartProducts();
       alert("삭제 되었습니다.");
     });
   }
@@ -93,8 +94,13 @@ export class UserCartItemsComponent implements OnInit {
     }else{
       this.tokenService.saveToken('cartToOrder',this.orderList);
     }
-    this.router.navigate(["/users",{outlets:{profileOutlet:['order-write']}}]);
-
+    if(this.orderList.length>0){
+      this.router.navigate(["/users",{outlets:{profileOutlet:['order-write']}}]);
+    }
+    else{
+      alert('선택된 상품이 없습니다');
+      return;
+    }
   }
 
 
