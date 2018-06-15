@@ -120,7 +120,7 @@ export class UserOrderWriteComponent implements OnInit {
       this.tokenService.removeToken('orderLists');
       this.tokenService.removeToken('cartLists');
       this.tokenService.removeToken('orderNum');
-      this.tokenService.removeToken('OrderCancle');
+      this.tokenService.removeToken('OrderWait');
       this.tokenService.removeToken('OrderCommit');
       this.router.navigate(["/users",{outlets:{profileOutlet:['order-list']}}])
 

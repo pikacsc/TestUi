@@ -12,7 +12,7 @@
         <!-- <link src="http://bootswatch.com/flatly/bootstrap.css" type="text/css"> order 건수 표시 -->
         <!------ Include the above in your HEAD tag ---------->
             <div class="row">
-              <!-- 세개 다 같은 넓이로 하려면 col-md-4 로 통일하면됨 -->
+              <!-- 주문취소 = C / 주문대기 = N / 주문완료 = Y -->
                 <div class="col-xs-6 col-md-3" >
                     <div class="card text-center" style="border:1px solid #A94442">
                         <div class="card-header" style="background:#F2DEDE;">
@@ -23,17 +23,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-6 col-md-3">
+                <div class="col-xs-6 col-md-3" >
                     <div class="card text-center" style="border:1px solid #8A6D3B">
                         <div class="card-header" style="background:#FCF8E3;">
-                            <h3 class="panel-title text-center" style="color:#8A6D3B; font-size:18px;">주문완료</h3>
+                            <h3 class="panel-title text-center" style="color:#8A6D3B; font-size:18px;">주문대기</h3>
+                        </div>
+                        <div class="card-body">
+                            <strong>{{OrderWait}}건</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <div class="card text-center" style="border:1px solid #0B610B">
+                        <div class="card-header" style="background:#A9F5A9;">
+                            <h3 class="panel-title text-center" style="color:#0B610B; font-size:18px;">주문완료</h3>
                         </div>
                         <div class="card-body">
                             <strong>{{OrderCommit}}건</strong>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-6 col-md-6">
+                <div class="col-xs-6 col-md-3">
                     <div class="card text-center" style="border:1px solid #31708F">
                         <div class="card-header" style="background:#D9EDF7;">
                             <h3 class="panel-title text-center" style="color:#31708F; font-size:18px;">총 주문</h3>
