@@ -30,6 +30,8 @@ export class QnaDetailComponent implements OnInit {
       var qna = qnaList.find(function (item) {
         return item.q_no === q_no;
       });
+      var q_content = qna.q_content;
+      qna.q_content = qna.q_content.replace("\r\n","<br>");
       this.qna = qna;
     }
   }

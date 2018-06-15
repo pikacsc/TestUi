@@ -11,6 +11,8 @@ declare var $: any;
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent implements OnInit {
+  select = 'Home';
+
   constructor(
     public authService: AuthService,
     private router: Router,

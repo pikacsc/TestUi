@@ -46,6 +46,10 @@ export class UserOrderListComponent implements OnInit {
     if(this.tokenService.isToken('orderLists')==false){
       this.productService.getOrderList(uid).subscribe((lists:Order[])=>{
         this.orderLists=lists;
+        this.orderNum=0;
+        this.OrderCancle=0;
+        this.OrderWait=0;
+        this.OrderCommit=0;
         for(let i=0;i<this.orderLists.length;i++){
           this.orderLists[i].oViewNum=++this.orderNum;
           if(this.orderLists[i].ostatus=='C'){
@@ -72,4 +76,25 @@ export class UserOrderListComponent implements OnInit {
       });
   }
 
+  cancleOrder(order:Order){
+    if(order.ostatus=='N'){
+      this.productService.cancleOrder(order.ono).subscribe(data=>{
+        alert('주문 취소가 완료 되었습니다.');
+    });
+    this.tokenService.removeToken('OrderCancle');
+    this.tokenService.removeToken('OrderWait');
+    this.tokenService.removeToken('OrderCommit');
+    this.tokenService.removeToken('orderLists');
+    this.tokenService.removeToken('orderNum');
+
+    this.getOrderList(this.authService.getLoggedInUser().uid);
+    return;
+    }else if(order.ostatus=='C'){
+      alert('이미 취소된 상품입니다.');
+      return;
+    }else{
+    alert('처리 완료된 상품은 취소가 불가능합니다.');
+      return;
+    }
+  }
 }

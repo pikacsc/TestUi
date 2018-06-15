@@ -30,7 +30,6 @@ export class QnaWriteComponent implements OnInit {
   }
 
   insertQna() {
-    this.submit = true;
     this.qnaService.insertQna(this.qna)
       .subscribe(() => {
         alert("질문이 등록되었습니다.");

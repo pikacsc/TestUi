@@ -28,6 +28,8 @@ export class NoticeDetailComponent implements OnInit, OnDestroy {
       var notice = noticeList.find(function (item) {
         return item.n_no === n_no;
       });
+      var n_content = notice.n_content;
+      notice.n_content = notice.n_content.replace("\r\n", "<br>");
       this.notice = notice;
     }
 
