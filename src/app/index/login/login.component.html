@@ -44,9 +44,9 @@
   <div class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
       <form #userForm="ngForm" (ngSubmit)="addUser(userForm)" name="JoinForm">
-        <div class="modal-content">
+        <div class="modal-content" >
 
-          <div class="modal-header light-blue darken-3 white-text">
+          <div class="modal-header light-blue darken-3 white-text" >
             <h4 class="title">
               <i class="fa fa-user-plus"></i> 회원가입</h4>
             <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
@@ -54,23 +54,23 @@
             </button>
           </div>
           <!-- mdbInputValidate: 만족하면 success, 실패하면 false. 글씨가 뜨게해주는 속성 삭제 -->
-          <div class="modal-body">
-            <div class="md-form form-sm">
+          <div class="modal-body" style="font-size:12px;">
+            <div class="md-form form-sm" style="margin:0px;">
               <i class="fa fa-envelope prefix"></i>
-              <input mdbActive type="text" id="userId" class="form-control" name="uid" [(ngModel)]="createUser.uid">
-              <label for="userId">아이디(20자이내)</label>
+              <input mdbActive type="text" id="userId" class="form-control" name="uid" [(ngModel)]="createUser.uid" >
+              <label for="userId">아이디(40자이내), 이메일형식입니다.</label>
             </div>
-            <div class="md-form form-sm">
+            <div class="md-form form-sm" style="width:200px; display:inline-block; height:40px;">
               <i class="fa fa-lock prefix"></i>
               <input mdbActive type="password" id="userPw" class="form-control" [(ngModel)]="createUser.upw" name="upw" >
-              <label for="userPw">비밀번호(10자이내)</label>
+              <label for="userPw">비밀번호(20자이내)</label>
             </div>
-            <div class="md-form form-sm">
+            <div class="md-form form-sm" style="width:200px; display:inline-block; height:40px;">
               <i class="fa fa-lock prefix"></i>
               <input mdbActive type="password" id="userPw2" class="form-control" name="upw2" [(ngModel)]="upw2">
               <label for="userPw2">비밀번호 확인</label>
             </div>
-            <div class="md-form form-sm">
+            <div class="md-form form-sm" style="margin:0px; padding:0px;">
               <i class="fa fa-user prefix"></i>
               <input mdbActive type="text" id="userName" class="form-control"  [(ngModel)]="createUser.uname" name="uname">
               <label for="userName">이름(10자이내)</label>
@@ -81,9 +81,15 @@
               <label for="userPhone">연락처( '-' 제외, 숫자만입력)</label>
             </div>
             <div class="md-form form-sm">
+              <div class="dododo" style="margin-left: 28px;"><btn-daum-address (result)="setDaumAddressApi($event)" [options]="daumAddressOptions"></btn-daum-address></div>
               <i class="fa fa-map-marker prefix"></i>
-              <input mdbActive type="text" id="userAddr1" class="form-control"  [(ngModel)]="createUser.uaddr1" name="uaddr1">
-              <label for="userAddr1">주소(100자이내)</label>
+              <br />
+              <p>기본주소 : {{AddrSearch2}}</p>
+              <input mdbActive type="text" id="DetailAddr" class="form-control"  [(ngModel)]="AddrSearch3" name="uDetailAddr" placeholder="상세주소(50자이내)">
+              <br />
+              <!-- <i class="fa fa-map-marker prefix"></i> -->
+              <!-- <input mdbActive type="text" id="userAddr1" class="form-control"  [(ngModel)]="createUser.uaddr1" name="uaddr1" style="display:none"> -->
+              <!-- <label for="DetailAddr">상세주소(50자이내)</label> -->
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-calendar prefix"></i>
