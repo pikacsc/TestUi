@@ -13,15 +13,15 @@ import { ProductService } from "../shared/services/product.service";
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { TokenService } from '../shared/services/token.service';
-import { AdminBoardComponent } from './admin-board/admin-board.component';
-
+import { AdminBoardModule } from './admin-board/admin-board.module';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminRoutes),
     SharedModule,
     Ng2SmartTableModule,
-    FileUploadModule
+    FileUploadModule,
+    AdminBoardModule
   ],
   declarations: [
     AdminComponent,
@@ -29,8 +29,7 @@ import { AdminBoardComponent } from './admin-board/admin-board.component';
     AdminBannerComponent,
     AdminLoginComponent,
     AdminEmployeeComponent,
-    AdminOrderComponent,
-    AdminBoardComponent
+    AdminOrderComponent
   ],
   exports: [AdminLoginComponent]
   ,providers: [ProductService,TokenService]

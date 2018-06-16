@@ -68,7 +68,8 @@ export class AdminOrderComponent implements OnInit {
         config: {
           list: [
             { value: 'Y', title: '처리' },
-            { value: 'N', title: '미처리' }
+            { value: 'C', title: '대기' },
+            { value: 'N', title: '취소' }
           ] },
       }
     },

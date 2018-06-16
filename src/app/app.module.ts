@@ -4,7 +4,7 @@ import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 import 'rxjs/add/operator/map';
-
+import { TableModule } from 'primeng/table';
 import { AppComponent } from "./app.component";
 import { IndexModule } from "./index/index.module";
 import { ProductModule } from "./product/product.module";
@@ -29,7 +29,8 @@ import { ProductService } from "./shared/services/product.service";
     SharedModule,
     RouterModule.forRoot(AppRoutes),
     NoticeModule,
-    AdminModule
+    AdminModule,
+    TableModule
   ],
   providers: [
     ProductService

@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminBoardComponent implements OnInit {
 
+  currentBoard: number;
+
+  selectchange(args){
+    this.currentBoard = args.target.value;
+  }
+
   constructor() {}
 
   ngOnInit() {
