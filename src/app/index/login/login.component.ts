@@ -131,36 +131,58 @@ export class LoginComponent implements OnInit {
     ){
       let emailcheck=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
+      let namecheck=/^[가-힣a-zA-Z]+$/;
+      let numpattern =/^[0-9]*$/;
         if(this.upw2!=this.createUser.upw || this.createUser.upw.length>20){ //비밀번호 틀리거나 21자 이상일때
           submitStatus=false;
           alert('비밀번호를 다시 확인해주세요');
+          this.createUser.upw="";
+          this.upw2="";
+          $("#userPw").focus();
           return;
         }if(this.createUser.uid.length>=40){
           submitStatus=false;
-          alert('아이디는 40자를 넘을 수 없습니다.');
+          alert('아이디는 40자를 넘을 수 없습니다');
+          $("#userId").focus();
           return;
         }if(emailcheck.test(this.createUser.uid)==false){
           submitStatus=false;
-          alert('이메일 형식이 아닙니다.');
+          alert('아이디가 이메일 형식이 아닙니다');
+          $("#userId").focus();
           return;
         }if(this.createUser.uname.length>10){
           submitStatus=false;
-          alert('이름의 길이가 너무 깁니다.');
+          alert('이름의 길이가 너무 깁니다');
+          $("#userName").focus();
           return;
-        }if(!isNaN(this.createUser.uname*1)){
+        }if(namecheck.test(this.createUser.uname)==false){
           submitStatus=false;
-          alert('이름에 숫자를 입력할 수 없습니다.');
+          alert('이름을 한글 또는 영어로만 입력해주세요');
+          $("#userName").focus();
           return;
-        }if(this.createUser.uphone.length<=8 || this.createUser.uphone.length>=12 || isNaN(this.createUser.uphone*1)){
+        }if(this.createUser.uphone.length<=8 || this.createUser.uphone.length>=12){
           submitStatus=false;
-          alert('연락처를 정확히 기재해주세요. (9~11자 이내로 숫자만 입력)');
+          alert('연락처는 9~11자 이내로 입력해주세요');
+          $("#userPhone").focus();
           return;
-        }if(this.createUser.ubirth.length!=6 || isNaN(this.createUser.ubirth*1)){
-          alert('생년월일을 다시 확인해주세요');
+        }if(numpattern.test(this.createUser.uphone)==false){
+          submitStatus=false;
+          alert('연락처는 숫자만 입력 가능합니다');
+          $("#userPhone").focus();
+          return;
+        }if(this.createUser.ubirth.length!=6){
+          submitStatus=false;
+          alert('생년월일은 주민등록번호 앞 6자리를 입력해야 합니다');
+          $("#userBirth").focus();
+          return;
+        }if(numpattern.test(this.createUser.ubirth)==false){
+          submitStatus=false;
+          alert('생년월일은 숫자만 입력 가능합니다');
+          $("#userBirth").focus();
           return;
         }if(this.createUser.uaddr1.length>=101){
           submitStatus=false;
-          alert('주소를 100자 이내로 입력해주세요.');
+          alert('주소를 100자 이내로 입력해주세요');
           return;
         }else{ //모든 항목 입력완료, 비밀번호 확인완료
           submitStatus=true;
@@ -169,7 +191,7 @@ export class LoginComponent implements OnInit {
     }else{
       submitStatus=false;
       // console.log('else문 실행됨. submitStatus='+submitStatus);
-      alert('모든 항목을 입력해주세요.');
+      alert('모든 항목을 입력해주세요');
     }
 
     //submitStatus 가 true일 경우에만 실행
