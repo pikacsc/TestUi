@@ -1,8 +1,6 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo scrolling-navbar">
-
   <links>
-
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" [ngClass]="{'active': select==='Home'}" (click)="select='Home'">
         <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/' ]">Home
@@ -12,10 +10,11 @@
       <li class="nav-item" [ngClass]="{'active': select==='Our Products'}" (click)="select='Our Products'">
         <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/products/all-products' ]">Our Products</a>
       </li>
-      <li class="nav-item" [ngClass]="{'active': select==='관리자'}" (click)="select='관리자'">
-        <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/admin/' ]">관리자</a>
+      <li class="nav-item" *ngIf="authService.isAdmin()" [ngClass]="{'active': select==='관리자'}" (click)="select='관리자'">
+        <a class="nav-link waves-light" mdbRippleRadius [routerLink]="[ '/admin' ]">관리자</a>
       </li>
     </ul>
+
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -35,7 +34,9 @@
           </a>
         </ng-template>
       </li>
-      <li class="nav-item" *ngIf="!authService.isLoggedIn()" [ngClass]="{'active': select==='Login'}" (click)="select='Login'">
+
+
+      <li class="nav-item" *ngIf="!authService.isLoggedIn() && !authService.isAdmin()" [ngClass]="{'active': select==='Login'}" (click)="select='Login'">
         <a class="nav-link" [routerLink]="[ '/index/login' ]">
           <i class="fa fa-sign-in" aria-hidden="true"></i> Login
           <span class="sr-only">(current)</span>
@@ -43,7 +44,7 @@
       </li>
 
       <!-- Dropdown -->
-      <li class="nav-item dropdown btn-group" dropdown [ngClass]="{'active': select==='고객센터'}" (click)="select='고객센터'">
+      <li class="nav-item dropdown btn-group" *ngIf="!authService.isAdmin()" dropdown [ngClass]="{'active': select==='고객센터'}" (click)="select='고객센터'">
         <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>고객센터
         </a>
@@ -54,21 +55,19 @@
         </div>
       </li>
 
-      <li class="nav-item" *ngIf="authService.isLoggedIn()" [ngClass]="{'active': select==='My Page'}" (click)="select='My Page'">
+      <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdmin()" [ngClass]="{'active': select==='My Page'}" (click)="select='My Page'">
         <a class="nav-link" [routerLink]="['/users']">
           <i class="fa fa-user"></i>My Page</a>
       </li>
-      <li class="nav-item" *ngIf="authService.isLoggedIn()" (click)="select='Home'">
+      <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdmin()"  (click)="select='Home'">
        <a class="nav-link" (click)="logout()">
          <i class="fa fa-sign-in"></i>Logout</a>
       </li>
-      <!-- <li class="nav-item" *ngIf="!authService.isLoggedIn()">
-        <a class="nav-link" [routerLink]="[ '/index/login' ]">
-          <i class="fa fa-sign-in"></i> Signin / Signup</a>
-      </li> -->
-
+      <li class="nav-item" *ngIf="authService.isAdmin()">
+       <a class="nav-link" (click)="adminlogout()">
+         <i class="fa fa-sign-in"></i>관리자 로그아웃</a>
+      </li>
     </ul>
-
   </links>
 
 </mdb-navbar>

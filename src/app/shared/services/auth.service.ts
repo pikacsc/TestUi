@@ -77,13 +77,7 @@ export class AuthService {
   isAdmin(): boolean {
     const token = sessionStorage.getItem("adminToken");
 
-    if (!token) {
-      return false;
-    }
-
-    const strObj = new Buffer(token || "", "base64").toString("utf8");
-    const loggedUser = JSON.parse(strObj);
-    if (loggedUser["isAdmin"] === true) {
+    if (token) {
       return true;
     }
     return false;
