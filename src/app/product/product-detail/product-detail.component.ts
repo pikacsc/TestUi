@@ -111,7 +111,6 @@ this.product = product;
     this.cart.camount = this.pQuantity;
     this.productService.addToCart(this.cart).subscribe((cart: Cart) => {
       this.cart = cart;
-      this.tokenService.removeToken('cartLists');
       alert('장바구니에 담았습니다.');
     });
   }
