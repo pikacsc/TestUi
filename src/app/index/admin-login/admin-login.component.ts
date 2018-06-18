@@ -39,9 +39,6 @@ export class AdminLoginComponent implements OnInit {
               return false;
             }
             this.adminlogin = admin;
-            //서비스에 로그인된 객체를 저장
-            //토큰부여(세션유지)
-            this.tokenService.saveToken("adminToken",this.adminlogin);
             this.router.navigate(["admin"]);
           },(err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
