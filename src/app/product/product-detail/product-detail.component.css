@@ -1,3 +1,8 @@
 #btn{
   list-style: none
 }
+
+button {
+  text-align: center;
+  font-weight: bold;
+}

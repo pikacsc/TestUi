@@ -17,7 +17,7 @@
             <h4>주문 정보</h4></div>
           <div class="panel-body">
             <table class="table">
-              <thead class="table-success">
+              <thead class="cyan lighten-4">
                 <tr>
                   <!-- <td><strong>Your Cart: # item</strong></td> -->
                   <td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
@@ -39,9 +39,9 @@
                       </div>
                     </div>
                   </td>
-                  <td>{{item.p_sellprice}}</td>
+                  <td>{{item.p_sellprice}}원</td>
                   <td>&nbsp;&nbsp;&nbsp;{{item.camount}}&nbsp;&nbsp;&nbsp;</td>
-                  <td>{{item.p_sellprice*item.camount}}</td>
+                  <td>{{item.p_sellprice*item.camount}}원</td>
 
                 </tr>
 
@@ -133,15 +133,15 @@
   <div class="panel-body">
     <div class="col-md-12">
       <strong>물품가격합계</strong>
-      <div class="pull-right"><span>{{totalPrice}}</span></div>
+      <div class="pull-right"><span>{{totalPrice}}원</span></div>
     </div>
     <div class="col-md-12">
       <strong>배송비</strong>
-      <div class="pull-right"><span>2500</span></div>
+      <div class="pull-right"><span>2500원</span></div>
     </div>
     <div class="col-md-12">
       <strong>총 가격</strong>
-      <div class="pull-right"><span>{{totalPrice+2500}}</span><span></span></div>
+      <div class="pull-right"><span>{{totalPrice+2500}}원</span><span></span></div>
       <hr>
     </div>
 

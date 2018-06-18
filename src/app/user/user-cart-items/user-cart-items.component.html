@@ -80,11 +80,16 @@
         </div>
       </div>
     </div>
-
-    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="gotoOrderWirte()">
-      구매하기
-    </button>
   </div>
+
+  <hr class="between-sections">
+
+  <button type="button" class="btn btn-primary btn-lg btn-block" (click)="gotoOrderWirte()">
+    구매하기
+  </button>
+
+  <hr class="between-sections">
+
   <div class="text-center">
     <pagination-controls (pageChange)="page = $event"></pagination-controls>
   </div>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NoticeService } from '../shared/services/notice.service';
 import { Notice } from '../shared/models/notice'
 import { SearchService } from '../shared/services/search.service';
+import { TokenService } from '../shared/services/token.service';
 
 @Component({
   selector: 'app-notice',
@@ -17,13 +18,15 @@ export class NoticeComponent implements OnInit {
 
   constructor(
     private noticeService: NoticeService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private tokenService: TokenService
   ) {
   }
 
   ngOnInit() {
     this.noticeService.getNoticeList()
       .subscribe((noticeList: Notice[]) => {
+        this.tokenService.saveToken("noticeToken", noticeList);
         this.noticeList = noticeList;
       });
   }
@@ -45,6 +48,11 @@ export class NoticeComponent implements OnInit {
   setNoticeNo(n_no: number) {
     this.noticeService.setNoticeNo(n_no);
     this.setNoticeNoObject(n_no);
+
+    if (this.tokenService.isToken("noticeDetailToken")) {
+      this.tokenService.removeToken("noticeDetailToken");
+    }
+    this.tokenService.saveToken("noticeDetailToken", n_no);
   }
 
   setNoticeNoObject(n_no: number) {

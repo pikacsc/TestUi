@@ -9,46 +9,46 @@
         </div>
         <div class="z-depth-1" style="margin-top:15px">
           <ul class="list-group">
-            <li class="list-group-item"> Product Price:
+            <li class="list-group-item"> 상품 가격:
               <span style="margin-left:15px; color:crimson">
                 <i class="fa fa-inr" aria-hidden="true"></i> {{product.p_sellPrice}}</span>
             </li>
-            <li class="list-group-item"> Product Seller:
+            <li class="list-group-item"> 상품 판매자:
               <span style="margin-left:15px; color:darkblue">
-                <i class="fa fa-building" aria-hidden="true"></i> {{product.productSeller}}</span>
+                <i class="fa fa-building" aria-hidden="true"></i> 토마토마 </span>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-7">
       <div class="product-detail z-depth-1">
-        <h5 class="product-head">Product Details</h5>
+        <h5 class="product-head font-weight-bold">상품 상세 정보</h5>
         <table class="table" cellspacing="0" style="max-height: 28px">
           <tbody>
             <tr>
-              <th scope="row">Product Name</th>
+              <th scope="row" class="font-weight-bold">상품 이름</th>
               <td>{{product.p_name}}</td>
             </tr>
             <tr>
-              <th scope="row">Product Description</th>
+              <th scope="row" class="font-weight-bold">상품 설명</th>
               <td>{{product.p_content}}</td>
             </tr>
             <tr>
-              <th scope="row">Product Category</th>
+              <th scope="row" class="font-weight-bold">상품 카테고리</th>
               <td>{{product.p_kind}}</td>
             </tr>
             <tr>
-              <th scope="row">No. of quantity available</th>
+              <th scope="row" class="font-weight-bold">구입할 수량</th>
               <td><input [(ngModel)]='pQuantity' />
-                <button (click)='pQuantityUp()'>+</button>
-                <button (click)='pQuantityDown()'>-</button>
+                <button (click)='pQuantityUp()'><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button (click)='pQuantityDown()'><i class="fa fa-minus" aria-hidden="true"></i></button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">Product Added on</th>
+            <!-- <tr>
+              <th scope="row">상품 추가 날짜</th>
               <td>{{product.productAdded * 1000 | date}}</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>

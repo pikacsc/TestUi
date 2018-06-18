@@ -5,3 +5,8 @@ tbody tr th {
   font-weight: bold;
   background-color: lightgray;
 }
+
+div button {
+  font-weight: bold;
+  font-size: 0.8em;
+}
