@@ -118,7 +118,6 @@ export class ProductListComponent implements OnInit {
  this.cart.p_kind=product.p_kind;
  this.cart.p_content=product.p_content;
  this.productService.addToCart(this.cart).subscribe((cart: Cart)=>{
-  this.tokenService.removeToken('cartLists');
   alert('장바구니에 담았습니다.');
   return;
 });
