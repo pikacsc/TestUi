@@ -70,7 +70,7 @@
 
           <div class="panel-body">
             <table class="table">
-              <thead class="table-success">
+              <thead class="cyan lighten-4">
                 <tr>
                   <!-- <td><strong>Your Cart: # item</strong></td> -->
                   <td>번호</td>
@@ -89,7 +89,7 @@
                 <tr>
                   <td>{{order.oViewNum}}</td>
                   <td>{{order.odate}}</td>
-                  <td>{{order.ototal+2500}}</td>
+                  <td>{{order.ototal+2500}}원</td>
                   <td>{{order.ostatus}}</td>
                   <td><a data-toggle="modal" data-target="#orderDetail" style="color:dodgerblue; font-weight:bold;" (click)="getDetailList(order.ono,order.oaddr)">상세</a></td>
                   <td><a style="color:red; font-weight:bold;" (click)="cancleOrder(order)">취소</a></td>
@@ -127,7 +127,7 @@
 
         <table class="table">
           <thead class="table-success">
-            <tr>
+            <tr class="cyan lighten-4">
               <!-- <td><strong>Your Cart: # item</strong></td> -->
               <td>이미지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품설명</td>
               <td>가격</td>
@@ -147,9 +147,9 @@
                   </div>
                 </div>
               </td>
-              <td><br />{{detail.odpprice}}</td>
+              <td><br />{{detail.odpprice | currency:'KOR '}}원</td>
               <td><br />&nbsp;&nbsp;&nbsp;{{detail.odpamount}}&nbsp;&nbsp;&nbsp;</td>
-              <td><br />{{detail.odpprice*detail.odpamount}}</td>
+              <td><br />{{detail.odpprice*detail.odpamount} | currency:'KOR '}원</td>
             </tr>
 
           </tbody>

@@ -20,13 +20,13 @@
     <!--Table body-->
     <tbody>
       <tr>
-        <th>제목</th>
+        <th class="cyan lighten-4">제목</th>
         <td>
           <input type="text" id="exampleForm2" class="form-control" placeholder="제목을 입력해주세요." required [(ngModel)]="qna.q_title" [ngModelOptions]="{standalone: true}" />
         </td>
       </tr>
       <tr [hidden]=true>
-        <th>작성자</th>
+        <th class="cyan lighten-4">작성자</th>
         <td>
           <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="qna.u_id" [ngModelOptions]="{standalone: true}" />
         </td>

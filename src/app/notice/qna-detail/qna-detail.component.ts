@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { QnaService } from '../../shared/services/qna.service';
 import { Qna } from '../../shared/models/qna';
-// import { TokenService } from '../../shared/services/token.service';
+import { TokenService } from '../../shared/services/token.service';
 
 @Component({
   selector: 'app-qna-detail',
@@ -17,23 +17,23 @@ export class QnaDetailComponent implements OnInit {
   constructor(
     private qnaService: QnaService,
     private http: HttpClient,
-    private router: Router
-    // private tokenService: TokenService
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
     this.qna = this.qnaService.getQnaObject();
 
-    // if(this.qna == null){
-    //   var q_no = this.tokenService.getToken("qnaDetailToken")
-    //   var qnaList = this.tokenService.getToken("qnaToken");
-    //   var qna = qnaList.find(function (item) {
-    //     return item.q_no === q_no;
-    //   });
-    //   var q_content = qna.q_content;
-    //   qna.q_content = qna.q_content.replace("\r\n","<br>");
-    //   this.qna = qna;
-    // }
+    if(this.qna == null){
+      var q_no = this.tokenService.getToken("qnaDetailToken")
+      var qnaList = this.tokenService.getToken("qnaToken");
+      var qna = qnaList.find(function (item) {
+        return item.q_no === q_no;
+      });
+      var q_content = qna.q_content;
+      qna.q_content = qna.q_content.replace("\r\n","<br>");
+      this.qna = qna;
+    }
   }
 
   setQnaObject() {

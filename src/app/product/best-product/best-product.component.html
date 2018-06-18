@@ -20,9 +20,10 @@
         <div class="card card-cascade wider">
 
           <!--Card image-->
-          <a [routerLink]="['/products/product', product.p_code]">
+          <a [routerLink]="['/products/product', product.p_code]" routerLinkActive="router-link-active"
+              (click)="setProductCode(product.p_code)">
             <div class="view overlay hm-white-slight">
-              <img [src]="product.productImageUrl" class="img-fluid" alt="">
+              <img src="./assets/ProductImg/{{product.p_img}}.jpg" class="img-fluid" alt="">
               <a>
                 <div class="mask waves-effect waves-light" mdbRippleRadius></div>
               </a>
@@ -31,8 +32,7 @@
           <!--/.Card image-->
 
           <!--Card content-->
-          <div class="card-body text-center no-padding">
-            <!--Category & Title-->
+          <!-- <div class="card-body text-center no-padding">
             <a href="" class="text-muted">
               <h5>{{ product.p_kind }}</h5>
             </a>
@@ -44,11 +44,9 @@
               </strong>
             </h5>
 
-            <!--Description-->
             <p class="card-text">{{ product.p_content }}
             </p>
 
-            <!--Card footer-->
             <div class="card-footer">
               <span class="left">{{ product.p_sellPrice }}원</span>
               <span class="right">
@@ -57,7 +55,7 @@
                 </a>
               </span>
             </div>
-          </div>
+          </div> -->
           <!--/.Card content-->
         </div>
         <!--/.Card-->

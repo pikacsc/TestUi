@@ -1,3 +1,7 @@
+ol li {
+  font-weight: bold;
+}
+
 tbody th {
   background-color: lightgray;
   text-align: center;

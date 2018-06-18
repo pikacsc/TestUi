@@ -15,6 +15,7 @@ import {Cart} from "../../shared/models/cart";
   styleUrls: ["./product-list.component.scss"]
 })
 export class ProductListComponent implements OnInit {
+  currentDate = new Date();
   productList: Product[];
 
   kinds = ["All", "Bakery", "Sauce", "Drink", "Instant","Snack"];
