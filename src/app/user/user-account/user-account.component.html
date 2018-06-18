@@ -4,51 +4,55 @@
 <form #updatePerson="ngForm" (ngSubmit)="updateProfile(updatePerson)" name="profileForm">
   <div class="row">
     <div class="col-md-8 mb-3">
-      <label for="userName">회원이름</label>
-      <input type="text" class="form-control is-valid" id="userName" [(ngModel)]="loggedUser.uname"
-        name="userName" #userName="ngModel" [disabled]="true">
-        <!-- 삭제한속성 : (ngModelChange)="enbUpdBut = !enbUpdBut" / [(ngClass)] : 초록색테두리 / required-->
+      <label for="userName" class="font-weight-bold" style="font-size:1.2em;">회원이름</label>
+      <input type="text" class="form-control is-valid font-weight-bold" id="userName" [(ngModel)]="loggedUser.uname" name="userName" #userName="ngModel" [disabled]="true">
+      <!-- 삭제한속성 : (ngModelChange)="enbUpdBut = !enbUpdBut" / [(ngClass)] : 초록색테두리 / required-->
       <div class="invalid-feedback">
         username is Mandatory.
       </div>
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userId">아이디</label>
-      <input type="text" class="form-control is-valid" id="userId" [disabled]="true" name="userId" [(ngModel)]="loggedUser.uid">
+      <label for="userId" class="font-weight-bold" style="font-size:1.2em;">아이디</label>
+      <input type="text" class="form-control is-valid font-weight-bold" id="userId" [disabled]="true" name="userId" [(ngModel)]="loggedUser.uid">
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userJoindate">가입일</label>
-      <input type="text" class="form-control is-valid" id="userJoindate" name="userJoindate" [(ngModel)]="loggedUser.ujoindate" [disabled]="true">
+      <label for="userJoindate" class="font-weight-bold" style="font-size:1.2em;">가입일</label>
+      <input type="text" class="form-control is-valid font-weight-bold" id="userJoindate" name="userJoindate" [(ngModel)]="loggedUser.ujoindate" [disabled]="true">
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userPwd">비밀번호(20자이내)</label>
+      <label for="userPwd" class="font-weight-bold badge grey" style="font-size:1em;">비밀번호(20자이내)</label>
       <input type="password" class="form-control" id="userPwd" name="userPwd" [(ngModel)]="loggedUser.upw">
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userPhone">연락처( '-' 제외, 9~11자리 숫자만입력)</label>
-      <input type="text" class="form-control" id="userPhone" name="userPhone" [(ngModel)]="loggedUser.uphone"> <!--#phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" 지운속성-->
+      <label for="userPhone" class="font-weight-bold badge grey" style="font-size:1em;">연락처( '-' 제외, 9~11자리 숫자만입력)</label>
+      <input type="text" class="form-control" id="userPhone" name="userPhone" [(ngModel)]="loggedUser.uphone">
+      <!--#phoneNumber="ngModel" (ngModelChange)="enbUpdBut = !enbUpdBut" 지운속성-->
     </div>
     <div class="col-md-8 mb-3">
-      <label>주소1 </label><span style="font-size:12px; margin-left:20px;">현재주소 : {{loggedUser.uaddr1}}</span><br />
+      <label for="userBirth" class="font-weight-bold badge grey" style="font-size:1em;">생년월일(주민등록번호 앞6자리만 입력)</label>
+      <input type="text" class="form-control" id="userBirth" name="userBirth" [(ngModel)]="loggedUser.ubirth">
+    </div>
+
+    <div class="col-md-8 mb-3">
+      <label class="font-weight-bold badge grey" style="font-size:1em;">주소1</label>
+      <span style="font-size:1em; margin-left:20px;" class="font-weight-bold">현재주소 : {{loggedUser.uaddr1}}</span><br />
       <span><a data-toggle="modal" (click)="ValueClear();" data-target="#addrChangeForm1" style="color:dodgerblue; font-weight:bold;">주소변경하기</a></span>
       <!--사용자가 주소를 바꾸길 원할때만 나타남-->
       <!--회원가입폼 (모달)-->
     </div>
     <div class="col-md-8 mb-3">
-      <label>주소2 </label><span style="font-size:12px; margin-left:20px;">현재주소 : {{loggedUser.uaddr2}}</span><br />
+      <label class="font-weight-bold badge grey" style="font-size:1em;">주소2</label>
+      <span style="font-size:1em; margin-left:20px;" class="font-weight-bold">현재주소 : {{loggedUser.uaddr2}}</span><br />
       <span><a data-toggle="modal" (click)="ValueClear();" data-target="#addrChangeForm2" style="color:dodgerblue; font-weight:bold;">주소변경하기</a></span>
     </div>
     <div class="col-md-8 mb-3">
-      <label>주소3 </label><span style="font-size:12px; margin-left:20px;">현재주소 : {{loggedUser.uaddr3}}</span><br />
+      <label class="font-weight-bold badge grey" style="font-size:1em;">주소3</label>
+      <span style="font-size:1em; margin-left:20px;" class="font-weight-bold">현재주소 : {{loggedUser.uaddr3}}</span><br />
       <span><a data-toggle="modal" (click)="ValueClear();" data-target="#addrChangeForm3" style="color:dodgerblue; font-weight:bold;">주소변경하기</a></span>
     </div>
 
     <div class="col-md-8 mb-3">
-      <label for="userBirth">생년월일(주민등록번호 앞6자리만 입력)</label>
-      <input type="text" class="form-control" id="userBirth" name="userBirth" [(ngModel)]="loggedUser.ubirth">
-    </div>
-    <div class="col-md-8 mb-3">
-      <label for="userAddrcheck">기본주소선택란</label>
+      <label for="userAddrcheck" class="font-weight-bold badge grey" style="font-size:1em;">기본주소선택란</label>
       <br />
       <select class="mdb-select" [(ngModel)]="loggedUser.uaddrcheck" name="userAddrcheck" id="userAddrcheck" style="width:100%;">
         <option value="" disabled selected>기본적으로 사용할 주소지를 선택해주세요</option>
@@ -58,7 +62,7 @@
       </select>
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userGender">성별</label>
+      <label for="userGender" class="font-weight-bold badge grey" style="font-size:1em;">성별</label>
       <br />
       <select class="mdb-select" [(ngModel)]="loggedUser.ugender" name="userGender" id="userGender" style="width:100%;">
         <option value="" disabled selected>성별을 선택해주세요</option>
@@ -67,7 +71,7 @@
       </select>
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userSmsyn">SMS 수신여부</label>
+      <label for="userSmsyn" class="font-weight-bold badge grey" style="font-size:1em;">SMS 수신여부</label>
       <br />
       <select class="mdb-select" [(ngModel)]="loggedUser.usmsyn" name="userSmsyn" id="userSmsyn" style="width:100%;">
         <option value="" disabled selected>SMS를 통해 정보를 받으시겠습니까 ?</option>
@@ -76,7 +80,7 @@
       </select>
     </div>
     <div class="col-md-8 mb-3">
-      <label for="userEmailyn">Email 수신여부</label>
+      <label for="userEmailyn" class="font-weight-bold badge grey" style="font-size:1em;">Email 수신여부</label>
       <br />
       <select class="mdb-select" [(ngModel)]="loggedUser.uemailyn" name="userEmailyn" id="userEmailyn" style="width:100%;">
         <option value="" disabled selected>Email을 통해 정보를 받으시겠습니까 ?</option>
@@ -86,70 +90,70 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" type="submit" style="margin-left:320px">정보수정하기</button>
+  <button class="btn btn-outline-primary" type="submit" style="margin-left:320px">정보수정하기</button>
 </form>
 
 <!-- 주소1 변경모달 -->
-<div class="modal fade" id="addrChangeForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade" id="addrChangeForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
     <div class="modal-content">
-      <div class="modal-header light-blue darken-3 white-text" >
+      <div class="modal-header light-blue darken-3 white-text">
         <h4 class="title">
           <i class="fa fa-user-plus"></i>주소1 변경</h4>
       </div>
       <div class="modal-body" style="font-size:12px;">
         <div class="md-form form-sm">
-            <btn-daum-address (result)="setDaumAddressApi($event)" [options]="daumAddressOptions"></btn-daum-address><br /><br /><br />
-            <p style="font-size:14px;">선택한 기본주소 :: &nbsp; {{AddrSearch1_2}}</p>
-            <input type="text" id="AcountDetailAddr" class="form-control"  [(ngModel)]="AddrSearch1_3" name="AcountDetailAddr" placeholder="상세주소(50자이내)">
+          <btn-daum-address (result)="setDaumAddressApi($event)" [options]="daumAddressOptions"></btn-daum-address><br /><br /><br />
+          <p style="font-size:14px;">선택한 기본주소 :: &nbsp; {{AddrSearch1_2}}</p>
+          <input type="text" id="AcountDetailAddr" class="form-control" [(ngModel)]="AddrSearch1_3" name="AcountDetailAddr" placeholder="상세주소(50자이내)">
         </div>
         <div class="text-center mt-2">
-          <button (click)="modalsubmit();" class="btn btn-success waves-light" id="Addr1ChangeButton" mdbRippleRadius>변경</button>
-          <button (click)="modalclose();" data-dismiss="modal" aria-label="Close" class="btn btn-danger waves-light" id="Addr1CloseButton" mdbRippleRadius>취소</button>
+          <button (click)="modalsubmit();" class="btn btn-outline-success" id="Addr1ChangeButton" mdbRippleRadius>변경</button>
+          <button (click)="modalclose();" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger" id="Addr1CloseButton" mdbRippleRadius>취소</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 <!-- 주소2 변경모달 -->
-<div class="modal fade" id="addrChangeForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade" id="addrChangeForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
     <div class="modal-content">
-      <div class="modal-header light-blue darken-3 white-text" >
+      <div class="modal-header light-blue darken-3 white-text">
         <h4 class="title">
           <i class="fa fa-user-plus"></i>주소2 변경</h4>
       </div>
       <div class="modal-body" style="font-size:12px;">
         <div class="md-form form-sm">
-            <btn-daum-address (result)="setDaumAddressApi2($event)" [options]="daumAddressOptions">주소검색</btn-daum-address><br /><br /><br />
-            <p style="font-size:14px;">선택한 기본주소 :: &nbsp; {{AddrSearch2_2}}</p>
-            <input type="text" id="AcountDetailAddr2" class="form-control"  [(ngModel)]="AddrSearch2_3" name="AcountDetailAddr2" placeholder="상세주소(50자이내)">
+          <btn-daum-address (result)="setDaumAddressApi2($event)" [options]="daumAddressOptions">주소검색</btn-daum-address><br /><br /><br />
+          <p style="font-size:14px;">선택한 기본주소 :: &nbsp; {{AddrSearch2_2}}</p>
+          <input type="text" id="AcountDetailAddr2" class="form-control" [(ngModel)]="AddrSearch2_3" name="AcountDetailAddr2" placeholder="상세주소(50자이내)">
         </div>
         <div class="text-center mt-2">
-          <button (click)="modalsubmit2();" class="btn btn-success waves-light" id="Addr2ChangeButton" mdbRippleRadius>변경</button>
-          <button (click)="modalclose2();" data-dismiss="modal" aria-label="Close" class="btn btn-danger waves-light" id="Addr2CloseButton" mdbRippleRadius>취소</button>
+          <button (click)="modalsubmit2();" class="btn btn-outline-success" id="Addr2ChangeButton" mdbRippleRadius>변경</button>
+          <button (click)="modalclose2();" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger" id="Addr2CloseButton" mdbRippleRadius>취소</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 <!-- 주소3 변경모달 -->
-<div class="modal fade" id="addrChangeForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade" id="addrChangeForm3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
     <div class="modal-content">
-      <div class="modal-header light-blue darken-3 white-text" >
+      <div class="modal-header light-blue darken-3 white-text">
         <h4 class="title">
           <i class="fa fa-user-plus"></i>주소3 변경</h4>
       </div>
       <div class="modal-body" style="font-size:12px;">
         <div class="md-form form-sm">
-            <btn-daum-address (result)="setDaumAddressApi3($event)" [options]="daumAddressOptions"></btn-daum-address><br /><br /><br />
-            <p style="font-size:14px;">선택한 기본주소 :: &nbsp; {{AddrSearch3_2}}</p>
-            <input type="text" id="AcountDetailAddr3" class="form-control"  [(ngModel)]="AddrSearch3_3" name="AcountDetailAddr3" placeholder="상세주소(50자이내)">
+          <btn-daum-address (result)="setDaumAddressApi3($event)" [options]="daumAddressOptions"></btn-daum-address><br /><br /><br />
+          <p style="font-size:14px;">선택한 기본주소 :: &nbsp; {{AddrSearch3_2}}</p>
+          <input type="text" id="AcountDetailAddr3" class="form-control" [(ngModel)]="AddrSearch3_3" name="AcountDetailAddr3" placeholder="상세주소(50자이내)">
         </div>
         <div class="text-center mt-2">
-          <button (click)="modalsubmit3();" class="btn btn-success waves-light" id="Addr3ChangeButton" mdbRippleRadius>변경</button>
-          <button (click)="modalclose3();" data-dismiss="modal" aria-label="Close" class="btn btn-danger waves-light" id="Addr3CloseButton" mdbRippleRadius>취소</button>
+          <button (click)="modalsubmit3();" class="btn btn-outline-success" id="Addr3ChangeButton" mdbRippleRadius>변경</button>
+          <button (click)="modalclose3();" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger" id="Addr3CloseButton" mdbRippleRadius>취소</button>
         </div>
       </div>
     </div>
