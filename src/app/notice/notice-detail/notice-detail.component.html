@@ -19,7 +19,8 @@
   </li>
   <li class="breadcrumb-item">고객센터</li>
   <li class="breadcrumb-item">
-    <a [routerLink]="['/notice']" (click)="removeToken()">공지사항</a>
+    <a [routerLink]="['/notice']">공지사항</a>
+    <!-- delete : (click)="removeToken()" -->
   </li>
 </ol>
 
@@ -53,6 +54,5 @@
 </table>
 <!--Table-->
 
-<button type="button" class="btn btn-outline-info waves-effect" (click)="removeToken()"
-  [routerLink]="['/notice']">목록
-</button>
+<button type="button" class="btn btn-outline-info waves-effect" [routerLink]="['/notice']">목록</button>
+<!-- delete (click)="removeToken()" -->

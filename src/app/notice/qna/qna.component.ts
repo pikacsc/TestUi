@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { QnaService } from '../../shared/services/qna.service';
 import { Qna } from '../../shared/models/qna';
-
 import { AuthService } from '../../shared/services/auth.service';
-import { TokenService } from '../../shared/services/token.service';
-
 import { SearchService } from '../../shared/services/search.service';
 
 @Component({
@@ -24,32 +20,21 @@ export class QnaComponent implements OnInit {
   constructor(
     private qnaService: QnaService,
     private authService: AuthService,
-    private searchService: SearchService,
-    private tokenService: TokenService
+    private searchService: SearchService
   ) { }
 
   ngOnInit() {
     this.u_id = this.authService.getLoggedInUser().uid;
 
-    if(this.tokenService.isToken("qnaToken")) {
-      this.qnaList = this.tokenService.getToken("qnaToken");
-    } else {
-      this.qnaService.getQnaList(this.u_id)
-        .subscribe((qnas: Qna[]) => {
-          this.tokenService.saveToken("qnaToken", qnas);
-          this.qnaList = qnas;
-        });
-    }
+    this.qnaService.getQnaList(this.u_id)
+      .subscribe((qnas: Qna[]) => {
+        this.qnaList = qnas;
+      });
   }
 
   setQnaNo(q_no: number) {
     this.qnaService.setQnaNo(q_no);
     this.setQnaNoObject(q_no);
-
-    if(this.tokenService.isToken("qnaDetailToken")) {
-      this.tokenService.removeToken("qnaDetailToken");
-    }
-    this.tokenService.saveToken("qnaDetailToken", q_no);
   }
 
   setQnaNoObject(q_no: number) {

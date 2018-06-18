@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FaqService } from '../../shared/services/faq.service';
 import { Faq } from '../../shared/models/faq';
-
 import { SearchService } from '../../shared/services/search.service';
-import { TokenService } from '../../shared/services/token.service';
+// import { TokenService } from '../../shared/services/token.service';
 
 @Component({
   selector: 'app-faq',
@@ -19,25 +17,30 @@ export class FaqComponent implements OnInit {
 
   constructor(
     private faqService: FaqService,
-    private searchService: SearchService,
-    private tokenService: TokenService
+    private searchService: SearchService
+    // private tokenService: TokenService
   ) { }
 
   ngOnInit() {
-    if(this.tokenService.isToken("faqToken")) {
-      this.faqList = this.tokenService.getToken("faqToken");
-    } else {
+    // if(this.tokenService.isToken("faqToken")) {
+    //   this.faqList = this.tokenService.getToken("faqToken");
+    // } else {
       this.faqService.getFaqList()
         .subscribe((faqs: Faq[]) => {
-          this.tokenService.saveToken("faqToken", faqs);
+          // this.tokenService.saveToken("faqToken", faqs);
           this.faqList = faqs;
-        })
-    }
+        });
+    // }
   }
 
   getFaqByCategory(f_category: string) {
     if(f_category == "전체조회" || f_category == "") {
-      this.faqList = this.tokenService.getToken("faqToken");
+      // this.faqList = this.tokenService.getToken("faqToken");
+      this.faqService.getFaqList()
+        .subscribe((faqs: Faq[]) => {
+          // this.tokenService.saveToken("faqToken", faqs);
+          this.faqList = faqs;
+        });
     } else {
       this.faqService.getFaqCategory(f_category)
         .subscribe((faqList: Faq[]) => {
@@ -50,10 +53,10 @@ export class FaqComponent implements OnInit {
     this.faqService.setFaqNo(f_no);
     this.setFaqNoObject(f_no);
 
-    if(this.tokenService.isToken("faqDetailToken")) {
-      this.tokenService.removeToken("faqDetailToken");
-    }
-    this.tokenService.saveToken("faqDetailToken", f_no);
+    // if(this.tokenService.isToken("faqDetailToken")) {
+    //   this.tokenService.removeToken("faqDetailToken");
+    // }
+    // this.tokenService.saveToken("faqDetailToken", f_no);
   }
 
   setFaqNoObject(f_no: number) {

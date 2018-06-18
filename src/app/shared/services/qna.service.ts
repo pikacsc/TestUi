@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Qna } from "../models/qna";
-import { TokenService } from "../../shared/services/token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +18,7 @@ export class QnaService {
   private detailUrl = 'http://localhost:8080/toma/detail/qna/';
 
   constructor(
-    private http: HttpClient,
-    private tokenService: TokenService
+    private http: HttpClient
   ) { }
 
   setQnaObject(qna: Qna) {

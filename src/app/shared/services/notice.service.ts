@@ -1,9 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-
 import { Notice } from "../models/notice";
-import { TokenService } from "./token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +12,7 @@ export class NoticeService {
   detailUrl = 'http://localhost:8080/toma/detail/notice/';
 
   constructor(
-    private http: HttpClient,
-    private tokenService: TokenService
+    private http: HttpClient
   ) {
 
   }
@@ -27,7 +23,6 @@ export class NoticeService {
 
   getNoticeList() {
     return this.http.get(this.url);
-    // return this.notices = this.http.get(this.url);
   }
 
   getNoticeCategory(n_category: string) {
@@ -43,7 +38,6 @@ export class NoticeService {
   }
 
   setNoticeNoObject(notice: Notice) {
-    // this.notice = notice;
     this.incrementNoticeHits(notice).subscribe(() => {
       this.notice = notice;
     });
