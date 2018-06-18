@@ -1,4 +1,4 @@
-<p-fileUpload name="demo[]" url="./assets/banner_img/" (onUpload)="onUpload($event)"
+<p-fileUpload name="demo[]" url="http://localhost:8080/toma/admin/img" (onUpload)="onUpload($event)"
         multiple="multiple" accept="image/*" maxFileSize="1000000" previewWidth="800">
     <ng-template pTemplate="content">
         <ul *ngIf="uploadedFiles.length">

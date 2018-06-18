@@ -3,38 +3,32 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ProductService } from "../../shared/services/product.service";
 import { Product } from "../../shared/models/product";
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
-import { TokenService } from "../../shared/services/token.service";
 @Component({
   selector: 'app-admin-product',
   templateUrl: './admin-product.component.html',
-  template: `
-    <ng2-smart-table
-    [settings]="settings"
-    [source]="productList"
-    (edit)="log($data)"
-    (createConfirm)="insertProduct($event)"
-    (deleteConfirm)="deleteProduct($data)"
-    (editConfirm)="updateProduct($event)"
-    (userRowSelect)="onUserRowSelect($event)"
-    ></ng2-smart-table>
-  `,
   styleUrls: ['./admin-product.component.css']
 })
 export class AdminProductComponent implements OnInit {
 
 
+
+  navProduct = new Product;
+  navState:string;
     constructor(
-      private tokenService:TokenService,
       private productService:ProductService,
       private http:HttpClient
     ) {}
 
     source: LocalDataSource;
-  productList: Product[];
-  settings = {
-    mode: 'inline',
+    productList: Product[];
+    settings = {
+    mode: 'external',
+    actions: {
+      delete: 'false'
+    },
     add: {
-      confirmCreate: 'true'
+      confirmCreate: 'true',
+      addButtonContent: '상품추가'
     },
     edit: {
       saveButtonContent: '확인',
@@ -43,7 +37,7 @@ export class AdminProductComponent implements OnInit {
       confirmSave: 'true'
     },
     delete: {
-      deleteButtonContent: '삭제',
+      deleteButtonContent: '',
       confirmDelete: 'true'
     },
     columns: {
@@ -91,68 +85,41 @@ export class AdminProductComponent implements OnInit {
     }
   };
 
-  newProduct:Product;
+  editProduct = new Product;
+
+  newProduct = new Product;
   modifiedProduct:Product;
-  onUserRowSelect(event): void {
-      console.log(event);
-  }
 
-
-  newDataBinding(event){
-    var data = {"p_code" : event.newData.p_code,
-                 "p_name" : event.newData.p_name,
-                 "p_count" : event.newData.p_count,
-                 "p_kind" : event.newData.p_kind,
-                 "p_price" : event.newData.p_price,
-                 "p_sellPrice" : event.newData.p_sellPrice,
-                 "p_profit" : event.newData.p_profit,
-                 "p_img" : event.newData.p_img,
-                 "p_content" : event.newData.p_content,
-                 "p_date" : event.newData.p_date
-                 };
-                 return data;
-  }
 
   editDataBinding(event){
-    var data = {"p_code" : event.data.p_code,
-                 "p_name" : event.data.p_name,
-                 "p_count" : event.data.p_count,
-                 "p_kind" : event.data.p_kind,
-                 "p_price" : event.data.p_price,
-                 "p_sellPrice" : event.data.p_sellPrice,
-                 "p_profit" : event.data.p_profit,
-                 "p_img" : event.data.p_img,
-                 "p_content" : event.data.p_content,
-                 "p_date" : event.data.p_date
-                 };
-                 return data;
+    this.editProduct.p_code = event.data.p_code;
+    this.editProduct.p_name = event.data.p_name;
+    this.editProduct.p_count = event.data.p_count;
+    this.editProduct.p_kind = event.data.p_kind;
+    this.editProduct.p_price = event.data.p_price;
+    this.editProduct.p_sellPrice = event.data.p_sellPrice;
+    this.editProduct.p_profit = event.data.p_profit;
+    this.editProduct.p_img = event.data.p_img;
+    this.editProduct.p_content = event.data.p_content;
+    this.editProduct.p_date = event.data.p_date;
   }
 
-
-  insertProduct(event){
-       this.http.post<Product>('http://localhost:8080/toma/product', this.newDataBinding(event)).subscribe(
-               res => {
-                 console.log(res);
-                 event.confirm.resolve(event.newData);
-                 alert("상품이 등록되었습니다.");
-                 this.tokenService.removeToken("adminProductToken");
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          alert("Client-side error occured.");
-        } else {
-          alert("Server-side error occured.");
-        }
-      });
-   }
 
   updateProduct(event){
-    this.http.put<Product>('http://localhost:8080/toma/product/'+event.newData.p_code, this.newDataBinding(event)).subscribe(
+     this.navState = '상품 정보 수정';
+     this.editDataBinding(event);
+     this.navProduct = this.editProduct;
+     this.openNav();
+  }
+
+
+  confirmEdit(){
+    this.http.put<Product>('http://localhost:8080/toma/product/'+this.navProduct.p_code, this.navProduct).subscribe(
         res => {
           console.log(res);
-          event.confirm.resolve(event.newData);
+          //event.confirm.resolve(event.newData);
           alert("상품이 수정되었습니다.");
-          this.tokenService.removeToken("adminProductToken");
+          this.ngOnInit();
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -162,6 +129,30 @@ export class AdminProductComponent implements OnInit {
         }
       });
   }
+
+    insertProduct(event){
+        this.navState = '상품 등록';
+        this.navProduct = new Product;
+        this.openNav();
+     }
+
+  confirmCreate(){
+    this.http.post<Product>('http://localhost:8080/toma/product', this.navProduct).subscribe(
+            res => {
+              console.log(res);
+              //event.confirm.resolve(event.newData);
+              alert("상품이 등록되었습니다.");
+   },
+   (err: HttpErrorResponse) => {
+     if (err.error instanceof Error) {
+       alert("Client-side error occured.");
+     } else {
+       alert("Server-side error occured.");
+     }
+   });
+  }
+
+
 
 
     deleteProduct(event){
@@ -170,7 +161,6 @@ export class AdminProductComponent implements OnInit {
              console.log(res);
              event.confirm.resolve(event.source.data);
             alert("상품이 삭제되었습니다.");
-            this.tokenService.removeToken("adminProductToken");
          },
          (err: HttpErrorResponse) => {
            if (err.error instanceof Error) {
@@ -182,17 +172,48 @@ export class AdminProductComponent implements OnInit {
        //event.confirm.resolve(event.source.data);
     }
 
-  ngOnInit() {
-    if(this.tokenService.isToken("adminProductToken")){
-      this.productList = this.tokenService.getToken("adminProductToken");
-    }else{
-      this.productService.getProducts()
-      .subscribe((productList : Product[]) => {
-        this.productList = productList;
-        this.tokenService.saveToken("adminProductToken",this.productList);
-      })
+    openNav() {
+        document.getElementById("mySidenav").style.width = "650px";
+        document.body.style.marginLeft = "650px";
     }
 
+    closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.body.style.marginLeft = "0";
+    }
+
+  productNullCheck(){
+    if(this.navProduct == null){
+      return true;
+    }else {
+      return false;
+    }
+  }
+  navProductReset(){
+     this.navProduct = this.editProduct;
+  }
+
+
+  p_countUp() {
+    ++this.navProduct.p_count;
+  }
+
+  p_countDown() {
+    if (this.navProduct.p_count > 1)
+      --this.navProduct.p_count;
+    else
+      alert('더 이상 줄일 수 없습니다.');
+  }
+
+
+
+
+
+  ngOnInit() {
+    this.productService.getProducts()
+    .subscribe((productList : Product[]) => {
+      this.productList = productList;
+    })
   }
 
 
