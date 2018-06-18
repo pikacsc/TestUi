@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { NoticeService } from '../shared/services/notice.service';
 import { Notice } from '../shared/models/notice'
 import { SearchService } from '../shared/services/search.service';
-import { TokenService } from '../shared/services/token.service';
 
 @Component({
   selector: 'app-notice',
@@ -18,27 +17,23 @@ export class NoticeComponent implements OnInit {
 
   constructor(
     private noticeService: NoticeService,
-    private searchService: SearchService,
-    private tokenService: TokenService
+    private searchService: SearchService
   ) {
   }
 
   ngOnInit() {
-    if (this.tokenService.isToken("noticeToken")) {
-      this.noticeList = this.tokenService.getToken("noticeToken");
-    } else {
-      this.noticeService.getNoticeList()
-        .subscribe((noticeList: Notice[]) => {
-          this.tokenService.saveToken("noticeToken", noticeList);
-          this.noticeList = noticeList;
-        });
-    }
-
+    this.noticeService.getNoticeList()
+      .subscribe((noticeList: Notice[]) => {
+        this.noticeList = noticeList;
+      });
   }
 
   getNoticeByCategory(n_category: string) {
-    if(n_category == "전체조회" || n_category == "") {
-      this.noticeList = this.tokenService.getToken("noticeToken");
+    if (n_category == "전체조회") {
+      this.noticeService.getNoticeList()
+        .subscribe((noticeList: Notice[]) => {
+          this.noticeList = noticeList;
+        });
     } else {
       this.noticeService.getNoticeCategory(n_category)
         .subscribe((noticeList: Notice[]) => {
@@ -50,22 +45,17 @@ export class NoticeComponent implements OnInit {
   setNoticeNo(n_no: number) {
     this.noticeService.setNoticeNo(n_no);
     this.setNoticeNoObject(n_no);
-
-    if(this.tokenService.isToken("noticeDetailToken")) {
-      this.tokenService.removeToken("noticeDetailToken");
-    }
-    this.tokenService.saveToken("noticeDetailToken", n_no);
   }
 
   setNoticeNoObject(n_no: number) {
-    var notice = this.noticeList.find(function (item) {
+    var notice = this.noticeList.find(function(item) {
       return item.n_no === n_no;
     });
     this.noticeService.setNoticeNoObject(notice);
     this.check(notice);
   }
 
-  check(notice:Notice) {
+  check(notice: Notice) {
     this.noticeService.checkNotice(notice);
   }
 
