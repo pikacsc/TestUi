@@ -1,0 +1,14 @@
+<label style="padding: 5px">게시판 관리</label>
+<select class="user-preselect btn-add" style="width: 40%;height: 34px;" (change)="selectchange($event)">
+<option value="0" >1:1 질문하기</option>
+<option value="1" >자주 하는 질문</option>
+<option value="2" >공지사항</option>
+<option value="3" >상품 문의</option>
+<option value="4" >상품 후기</option>
+<option value="5" selected="selected">선택</option>
+</select>
+<app-admin-qna *ngIf="currentBoard == 0"></app-admin-qna>
+<app-admin-faq *ngIf="currentBoard == 1"></app-admin-faq>
+<app-admin-notice *ngIf="currentBoard == 2"></app-admin-notice>
+<app-admin-product-qna *ngIf="currentBoard == 3"></app-admin-product-qna>
+<app-admin-product-review *ngIf="currentBoard == 4"></app-admin-product-review>

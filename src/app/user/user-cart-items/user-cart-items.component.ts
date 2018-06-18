@@ -35,31 +35,23 @@ export class UserCartItemsComponent implements OnInit {
 }
   ngOnInit() {
     this.loggedUser = this.authService.getLoggedInUser();
-    if(this.tokenService.isToken('cartLists')){
-      this.cartList=this.tokenService.getToken('cartLists');
-    }else{
       this.getCartProducts();
-    }
   }
 
   getCartProducts() {
     this.productService.getUsersCartProducts().subscribe((cartList:Cart[])=>{
       this.cartList=cartList;
-      this.tokenService.saveToken('cartLists',this.cartList);
     });
   }
 
   removeFromCart(cno: number) {
     this.productService.removeFromCart(cno).subscribe(data=>{
-      this.tokenService.removeToken('cartLists');
       this.getCartProducts();
-      alert("삭제 되었습니다.");
     });
   }
 
     updateCart(cart:Cart){
       this.productService.updateCart(cart).subscribe((cart:Cart)=>{
-        this.tokenService.removeToken('cartLists');
         alert("수정 되었습니다.");
       });
     }

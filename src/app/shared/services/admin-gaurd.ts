@@ -10,10 +10,10 @@ export class AdminGaurd implements CanActivate {
   ) {}
 
   canActivate() {
-     if (this.authService.isLoggedIn() && this.authService.isAdmin()) {
+     if (this.authService.isAdmin()) {
        return true;
      }
-    this.router.navigate(["no-access"]);
+    this.router.navigate(["adminlogin"]);
     return false;
   }
 }

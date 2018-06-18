@@ -18,6 +18,7 @@ import { LocalFavouritePageComponent } from "./local-favourite-page/local-favour
 import { LocalCartItemComponent } from "./local-cart-item/local-cart-item.component";
 import { SharedModule } from "../shared/shared.module";
 import { NgDaumAddressModule } from 'ng2-daum-address';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -32,7 +33,8 @@ import { NgDaumAddressModule } from 'ng2-daum-address';
     LoginComponent,
     FooterComponent,
     LocalFavouritePageComponent,
-    LocalCartItemComponent
+    LocalCartItemComponent,
+    AdminLoginComponent
   ],
   schemas: [NO_ERRORS_SCHEMA],
   exports: [NavbarComponent, FooterComponent],

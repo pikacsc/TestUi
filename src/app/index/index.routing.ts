@@ -3,7 +3,7 @@ import { Routes } from "@angular/router";
 import { IndexComponent } from "./index.component";
 import { LocalFavouritePageComponent } from "./local-favourite-page/local-favourite-page.component";
 import { LocalCartItemComponent } from "./local-cart-item/local-cart-item.component";
-
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 export const IndexRoutes: Routes = [
   {
     path: "index",
@@ -15,6 +15,10 @@ export const IndexRoutes: Routes = [
       {
         path: "login",
         component: LoginComponent
+      },
+      {
+          path: "adminlogin",
+          component: AdminLoginComponent
       },
       {
         path: "favourites",

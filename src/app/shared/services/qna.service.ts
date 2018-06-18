@@ -35,6 +35,12 @@ export class QnaService {
     return this.qna;
   }
 
+// 관리자용
+  getAllQnaList() {
+    return this.http.get('http://localhost:8080/toma/admin/qna/list');
+  }
+
+
   getQnaList(u_id: string) {
     return this.http.get(this.url + "/list/" + u_id);
   }

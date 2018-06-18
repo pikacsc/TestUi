@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-admin-banner',
   templateUrl: './admin-banner.component.html',
@@ -7,9 +6,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminBannerComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+  ) { }
 
   ngOnInit() {
+
   }
+
+
+   uploadedFiles: any[] = [];
+
+   onUpload(event) {
+       for(let file of event.files) {
+           this.uploadedFiles.push(file);
+       }
+   }
 
 }
