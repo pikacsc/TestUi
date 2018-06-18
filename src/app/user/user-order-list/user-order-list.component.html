@@ -8,8 +8,13 @@
       <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-12 col-sm-pull-12">
         <!-- 주문건수 확인 -->
         <h6 style="text-align:right; font-weight:bold; color:#232BDB; font-size:16px;">마이페이지 > 주문목록</h6>
+        <hr />
         <br />
-        <!-- <link src="http://bootswatch.com/flatly/bootstrap.css" type="text/css"> order 건수 표시 -->
+        <div class="panel-heading text-center">
+          <h4>주문 현황</h4>
+        </div>
+        <br />
+        <!-- 원본디자인 <link src="http://bootswatch.com/flatly/bootstrap.css" type="text/css"> order 건수 표시 -->
         <!------ Include the above in your HEAD tag ---------->
             <div class="row">
               <!-- 주문취소 = C / 주문대기 = N / 주문완료 = Y -->
@@ -54,7 +59,9 @@
                     </div>
                 </div>
             </div> <!--orderlist 끝-->
+            <br />
         <hr>
+        <br />
         <!--SHIPPING METHOD-->
         <div class="panel panel-default">
           <div class="panel-heading text-center">
@@ -82,7 +89,7 @@
                 <tr>
                   <td>{{order.oViewNum}}</td>
                   <td>{{order.odate}}</td>
-                  <td>{{order.ototal}}</td>
+                  <td>{{order.ototal+2500}}</td>
                   <td>{{order.ostatus}}</td>
                   <td><a data-toggle="modal" data-target="#orderDetail" style="color:dodgerblue; font-weight:bold;" (click)="getDetailList(order.ono,order.oaddr)">상세</a></td>
                   <td><a style="color:red; font-weight:bold;" (click)="cancleOrder(order)">취소</a></td>
@@ -143,7 +150,6 @@
               <td><br />{{detail.odpprice}}</td>
               <td><br />&nbsp;&nbsp;&nbsp;{{detail.odpamount}}&nbsp;&nbsp;&nbsp;</td>
               <td><br />{{detail.odpprice*detail.odpamount}}</td>
-
             </tr>
 
           </tbody>
@@ -156,7 +162,12 @@
         </div>
         <div class="form-group">
           <div class="col-md-12">
-            <input type="text" name="address4" class="form-control" value='{{oAddress}}' [disabled]='true'/>
+            <strong>주소</strong>
+            <!-- <input type="text" name="address4" class="form-control" value='{{oAddress}}' [disabled]='true'/> -->
+            <!-- <textarea value='{{oAddress}}' /> -->
+            <textarea name="" rows="4" cols="50" value="{{oAddress}}" class="form-control" required [disabled]='true'></textarea>
+            <strong>배송비</strong>
+            <input type="text" name="address4" class="form-control" value='2500' [disabled]='true'/>
           </div>
         </div>
       </div>

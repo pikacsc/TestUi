@@ -28,4 +28,11 @@ export class NavbarComponent implements OnInit {
     location.reload();
   }
 
+  adminlogout() {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.router.navigate(["/"]);
+    location.reload();
+  }
+
 }

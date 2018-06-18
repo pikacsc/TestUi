@@ -143,8 +143,8 @@ this.product = product;
       this.tokenService.saveToken('fromCart',false);
     }
 
-    // this.productService.cart=this.cart;
-    // this.productService.fromCart=false;
+    //this.productService.cart=this.cart;
+    //this.productService.fromCart=false;
     console.log(this.cart);
     this.router.navigate(["/users", { outlets: { profileOutlet: ['order-write'] } }]);
   }

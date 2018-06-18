@@ -3,6 +3,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ProductService } from "../../shared/services/product.service";
 import { Product } from "../../shared/models/product";
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { TokenService } from "../../shared/services/token.service";
 @Component({
   selector: 'app-admin-product',
   templateUrl: './admin-product.component.html',
@@ -23,6 +24,7 @@ export class AdminProductComponent implements OnInit {
 
 
     constructor(
+      private tokenService:TokenService,
       private productService:ProductService,
       private http:HttpClient
     ) {}
@@ -133,6 +135,7 @@ export class AdminProductComponent implements OnInit {
                  console.log(res);
                  event.confirm.resolve(event.newData);
                  alert("상품이 등록되었습니다.");
+                 this.tokenService.removeToken("adminProductToken");
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -149,6 +152,7 @@ export class AdminProductComponent implements OnInit {
           console.log(res);
           event.confirm.resolve(event.newData);
           alert("상품이 수정되었습니다.");
+          this.tokenService.removeToken("adminProductToken");
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -166,6 +170,7 @@ export class AdminProductComponent implements OnInit {
              console.log(res);
              event.confirm.resolve(event.source.data);
             alert("상품이 삭제되었습니다.");
+            this.tokenService.removeToken("adminProductToken");
          },
          (err: HttpErrorResponse) => {
            if (err.error instanceof Error) {
@@ -178,10 +183,16 @@ export class AdminProductComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.productService.getProducts()
-    .subscribe((productList : Product[]) => {
-      this.productList = productList;
-    })
+    if(this.tokenService.isToken("adminProductToken")){
+      this.productList = this.tokenService.getToken("adminProductToken");
+    }else{
+      this.productService.getProducts()
+      .subscribe((productList : Product[]) => {
+        this.productList = productList;
+        this.tokenService.saveToken("adminProductToken",this.productList);
+      })
+    }
+
   }
 
 

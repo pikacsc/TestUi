@@ -29,15 +29,8 @@ export class UserOrderListComponent implements OnInit {
 
   ngOnInit() {
     this.uid=this.authService.getLoggedInUser().uid;
-    if(this.tokenService.isToken('orderLists')){
-      this.orderLists=this.tokenService.getToken('orderLists');
-      this.OrderCancle=this.tokenService.getToken('OrderCancle');
-      this.OrderWait = this.tokenService.getToken('OrderWait');
-      this.OrderCommit=this.tokenService.getToken('OrderCommit');
-      this.orderNum=this.tokenService.getToken('orderNum');
-    }else{
+
       this.getOrderList(this.uid);
-    }
 
 
   }
@@ -60,11 +53,6 @@ export class UserOrderListComponent implements OnInit {
             this.OrderCommit++;
           }
         }
-        this.tokenService.saveToken('orderLists',this.orderLists);
-        this.tokenService.saveToken('OrderCancle',this.OrderCancle);
-        this.tokenService.saveToken('OrderWait',this.OrderWait);
-        this.tokenService.saveToken('OrderCommit',this.OrderCommit);
-        this.tokenService.saveToken('orderNum',this.orderNum);
       });
     }
   }

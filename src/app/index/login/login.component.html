@@ -41,7 +41,7 @@
 
 
   <!--회원가입폼 (모달)-->
-  <div class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog cascading-modal" role="document">
       <form #userForm="ngForm" (ngSubmit)="addUser(userForm)" name="JoinForm">
         <div class="modal-content" >
@@ -78,7 +78,7 @@
             <div class="md-form form-sm">
               <i class="fa fa-phone prefix"></i>
               <input mdbActive type="text" id="userPhone" class="form-control"  [(ngModel)]="createUser.uphone" name="uphone">
-              <label for="userPhone">연락처( '-' 제외, 숫자만입력)</label>
+              <label for="userPhone">연락처( '-' 제외, 9~11자리 숫자만입력)</label>
             </div>
             <div class="md-form form-sm">
               <div class="dododo" style="margin-left: 28px;"><btn-daum-address (result)="setDaumAddressApi($event)" [options]="daumAddressOptions"></btn-daum-address></div>
