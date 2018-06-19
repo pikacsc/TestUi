@@ -14,10 +14,6 @@ declare var $: any;
 })
 export class UserAccountComponent implements OnInit {
   loggedUser: User;
-  // Enable Update Button
-  // enbUpdBut: Boolean = true;
-
-
   constructor(private authService:AuthService,private fb: FormBuilder, private userService: UserService,  private router: Router ) {
 
   }
@@ -48,9 +44,9 @@ export class UserAccountComponent implements OnInit {
       this.loggedUser.uaddr3!=null &&
       this.loggedUser.ubirth!=null
     ){
-      let numpattern=/^[0-9]*$/;
+      let numpattern=/^[0-9]*$/; //숫자표현식
 
-      console.log('1차가입조건만족');
+      console.log('1차 정보수정조건 만족');
       // 2차 필터
       if(this.loggedUser.upw.length>20){
         submitStatus=false;
@@ -68,7 +64,8 @@ export class UserAccountComponent implements OnInit {
         $("#userPhone").focus();
         return;
       }if(this.loggedUser.ubirth.length!=6){
-        alert('생년월일은 주민등록번호 앞 6자리를 입력해야 합니다');
+        submitStatus=false;
+        alert('생년월일은 주민등록번호 앞 6자리를 입력해야 합니다 (공백이 있나 확인해주세요)');
         $("#userBirth").focus();
         return;
       }if(numpattern.test(this.loggedUser.ubirth)==false){
@@ -94,7 +91,7 @@ export class UserAccountComponent implements OnInit {
     }
     if(submitStatus){
       this.userService.updateUser(this.loggedUser).subscribe(()=>{
-        // this.loggedUser = data;
+        //회원정보 수정이 성공적으로 실행될때, 토큰업데이트
         this.authService.updateUserToken(this.loggedUser);
         alert("수정되었습니다");
         this.router.navigate(["index"]);
@@ -182,7 +179,7 @@ export class UserAccountComponent implements OnInit {
   daumAddressOptions =  {
     class: ['btn', 'btn-large', 'btn-info', 'waves-light']
   };
-  AddrSearch1_2:string; //우편번호(zip)+기본주소(addr)
+  AddrSearch1_2:string;    //우편번호(zip)+기본주소(addr)
   AddrSearch1_3:string=""; //상세주소
   setDaumAddressApi(AddrSearch){
   // 여기로 주소값이 반환

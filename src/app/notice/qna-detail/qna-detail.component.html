@@ -40,11 +40,19 @@
       <th class="cyan lighten-4">작성일</th>
       <td>{{ qna?.q_date | date:'yyyy-MM-dd' }}</td>
       <th class="cyan lighten-4">답변여부</th>
-      <td>{{ qna?.q_reply | uppercase }}</td>
+      <td [(ngModel)]="reply" ngDefaultControl>{{ reply }}</td>
     </tr>
     <tr>
       <td colspan="4">
         <pre>{{ qna?.q_content }}</pre>
+      </td>
+    </tr>
+    <tr *ngIf="reply !== 'N'">
+      <th class="cyan lighten-4">답변 내용</th>
+      <td colspan="3">
+        <pre>
+          {{ qna?.q_reply }}
+        </pre>
       </td>
     </tr>
   </tbody>
