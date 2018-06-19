@@ -82,7 +82,7 @@
                 </tr>
               </thead>
 
-              <tbody *ngFor="let order of orderLists" style="position:relative;">
+              <tbody *ngFor="let order of orderLists | paginate: { itemsPerPage: 10, currentPage: page }" style="position:relative;">
 
                 <!-- <tr *ngFor="let item of cartList"> -->
                 <!-- <td class="col-md-3"> -->
@@ -90,13 +90,19 @@
                   <td>{{order.oViewNum}}</td>
                   <td>{{order.odate}}</td>
                   <td>{{order.ototal+2500}}원</td>
-                  <td>{{order.ostatus}}</td>
+                  <!-- <td>{{order.ostatus}}</td> -->
+                  <td *ngIf='order.ostatus=="C"'>취소</td>
+                  <td *ngIf='order.ostatus=="N"'>대기</td>
+                  <td *ngIf='order.ostatus=="Y"'>완료</td>
                   <td><a data-toggle="modal" data-target="#orderDetail" style="color:dodgerblue; font-weight:bold;" (click)="getDetailList(order.ono,order.oaddr)">상세</a></td>
                   <td><a style="color:red; font-weight:bold;" (click)="cancleOrder(order)">취소</a></td>
                 </tr>
               </tbody>
 
             </table>
+            <div class="text-center mt-3">
+              <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div>
           </div>
         </div>
 

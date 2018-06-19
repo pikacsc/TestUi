@@ -13,6 +13,7 @@ import { TokenService } from "../../shared/services/token.service";
 export class UserOrderListComponent implements OnInit {
 
   // checkNum:number=0;
+  page = 1;
   uid:string;
   orderLists:Order[]=[];
   detailLists:OrderDetail[]=[];
@@ -21,6 +22,8 @@ export class UserOrderListComponent implements OnInit {
   OrderWait=0; // 주문대기건수 (평소)
   OrderCommit=0; // 주문완료건수
   oAddress:string;
+
+
   constructor(
     private productService:ProductService,
     private authService:AuthService,
