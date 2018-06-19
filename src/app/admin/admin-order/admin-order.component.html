@@ -1,3 +1,5 @@
-<p>
-  admin-order works!
-</p>
+<ng2-smart-table
+[settings]="settings"
+[source]="orderList"
+(editConfirm)="updateRecord($event)"
+></ng2-smart-table>

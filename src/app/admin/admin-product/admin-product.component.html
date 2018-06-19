@@ -6,68 +6,67 @@
 ></ng2-smart-table>
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  {{navState}}
+  <h1 id="navState">{{navState}}</h1>
   <div class="product-image">
     <div class="view hm-zoom z-depth-2" style="cursor: pointer">
       <img src="./assets/ProductImg/{{navProduct.p_img}}.jpg" [alt]="navProduct.p_name" width="100%" class="img-fluid rounded">
       <h1 *ngIf="productNullCheck()">상품정보가 없습니다</h1>
+      <button  class="btn btn-primary" data-toggle="collapse" data-target="#demo">이미지 수정</button>
+    <div id="demo" class="collapse">
+      <app-file-upload></app-file-upload>
+    </div>  <!-- collapse -->
     </div>
-    <!-- <div class="z-depth-1" style="margin-top:15px"> -->
-      <ul class="list-group">
-        <li class="list-group-item"> 원가:
-          <span style="margin-left:15px; color:crimson">
-            <i class="fa fa-inr" aria-hidden="true"></i>
-            <input type="number" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_price" [ngModelOptions]="{standalone: true}" />
-          </span>
-        </li>
-        <li class="list-group-item"> 판매가:
-          <span style="margin-left:15px; color:crimson">
-            <i class="fa fa-inr" aria-hidden="true"></i>
-            <input type="number" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_sellPrice" [ngModelOptions]="{standalone: true}" />
-          </span>
-        </li>
-        <li class="list-group-item"> 순이익:
-          <span style="margin-left:15px; color:darkblue">
-            <i class="fa fa-inr" aria-hidden="true"></i>{{navProduct.p_profit}}</span>
-        </li>
-      </ul>
-    <!-- </div> -->
   </div>
+  <br/>
+  <h5 class="product-head font-weight-bold">상품 상세 정보</h5>
   <table class="table" cellspacing="0" style="max-height: 28px">
     <tbody>
       <tr>
-        <th scope="row">상품명</th>
-        <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_name" [ngModelOptions]="{standalone: true}" />
-      </tr>
-      <tr>
-        <th colspan="1">상품 내용</th>
-        <td colspan="2">
-          <textarea name="qnaContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navProduct.p_content" [ngModelOptions]="{standalone: true}"></textarea>
+        <th scope="row" class="font-weight-bold">상품 이름</th>
+        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_name" [ngModelOptions]="{standalone: true}" />
         </td>
       </tr>
       <tr>
-        <th scope="row">분류</th>
+        <th scope="row" class="font-weight-bold">카테고리</th>
         <td>
-        <select class="user-preselect btn-add" style="width: 40%;height: 34px;" (change)="selectchange($event)">
-        <option value="Snack" >Snack</option>
-        <option value="Bakery" >Bakery</option>
-        <option value="Sauce" >Sauce</option>
-        <option value="Drink" >Drink</option>
-        <option value="Instant" >Instant</option>
-        </select>
+          <select class="mdb-select" [(ngModel)]="this.navProduct.p_kind" name="navProduct_p_kind" id="navProduct_p_kind" >
+            <option value="" disabled selected>상품 카테고리를 선택해주세요</option>
+            <option value="Bakery">&nbsp;Bakery</option>
+            <option value="Sauce">&nbsp;Sauce</option>
+            <option value="Drink">&nbsp;Drink</option>
+            <option value="Instant">&nbsp;Instant</option>
+            <option value="Snack">&nbsp;Snack</option>
+          </select>
+        </td>
+      <tr>
+        <th scope="row" class="font-weight-bold">원가</th>
+        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_price" [ngModelOptions]="{standalone: true}" />
         </td>
       </tr>
       <tr>
-        <th scope="row">재고</th>
-        <td><input type="number" min="1" [(ngModel)]='this.navProduct.p_count'  [ngModelOptions]="{standalone: true}" required />
-          <button (click)='p_countUp()'>+</button>
-          <button (click)='p_countDown()'>-</button>
+        <th scope="row" class="font-weight-bold">판매가</th>
+        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_sellPrice" [ngModelOptions]="{standalone: true}" />
         </td>
-
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">순이익</th>
+        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_profit" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">재고</th>
+        <td><input type="number" min="1" [(ngModel)]='this.navProduct.p_count'  [ngModelOptions]="{standalone: true}" required />
+        </td>
       </tr>
     </tbody>
   </table>
+  <li class="list-group-item"> 상품내용
+    <span style="margin-left:15px; color:crimson">
+      <textarea name="qnaContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navProduct.p_content" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
   <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 정보 수정'">수정</button>
   <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 등록'">등록</button>
+  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
   <button type="button" class="btn btn-primary" (click)="navProductReset()" >초기화</button>
 </div>

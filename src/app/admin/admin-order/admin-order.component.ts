@@ -7,13 +7,6 @@ import { TokenService } from "../../shared/services/token.service";
 @Component({
   selector: 'app-admin-order',
   templateUrl: './admin-order.component.html',
-  template: `
-    <ng2-smart-table
-    [settings]="settings"
-    [source]="orderList"
-    (editConfirm)="updateRecord($event)"
-    ></ng2-smart-table>
-  `,
   styleUrls: ['./admin-order.component.css']
 })
 export class AdminOrderComponent implements OnInit {
@@ -28,11 +21,13 @@ export class AdminOrderComponent implements OnInit {
   settings = {
   mode: 'inline',
   add: {
-    confirmCreate: 'true'
+    confirmCreate: 'true',
+    addButtonContent: ''
   },
   actions: {
     add: 'false',
-    delete: 'false'
+    delete: 'false',
+    columnTitle:'주문관리'
   },
   edit: {
     saveButtonContent: '확인',
@@ -41,7 +36,7 @@ export class AdminOrderComponent implements OnInit {
     confirmSave: 'true'
   },
   delete: {
-    deleteButtonContent: '삭제',
+    deleteButtonContent: '',
     confirmDelete: 'true'
   },
   columns: {
@@ -68,8 +63,8 @@ export class AdminOrderComponent implements OnInit {
         config: {
           list: [
             { value: 'Y', title: '처리' },
-            { value: 'C', title: '대기' },
-            { value: 'N', title: '취소' }
+            { value: 'N', title: '대기' },
+            { value: 'C', title: '취소' }
           ] },
       }
     },
