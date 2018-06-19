@@ -144,7 +144,6 @@ export class AdminEmployeeComponent implements OnInit {
    }
 
   updateAdmin(event){
-    alert(document.getElementById('inputPassword'));
     this.http.put<Admin>('http://localhost:8080/toma/admin/', this.newDataBinding(event)).subscribe(
         res => {
           console.log(res);

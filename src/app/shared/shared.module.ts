@@ -4,7 +4,7 @@ import { NoProductsFoundComponent } from "./components/no-products-found/no-prod
 import { MDBBootstrapModule } from "angular-bootstrap-md";
 // import { AngularFireModule } from "angularfire2";
 // import { AngularFireDatabaseModule } from "angularfire2/database";
-import { FormsModule, FormBuilder } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastyModule } from "ng2-toasty";
 import { RouterModule, Router } from "@angular/router";
 import { OwlModule } from "ngx-owl-carousel";
@@ -26,6 +26,7 @@ import { NoticeService } from "./services/notice.service";
 import { FaqService } from "./services/faq.service";
 import { QnaService } from "./services/qna.service";
 import { SearchService } from "./services/search.service";
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { SearchService } from "./services/search.service";
     // AngularFireModule.initializeApp(FireBaseConfig),
     // AngularFireDatabaseModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
     ToastyModule.forRoot(),
@@ -47,7 +49,8 @@ import { SearchService } from "./services/search.service";
     NoProductsFoundComponent,
     FilterByKindPipe,
     NoAccessComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FileUploadComponent
   ],
   exports: [
     NoProductsFoundComponent,
@@ -62,6 +65,7 @@ import { SearchService } from "./services/search.service";
     NgxPaginationModule,
     FilterByKindPipe,
     AgmCoreModule,
+    FileUploadComponent,
     NoAccessComponent,
     PageNotFoundComponent
   ],
@@ -72,7 +76,6 @@ import { SearchService } from "./services/search.service";
     AdminGaurd,
     ProductService,
     UserService,
-    FormBuilder,
     LoaderSpinnerService,
     NoticeService,
     FaqService,
