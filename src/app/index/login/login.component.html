@@ -1,20 +1,20 @@
 <br /><br />
 <section class="container" style="position:relative;">
-  <!-- Login form -->
+  <!-- 로그인 폼 -->
   <div class="col-sm-6" style="margin:auto;">
     <form style="width:22rem" #loginForm="ngForm" (ngSubmit)="login()">
       <p class="h5 text-center mb-4">Sign in</p>
 
       <div class="md-form">
         <i class="fa fa-envelope prefix grey-text"></i>
-        <input mdbActive type="text" id="loginUserId" class="form-control" name="uid" [(ngModel)]="login1.uid" mdbInputValidate [email]="true">
-        <label for="userId">Your ID</label>
+        <input mdbActive type="text" id="loginUserId" class="form-control" name="uid" [(ngModel)]="login1.uid">
+        <label for="userId">아이디</label>
       </div>
 
       <div class="md-form">
         <i class="fa fa-lock prefix grey-text"></i>
         <input type="password" id="userPassword" name="upw" [(ngModel)]="login1.upw" class="form-control" mdbActive>
-        <label for="defaultForm-pass">Your password</label>
+        <label for="defaultForm-pass">비밀번호</label>
       </div>
 
       <div class="text-center">
@@ -53,7 +53,7 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <!-- mdbInputValidate: 만족하면 success, 실패하면 false. 글씨가 뜨게해주는 속성 삭제 -->
+          <!-- mdbInputValidate: 만족하면 success, 실패하면 false. 글씨가 뜨게해주는 속성 삭제. 컨트롤하는 방법을 모르겠어서 삭제-->
           <div class="modal-body" style="font-size:12px;">
             <div class="md-form form-sm" style="margin:0px;">
               <i class="fa fa-envelope prefix"></i>
@@ -87,9 +87,6 @@
               <p>기본주소 : {{AddrSearch2}}</p>
               <input mdbActive type="text" id="DetailAddr" class="form-control"  [(ngModel)]="AddrSearch3" name="uDetailAddr" placeholder="상세주소(50자이내)">
               <br />
-              <!-- <i class="fa fa-map-marker prefix"></i> -->
-              <!-- <input mdbActive type="text" id="userAddr1" class="form-control"  [(ngModel)]="createUser.uaddr1" name="uaddr1" style="display:none"> -->
-              <!-- <label for="DetailAddr">상세주소(50자이내)</label> -->
             </div>
             <div class="md-form form-sm">
               <i class="fa fa-calendar prefix"></i>
