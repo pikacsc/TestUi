@@ -29,7 +29,7 @@
       <th>번호</th>
       <th>제목</th>
       <th>작성일</th>
-      <th>답변</th>
+      <th>답변여부</th>
     </tr>
   </thead>
   <!--Table head-->
@@ -39,11 +39,12 @@
     <tr *ngFor="let qna of qnaList | paginate: { itemsPerPage: 10, currentPage: page }; let i= index">
       <th >{{ i+1 }}</th>
       <th>
-        <a [routerLink]="['/detail/qna']" routerLinkActive="router-link-active" (click)="setQnaNo(qna.q_no)">{{ qna.q_title }}
-              </a>
+        <a [routerLink]="['/detail/qna']" routerLinkActive="router-link-active" (click)="setQnaNo(qna.q_no)">
+          {{ qna.q_title }}</a>
       </th>
       <th>{{ qna.q_date | date:'yyyy-MM-dd' }}</th>
-      <th>{{ qna.q_reply | uppercase }}</th>
+      <th *ngIf="qna.q_reply == reply">{{ reply | uppercase }}</th>
+      <th *ngIf="qna.q_reply !== reply">답변완료</th>
     </tr>
   </tbody>
   <!--Table body-->
