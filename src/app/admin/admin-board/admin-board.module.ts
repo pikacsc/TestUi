@@ -6,13 +6,14 @@ import { AdminQnaComponent } from './admin-qna/admin-qna.component';
 import { AdminProductQnaComponent } from './admin-product-qna/admin-product-qna.component';
 import { AdminProductReviewComponent } from './admin-product-review/admin-product-review.component';
 import { AdminBoardComponent } from './admin-board.component';
-import { TableModule } from 'primeng/table';
-
+import { SharedModule } from "../../shared/shared.module";
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
     CommonModule,
-    TableModule
+    SharedModule,
+    Ng2SmartTableModule
   ],
   declarations: [
     AdminBoardComponent,

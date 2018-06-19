@@ -1,4 +1,8 @@
 /* The side navigation menu */
+#navState{
+   text-align: center;
+}
+
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
