@@ -23,49 +23,30 @@ export class UserService {
 
   joinUrl='http://localhost:8080/toma/join/';
   loginUrl='http://localhost:8080/toma/login/';
-  updateUrl='http://localhost:8080/toma/user/Update/'; // +user객체
+  updateUrl='http://localhost:8080/toma/user/Update/';
   findUserIDUrl='http://localhost:8080/toma/user/findID/';
   findUserPWUrl='http://localhost:8080/toma/user/findPW/';
   constructor(private http: HttpClient) {
-    // this.getUsers();
     this.loginUser=new User();
   }
-
-
-  // getUsers(login: Login) {
-  //   return this.http.post(this.url, login);
-  //   // this.users = this.db.list("clients");
-  //   // return this.users;
-  // }
-
+  // 로그인
   getUsers(login: Login) {
     return this.http.post(this.loginUrl, login);
-    // this.users = this.db.list("clients");
-    // return this.users;
   }
 
-
+  // 회원가입
   createUser(data: User) {
-    // data.location = this.location;
-    // data.createdOn = moment(new Date()).format("X");
-    // this.users.push(data);
-
     return this.http.post(this.joinUrl,data);
   }
-
+  // 회원정보수정
   updateUser(data:User){
     return this.http.put(this.updateUrl,data);
   }
-
-  // updateUser(user: User) {
-  //   // this.users.update(user.$key, user);
-  // }
-
-
+  // 아이디찾기
   findUserID(data : User){
     return this.http.post(this.findUserIDUrl,data);
   }
-
+  // 비밀번호찾기
   findUserPW(data : User){
     return this.http.post(this.findUserPWUrl,data);
   }
