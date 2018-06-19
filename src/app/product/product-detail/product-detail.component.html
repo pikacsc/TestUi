@@ -9,11 +9,11 @@
         </div>
         <div class="z-depth-1" style="margin-top:15px">
           <ul class="list-group">
-            <li class="list-group-item"> 상품 가격:
+            <li class="list-group-item font-weight-bold"> 상품 가격:
               <span style="margin-left:15px; color:crimson">
                 <i class="fa fa-inr" aria-hidden="true"></i> {{product.p_sellPrice}}</span>
             </li>
-            <li class="list-group-item"> 상품 판매자:
+            <li class="list-group-item font-weight-bold"> 상품 판매자:
               <span style="margin-left:15px; color:darkblue">
                 <i class="fa fa-building" aria-hidden="true"></i> 토마토마 </span>
             </li>
@@ -55,8 +55,9 @@
 
         <li>
          <span>
-          <button type="button" class="btn btn-outline-warning waves-effect" (click)="addToCart()">장바구니담기</button>
-          <button type="button" class="btn btn-warning" (click)="gotoOrderWirte()">구매하기</button>
+          <button type="button" class="btn btn-outline-warning waves-effect font-weight-bold"
+              (click)="addToCart()">장바구니담기</button>
+          <button type="button" class="btn btn-warning font-weight-bold" (click)="gotoOrderWirte()">구매하기</button>
           </span>
         </li>
 
