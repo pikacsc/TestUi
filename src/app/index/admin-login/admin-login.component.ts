@@ -39,6 +39,7 @@ export class AdminLoginComponent implements OnInit {
               return false;
             }
             this.adminlogin = admin;
+            this.tokenService.saveToken("adminToken",this.adminlogin);
             this.router.navigate(["admin"]);
           },(err: HttpErrorResponse) => {
             if (err.error instanceof Error) {

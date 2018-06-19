@@ -9,8 +9,94 @@ import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@ang
   styleUrls: ['./admin-product.component.css']
 })
 export class AdminProductComponent implements OnInit {
+  source: LocalDataSource;
+  productList: Product[];
+  settings = {
+  mode: 'external',
+  actions: {
+    delete: 'false',
+    columnTitle:'상품관리'
+  },
+  add: {
+    confirmCreate: 'true',
+    addButtonContent: '상품추가'
+  },
+  edit: {
+    saveButtonContent: '확인',
+    editButtonContent: '수정',
+    cancelButtonContent: '취소',
+    confirmSave: 'true'
+  },
+  delete: {
+    deleteButtonContent: '',
+    confirmDelete: 'true'
+  },
+  columns: {
+    p_code: {
+      title: '상품코드'
+    },
+    p_name: {
+      title: '상품명'
+    },
+    p_count: {
+      title: '재고'
+    },
+    p_kind: {
+      title: '분류',
+      editor: {
+        type: 'list',
+        config: {
+          list: [
+            { value: 'Bakery', title: 'Bakery' },
+            { value: 'Sauce', title: 'Sauce' },
+            { value: 'Drink', title: 'Drink' },
+            { value: 'Instant', title: 'Instant' },
+            { value: 'Snack', title: 'Snack' }
+          ] },
+      }
+    },
+    p_price: {
+      title: '원가'
+    },
+    p_sellPrice: {
+      title: '판매가'
+    },
+    p_profit: {
+      title: '순이익'
+    },
+    p_img: {
+      title: '이미지'
+    },
+    p_content: {
+      title: '상품내용'
+    },
+    p_date: {
+      title: '수정날짜'
+    }
+  }
+};
 
 
+
+selectedFile: File;
+
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+  }
+
+  onUpload() {
+    this.http.post('http://localhost:8080/uploadFile', this.selectedFile, {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(event => {
+        console.log(event); // handle event here
+      });
+  }
+
+
+  kinds = ["Bakery", "Sauce", "Drink", "Instant","Snack"];
+  selectedKind = "All";
 
   navProduct = new Product;
   navState:string;
@@ -19,71 +105,6 @@ export class AdminProductComponent implements OnInit {
       private http:HttpClient
     ) {}
 
-    source: LocalDataSource;
-    productList: Product[];
-    settings = {
-    mode: 'external',
-    actions: {
-      delete: 'false'
-    },
-    add: {
-      confirmCreate: 'true',
-      addButtonContent: '상품추가'
-    },
-    edit: {
-      saveButtonContent: '확인',
-      editButtonContent: '수정',
-      cancelButtonContent: '취소',
-      confirmSave: 'true'
-    },
-    delete: {
-      deleteButtonContent: '',
-      confirmDelete: 'true'
-    },
-    columns: {
-      p_code: {
-        title: '상품코드'
-      },
-      p_name: {
-        title: '상품명'
-      },
-      p_count: {
-        title: '재고'
-      },
-      p_kind: {
-        title: '분류',
-        editor: {
-          type: 'list',
-          config: {
-            list: [
-              { value: 'Bakery', title: 'Bakery' },
-              { value: 'Sauce', title: 'Sauce' },
-              { value: 'Drink', title: 'Drink' },
-              { value: 'Instant', title: 'Instant' },
-              { value: 'Snack', title: 'Snack' }
-            ] },
-        }
-      },
-      p_price: {
-        title: '원가'
-      },
-      p_sellPrice: {
-        title: '판매가'
-      },
-      p_profit: {
-        title: '순이익'
-      },
-      p_img: {
-        title: '이미지'
-      },
-      p_content: {
-        title: '상품내용'
-      },
-      p_date: {
-        title: '수정날짜'
-      }
-    }
-  };
 
   editProduct = new Product;
 
