@@ -67,9 +67,6 @@ export class AdminProductComponent implements OnInit {
     p_img: {
       title: '이미지'
     },
-    p_content: {
-      title: '상품내용'
-    },
     p_date: {
       title: '수정날짜'
     }
