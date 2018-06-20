@@ -1,0 +1,56 @@
+<ng2-smart-table
+[settings]="settings"
+[source]="noticeList"
+(create)="createNotice()"
+(edit)="updateNotice($event)"
+></ng2-smart-table>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <h1 id="navState">{{navState}}</h1>
+  <table class="table" cellspacing="0" style="max-height: 28px">
+    <tbody>
+      <tr>
+        <th class="cyan lighten-4">제목</th>
+        <td colspan="4">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navNotice.n_title" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">카테고리</th>
+        <td><select class="mdb-select" [(ngModel)]="this.navNotice.n_category" name="navProduct_n_cate" id="navProduct_n_cate" >
+                  <option value="" disabled selected>공지사항 카테고리를 선택해주세요</option>
+                  <option value="공지">&nbsp;공지</option>
+                  <option value="배송">&nbsp;배송</option>
+                  <option value="상품">&nbsp;상품</option>
+                  <option value="행사">&nbsp;행사</option>
+                  <option value="긴급">&nbsp;긴급</option>
+                </select></td>
+                <th class="cyan lighten-4">번호</th>
+                <td *ngIf="navState==='공지사항 글쓰기'">{{nextNoticeNo}}</td>
+                <td *ngIf="navState==='공지사항 수정'">{{ navNotice?.n_no }}</td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">작성자</th>
+        <td colspan="4">
+          {{ navNotice?.a_id}}
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">작성일</th>
+        <td>{{ navNotice?.n_date | date:'yyyy-MM-dd' }}</td>
+        <th class="cyan lighten-4">조회수</th>
+        <td>{{ navNotice?.n_hits }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <li class="list-group-item"> 공지사항 내용
+    <span style="margin-left:15px; color:crimson">
+      <!-- {{navNotice.q_content}} -->
+      <textarea name="NoticeContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navNotice.n_content" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
+  <button type="button" class="btn btn-primary" (click)="confirmCreate()" *ngIf="navState==='공지사항 글쓰기'">등록</button>
+  <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='공지사항 수정'">수정</button>
+  <button type="button" class="btn btn-primary" (click)="confirmDelete()" *ngIf="navState==='공지사항 수정'">삭제</button>
+  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
+</div>

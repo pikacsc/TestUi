@@ -13,6 +13,7 @@ import { TokenService } from '../../shared/services/token.service';
 })
 export class QnaDetailComponent implements OnInit {
   qna: Qna;
+  reply = 'n';
 
   constructor(
     private qnaService: QnaService,
@@ -33,6 +34,12 @@ export class QnaDetailComponent implements OnInit {
       var q_content = qna.q_content;
       qna.q_content = qna.q_content.replace("\r\n","<br>");
       this.qna = qna;
+    }
+
+    if(this.qna.q_reply == this.reply) {
+      this.reply = 'N';
+    } else {
+      this.reply = "답변 완료"
     }
   }
 

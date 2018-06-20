@@ -1,21 +1,37 @@
-<table class="table table-responsive-md">
-  <thead class="amber lighten-3">
-  <tr>
-    <th>번호</th>
-    <th>제목</th>
-    <th>내용</th>
-    <th>작성자</th>
-    <th>날짜</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let qna of qnaList | paginate : {itemsPerPage: 10, currentPage : page }">
-      <th>{{qna.q_no}}</th>
-      <th>{{qna.q_title}}</th>
-      <th>{{qna.q_content}}</th>
-      <th>{{qna.u_id}}</th>
-      <th>{{qna.q_date | date : 'yyyy-MM-dd-hh-mm-ss'}}</th>
-    </tr>
-  </tbody>
-<pagination-controls (pageChange)="page = $event"></pagination-controls>
-</table>
+<ng2-smart-table
+[settings]="settings"
+[source]="qnaList"
+(edit)="updateQna($event)"
+></ng2-smart-table>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <h1 id="navState">{{navState}}</h1>
+  <table class="table" cellspacing="0" style="max-height: 28px">
+    <tbody>
+      <tr>
+        <th scope="row" class="font-weight-bold">제목</th>
+        <td>{{navQna.q_title}}
+          <!-- <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navQna.q_title" [ngModelOptions]="{standalone: true}" /> -->
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">작성자</th>
+        <td>{{navQna.u_id}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <li class="list-group-item"> 질문 내용
+    <span style="margin-left:15px; color:crimson">
+      <!-- {{navQna.q_content}} -->
+      <textarea name="qnaContent" readonly="true" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navQna.q_content" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
+  <li class="list-group-item"> 답변 내용
+    <span style="margin-left:15px; color:crimson">
+      <textarea name="qnaContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navQna.q_reply" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
+  <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='1:1질문 답변하기'">답변</button>
+  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
+</div>

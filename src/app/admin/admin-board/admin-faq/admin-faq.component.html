@@ -1,3 +1,54 @@
-<p>
-  admin-faq works!
-</p>
+<ng2-smart-table
+[settings]="settings"
+[source]="faqList"
+(create)="createFaq()"
+(edit)="updateFaq($event)"
+></ng2-smart-table>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <h1 id="navState">{{navState}}</h1>
+  <table class="table" cellspacing="0" style="max-height: 28px">
+    <tbody>
+      <tr>
+        <th class="cyan lighten-4">제목</th>
+        <td colspan="4">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navFaq.f_title" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">카테고리</th>
+        <td><select class="mdb-select" [(ngModel)]="this.navFaq.f_category" name="navFaq_f_cate" id="navFaq_f_cate" >
+                  <option value="" disabled selected>FAQ 카테고리를 선택해주세요</option>
+                  <option value="배송">&nbsp;배송</option>
+                  <option value="상품">&nbsp;상품</option>
+                  <option value="행사">&nbsp;행사</option>
+                </select></td>
+                <th class="cyan lighten-4">번호</th>
+                <td *ngIf="navState==='FAQ 글쓰기'">{{nextFaqNo}}</td>
+                <td *ngIf="navState==='FAQ 수정'">{{ navFaq?.f_no }}</td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">작성자</th>
+        <td colspan="4">
+          {{ navFaq?.a_id}}
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">작성일</th>
+        <td>{{ navFaq?.f_date | date:'yyyy-MM-dd' }}</td>
+        <th class="cyan lighten-4">조회수</th>
+        <td>{{ navFaq?.f_hits }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <li class="list-group-item"> FAQ 내용
+    <span style="margin-left:15px; color:crimson">
+      <!-- {{navFaq.q_content}} -->
+      <textarea name="faqContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navFaq.f_content" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
+  <button type="button" class="btn btn-primary" (click)="confirmCreate()" *ngIf="navState==='FAQ 글쓰기'">등록</button>
+  <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='FAQ 수정'">수정</button>
+  <button type="button" class="btn btn-primary" (click)="confirmDelete()" *ngIf="navState==='FAQ 수정'">삭제</button>
+  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
+</div>

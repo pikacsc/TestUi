@@ -13,8 +13,8 @@ import { TokenService } from '../../shared/services/token.service';
 export class QnaComponent implements OnInit {
   page = 1;
   qnaList: Qna[];
-  qna: Qna;
   u_id: string;
+  reply = 'n';
   search: string;
   number: number = 1;
 

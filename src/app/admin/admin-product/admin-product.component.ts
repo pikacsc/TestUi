@@ -74,24 +74,6 @@ export class AdminProductComponent implements OnInit {
 };
 
 
-
-selectedFile: File;
-
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
-  }
-
-  onUpload() {
-    this.http.post('http://localhost:8080/uploadFile', this.selectedFile, {
-      reportProgress: true,
-      observe: 'events'
-    })
-      .subscribe(event => {
-        console.log(event); // handle event here
-      });
-  }
-
-
   kinds = ["Bakery", "Sauce", "Drink", "Instant","Snack"];
   selectedKind = "All";
 
@@ -171,25 +153,6 @@ selectedFile: File;
   }
 
 
-
-
-    deleteProduct(event){
-       this.http.delete<any>('http://localhost:8080/toma/detail/product/'+event.data.p_code).subscribe(
-           res => {
-             console.log(res);
-             event.confirm.resolve(event.source.data);
-            alert("상품이 삭제되었습니다.");
-         },
-         (err: HttpErrorResponse) => {
-           if (err.error instanceof Error) {
-             alert("Client-side error occured.");
-           } else {
-             alert("Server-side error occured.");
-           }
-         });
-       //event.confirm.resolve(event.source.data);
-    }
-
     openNav() {
         document.getElementById("mySidenav").style.width = "650px";
         document.body.style.marginLeft = "650px";
@@ -233,7 +196,6 @@ selectedFile: File;
       this.productList = productList;
     })
   }
-
 
 
 }
