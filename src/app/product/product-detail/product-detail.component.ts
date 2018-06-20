@@ -56,7 +56,7 @@ export class ProductDetailComponent implements OnInit {
 
     } else {
 
-      this.productService.getProductById()
+      this.productService.getProductById(this.p_code)
         .subscribe((product: Product) => {
 this.product = product;
           this.tokenService.saveToken("productDetailToken", product);

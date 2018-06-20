@@ -78,7 +78,6 @@ export class AdminQnaComponent implements OnInit {
   updateQna(event){
      this.navState = '1:1질문 답변하기';
      this.editDataBinding(event);
-     alert(this.editQna.q_reply);
      this.navQna = this.editQna;
      this.openNav();
   }
@@ -94,7 +93,7 @@ export class AdminQnaComponent implements OnInit {
     if(this.isReplyNull(this.navQna)){
         alert("답변 내용이 없습니다.");
     }else {
-        this.http.put<Qna>('http://localhost:8080/toma/qna/update/'+this.navQna.q_no, this.navQna).subscribe(
+        this.http.put<Qna>('http://localhost:8080/toma/qna/reply', this.navQna).subscribe(
             res => {
               console.log(res);
               //event.confirm.resolve(event.newData);

@@ -1,37 +1,73 @@
 <ng2-smart-table
     [settings]="settings"
-    [source]="adminList">
+    [source]="adminList"
+    (create)="createAdmin()">
 </ng2-smart-table>
-<div class="modal fade" id="inputPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog cascading-modal" role="document">
-    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)" name="JoinForm">
-      <div class="modal-content">
-        <div class="modal-header light-blue darken-3 white-text">
-          <h4 class="title">
-            <i class="fa fa-user-plus"></i>Password</h4>
-          <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <!-- mdbInputValidate: 만족하면 success, 실패하면 false. 글씨가 뜨게해주는 속성 삭제 -->
-        <div class="modal-body">
-          <div class="md-form form-sm">
-            <i class="fa fa-lock prefix"></i>
-            <input mdbActive type="password" id="userPw" class="form-control" [(ngModel)]="createUser.upw" name="upw" >
-            <label for="userPw">비밀번호(10자이내)</label>
-          </div>
-          <div class="md-form form-sm">
-            <i class="fa fa-lock prefix"></i>
-            <input mdbActive type="password" id="userPw2" class="form-control" name="upw2" [(ngModel)]="upw2">
-            <label for="userPw2">비밀번호 확인</label>
-          </div>
-          <div class="text-center mt-2">
-            <button type="submit" class="btn btn-info waves-light" id="confirmBtn" mdbRippleRadius>등록
-              <i class="fa fa-sign-in ml-1"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <h1 id="navState">{{navState}}</h1>
+  <table class="table" cellspacing="0" style="max-height: 28px">
+    <tbody>
+      <tr>
+        <th class="cyan lighten-4">이름</th>
+        <td colspan="4">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navAdmin.a_name" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">아이디</th>
+        <td colspan="4">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navAdmin.a_id" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">패스워드</th>
+        <td colspan="4">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navAdmin.a_pw" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">패스워드 확인</th>
+        <td colspan="4">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navAdmin.a_pw" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">직위</th>
+        <td><select class="mdb-select" [(ngModel)]="this.navAdmin.a_position" name="navAdmin_a_cate" id="navAdmin_a_cate" >
+                  <option value="" disabled selected>선택</option>
+                  <option value="사장">&nbsp;사장</option>
+                  <option value="전무이사">&nbsp;전무이사</option>
+                  <option value="사원">&nbsp;사원</option>
+                  <option value="대리">&nbsp;대리</option>
+                  <option value="차장">&nbsp;차장</option>
+                  <option value="부장">&nbsp;부장</option>
+                  <option value="대표">&nbsp;대표</option>
+                </select></td>
+                <th class="cyan lighten-4">직무</th>
+                <td><select class="mdb-select" [(ngModel)]="this.navAdmin.a_position" name="navAdmin_a_cate" id="navAdmin_a_cate" >
+                          <option value="" disabled selected>선택</option>
+                          <option value="전무이사">&nbsp;전무이사</option>
+                          <option value="경리">&nbsp;경리</option>
+                          <option value="디자인">&nbsp;디자인</option>
+                          <option value="개발">&nbsp;개발</option>
+                          <option value="영업">&nbsp;영업</option>
+                        </select></td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">이메일주소</th>
+        <td colspan="4">
+          <input type="email" id="exampleForm2" class="form-control" required [(ngModel)]="navAdmin.a_email" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="cyan lighten-4">연락처</th>
+        <td colspan="4">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navAdmin.a_phone" [ngModelOptions]="{standalone: true}" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" (click)="confirmCreate()" *ngIf="navState==='직원 등록'">등록</button>
+  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
 </div>

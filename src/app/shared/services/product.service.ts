@@ -153,11 +153,11 @@ export class ProductService extends CachcingServiceBase{
 
   }
 
-  getProductById() {
+  getProductById(p_code: string) {
     // this.product = this.db.object("products/" + key);
     // return this.product;
 
-    return this.http.get(this.productListUrl + 'detail/product/'+ this.p_code);
+    return this.http.get(this.productListUrl + 'detail/product/'+p_code);
 
 
   }

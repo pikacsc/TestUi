@@ -6,16 +6,6 @@ import { LocalDataSource } from 'ng2-smart-table';
 @Component({
   selector: 'app-admin-employee',
   templateUrl: './admin-employee.component.html',
-  template: `
-    <ng2-smart-table
-    [settings]="settings"
-    [source]="adminList"
-    (createConfirm)="createAmdin($event)"
-    (deleteConfirm)="deleteAdmin($data)"
-    (editConfirm)="updateAdmin($event)"
-    (userRowSelect)="onUserRowSelect($event)"
-    ></ng2-smart-table>
-  `,
   styleUrls: ['./admin-employee.component.css']
 })
 export class AdminEmployeeComponent implements OnInit {
@@ -30,12 +20,13 @@ export class AdminEmployeeComponent implements OnInit {
     adminList: Admin[];
     settings = {
     mode: 'inline',
-    add: {
-      confirmCreate: 'true'
-    },
     actions: {
-      add: 'false',
-      delete: 'false'
+      delete: 'false',
+      columnTitle:'직원관리'
+    },
+    add: {
+      confirmCreate: 'false',
+      addButtonContent: '등록'
     },
     edit: {
       saveButtonContent: '확인',
@@ -44,7 +35,7 @@ export class AdminEmployeeComponent implements OnInit {
       confirmSave: 'true'
     },
     delete: {
-      deleteButtonContent: '삭제',
+      deleteButtonContent: '',
       confirmDelete: 'true'
     },
     columns: {
@@ -57,7 +48,7 @@ export class AdminEmployeeComponent implements OnInit {
         editable: 'false'
       },
       a_position: {
-        title: '직책',
+        title: '직위',
         editor: {
           type: 'list',
           config: {
@@ -99,6 +90,9 @@ export class AdminEmployeeComponent implements OnInit {
   };
 
 
+  navAdmin = new Admin;
+  navState:string;
+
   newDataBinding(event){
     var data = {"a_id" : event.newData.a_id,
                  "a_name" : event.newData.a_name,
@@ -123,8 +117,13 @@ export class AdminEmployeeComponent implements OnInit {
 
 
 
+  createAdmin(event){
+    this.navState = '직원 등록';
+    this.navAdmin = new Admin;
+    this.openNav();
+  }
 
-  createAmdin(event){
+  confirmCreate(event){
     //$('#myModal').modal('show')
 
        this.http.post<Admin>('http://localhost:8080/toma/admin/', this.newDataBinding(event)).subscribe(
@@ -195,6 +194,15 @@ export class AdminEmployeeComponent implements OnInit {
     }
 
 
+        openNav() {
+            document.getElementById("mySidenav").style.width = "650px";
+            document.body.style.marginLeft = "650px";
+        }
+
+        closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.marginLeft = "0";
+        }
 
 
     ngOnInit() {

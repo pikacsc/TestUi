@@ -1,3 +1,47 @@
-<p>
-  admin-product-review works!
-</p>
+<ng2-smart-table
+[settings]="settings"
+[source]="reviewList"
+(userRowSelect)="reviewRead($event)"
+(edit)="reviewRead($event)"
+></ng2-smart-table>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <h1 id="navState">{{navState}}</h1>
+  <div class="product-image">
+    <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+      <img src="./assets/ProductImg/{{reviewProduct.p_img}}.jpg" [alt]="reviewProduct.p_name" width="100%" class="img-fluid rounded">
+    </div>
+  </div>
+  <br/>
+  <table class="table" cellspacing="0" style="max-height: 28px">
+    <tbody>
+      <tr>
+        <th scope="row" class="font-weight-bold">상품명</th>
+        <td>{{reviewProduct.p_name}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">판매가</th>
+        <td>{{reviewProduct.p_sellPrice}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">제목</th>
+        <td>{{navReview.rev_title}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">작성자</th>
+        <td>{{navReview.u_id}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <li class="list-group-item"> 후기 내용
+    <span style="margin-left:15px; color:crimson">
+      <textarea name="ReviewContent" readonly="true" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navReview.rev_content" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
+  <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 질문 답변하기'">답변</button>
+  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
+</div>

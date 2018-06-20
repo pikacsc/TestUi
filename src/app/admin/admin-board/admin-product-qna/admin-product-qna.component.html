@@ -1,3 +1,35 @@
-<p>
-  admin-product-qna works!
-</p>
+<ng2-smart-table
+[settings]="settings"
+[source]="productQnaList"
+(edit)="updateProductQna($event)"
+></ng2-smart-table>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <h1 id="navState">{{navState}}</h1>
+  <table class="table" cellspacing="0" style="max-height: 28px">
+    <tbody>
+      <tr>
+        <th scope="row" class="font-weight-bold">제목</th>
+        <td>{{navProductQna.pq_title}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">작성자</th>
+        <td>{{navProductQna.u_id}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <li class="list-group-item"> 질문 내용
+    <span style="margin-left:15px; color:crimson">
+      <textarea name="ProductQnaContent" readonly="true" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navProductQna.pq_content" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
+  <li class="list-group-item"> 답변 내용
+    <span style="margin-left:15px; color:crimson">
+      <textarea name="ProductQnaContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navProductQna.pq_reply" [ngModelOptions]="{standalone: true}"></textarea>
+    </span>
+  </li>
+  <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 질문 답변하기'">답변</button>
+  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
+</div>
