@@ -12,7 +12,7 @@ export class FileUploadComponent {
 
   form: FormGroup;
   loading = false;
-  imageSrc = '/assets/images/john-resig.jpeg';
+  imageSrc = '/assets/img/';
 
   result; // file upload 수행 이후 서버로부터 수신한 데이터
 

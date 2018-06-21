@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-      <h4 class="text-center">이미지 파일을 선택 또는 드래그 해주세요</h4>
+      이미지 파일을 선택 또는 드래그 해주세요
       <form [formGroup]="form" (ngSubmit)="onSubmit(fileInput.files)">
         <div class="form-group">
           <img *ngIf="imageSrc" [src]="imageSrc" class="avatar">
