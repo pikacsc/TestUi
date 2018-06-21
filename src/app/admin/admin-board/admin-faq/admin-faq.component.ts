@@ -4,6 +4,7 @@ import { FaqService } from '../../../shared/services/faq.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { TokenService } from '../../../shared/services/token.service';
+import { SidenavService } from '../../../shared/services/sidenav.service';
 
 @Component({
   selector: 'app-admin-faq',
@@ -62,6 +63,7 @@ export class AdminFAQComponent implements OnInit {
   navState:string;
     constructor(
       private tokenService:TokenService,
+      private sideNavService:SidenavService,
       private FaqService:FaqService,
       private http:HttpClient
     ) {}
@@ -86,7 +88,7 @@ export class AdminFAQComponent implements OnInit {
      this.navState = 'FAQ 수정';
      this.editDataBinding(event);
      this.navFaq = this.editFaq;
-     this.openNav();
+     this.sideNavService.openNav();
   }
 
   createFaq(){
@@ -95,7 +97,7 @@ export class AdminFAQComponent implements OnInit {
     this.navFaq.a_id = this.tokenService.getToken("adminToken").a_id;
     this.navFaq.f_date = new Date();
     this.navFaq.f_hits = 0;
-    this.openNav();
+    this.sideNavService.openNav();
   }
 
   confirmCreate(){
@@ -144,7 +146,7 @@ export class AdminFAQComponent implements OnInit {
                   console.log(res);
                   //event.confirm.resolve(event.newData);
                   alert("삭제 됐습니다.");
-                  this.closeNav();
+                  this.sideNavService.closeNav();
                   this.ngOnInit();
               },
               (err: HttpErrorResponse) => {
@@ -159,18 +161,6 @@ export class AdminFAQComponent implements OnInit {
           }
     }
 
-
-
-
-    openNav() {
-        document.getElementById("mySidenav").style.width = "650px";
-        document.body.style.marginLeft = "650px";
-    }
-
-    closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.body.style.marginLeft = "0";
-    }
 
   navFaqReset(){
      this.navFaq = this.editFaq;

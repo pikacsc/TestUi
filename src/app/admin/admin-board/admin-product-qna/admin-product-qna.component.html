@@ -4,13 +4,29 @@
 (edit)="updateProductQna($event)"
 ></ng2-smart-table>
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a href="javascript:void(0)" class="closebtn" (click)="sideNavService.closeNav()">&times;</a>
   <h1 id="navState">{{navState}}</h1>
+  <div class="product-image">
+    <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+      <img src="./assets/img/{{qnaProduct.p_img}}.jpg" [alt]="qnaProduct.p_name" width="100%" class="img-fluid rounded">
+    </div>
+  </div>
+  <br/>
   <table class="table" cellspacing="0" style="max-height: 28px">
     <tbody>
       <tr>
+        <th scope="row" class="font-weight-bold">상품명</th>
+        <td>{{qnaProduct.p_name}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="font-weight-bold">판매가</th>
+        <td>{{qnaProduct.p_sellPrice}}
+        </td>
+      </tr>
+      <tr>
         <th scope="row" class="font-weight-bold">제목</th>
-        <td>{{navProductQna.pq_title}}
+        <td>{{qnaProduct.pq_title}}
         </td>
       </tr>
       <tr>

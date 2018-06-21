@@ -5,13 +5,14 @@
 (edit)="updateProduct($event)"
 ></ng2-smart-table>
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a href="javascript:void(0)" class="closebtn" (click)="sideNavService.closeNav()">&times;</a>
   <h1 id="navState">{{navState}}</h1>
   <div class="product-image">
     <div class="view hm-zoom z-depth-2" style="cursor: pointer">
-      <img src="./assets/ProductImg/{{navProduct.p_img}}.jpg" [alt]="navProduct.p_name" width="100%" class="img-fluid rounded">
+      <img src="./assets/img/{{navProduct.p_img}}.jpg" [alt]="navProduct.p_name" width="100%" class="img-fluid rounded">
       <h1 *ngIf="productNullCheck()">상품정보가 없습니다</h1>
-      <button  class="btn btn-primary" data-toggle="collapse" data-target="#demo">이미지 수정</button>
+      <button  class="btn btn-primary" *ngIf="navState==='상품 정보 수정'" data-toggle="collapse" data-target="#demo">이미지 수정</button>
+      <button  class="btn btn-primary" *ngIf="navState==='상품 등록'" data-toggle="collapse" data-target="#demo">이미지 등록</button>
     <div id="demo" class="collapse">
       <app-file-upload></app-file-upload>
     </div>  <!-- collapse -->
@@ -26,9 +27,15 @@
         <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_name" [ngModelOptions]="{standalone: true}" />
         </td>
       </tr>
+      <tr *ngIf="navState==='상품 정보 수정'">
+        <th scope="row" class="font-weight-bold">상품코드</th>
+        <td>
+          {{this.navProduct.p_code}}
+        </td>
+      <tr>
       <tr>
         <th scope="row" class="font-weight-bold">카테고리</th>
-        <td>
+        <td *ngIf="navState==='상품 등록'">
           <select class="mdb-select" [(ngModel)]="this.navProduct.p_kind" name="navProduct_p_kind" id="navProduct_p_kind" >
             <option value="" disabled selected>상품 카테고리를 선택해주세요</option>
             <option value="Bakery">&nbsp;Bakery</option>
@@ -37,6 +44,10 @@
             <option value="Instant">&nbsp;Instant</option>
             <option value="Snack">&nbsp;Snack</option>
           </select>
+        </td>
+        <!-- 카테고리는 수정 불가능 -->
+        <td *ngIf="navState==='상품 정보 수정'">
+          {{this.navProduct.p_kind}}
         </td>
       <tr>
         <th scope="row" class="font-weight-bold">원가</th>
@@ -66,7 +77,6 @@
     </span>
   </li>
   <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 정보 수정'">수정</button>
-  <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 등록'">등록</button>
-  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
-  <button type="button" class="btn btn-primary" (click)="navProductReset()" >초기화</button>
+  <button type="button" class="btn btn-primary" (click)="confirmCreate()" *ngIf="navState==='상품 등록'">등록</button>
+  <button type="button" class="btn btn-primary" (click)="sideNavService.closeNav()">취소</button>
 </div>

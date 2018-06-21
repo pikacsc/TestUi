@@ -4,7 +4,7 @@ import { NoticeService } from '../../../shared/services/notice.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { TokenService } from '../../../shared/services/token.service';
-
+import { SidenavService } from '../../../shared/services/sidenav.service';
 @Component({
   selector: 'app-admin-notice',
   templateUrl: './admin-notice.component.html',
@@ -63,6 +63,7 @@ export class AdminNoticeComponent implements OnInit {
     constructor(
       private tokenService:TokenService,
       private noticeService:NoticeService,
+      private sideNavService:SidenavService,
       private http:HttpClient
     ) {}
 
@@ -86,7 +87,7 @@ export class AdminNoticeComponent implements OnInit {
      this.navState = '공지사항 수정';
      this.editDataBinding(event);
      this.navNotice = this.editNotice;
-     this.openNav();
+     this.sideNavService.openNav();
   }
 
   createNotice(){
@@ -95,7 +96,7 @@ export class AdminNoticeComponent implements OnInit {
     this.navNotice.a_id = this.tokenService.getToken("adminToken").a_id;
     this.navNotice.n_date = new Date();
     this.navNotice.n_hits = 0;
-    this.openNav();
+    this.sideNavService.openNav();
   }
 
   confirmCreate(){
@@ -144,7 +145,7 @@ export class AdminNoticeComponent implements OnInit {
                   console.log(res);
                   //event.confirm.resolve(event.newData);
                   alert("삭제 됐습니다.");
-                  this.closeNav();
+                  this.sideNavService.closeNav();
                   this.ngOnInit();
               },
               (err: HttpErrorResponse) => {
@@ -160,17 +161,6 @@ export class AdminNoticeComponent implements OnInit {
     }
 
 
-
-
-    openNav() {
-        document.getElementById("mySidenav").style.width = "650px";
-        document.body.style.marginLeft = "650px";
-    }
-
-    closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.body.style.marginLeft = "0";
-    }
 
   navnoticeReset(){
      this.navNotice = this.editNotice;

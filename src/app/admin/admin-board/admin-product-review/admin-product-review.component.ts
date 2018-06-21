@@ -5,7 +5,7 @@ import { ProductService } from "../../../shared/services/product.service";
 import { Product } from "../../../shared/models/product";
 import { LocalDataSource } from 'ng2-smart-table';
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
-
+import { SidenavService } from "../../../shared/services/sidenav.service"
 @Component({
   selector: 'app-admin-product-review',
   templateUrl: './admin-product-review.component.html',
@@ -63,6 +63,7 @@ export class AdminProductReviewComponent implements OnInit {
     constructor(
       private productService:ProductService,
       private reviewService:ReviewService,
+      private sideNavService:SidenavService,
       private http:HttpClient
     ) {}
 
@@ -72,25 +73,15 @@ export class AdminProductReviewComponent implements OnInit {
 
 
   reviewRead(event){
+    this.navState = '상품 후기'
     this.navReview = event.data;
     this.productService.getProductById(event.data.p_code).subscribe((reviewProduct:Product)=>{
         this.reviewProduct = reviewProduct;
     });
 
-    this.openNav();
+    this.sideNavService.openNav();
   }
 
-
-
-    openNav() {
-        document.getElementById("mySidenav").style.width = "650px";
-        document.body.style.marginLeft = "650px";
-    }
-
-    closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.body.style.marginLeft = "0";
-    }
 
 
   ngOnInit() {

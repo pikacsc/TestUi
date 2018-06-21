@@ -12,6 +12,7 @@ import { ProductService } from "../shared/services/product.service";
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { TokenService } from '../shared/services/token.service';
+import { SidenavService } from '../shared/services/sidenav.service';
 import { AdminBoardModule } from './admin-board/admin-board.module';
 @NgModule({
   imports: [
@@ -30,6 +31,6 @@ import { AdminBoardModule } from './admin-board/admin-board.module';
     AdminOrderComponent
   ],
   exports: []
-  ,providers: [ProductService,TokenService]
+  ,providers: [ProductService,TokenService,SidenavService]
 })
 export class AdminModule { }

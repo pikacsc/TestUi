@@ -5,11 +5,11 @@
 (edit)="reviewRead($event)"
 ></ng2-smart-table>
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a href="javascript:void(0)" class="closebtn" (click)="sideNavService.closeNav()">&times;</a>
   <h1 id="navState">{{navState}}</h1>
   <div class="product-image">
     <div class="view hm-zoom z-depth-2" style="cursor: pointer">
-      <img src="./assets/ProductImg/{{reviewProduct.p_img}}.jpg" [alt]="reviewProduct.p_name" width="100%" class="img-fluid rounded">
+      <img src="./assets/img/{{reviewProduct.p_img}}.jpg" [alt]="reviewProduct.p_name" width="100%" class="img-fluid rounded">
     </div>
   </div>
   <br/>

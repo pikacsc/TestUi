@@ -15,42 +15,29 @@ import { AdminGaurd } from "../shared/services/admin-gaurd";
 
 export const AdminRoutes: Routes = [
   {
-    path: "admin",
-    component: AdminComponent,
+    path: "admin", component: AdminComponent,
     children: [
       {
-        path: "",
-        component: AdminComponent,
-        canActivate: [AdminGaurd]
+        path: "", component: AdminComponent, canActivate: [AdminGaurd]
       },
       {
-        path: "product",
-        component: AdminProductComponent,
-        canActivate: [AdminGaurd],
+        path: "product", component: AdminProductComponent, canActivate: [AdminGaurd],
         outlet: "adminOutlet"
       },
       {
-        path: "order",
-        component: AdminOrderComponent,
-        canActivate: [AdminGaurd],
+        path: "order", component: AdminOrderComponent, canActivate: [AdminGaurd],
         outlet: "adminOutlet"
       },
       {
-        path: "banner",
-        component: AdminBannerComponent,
-        canActivate: [AdminGaurd],
+        path: "banner", component: AdminBannerComponent, canActivate: [AdminGaurd],
         outlet: "adminOutlet"
       },
       {
-        path: "board",
-        component: AdminBoardComponent,
-        canActivate: [AdminGaurd],
+        path: "board", component: AdminBoardComponent, canActivate: [AdminGaurd],
         outlet: "adminOutlet"
       },
       {
-        path:"employee",
-        component : AdminEmployeeComponent,
-        canActivate: [AdminGaurd],
+        path:"employee", component : AdminEmployeeComponent, canActivate: [AdminGaurd],
         outlet: "adminOutlet"
       }
     ]

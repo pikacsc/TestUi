@@ -3,7 +3,7 @@ import { Qna } from '../../../shared/models/qna';
 import { QnaService } from '../../../shared/services/qna.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
-
+import { SidenavService } from '../../../shared/services/sidenav.service';
 @Component({
   selector: 'app-admin-qna',
   templateUrl: './admin-qna.component.html',
@@ -57,6 +57,7 @@ export class AdminQnaComponent implements OnInit {
   navState:string;
     constructor(
       private qnaService:QnaService,
+      private sideNavService:SidenavService,
       private http:HttpClient
     ) {}
 
@@ -79,7 +80,7 @@ export class AdminQnaComponent implements OnInit {
      this.navState = '1:1질문 답변하기';
      this.editDataBinding(event);
      this.navQna = this.editQna;
-     this.openNav();
+     this.sideNavService.openNav();
   }
 
   isReplyNull(qna:Qna){
@@ -109,18 +110,6 @@ export class AdminQnaComponent implements OnInit {
           });
       }
   }
-
-
-
-    openNav() {
-        document.getElementById("mySidenav").style.width = "650px";
-        document.body.style.marginLeft = "650px";
-    }
-
-    closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.body.style.marginLeft = "0";
-    }
 
   navQnaReset(){
      this.navQna = this.editQna;

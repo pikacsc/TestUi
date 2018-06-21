@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductQna } from '../../../shared/models/productQna';
 import { ProductQnaService } from '../../../shared/services/product-qna.service';
+import { ProductService } from "../../../shared/services/product.service";
+import { Product } from "../../../shared/models/product";
 import { LocalDataSource } from 'ng2-smart-table';
+import { SidenavService } from '../../../shared/services/sidenav.service'
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -59,10 +62,13 @@ export class AdminProductQnaComponent implements OnInit {
   kinds = ["Bakery", "Sauce", "Drink", "Instant","Snack"];
   selectedKind = "All";
 
+  qnaProduct = new Product;
   navProductQna = new ProductQna;
   navState:string;
     constructor(
+      private productService:ProductService,
       private productQnaService:ProductQnaService,
+      private sideNavService:SidenavService,
       private http:HttpClient
     ) {}
 
@@ -88,8 +94,11 @@ export class AdminProductQnaComponent implements OnInit {
   updateProductQna(event){
      this.navState = '상품 질문 답변하기';
      this.editDataBinding(event);
+     this.productService.getProductById(event.data.p_code).subscribe((qnaProduct:Product)=>{
+         this.qnaProduct = qnaProduct;
+     });
      this.navProductQna = this.editProductQna;
-     this.openNav();
+     this.sideNavService.openNav();
   }
 
   isReplyNull(productQna:ProductQna){
@@ -121,16 +130,6 @@ export class AdminProductQnaComponent implements OnInit {
       }
   }
 
-
-    openNav() {
-        document.getElementById("mySidenav").style.width = "650px";
-        document.body.style.marginLeft = "650px";
-    }
-
-    closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.body.style.marginLeft = "0";
-    }
 
   navProductQnaReset(){
      this.navProductQna = this.editProductQna;
