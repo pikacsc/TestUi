@@ -27,7 +27,7 @@ import { FaqService } from "./services/faq.service";
 import { QnaService } from "./services/qna.service";
 import { SearchService } from "./services/search.service";
 import { FileUploadComponent } from './file-upload/file-upload.component';
-
+import { SidenavService } from './services/sidenav.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -80,7 +80,8 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     NoticeService,
     FaqService,
     QnaService,
-    SearchService
+    SearchService,
+    SidenavService
   ]
 })
 export class SharedModule {}
