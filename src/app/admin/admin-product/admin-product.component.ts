@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProductService } from "../../shared/services/product.service";
 import { Product } from "../../shared/models/product";
+import { SidenavService } from "../../shared/services/sidenav.service";
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-admin-product',
@@ -74,12 +75,11 @@ export class AdminProductComponent implements OnInit {
 };
 
 
-  kinds = ["Bakery", "Sauce", "Drink", "Instant","Snack"];
-  selectedKind = "All";
 
   navProduct = new Product;
   navState:string;
     constructor(
+      private sideNavService:SidenavService,
       private productService:ProductService,
       private http:HttpClient
     ) {}
@@ -109,7 +109,16 @@ export class AdminProductComponent implements OnInit {
      this.navState = '상품 정보 수정';
      this.editDataBinding(event);
      this.navProduct = this.editProduct;
-     this.openNav();
+     this.sideNavService.openNav();
+  }
+
+  num:number;
+
+
+  //숫자앞에 0붙여주는 메소드, ex) 0001, 0124
+  pad(n, width) {
+   n = n + '';
+   return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
   }
 
 
@@ -133,36 +142,58 @@ export class AdminProductComponent implements OnInit {
     insertProduct(event){
         this.navState = '상품 등록';
         this.navProduct = new Product;
-        this.openNav();
+        this.sideNavService.openNav();
      }
 
-  confirmCreate(){
-    this.http.post<Product>('http://localhost:8080/toma/product', this.navProduct).subscribe(
-            res => {
-              console.log(res);
-              //event.confirm.resolve(event.newData);
-              alert("상품이 등록되었습니다.");
-   },
-   (err: HttpErrorResponse) => {
-     if (err.error instanceof Error) {
-       alert("Client-side error occured.");
-     } else {
-       alert("Server-side error occured.");
+     codeMaker(p_kind:string){
+           if(p_kind==='Bakery'){
+             return 'B';
+           }else if(p_kind==='Sauce'){
+             return 'S';
+           }else if(p_kind==='Drink'){
+             return 'D';
+           }else if(p_kind==='Instant'){
+             return 'I';
+           }else {
+             return 'SN';
+           }
      }
-   });
+  confirmCreate(){
+      let codefront = this.codeMaker(this.navProduct.p_kind);// 코드 앞자리 배정
+      //(정규식) 숫자만 남기고 한글, 영문, 특수문자는 모두 제거한다.
+      //상품코드에서 앞에 SN,I,S,D,B 를 제거
+      var regex = /[^0-9]/gi;
+
+      let lastProductIndex:number; //마지막 상품 번호
+      let newProductIndex:number; //새 상품 번호
+      this.productService.getProductByKind(this.navProduct.p_kind)//선택된 상품코드로 상품 리스트 가져오기
+      .subscribe((productList:Product[]) => {
+          //lastProductIndex: 해당 상품 종류의 마지막 상품 코드 번호
+          lastProductIndex = parseInt(productList[productList.length-1].p_code.replace(regex,''));
+          newProductIndex = this.pad(lastProductIndex+1,4);
+          this.navProduct.p_code=codefront+newProductIndex; //새코드 부여
+          this.navProduct.p_img=this.navProduct.p_code;
+          this.finalCreateProduct(this.navProduct);
+          this.sideNavService.closeNav();
+          this.ngOnInit();
+      });
+
   }
 
-
-    openNav() {
-        document.getElementById("mySidenav").style.width = "650px";
-        document.body.style.marginLeft = "650px";
+  finalCreateProduct(product:Product){
+   this.http.post<Product>('http://localhost:8080/toma/product', product).subscribe(
+           res => {
+             console.log(res);
+             alert("상품이 등록되었습니다.");
+  },
+  (err: HttpErrorResponse) => {
+    if (err.error instanceof Error) {
+      alert("Client-side error occured.");
+    } else {
+      alert("Server-side error occured.");
     }
-
-    closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.body.style.marginLeft = "0";
-    }
-
+  });
+}
   productNullCheck(){
     if(this.navProduct == null){
       return true;
@@ -186,8 +217,32 @@ export class AdminProductComponent implements OnInit {
       alert('더 이상 줄일 수 없습니다.');
   }
 
+    allMsgChangeLogs: string[] = [];
+    allEmployeeChangeLogs: string[] = [];
 
 
+  ngOnChange(changes: SimpleChanges){
+    for (let propName in changes) {
+          let change = changes[propName];
+
+          let curVal  = JSON.stringify(change.currentValue);
+          let prevVal = JSON.stringify(change.previousValue);
+          let changeLog = `${propName}: currentValue = ${curVal}, previousValue = ${prevVal}`;
+
+          if (propName === 'message') {
+             this.allMsgChangeLogs.push(changeLog);
+             console.log(this.allMsgChangeLogs);
+          } else if (propName === 'employee') {
+             this.allEmployeeChangeLogs.push(changeLog);
+              console.log(this.allMsgChangeLogs);
+          }
+      }
+    if(this.navState==='상품 등록'){
+      alert('hello');
+      this.codeMaker(this.navProduct.p_kind);
+      alert(this.navProduct.p_code);
+    }
+  }
 
 
   ngOnInit() {
