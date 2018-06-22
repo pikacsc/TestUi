@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class NavbarComponent implements OnInit {
   select = 'Home';
-
+  numb:number;
   constructor(
     public authService: AuthService,
     private router: Router,
@@ -20,7 +20,9 @@ export class NavbarComponent implements OnInit {
     private tokenService: TokenService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.numb = 0;
+  }
 
   logout() {
     this.authService.logout();
@@ -33,6 +35,10 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(["/"]);
     location.reload();
+  }
+
+  countUp(){
+    this.numb+=1;
   }
 
 }

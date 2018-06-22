@@ -34,10 +34,15 @@
           </a>
         </ng-template>
       </li>
-
+      <li class="nav-item" *ngIf="!authService.isLoggedIn() && !authService.isAdmin() && numb >= 10" [ngClass]="{'active': select==='관리자 로그인'}" (click)="select='관리자 로그인'">
+        <a class="nav-link" [routerLink]="[ '/adminlogin' ]">
+          <i class="fa fa-sign-in" aria-hidden="true"></i> 관리자 로그인
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
 
       <li class="nav-item" *ngIf="!authService.isLoggedIn() && !authService.isAdmin()" [ngClass]="{'active': select==='Login'}" (click)="select='Login'">
-        <a class="nav-link" [routerLink]="[ '/index/login' ]">
+        <a class="nav-link" [routerLink]="[ '/index/login' ]" (click)="countUp()">
           <i class="fa fa-sign-in" aria-hidden="true"></i> Login
           <span class="sr-only">(current)</span>
         </a>
