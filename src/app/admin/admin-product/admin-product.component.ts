@@ -248,7 +248,6 @@ export class AdminProductComponent implements OnInit {
     .subscribe((productList : Product[]) => {
       this.productList = productList;
     })
-    this.profit = this.navProduct.p_sellPrice-this.navProduct.p_price;
   }
 
 
