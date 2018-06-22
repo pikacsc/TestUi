@@ -54,8 +54,7 @@ export class FileUploadComponent {
     this.loading = true;
     // Send data (payload = formData)
     console.log(formData.get('file'));
-
-    // 폼데이터를 서버로 전송한다.
+  //  폼데이터를 서버로 전송한다.
     this.http.post(`${this.apiUrl}/uploadFile`, formData)
       .subscribe(res => {
         this.result = res;

@@ -35,19 +35,24 @@ export class AdminNoticeComponent implements OnInit {
   },
   columns: {
     n_no: {
-      title: '번호'
+      title: '번호',
+      width: '5%'
     },
     n_category: {
-      title: '카테고리'
+      title: '카테고리',
+      width: '5%'
     },
     n_title: {
-      title: '제목'
+      title: '제목',
+      width: '30%'
     },
     a_id: {
-      title: '작성자'
+      title: '작성자',
+      width: '10%'
     },
     n_hits: {
-      title: '조회수'
+      title: '조회수',
+      width: '5%'
     },
     n_date: {
       title: '작성날짜'

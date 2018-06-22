@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Admin } from '../../shared/models/admin';
 import { HttpClientModule,HttpHeaders, HttpClient,HttpErrorResponse } from '@angular/common/http';
-import { TokenService } from "../../shared/services/token.service";
+import { SidenavService } from "../../shared/services/sidenav.service";
 import { LocalDataSource } from 'ng2-smart-table';
 @Component({
   selector: 'app-admin-employee',
@@ -13,7 +13,7 @@ export class AdminEmployeeComponent implements OnInit {
 
     constructor(
       private http: HttpClient,
-      private tokenService: TokenService
+      private sideNavService: SidenavService
     ) { }
 
     source: LocalDataSource;
@@ -25,7 +25,7 @@ export class AdminEmployeeComponent implements OnInit {
       columnTitle:'직원관리'
     },
     add: {
-      confirmCreate: 'false',
+      confirmCreate: 'true',
       addButtonContent: '등록'
     },
     edit: {
@@ -40,12 +40,10 @@ export class AdminEmployeeComponent implements OnInit {
     },
     columns: {
       a_id: {
-        title: '직원아이디',
-        editable: 'false'
+        title: '직원아이디'
       },
       a_name: {
-        title: '이름',
-        editable: 'false'
+        title: '이름'
       },
       a_position: {
         title: '직위',
@@ -79,12 +77,10 @@ export class AdminEmployeeComponent implements OnInit {
         }
       },
       a_email:{
-        title: '이메일',
-        editable: 'false'
+        title: '이메일'
       },
       a_phone: {
-        title: '연락처',
-        editable: 'false'
+        title: '연락처'
       }
     }
   };
@@ -92,20 +88,20 @@ export class AdminEmployeeComponent implements OnInit {
 
   navAdmin = new Admin;
   navState:string;
+  apw2:string;
 
   newDataBinding(event){
-    var data = {"a_id" : event.newData.a_id,
-                 "a_name" : event.newData.a_name,
-                 "a_position" : event.newData.a_position,
-                 "a_job" : event.newData.a_job,
-                 "a_email" : event.newData.a_email,
-                 "a_phone" : event.newData.a_phone,
-                 };
-                 return data;
+    this.navAdmin.a_id = event.newData.a_id;
+    this.navAdmin.a_name = event.newData.a_name;
+    this.navAdmin.a_position = event.newData.a_position;
+    this.navAdmin.a_job = event.newData.a_job,
+    this.navAdmin.a_email =  event.newData.a_email,
+    this.navAdmin.a_phone = event.newData.a_phone
   }
 
   editDataBinding(event){
     var data = {"a_id" : event.data.a_id,
+                 "a_pw" : event.data.a_pw,
                  "a_name" : event.data.a_name,
                  "a_position" : event.data.a_position,
                  "a_job" : event.data.a_job,
@@ -115,23 +111,52 @@ export class AdminEmployeeComponent implements OnInit {
                  return data;
   }
 
+  isAdminValueNull(event){
+    if(event.newData.a_name==null){
+      alert("이름을 입력하세요");
+      return true;
+    }else if(event.newData.a_job==null){
+      alert("직무를 선택하세요");
+      return true;
+    }else if(event.newData.a_phone==null){
+      alert("연락처를 입력하세요");
+      return true;
+    }else if(event.newData.a_email==null){
+      alert("이메일을 입력하세요");
+      return true;
+    }else if(event.newData.a_position==null){
+      alert("직위를 입력하세요");
+      return true;
+    }else if(event.newData.a_id==null){
+      alert("아이디를 입력하세요");
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 
   createAdmin(event){
     this.navState = '직원 등록';
     this.navAdmin = new Admin;
-    this.openNav();
+    this.newDataBinding(event);
+    if(this.isAdminValueNull(event)){
+      return false;
+    }else{
+      this.openNav();
+    }
   }
 
-  confirmCreate(event){
-    //$('#myModal').modal('show')
-
-       this.http.post<Admin>('http://localhost:8080/toma/admin/', this.newDataBinding(event)).subscribe(
+  confirmCreate(){
+      if(this.navAdmin.a_pw!==this.apw2){
+        alert("비밀번호 확인이 불일치 합니다");
+      }else {
+       this.http.post<Admin>('http://localhost:8080/toma/admin/', this.navAdmin).subscribe(
                res => {
                  console.log(res);
-                 event.confirm.resolve(event.newData);
                  alert("직원이 등록되었습니다.");
-                 this.tokenService.removeToken("adminListToken");
+                 this.sideNavService.closeNav();
+                 this.ngOnInit();
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -140,15 +165,15 @@ export class AdminEmployeeComponent implements OnInit {
           alert("Server-side error occured.");
         }
       });
+      }
    }
 
   updateAdmin(event){
-    this.http.put<Admin>('http://localhost:8080/toma/admin/', this.newDataBinding(event)).subscribe(
+    this.http.put<Admin>('http://localhost:8080/toma/admin/', this.editDataBinding(event)).subscribe(
         res => {
           console.log(res);
           event.confirm.resolve(event.newData);
           alert("직원 정보가 수정되었습니다.");
-          this.tokenService.removeToken("adminListToken");
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -166,7 +191,6 @@ export class AdminEmployeeComponent implements OnInit {
              console.log(res);
              event.confirm.resolve(event.source.data);
             alert("직원 정보가 삭제되었습니다.");
-            this.tokenService.removeToken("adminListToken");
          },
          (err: HttpErrorResponse) => {
            if (err.error instanceof Error) {
@@ -183,7 +207,6 @@ export class AdminEmployeeComponent implements OnInit {
         this.http.get<Admin[]>('http://localhost:8080/toma/admin/')
         .subscribe((adminList: Admin[]) => {
           this.adminList = adminList;
-          this.tokenService.saveToken("adminListToken",this.adminList);
         },(err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
             alert("Client-side error occured.");
@@ -206,12 +229,7 @@ export class AdminEmployeeComponent implements OnInit {
 
 
     ngOnInit() {
-        if(this.tokenService.isToken("adminListToken")){
-          this.adminList = this.tokenService.getToken("adminListToken");
-        }else{
-          this.getAdminList();
-          this.tokenService.saveToken("adminListToken",this.adminList);
-        }
+      this.getAdminList();
     }
 
 }

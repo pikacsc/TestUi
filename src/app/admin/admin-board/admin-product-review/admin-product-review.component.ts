@@ -34,16 +34,20 @@ export class AdminProductReviewComponent implements OnInit {
   },
   columns: {
     rev_no: {
-      title: '번호'
+      title: '번호',
+      width: '5%'
     },
     rev_title: {
-      title: '제목'
+      title: '제목',
+      width: '40%'
     },
     u_id: {
-      title: '작성자'
+      title: '작성자',
+      width: '10%'
     },
     rev_hits: {
-      title: '조회수'
+      title: '조회수',
+      width: '5%'
     },
     rev_date: {
       title: '후기날짜'

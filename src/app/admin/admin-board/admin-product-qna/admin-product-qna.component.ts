@@ -37,19 +37,24 @@ export class AdminProductQnaComponent implements OnInit {
   },
   columns: {
     pq_no: {
-      title: '질문번호'
+      title: '질문번호',
+      width: '5%'
     },
     pq_category: {
-      title: '카테고리'
+      title: '카테고리',
+      width: '5%'
     },
     pq_title: {
-      title: '제목'
+      title: '제목',
+      width: '30%'
     },
     u_id: {
-      title: '작성자'
+      title: '작성자',
+      width: '10%'
     },
     pq_replyyn: {
-      title: '답변여부'
+      title: '답변여부',
+      width: '5%'
     },
     pq_date: {
       title: '질문날짜'

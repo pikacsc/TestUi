@@ -10,7 +10,6 @@
   <div class="product-image">
     <div class="view hm-zoom z-depth-2" style="cursor: pointer">
       <img src="./assets/img/{{navProduct.p_img}}.jpg" [alt]="navProduct.p_name" width="100%" class="img-fluid rounded">
-      <h1 *ngIf="productNullCheck()">상품정보가 없습니다</h1>
       <button  class="btn btn-primary" *ngIf="navState==='상품 정보 수정'" data-toggle="collapse" data-target="#demo">이미지 수정</button>
       <button  class="btn btn-primary" *ngIf="navState==='상품 등록'" data-toggle="collapse" data-target="#demo">이미지 등록</button>
     <div id="demo" class="collapse">
@@ -24,9 +23,23 @@
     <tbody>
       <tr>
         <th scope="row" class="font-weight-bold">상품 이름</th>
-        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_name" [ngModelOptions]="{standalone: true}" />
+        <td><input type="text" id="p_name" class="form-control" required [(ngModel)]="navProduct.p_name" [ngModelOptions]="{standalone: true}" />
         </td>
       </tr>
+      <tr *ngIf="navState==='상품 등록'">
+        <th scope="row" class="font-weight-bold">상품코드</th>
+        <td *ngIf="autoCodeGeneratorOn">
+          <input type="text" readonly="readonly" id="p_code" class="form-control" required [(ngModel)]="navProduct.p_code" [ngModelOptions]="{standalone: true}" />
+        </td>
+        <td *ngIf="!autoCodeGeneratorOn">
+          <input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_code" [ngModelOptions]="{standalone: true}" />
+        </td>
+      <tr>
+        <tr *ngIf="navState==='상품 등록'">
+          <th scope="row" class="font-weight-bold">자동 코드 생성</th>
+          <td><input type="checkbox" id="exampleForm2" class="form-control" [(ngModel)]="autoCodeGeneratorOn" [ngModelOptions]="{standalone: true}" />
+          </td>
+        <tr>
       <tr *ngIf="navState==='상품 정보 수정'">
         <th scope="row" class="font-weight-bold">상품코드</th>
         <td>
@@ -36,7 +49,7 @@
       <tr>
         <th scope="row" class="font-weight-bold">카테고리</th>
         <td *ngIf="navState==='상품 등록'">
-          <select class="mdb-select" [(ngModel)]="this.navProduct.p_kind" name="navProduct_p_kind" id="navProduct_p_kind" >
+          <select class="mdb-select" [(ngModel)]="this.navProduct.p_kind" name="navProduct_p_kind" id="p_kind" >
             <option value="" disabled selected>상품 카테고리를 선택해주세요</option>
             <option value="Bakery">&nbsp;Bakery</option>
             <option value="Sauce">&nbsp;Sauce</option>
@@ -51,29 +64,29 @@
         </td>
       <tr>
         <th scope="row" class="font-weight-bold">원가</th>
-        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_price" [ngModelOptions]="{standalone: true}" />
+        <td><input type="number" min="1" (input)="onSearchChange($event.target.value)" id="p_price" class="form-control" required [(ngModel)]="navProduct.p_price" [ngModelOptions]="{standalone: true}" />
         </td>
       </tr>
       <tr>
         <th scope="row" class="font-weight-bold">판매가</th>
-        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_sellPrice" [ngModelOptions]="{standalone: true}" />
+        <td><input type="number" min="1" (input)="onSearchChange($event.target.value)" id="p_sellPrice" class="form-control" required [(ngModel)]="navProduct.p_sellPrice" [ngModelOptions]="{standalone: true}" />
         </td>
       </tr>
       <tr>
         <th scope="row" class="font-weight-bold">순이익</th>
-        <td><input type="text" id="exampleForm2" class="form-control" required [(ngModel)]="navProduct.p_profit" [ngModelOptions]="{standalone: true}" />
+        <td>{{this.navProduct.p_profit}}
         </td>
       </tr>
       <tr>
         <th scope="row" class="font-weight-bold">재고</th>
-        <td><input type="number" min="1" [(ngModel)]='this.navProduct.p_count'  [ngModelOptions]="{standalone: true}" required />
+        <td><input type="number" min="1" id="p_count" [(ngModel)]='this.navProduct.p_count'  [ngModelOptions]="{standalone: true}" required />
         </td>
       </tr>
     </tbody>
   </table>
   <li class="list-group-item"> 상품내용
     <span style="margin-left:15px; color:crimson">
-      <textarea name="qnaContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navProduct.p_content" [ngModelOptions]="{standalone: true}"></textarea>
+      <textarea name="qnaContent" rows="8" cols="150" id="p_content" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="navProduct.p_content" [ngModelOptions]="{standalone: true}"></textarea>
     </span>
   </li>
   <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 정보 수정'">수정</button>

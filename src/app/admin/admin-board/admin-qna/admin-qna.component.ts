@@ -34,13 +34,16 @@ export class AdminQnaComponent implements OnInit {
   },
   columns: {
     q_no: {
-      title: '질문번호'
+      title: '질문번호',
+      width: '5%'
     },
     q_title: {
-      title: '제목'
+      title: '제목',
+      width: '30%'
     },
     u_id: {
-      title: '작성자'
+      title: '작성자',
+      width: '20%'
     },
     q_date: {
       title: '질문날짜'

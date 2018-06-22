@@ -36,19 +36,24 @@ export class AdminFAQComponent implements OnInit {
   },
   columns: {
     f_no: {
-      title: '번호'
+      title: '번호',
+      width: '5%'
     },
     f_category: {
-      title: '카테고리'
+      title: '카테고리',
+      width: '5%'
     },
     f_title: {
-      title: '제목'
+      title: '제목',
+      width: '30%'
     },
     a_id: {
-      title: '작성자'
+      title: '작성자',
+      width: '10%'
     },
     f_hits: {
-      title: '조회수'
+      title: '조회수',
+      width: '5%'
     },
     f_date: {
       title: '작성날짜'

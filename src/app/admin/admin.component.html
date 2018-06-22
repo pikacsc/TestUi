@@ -1,19 +1,26 @@
 <!-- Nav tabs -->
-<ul class="nav nav-tabs nav-justified">
-    <li class="nav-item">
-    <a [routerLink]="['/admin', {outlets: {'adminOutlet': ['product']}}]"><li class="list-group-item">상품 관리</li></a>
-    </li>
-    <li class="nav-item"><a [routerLink]="['/admin', {outlets: {'adminOutlet': ['order']}}]"><li class="list-group-item">주문 관리</li></a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/admin', {outlets: {'adminOutlet': ['banner']}}]"><li class="list-group-item">배너 관리</li></a>
-    </li>
-    <li class="nav-item">  <a [routerLink]="['/admin', {outlets: {'adminOutlet': ['board']}}]"><li class="list-group-item">게시판 관리</li></a>
-    </li>
-    <li class="nav-item">  <a [routerLink]="['/admin', {outlets: {'adminOutlet': ['employee']}}]"><li class="list-group-item">직원 관리</li></a>
-    </li>
-</ul>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark danger-color indigo scrolling-navbar">
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [ngClass]="{'active': select==='상품 관리'}" (click)="select='상품 관리'">
+        <a class="nav-link waves-light" mdbRippleRadius [routerLink]="['/admin', {outlets: {'adminOutlet': ['product']}}]">상품 관리
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{'active': select==='주문 관리'}" (click)="select='주문 관리'">
+        <a class="nav-link waves-light" mdbRippleRadius [routerLink]="['/admin', {outlets: {'adminOutlet': ['order']}}]">주문 관리</a>
+      </li>
+      <li class="nav-item" [ngClass]="{'active': select==='배너 관리'}" (click)="select='배너 관리'">
+        <a class="nav-link waves-light" mdbRippleRadius [routerLink]="['/admin', {outlets: {'adminOutlet': ['banner']}}]">배너 관리</a>
+      </li>
+      <li class="nav-item" [ngClass]="{'active': select==='게시판 관리'}" (click)="select='게시판 관리'">
+        <a class="nav-link waves-light" mdbRippleRadius [routerLink]="['/admin', {outlets: {'adminOutlet': ['board']}}]">게시판 관리</a>
+      </li>
+      <li class="nav-item" [ngClass]="{'active': select==='직원 관리'}" (click)="select='직원 관리'">
+        <a class="nav-link waves-light" mdbRippleRadius   [routerLink]="['/admin', {outlets: {'adminOutlet': ['employee']}}]">직원 관리</a>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>
 <!-- Tab panels -->
-<div class="tab-content card">
-    <router-outlet name="adminOutlet"></router-outlet>
-</div>
+<router-outlet name="adminOutlet"></router-outlet>
