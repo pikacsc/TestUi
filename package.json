@@ -45,6 +45,7 @@
     "node-sass": "^4.9.0",
     "npm": "^6.1.0",
     "owl.carousel": "^2.3.4",
+    "pagination-control": "0.0.10",
     "primeng": "^5.2.7",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.1.0",

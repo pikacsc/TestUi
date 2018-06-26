@@ -1,21 +1,25 @@
-<!-- <hr class="between-sections">
- <div class="card-body card-body-cascade text-center">
+<hr class="between-sections">
 
+<div class="card card-cascade wider reverse">
 
-    <h4 class="card-title"><strong>상품 문의</strong></h4>
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>상품 문의 하기</strong></h4>
   </div>
 
 </div>
 
 <hr class="between-sections">
 
-
-<form (ngSubmit)="insertQna()">
-
+<!-- Default form contact -->
+<form (ngSubmit)="insertProductQna()">
+  <!--Table-->
   <table class="table table-bordered">
 
-    <tbody> -->
-      <!-- <tr>
+    <tbody>
+      <tr>
         <th>제목</th>
         <td>
           <input type="text" id="exampleForm2" class="form-control" placeholder="제목을 입력해주세요." required [(ngModel)]="productQna.pq_title" [ngModelOptions]="{standalone: true}" />
@@ -28,6 +32,18 @@
         </td>
       </tr>
       <tr>
+        <th>카테고리</th>
+        <td>
+         <select (change)="getProductQnaByCategory($event.target.value)">
+           <option value="" disabled selected>카테고리를 선택해주세요</option>
+           <option *ngFor="let category of categoryList" [value]="category">
+             {{ category }}
+           </option>
+         </select>
+       </td>
+    </tr>
+
+      <tr>
         <th colspan="1">문의 내용</th>
         <td colspan="2">
           <textarea name="qnaContent" rows="8" cols="150" placeholder="내용을 입력해주세요." class="form-control" required [(ngModel)]="productQna.pq_content" [ngModelOptions]="{standalone: true}"></textarea>
@@ -38,6 +54,6 @@
 
   <div class="text-center mt-4" [hidden]="submit">
     <button type="submit" class="btn btn-outline-danger waves-effect">등록</button>
-    <button type="button" class="btn btn-outline-info waves-effect" [routerLink]="['/products/all-products']">취소</button>
+    <button type="button" class="btn btn-outline-info waves-effect" [routerLink]="['/products/product', productQna.p_code]">취소</button>
   </div>
-</form> -->
+</form>

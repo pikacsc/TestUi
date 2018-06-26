@@ -41,30 +41,23 @@ export class ProductDetailComponent implements OnInit {
     //   this.getProductDetail(id);
     // });
 
-    if (this.tokenService.isToken("productListToken")) {
-      var p_code = this.productService.getProductCode();
+        // if(this.tokenService.isToken("pcodeToken")){
+        //   this.p_code = this.tokenService.getToken("pcodeToken");
+        // }else{
+        //
+        // }
 
-      if (p_code == null) {
-        p_code = this.tokenService.getToken("pcodeToken");
-      }
-      this.productList = this.tokenService.getToken("productListToken");
-      this.product = this.productList.find(function(item) {
-        return item.p_code == p_code;
-      });
+        this.p_code = this.tokenService.getToken("p_code");
 
-
-
-    } else {
-
-      this.productService.getProductById(this.p_code)
+        this.productService.getProductById(this.p_code)
         .subscribe((product: Product) => {
-this.product = product;
-          this.tokenService.saveToken("productDetailToken", product);
-          console.log(this.product.p_price);
-          console.log(this.product.p_sellPrice);
-          console.log(this.product.p_name);
-          console.log(this.product.p_profit);
+        this.product = product;
+          this.tokenService.removeToken("p_code");
+          this.tokenService.saveToken("p_code",this.product.p_code);
+
         });
+
+        // alert(this.tokenService.getToken("p_code"));
 
     }
 
@@ -78,7 +71,7 @@ this.product = product;
 
 
 
-  }
+
 
   setProductCode(p_code: string) {
     this.productService.setProductCode(p_code);

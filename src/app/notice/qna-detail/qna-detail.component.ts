@@ -36,12 +36,15 @@ export class QnaDetailComponent implements OnInit {
       this.qna = qna;
     }
 
-    if (this.qna.q_reply == this.reply) {
+    if(this.qna.q_reply == this.reply) {
       this.reply = 'N';
     } else {
       this.reply = "답변 완료"
     }
   }
+
+
+
 
   setQnaObject() {
     this.qnaService.setQnaObject(this.qna);

@@ -38,51 +38,29 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
 
-    if(this.tokenService.isToken("productListToken")){
-      this.productList = this.tokenService.getToken("productListToken");
-    }else{
-
-      this.productService.getProducts()
-      .subscribe((productList : Product[]) => {
-        this.tokenService.saveToken("productListToken" , productList );
-        this.productList = productList;
+    this.productService.getProducts()
+    .subscribe((productList : Product[]) => {
+    this.productList = productList;
       })
 
 
-    }
+
   }
 
   p_code : string;
 
   setProductCode(p_code: string) {
      this.productService.setProductCode(p_code);
-     if(this.tokenService.isToken("pcodeToken")){
-       this.tokenService.removeToken("pcodeToken");
+     if(this.tokenService.isToken("p_code")){
+       this.tokenService.removeToken("p_code");
      }
-     this.tokenService.saveToken("pcodeToken", p_code);
+     this.tokenService.saveToken("p_code", p_code);
      this.p_code = p_code;
   }
 
-  // getAllProducts() {
-  //   // this.spinnerService.show();
-  //   // const x = this.productService.getProducts();
-  //   // x.snapshotChanges().subscribe(product => {
-  //   //   this.spinnerService.hide();
-  //   //   this.productList = [];
-  //   //   product.forEach(element => {
-  //   //     const y = element.payload.toJSON();
-  //   //     y["$key"] = element.key;
-  //   //     this.productList.push(y as Product);
-  //   //   });
-  //   // });
-  //
-  //
-  //
-  // }
+
 
   getProductByKind(p_kind: string) {
-    // this.product = this.db.object("products/" + key);
-    // return this.product;
 
      this.productService.getProductByKind(this.selectedKind)
      .subscribe((productList : Product[]) => {
