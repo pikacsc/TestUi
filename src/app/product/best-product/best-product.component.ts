@@ -47,20 +47,6 @@ export class BestProductComponent implements OnInit {
         this.productList = productList;
       })
     }
-    // const x = this.productService.getProducts();
-    // x.snapshotChanges().subscribe(product => {
-    //   this.bestProducts = [];
-    //   for (let i = 0; i < 5; i++) {
-    //     const y = product[i].payload.toJSON();
-    //     y["$key"] = product[i].key;
-    //     this.bestProducts.push(y as Product);
-    //   }
-    //   // product.forEach(element => {
-    //   //   const y = element.payload.toJSON();
-    //   //   y["$key"] = element.key;
-    //   //   this.bestProducts.push(y as Product);
-    //   // });
-    // });
   }
 
   setProductCode(p_code: string) {
