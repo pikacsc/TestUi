@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SidenavService } from '../../shared/services/sidenav.service'
 @Component({
   selector: 'app-admin-board',
   templateUrl: './admin-board.component.html',
@@ -11,9 +11,10 @@ export class AdminBoardComponent implements OnInit {
 
   selectchange(args){
     this.currentBoard = args.target.value;
+    this.sideNavService.bodyMarginReset();
   }
 
-  constructor() {}
+  constructor(private sideNavService:SidenavService) {}
 
   ngOnInit() {
   }

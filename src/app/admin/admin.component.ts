@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/pairwise';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { SidenavService } from '../shared/services/sidenav.service';
 @Component({
   selector: 'app-admin',
@@ -14,10 +14,20 @@ export class AdminComponent implements OnInit {
     private router: Router,
     private sideNavService: SidenavService
           ) {
-         this.router.events.pairwise().subscribe((event) => {
-             console.log(event);
-             this.sideNavService.closeNav();
-         });
+            router.events.subscribe( (event: Event) => { //routing 변화 감지
+
+                  if (event instanceof NavigationStart) {
+                      this.sideNavService.bodyMarginReset(); //수정 nav 닫아주고 margin 초기화
+                  }
+
+                  if (event instanceof NavigationEnd) {
+                      this.sideNavService.bodyMarginReset();
+                  }
+
+                  if (event instanceof NavigationError) {
+                      this.sideNavService.bodyMarginReset();
+                  }
+              });
      };
 
   ngOnInit() {

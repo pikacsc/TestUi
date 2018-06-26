@@ -199,44 +199,6 @@ export class AdminProductComponent implements OnInit {
   }
 
 
-  p_countUp() {
-    ++this.navProduct.p_count;
-  }
-
-  p_countDown() {
-    if (this.navProduct.p_count > 1)
-      --this.navProduct.p_count;
-    else
-      alert('더 이상 줄일 수 없습니다.');
-  }
-
-    allMsgChangeLogs: string[] = [];
-    allEmployeeChangeLogs: string[] = [];
-
-
-  ngOnChange(changes: SimpleChanges){
-    for (let propName in changes) {
-          let change = changes[propName];
-
-          let curVal  = JSON.stringify(change.currentValue);
-          let prevVal = JSON.stringify(change.previousValue);
-          let changeLog = `${propName}: currentValue = ${curVal}, previousValue = ${prevVal}`;
-
-          if (propName === 'message') {
-             this.allMsgChangeLogs.push(changeLog);
-             this.sideNavService.closeNav();
-             console.log(this.allMsgChangeLogs);
-          } else if (propName === 'employee') {
-             this.allEmployeeChangeLogs.push(changeLog);
-              console.log(this.allMsgChangeLogs);
-          }
-      }
-    if(this.navState==='상품 등록'){
-      alert('hello');
-      alert(this.navProduct.p_code);
-    }
-  }
-
 
   onSearchChange(searchValue : number ) {
       this.navProduct.p_profit = this.navProduct.p_sellPrice - this.navProduct.p_price;

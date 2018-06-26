@@ -15,7 +15,7 @@ import { AdminModule } from "./admin/admin.module";
 import { AppRoutes } from "./app.routing";
 //동현임포트수정
 import { ProductService } from "./shared/services/product.service";
-
+import { FileUploadModule } from 'primeng/fileupload';
 //동현임포트수정끝
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +30,7 @@ import { ProductService } from "./shared/services/product.service";
     RouterModule.forRoot(AppRoutes),
     NoticeModule,
     AdminModule,
-    TableModule
+    FileUploadModule
   ],
   providers: [
     ProductService

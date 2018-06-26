@@ -52,5 +52,5 @@
   <button type="button" class="btn btn-primary" (click)="confirmCreate()" *ngIf="navState==='공지사항 글쓰기'">등록</button>
   <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='공지사항 수정'">수정</button>
   <button type="button" class="btn btn-primary" (click)="confirmDelete()" *ngIf="navState==='공지사항 수정'">삭제</button>
-  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
+  <button type="button" class="btn btn-primary" (click)="sideNavService.closeNav()">취소</button>
 </div>
