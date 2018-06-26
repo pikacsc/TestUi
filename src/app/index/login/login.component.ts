@@ -199,6 +199,13 @@ export class LoginComponent implements OnInit {
 
   //로그인
   login() {
+  if(this.login1.uid==null || this.login1.uid==""){
+    alert("아이디를 입력해주세요");
+    return;
+  }else if (this.login1.upw==null || this.login1.upw==""){
+    alert("비밀번호를 입력해주세요");
+    return;
+  }else {
     this.userService.getUsers(this.login1)
       .subscribe((user:User) => {
         if(user==null){
@@ -223,6 +230,7 @@ export class LoginComponent implements OnInit {
 
       },(error: any)=>{
     });
+  }
   }
 
 
