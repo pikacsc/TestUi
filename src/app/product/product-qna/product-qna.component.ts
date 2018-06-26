@@ -16,6 +16,7 @@ export class ProductQnaComponent implements OnInit {
   page = 1;
   productQnas : ProductQna[];
   p_code : string;
+  pq_no : number;
 
 
   constructor(
@@ -27,17 +28,29 @@ export class ProductQnaComponent implements OnInit {
 
   ngOnInit() {
 
-    if(this.tokenService.isToken("productQnaToken")){
-      this.productQnas = this.tokenService.getToken("productQnaToken");
-    }else{
+
       this.productService.getProductQna()
       .subscribe((productQnas :ProductQna[] )=>
     {
-      this.tokenService.saveToken("productQnaToken", productQnas);
-      this.productQnas = productQnas;
+        this.productQnas = productQnas;
     })
-    }
+
 
   }
+
+  setProductQnaNo(pq_no : number){
+    this.productQnaService.setProductQnaNo(pq_no);
+    this.setProductQnaNoObject(pq_no);
+  }
+
+
+  setProductQnaNoObject(pq_no: number) {
+    var productQna = this.productQnas.find(function (item){
+      return item.pq_no == pq_no;
+    });
+    this.productQnaService.setProductQnaNoObject(productQna);
+    // this.check(review);
+  }
+
 
 }

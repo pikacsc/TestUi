@@ -39,40 +39,11 @@ export class ProductService extends CachcingServiceBase{
 
   private products: Observable<Product[]>;
 
-  // products: AngularFireList<Product>;
-  // product: AngularFireObject<Product>;
 
-  // favouriteProducts
-  // favouriteProducts: AngularFireList<FavouriteProduct>;
-  // cartProducts: AngularFireList<FavouriteProduct>;
-
-  // NavbarCounts
   navbarCartCount = 0;
   navbarFavProdCount = 0;
 
-  // constructor()(
-  //   // private db: AngularFireDatabase,
-  //   // private authService: AuthService,
-  //   // 동현생성자수정
-  //   private userService: UserService,
-  //   private http:HttpClient,
-  //   // 동현생성자수정끝
-  //   private toastyService: ToastyService,
-  //   private toastyConfig: ToastyConfig
-  // ) {
-  //   // Toaster Config
-  //   this.toastyConfig.position = "top-right";
-  //   this.toastyConfig.theme = "material";
-  //
-  //   // if (this.authService.isLoggedIn()) {
-  //   //   this.calculateFavProductCounts();
-  //   //   this.calculateCartProductCounts();
-  //   // } else {
-  //   //   this.calculateLocalFavProdCounts();
-  //   //   this.calculateLocalCartProdCounts();
-  //   // }
-  // }
-//동현변수
+
   cartToOrder:number[]=[];
   cart:Cart;
   fromCart:boolean=false;
@@ -114,27 +85,12 @@ export class ProductService extends CachcingServiceBase{
   }
 
   getReview(){
-    if(this.tokenService.isToken("productReviewToken")){
-      this.tokenService.removeToken("productReviewToken");
-    }
+
+
     return this.http.get(this.productReviewUrl + this.p_code);
   }
 
-
   public getProducts(){
-    // this.products = this.db.list("products");
-    // return this.products;
-
-    // return this.cache<Product[]>(() => this.products,
-    //                            (val: Observable<Product[]>) => this.products = val,
-    //                            () => this.http
-    //                                      .get("http://localhost:8080/toma")
-    //                                      .map((response) => response.json()
-    //                                                                 .map((item) => {
-    //                                                                   let model = new Product();
-    //                                                                   model.updateFrom(item);
-    //                                                                   return model;
-    //                                                                 })));
 
     return this.http.get(this.productListUrl);
 

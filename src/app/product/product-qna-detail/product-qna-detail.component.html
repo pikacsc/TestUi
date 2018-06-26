@@ -1,0 +1,73 @@
+<hr class="between-sections">
+
+<div class="card card-cascade wider reverse">
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>상품 문의</strong></h4>
+  </div>
+
+</div>
+
+<hr class="between-sections">
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/index']">Home</a>
+  </li>
+  <li class="breadcrumb-item">상품상세</li>
+  <li class="breadcrumb-item">
+  상품문의
+    <!-- delete : (click)="removeToken()" -->
+  </li>
+</ol>
+
+<!--Table-->
+<table class="table table-bordered">
+
+  <!--Table body-->
+  <tbody>
+    <tr>
+      <th>제목</th>
+      <td colspan="3">{{ productQna?.pq_title }}</td>
+    </tr>
+    <tr>
+      <th>작성자</th>
+      <td colspan="3">{{ productQna?.u_id }}</td>
+    </tr>
+    <tr>
+      <th>작성일</th>
+      <td>{{ productQna?.pq_date | date:'yyyy-MM-dd' }}</td>
+      <th>조회수</th>
+      <td>{{ productQna?.pq_hits }}</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <pre>{{ productQna?.pq_content }}</pre>
+      </td>
+    </tr>
+    <tr *ngIf="replyyn !== 'n'">
+      <th class="cyan lighten-4">답변 내용</th>
+      <td colspan="3">
+        <pre>
+          {{ productQna?.pq_reply }}
+        </pre>
+      </td>
+    </tr>
+  </tbody>
+  <!--Table body-->
+
+</table>
+<!--Table-->
+
+<button type="button" class="btn btn-outline-danger waves-effect" (click)="deleteProductQna()">
+  삭제
+</button>
+
+<button type="button" class="btn btn-outline-info waves-effect" [routerLink]="['/products/product', productQna.p_code]">목록
+  <!-- (click)="removeToken()" -->
+</button>
+
+<button type="button" class="btn btn-outline-info waves-effect" id="pq_update_button" [routerLink]="['/products/productqna/update']" (click)="setProductQnaObject()">수정</button>

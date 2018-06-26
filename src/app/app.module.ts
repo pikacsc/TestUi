@@ -13,10 +13,8 @@ import { SharedModule } from "./shared/shared.module";
 import { NoticeModule } from "./notice/notice.module"
 import { AdminModule } from "./admin/admin.module";
 import { AppRoutes } from "./app.routing";
-//동현임포트수정
 import { ProductService } from "./shared/services/product.service";
-import { FileUploadModule } from 'primeng/fileupload';
-//동현임포트수정끝
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -29,8 +27,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     SharedModule,
     RouterModule.forRoot(AppRoutes),
     NoticeModule,
-    AdminModule,
-    FileUploadModule
+    AdminModule
   ],
   providers: [
     ProductService
