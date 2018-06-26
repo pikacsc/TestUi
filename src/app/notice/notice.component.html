@@ -47,8 +47,8 @@
 
   <!--Table body-->
   <tbody class="view overlay">
-    <tr *ngFor="let notice of noticeList | paginate: { itemsPerPage: 10, currentPage: page }">
-      <th scope="row">{{ notice.n_no }}</th>
+    <tr *ngFor="let notice of noticeList | paginate: { itemsPerPage: 10, currentPage: page }; let i = index">
+      <th scope="row">{{ i+1 }}</th>
       <th>{{ notice.n_category }}</th>
       <th>
         <a [routerLink]="['/detail/notice']" routerLinkActive="router-link-active" (click)="setNoticeNo(notice.n_no)">{{ notice.n_title }}
