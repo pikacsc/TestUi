@@ -34,14 +34,14 @@
       <tr>
         <th>분류</th>
         <td>
-         <select (change)="getProductQnaByCategory($event.target.value)">
+          <select (change)="getProductQnaByCategory($event.target.value)">
            <option value="" disabled selected>카테고리를 선택해주세요</option>
            <option *ngFor="let category of categoryList" [value]="category">
              {{ category }}
            </option>
          </select>
-       </td>
-    </tr>
+        </td>
+      </tr>
 
       <tr>
         <th colspan="1">문의 내용</th>

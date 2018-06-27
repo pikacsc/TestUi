@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
 
-import { ReviewService} from "../../shared/services/review.service";
-import {Review} from "../../shared/models/Review";
+import { ReviewService } from "../../shared/services/review.service";
+import { Review } from "../../shared/models/Review";
 import { TokenService } from '../../shared/services/token.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
@@ -15,36 +15,37 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class ProductReviewDetailComponent implements OnInit {
 
+
   review : Review;
   u_id : string;
 
-  constructor(
 
-    private reviewService : ReviewService,
-    private http : HttpClient,
+  constructor(
+    private reviewService: ReviewService,
+    private http: HttpClient,
     private tokenService: TokenService,
     private router: Router,
     private authService: AuthService
 
 
+
   ) { }
 
   ngOnInit() {
-
-      this.reviewService.getReviewNoObject().subscribe((review: Review)=>{
-      this.tokenService.saveToken("reviewToken",review);
+    this.reviewService.getReviewNoObject().subscribe((review: Review) => {
+      this.tokenService.saveToken("reviewToken", review);
       this.review = review;
       return this.review;
       })
 
       this.u_id = this.authService.getLoggedInUser().uid;
-
   }
 
-  setReviewObject(){
+  setReviewObject() {
     this.review = this.tokenService.getToken("reviewToken");
     this.reviewService.setReviewObject(this.review);
   }
+
 
 
 
@@ -62,6 +63,5 @@ export class ProductReviewDetailComponent implements OnInit {
     }
 
   }
-
 
 }

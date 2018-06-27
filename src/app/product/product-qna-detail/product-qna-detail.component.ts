@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
 
-import { ProductQnaService} from "../../shared/services/product-qna.service";
-import { ProductQna} from "../../shared/models/ProductQna";
+import { ProductQnaService } from "../../shared/services/product-qna.service";
+import { ProductQna } from "../../shared/models/ProductQna";
 import { TokenService } from '../../shared/services/token.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
-
 
 @Component({
   selector: 'app-product-qna-detail',
@@ -24,8 +23,7 @@ export class ProductQnaDetailComponent implements OnInit {
     private authService: AuthService,
     private http : HttpClient,
     private router: Router,
-    private tokenService : TokenService
-
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
@@ -40,8 +38,7 @@ export class ProductQnaDetailComponent implements OnInit {
     this.u_id = this.authService.getLoggedInUser().uid;
   }
 
-
-  setProductQnaObject(){
+  setProductQnaObject() {
     this.productQna = this.tokenService.getToken("productQnaToken");
     this.productQnaService.setProductQnaObject(this.productQna);
   }

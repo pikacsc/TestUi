@@ -11,11 +11,7 @@ export class NoticeService {
   url = 'http://localhost:8080/toma/notice';
   detailUrl = 'http://localhost:8080/toma/detail/notice/';
 
-  constructor(
-    private http: HttpClient
-  ) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   incrementNoticeHits(notice: Notice) {
     return this.http.put(this.detailUrl + this.n_no, notice);

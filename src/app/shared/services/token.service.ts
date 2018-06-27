@@ -44,6 +44,7 @@ export class TokenService {
     localStorage.setItem(tokenName, Token);
     sessionStorage.setItem(tokenName, Token);
   }
+
   isToken(tokenName: string): Boolean {
     const token = sessionStorage.getItem(tokenName);
     if (token) {
@@ -51,6 +52,5 @@ export class TokenService {
     }
     return false;
   }
-
 
 }

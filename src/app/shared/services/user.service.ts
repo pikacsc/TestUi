@@ -1,15 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClientModule,HttpHeaders, HttpClient } from '@angular/common/http';
-// import {
-//   AngularFireDatabase,
-//   AngularFireList,
-//   AngularFireObject
-// } from "angularfire2/database";
-
 import * as moment from "moment";
 import { User } from "../models/user";
 import { Login } from "../models/login";
-
 
 @Injectable()
 export class UserService {

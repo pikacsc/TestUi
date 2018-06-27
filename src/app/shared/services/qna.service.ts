@@ -33,11 +33,10 @@ export class QnaService {
     return this.qna;
   }
 
-// 관리자용
+  // 관리자용
   getAllQnaList() {
     return this.http.get('http://localhost:8080/toma/admin/qna/list');
   }
-
 
   getQnaList(u_id: string) {
     return this.http.get(this.url + "/list/" + u_id);
@@ -51,7 +50,7 @@ export class QnaService {
     return this.http.post(this.url + "/write", qna);
   }
 
-  updateQna(qna: Qna):Observable<any> {
+  updateQna(qna: Qna): Observable<any> {
     return this.http.put(this.url + "/update/" + qna.q_no, qna)
       .catch(this.handleError);
   }
@@ -60,7 +59,7 @@ export class QnaService {
     return this.http.delete(this.url + "/" + this.q_no);
   }
 
-  private handleError( error: Response | any) {
+  private handleError(error: Response | any) {
     console.error(error.message || error);
     return Observable.throw(error.status);
   }

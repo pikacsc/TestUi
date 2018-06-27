@@ -94,16 +94,4 @@ export class AuthService {
     const loggedUser: User = JSON.parse(strObj);
     return loggedUser;
   }
-  //
-  // getAllUsers() {
-  //   const x = this.userService.getUsers();
-  //   x.snapshotChanges().subscribe(user => {
-  //     this.usersList = [];
-  //     user.forEach(element => {
-  //       const y = element.payload.toJSON();
-  //       y["$key"] = element.key;
-  //       this.usersList.push(y as User);
-  //     });
-  //   });
-  // }
 }
