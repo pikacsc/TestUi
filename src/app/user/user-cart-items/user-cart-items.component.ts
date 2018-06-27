@@ -70,7 +70,7 @@ export class UserCartItemsComponent implements OnInit {
 
 
 
-//주문진행 페이지로 가기 전 저장된 배열을 service에 저장한다.
+//주문진행 페이지로 가기 전 저장된 배열을 TokenService에 저장한다.
   gotoOrderWirte(){
     this.productService.cartToOrder=this.orderList;
     // this.productService.fromCart=true;

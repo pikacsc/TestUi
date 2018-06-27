@@ -73,6 +73,7 @@ export class UserOrderListComponent implements OnInit {
       if(order.ostatus=='N'){
         this.productService.cancleOrder(order.ono).subscribe(data=>{
           alert('주문 취소가 완료 되었습니다.');
+          this.getOrderList(this.uid);
       });
       this.tokenService.removeToken('OrderCancle');
       this.tokenService.removeToken('OrderWait');
