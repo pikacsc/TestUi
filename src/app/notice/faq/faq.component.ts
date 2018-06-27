@@ -22,15 +22,11 @@ export class FaqComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // if(this.tokenService.isToken("faqToken")) {
-    //   this.tokenService.removeToken("faqToken");
-    // } else {
     this.faqService.getFaqList()
       .subscribe((faqs: Faq[]) => {
         this.tokenService.saveToken("faqToken", faqs);
         this.faqList = faqs;
       });
-    // }
   }
 
   getFaqByCategory(f_category: string) {

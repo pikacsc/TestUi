@@ -12,36 +12,23 @@ import { Review } from '../../shared/models/review';
 })
 export class ProductReviewUpdateComponent implements OnInit {
 
-  review : Review;
+  review: Review;
 
   constructor(
-    private reviewService : ReviewService,
+    private reviewService: ReviewService,
     private router: Router
-
-
   ) { }
 
   ngOnInit() {
-
     this.review = this.reviewService.getReviewObject();
-
   }
 
-  updateReview(form : NgForm){
-
-    // console.log(this.review.rev_no);
-    // console.log(this.review.u_id);
-    // console.log(this.review.rev_title);
-    // console.log(this.review.rev_content);
-
-
-
+  updateReview(form: NgForm) {
     this.reviewService.updateReview(this.review)
-    .subscribe(()=>{
-      alert("상품 후기가 수정되었습니다.");
-      this.router.navigate(['/products/review', this.review.rev_no]);
-    })
+      .subscribe(() => {
+        alert("상품 후기가 수정되었습니다.");
+        this.router.navigate(['/products/review', this.review.rev_no]);
+      });
   }
-
 
 }

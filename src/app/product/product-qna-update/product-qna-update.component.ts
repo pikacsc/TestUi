@@ -11,31 +11,23 @@ import { ProductQna } from '../../shared/models/productQna';
   styleUrls: ['./product-qna-update.component.css']
 })
 export class ProductQnaUpdateComponent implements OnInit {
-
   productQna : ProductQna;
 
-
   constructor(
-
     private productQnaService : ProductQnaService,
     private router : Router
-
   ) { }
 
   ngOnInit() {
-
     this.productQna = this.productQnaService.getProductQnaObject();
-
   }
 
-
   updateProductQna(){
-
       this.productQnaService.updateProductQna(this.productQna)
       .subscribe(()=>{
         alert("상품 문의가 수정되었습니다.");
         this.router.navigate(['/products/qna',this.productQna.pq_no]);
-      })
+      });
   }
 
 

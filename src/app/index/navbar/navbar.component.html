@@ -15,7 +15,6 @@
       </li>
     </ul>
 
-
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <ng-template #favCountNotLogged>
@@ -64,12 +63,12 @@
         <a class="nav-link" [routerLink]="['/users']">
           <i class="fa fa-user"></i>My Page</a>
       </li>
-      <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdmin()"  (click)="select='Home'">
-       <a class="nav-link" (click)="logout()">
+      <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdmin()" (click)="select='Home'">
+        <a class="nav-link" (click)="logout()">
          <i class="fa fa-sign-in"></i>Logout</a>
       </li>
       <li class="nav-item" *ngIf="authService.isAdmin()">
-       <a class="nav-link" (click)="adminlogout()">
+        <a class="nav-link" (click)="adminlogout()">
          <i class="fa fa-sign-in"></i>관리자 로그아웃</a>
       </li>
     </ul>

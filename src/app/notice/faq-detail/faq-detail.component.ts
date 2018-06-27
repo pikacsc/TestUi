@@ -35,12 +35,4 @@ export class FaqDetailComponent implements OnInit {
     }
   }
 
-  // ngOnDestroy() {
-  //   this.removeToken();
-  // }
-
-  // removeToken() {
-  //   this.tokenService.removeToken("faqToken");
-  // }
-
 }

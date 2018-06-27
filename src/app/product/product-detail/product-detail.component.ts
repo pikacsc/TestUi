@@ -8,6 +8,7 @@ import { TokenService } from "../../shared/services/token.service";
 import { Cart } from "../../shared/models/cart";
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from '@angular/router';
+
 @Component({
   selector: "app-product-detail",
   templateUrl: "./product-detail.component.html",
@@ -22,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
   cart: Cart;
   carts: Cart[] = [];
   pQuantity: number = 1;
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -31,12 +33,9 @@ export class ProductDetailComponent implements OnInit {
     private tokenService: TokenService
   ) {
     this.product = new Product();
-
-
   }
 
   ngOnInit() {
-
     // this.p_code = this.tokenService.getToken("p_code");
     this.p_code = this.productService.getProductCode();
 
@@ -45,11 +44,7 @@ export class ProductDetailComponent implements OnInit {
         this.product = product;
         this.tokenService.removeToken("p_code");
         this.tokenService.saveToken("p_code", this.product.p_code);
-
       });
-
-    // alert(this.tokenService.getToken("p_code"));
-
   }
 
   setProductCode(p_code: string) {

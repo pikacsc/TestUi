@@ -43,9 +43,6 @@ export class QnaDetailComponent implements OnInit {
     }
   }
 
-
-
-
   setQnaObject() {
     this.qnaService.setQnaObject(this.qna);
   }

@@ -2,8 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NoProductsFoundComponent } from "./components/no-products-found/no-products-found.component";
 import { MDBBootstrapModule } from "angular-bootstrap-md";
-// import { AngularFireModule } from "angularfire2";
-// import { AngularFireDatabaseModule } from "angularfire2/database";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastyModule } from "ng2-toasty";
 import { RouterModule, Router } from "@angular/router";
@@ -13,7 +11,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AgmCoreModule } from "@agm/core";
 import { NoAccessComponent } from "./components/no-access/no-access.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-// import { FireBaseConfig } from "../../environments/firebaseConfigDummy";
 import { FilterByKindPipe } from "./pipes/filterByKind.pipe";
 import { ProductService } from "./services/product.service";
 import { AdminGaurd } from "./services/admin-gaurd";
@@ -28,12 +25,11 @@ import { QnaService } from "./services/qna.service";
 import { SearchService } from "./services/search.service";
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { SidenavService } from './services/sidenav.service';
+
 @NgModule({
   imports: [
     CommonModule,
     MDBBootstrapModule.forRoot(),
-    // AngularFireModule.initializeApp(FireBaseConfig),
-    // AngularFireDatabaseModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -45,6 +41,7 @@ import { SidenavService } from './services/sidenav.service';
       apiKey: "AIzaSyDMbxW3MlwUP2vrAZVJyu7pYqZa1LthvTE"
     })
   ],
+
   declarations: [
     NoProductsFoundComponent,
     FilterByKindPipe,
@@ -52,12 +49,11 @@ import { SidenavService } from './services/sidenav.service';
     PageNotFoundComponent,
     FileUploadComponent
   ],
+
   exports: [
     NoProductsFoundComponent,
     FormsModule,
     MDBBootstrapModule,
-    // AngularFireModule,
-    // AngularFireDatabaseModule,
     FormsModule,
     ToastyModule,
     RouterModule,
@@ -69,6 +65,7 @@ import { SidenavService } from './services/sidenav.service';
     NoAccessComponent,
     PageNotFoundComponent
   ],
+
   providers: [
     TokenService,
     AuthService,
