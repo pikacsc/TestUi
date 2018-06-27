@@ -5,6 +5,7 @@ import { ProductQnaService} from "../../shared/services/product-qna.service";
 import { ProductQna} from "../../shared/models/ProductQna";
 import { TokenService } from '../../shared/services/token.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 @Component({
@@ -15,10 +16,12 @@ import { Router } from '@angular/router';
 export class ProductQnaDetailComponent implements OnInit {
 
   productQna : ProductQna ;
+  u_id : string;
 
   constructor(
 
     private productQnaService : ProductQnaService,
+    private authService: AuthService,
     private http : HttpClient,
     private router: Router,
     private tokenService : TokenService
@@ -27,11 +30,14 @@ export class ProductQnaDetailComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.productQnaService.getProductQnaNoObject().subscribe((productQna: ProductQna)=>{
     this.tokenService.saveToken("productQnaToken", productQna);
     this.productQna = productQna;
     return this.productQna;
     })
+
+    this.u_id = this.authService.getLoggedInUser().uid;
   }
 
 
@@ -43,12 +49,20 @@ export class ProductQnaDetailComponent implements OnInit {
 
   deleteProductQna(productQna : ProductQna){
 
-    this.productQnaService.deleteProductQna(this.productQna)
-    .subscribe(()=>{
-      alert("고객님의 상품문의가 삭제되었습니다.");
-      this.router.navigate(['/products/product', this.productQna.p_code]);
-    
-    })
+    if(this.productQna.u_id == this.u_id){
+
+      this.productQnaService.deleteProductQna(this.productQna)
+      .subscribe(()=>{
+        alert("고객님의 상품문의가 삭제되었습니다.");
+        this.router.navigate(['/products/product', this.productQna.p_code]);
+
+      })
+    }else{
+      alert("삭제할 권한이 없습니다.");
+    }
+
   }
+
+
 
 }

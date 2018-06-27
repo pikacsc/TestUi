@@ -5,6 +5,7 @@ import { ReviewService} from "../../shared/services/review.service";
 import {Review} from "../../shared/models/Review";
 import { TokenService } from '../../shared/services/token.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 @Component({
@@ -15,13 +16,15 @@ import { Router } from '@angular/router';
 export class ProductReviewDetailComponent implements OnInit {
 
   review : Review;
+  u_id : string;
 
   constructor(
 
     private reviewService : ReviewService,
     private http : HttpClient,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
 
 
   ) { }
@@ -34,6 +37,7 @@ export class ProductReviewDetailComponent implements OnInit {
       return this.review;
       })
 
+      this.u_id = this.authService.getLoggedInUser().uid;
 
   }
 
@@ -46,13 +50,18 @@ export class ProductReviewDetailComponent implements OnInit {
 
   deleteReview(review : Review){
 
-    this.reviewService.deleteReview(this.review)
-    .subscribe(()=>{
-      alert("고객님의 상품후기가 삭제되었습니다.");
-      this.router.navigate(['/products/product', this.review.p_code]);
-    })
-  }
+    if(this.review.u_id == this.u_id){
 
+      this.reviewService.deleteReview(this.review)
+      .subscribe(()=>{
+        alert("고객님의 상품후기가 삭제되었습니다.");
+        this.router.navigate(['/products/product', this.review.p_code]);
+      })
+    }else{
+      alert("삭제할 권한이 없습니다.");
+    }
+
+  }
 
 
 }

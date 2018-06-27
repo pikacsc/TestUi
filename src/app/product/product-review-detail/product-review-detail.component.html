@@ -54,14 +54,14 @@
 </table>
 <!--Table-->
 
-<button type="button" class="btn btn-outline-danger waves-effect" id="delete_button" (click)="deleteReview()">
+<button type="button" class="btn btn-outline-danger waves-effect" *ngIf="u_id == review.u_id" id="delete_button" (click)="deleteReview()">
   삭제
 </button>
 
-<button type="button" class="btn btn-outline-info waves-effect" id="update_button" [routerLink]="['/products/productreview/update']" (click)="setReviewObject()" >수정</button>
+<button type="button" class="btn btn-outline-info waves-effect" id="update_button" *ngIf="u_id == review.u_id" [routerLink]="['/products/productreview/update']" (click)="setReviewObject()" >수정</button>
 
 
-<button type="button" class="btn btn-outline-info waves-effect" id="back_button" [routerLink]="['/products/product', review.p_code]">목록
+<button type="button" class="btn btn-outline-info waves-effect" id="back_button"  [routerLink]="['/products/product', review.p_code]">목록
   <!-- (click)="removeToken()" -->
 </button>
 

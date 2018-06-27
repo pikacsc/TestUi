@@ -48,11 +48,12 @@
         <pre>{{ productQna?.pq_content }}</pre>
       </td>
     </tr>
-    <tr *ngIf="replyyn !== 'n'">
+    <tr *ngIf="productQna?.pq_replyyn !== 'n' ">
       <th class="reply">답변 내용</th>
       <td colspan="3">
         <pre>
           {{ productQna?.pq_reply }}
+
         </pre>
       </td>
     </tr>
@@ -62,13 +63,15 @@
 </table>
 <!--Table-->
 
-<button type="button" class="btn btn-outline-danger waves-effect" id="delete_button" (click)="deleteProductQna()">
+<button type="button" class="btn btn-outline-danger waves-effect" id="delete_button" *ngIf="u_id == productQna.u_id" (click)="deleteProductQna()">
   삭제
 </button>
+
+<button type="button" class="btn btn-outline-info waves-effect" id="update_button"  *ngIf="u_id == productQna.u_id"  [routerLink]="['/products/productqna/update']" (click)="setProductQnaObject()">수정</button>
 
 <button type="button" class="btn btn-outline-info waves-effect" id="back_button" [routerLink]="['/products/product', productQna.p_code]">목록
   <!-- (click)="removeToken()" -->
 </button>
 
-<button type="button" class="btn btn-outline-info waves-effect" id="update_button" [routerLink]="['/products/productqna/update']" (click)="setProductQnaObject()">수정</button>
+
 <br><br>

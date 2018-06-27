@@ -13,11 +13,8 @@ import { SharedModule } from "./shared/shared.module";
 import { NoticeModule } from "./notice/notice.module"
 import { AdminModule } from "./admin/admin.module";
 import { AppRoutes } from "./app.routing";
-<<<<<<< HEAD
 import {NgxPaginationModule} from 'ngx-pagination';
 //동현임포트수정
-=======
->>>>>>> ddb2ead2cb3f8b050c63f95108eed4cd494dc1d2
 import { ProductService } from "./shared/services/product.service";
 
 @NgModule({
@@ -32,13 +29,9 @@ import { ProductService } from "./shared/services/product.service";
     SharedModule,
     RouterModule.forRoot(AppRoutes),
     NoticeModule,
-<<<<<<< HEAD
     AdminModule,
     TableModule,
     NgxPaginationModule
-=======
-    AdminModule
->>>>>>> ddb2ead2cb3f8b050c63f95108eed4cd494dc1d2
   ],
   providers: [
     ProductService

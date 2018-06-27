@@ -1,0 +1,10 @@
+
+
+
+tbody th {
+  padding-top: 25px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(245,198,203);
+  width: 70px;
+}
