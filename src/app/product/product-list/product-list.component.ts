@@ -70,8 +70,6 @@ export class ProductListComponent implements OnInit {
   }
 
 
-
-
   removeProduct(key: string) {
     this.productService.deleteProduct(key);
   }

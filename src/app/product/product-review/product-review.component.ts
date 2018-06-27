@@ -13,7 +13,7 @@ import { TokenService } from "../../shared/services/token.service";
 })
 export class ProductReviewComponent implements OnInit {
 
-  page = 1;
+  page : number = 1;
   reviews : Review[];
   p_code : string;
   rev_no : number;

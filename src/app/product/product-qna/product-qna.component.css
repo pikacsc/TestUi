@@ -1,0 +1,27 @@
+ol li {
+  font-weight: bold;
+}
+
+thead tr th {
+  font-weight: bold;
+  text-align: center;
+}
+
+
+tbody tr a:hover {
+  color: lightgray;
+
+}
+
+tbody tr th {
+  text-align: center;
+}
+
+form button {
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+#qna_button{
+    font-size: 0.8em;
+}

@@ -13,6 +13,7 @@ import { SharedModule } from "./shared/shared.module";
 import { NoticeModule } from "./notice/notice.module"
 import { AdminModule } from "./admin/admin.module";
 import { AppRoutes } from "./app.routing";
+import {NgxPaginationModule} from 'ngx-pagination';
 //동현임포트수정
 import { ProductService } from "./shared/services/product.service";
 
@@ -31,7 +32,8 @@ import { ProductService } from "./shared/services/product.service";
     RouterModule.forRoot(AppRoutes),
     NoticeModule,
     AdminModule,
-    TableModule
+    TableModule,
+    NgxPaginationModule
   ],
   providers: [
     ProductService

@@ -5,7 +5,7 @@
 </ol>
 
 <table class="table table-responsive-md">
-  <thead class="amber lighten-3">
+  <thead class="table-danger">
   <tr>
     <th>번호</th>
     <th>제목</th>
@@ -17,7 +17,7 @@
 
   <tbody>
 
-    <tr *ngFor="let review of reviews | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+    <tr *ngFor="let review of reviews | paginate: { id:'review', itemsPerPage: 5, currentPage: page }; let i = index">
     <th>{{i+1}}</th>
     <th>
       <a [routerLink]="['/products/review', review.rev_no]" routerLinkActive="router-link-active"
@@ -31,16 +31,13 @@
     <p>{{review.review_content}}</p>
   </tr>
 
-  </tbody>
+</tbody>
+</table>
+
+<button type="button" class="btn btn-outline-info btn-sm waves-effect" id="review_button"
+  [routerLink]="['/products/productreview/write']">후기쓰기
+</button>
 
   <div class="text-center mt-3">
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    <pagination-controls id="review" (pageChange)="page = $event"></pagination-controls>
   </div>
-
-
-
-  <button type="button" class="btn btn-outline-info waves-effect" id="qna_button"
-    [routerLink]="['/products/productreview/write']">후기쓰기
-  </button>
-
-</table>
