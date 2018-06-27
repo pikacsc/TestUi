@@ -36,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.p_code = this.tokenService.getToken("p_code");
+
     this.p_code = this.productService.getProductCode();
 
     this.productService.getProductById(this.p_code)
@@ -94,8 +94,7 @@ export class ProductDetailComponent implements OnInit {
       this.tokenService.saveToken('fromCart', false);
     }
 
-    //this.productService.cart=this.cart;
-    //this.productService.fromCart=false;
+
     console.log(this.cart);
     this.router.navigate(["/users", { outlets: { profileOutlet: ['order-write'] } }]);
   }

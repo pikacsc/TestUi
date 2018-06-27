@@ -18,10 +18,7 @@
     <a [routerLink]="['/index']">Home</a>
   </li>
   <li class="breadcrumb-item">상품상세</li>
-  <li class="breadcrumb-item">
-    상품문의
-    <!-- delete : (click)="removeToken()" -->
-  </li>
+  <li class="breadcrumb-item">상품문의</li>
 </ol>
 
 <!--Table-->
@@ -64,13 +61,15 @@
 <!--Table-->
 
 <button type="button" class="btn btn-outline-danger waves-effect" id="delete_button" *ngIf="u_id == productQna.u_id" (click)="deleteProductQna()">
-  삭제
+삭제
 </button>
 
-<button type="button" class="btn btn-outline-info waves-effect" id="update_button"  *ngIf="u_id == productQna.u_id"  [routerLink]="['/products/productqna/update']" (click)="setProductQnaObject()">수정</button>
+<button type="button" class="btn btn-outline-danger waves-effect" id="update_button" *ngIf="u_id == productQna.u_id" [routerLink]="['/products/productqna/update']" (click)="setProductQnaObject()">
+수정
+</button>
 
-<button type="button" class="btn btn-outline-info waves-effect" id="back_button" [routerLink]="['/products/product', productQna.p_code]">목록
-  <!-- (click)="removeToken()" -->
+<button type="button" class="btn btn-outline-info waves-effect" id="back_button" [routerLink]="['/products/product', productQna.p_code]">
+목록
 </button>
 
 

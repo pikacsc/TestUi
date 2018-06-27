@@ -39,7 +39,6 @@ export class ProductQnaComponent implements OnInit {
       return item.pq_no == pq_no;
     });
     this.productQnaService.setProductQnaNoObject(productQna);
-    // this.check(review);
   }
 
 }

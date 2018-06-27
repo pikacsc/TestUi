@@ -1,12 +1,12 @@
 #delete_button{
-  float : left;
+  float : right;
 }
 
 #update_button{
   float : right;
 }
 #back_button{
-  float : right;
+  float : left;
 }
 
 
