@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileUploadModule } from 'primeng/fileupload';
 import { RouterModule } from "@angular/router";
 import { AdminComponent } from './admin.component';
 import { AdminProductComponent } from './admin-product/admin-product.component';
@@ -20,7 +19,6 @@ import { AdminBoardModule } from './admin-board/admin-board.module';
     RouterModule.forChild(AdminRoutes),
     SharedModule,
     Ng2SmartTableModule,
-    FileUploadModule,
     AdminBoardModule
   ],
   declarations: [
