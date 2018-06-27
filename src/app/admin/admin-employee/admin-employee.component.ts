@@ -143,7 +143,7 @@ export class AdminEmployeeComponent implements OnInit {
     if(this.isAdminValueNull(event)){
       return false;
     }else{
-      this.openNav();
+      this.sideNavService.openNav();
     }
   }
 
@@ -217,15 +217,6 @@ export class AdminEmployeeComponent implements OnInit {
     }
 
 
-        openNav() {
-            document.getElementById("mySidenav").style.width = "650px";
-            document.body.style.marginLeft = "650px";
-        }
-
-        closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.body.style.marginLeft = "0";
-        }
 
 
     ngOnInit() {
