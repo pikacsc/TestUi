@@ -25,14 +25,14 @@ export class QnaDetailComponent implements OnInit {
   ngOnInit() {
     this.qna = this.qnaService.getQnaObject();
 
-    if(this.qna == null){
+    if (this.qna == null) {
       var q_no = this.tokenService.getToken("qnaDetailToken")
       var qnaList = this.tokenService.getToken("qnaToken");
-      var qna = qnaList.find(function (item) {
+      var qna = qnaList.find(function(item) {
         return item.q_no === q_no;
       });
       var q_content = qna.q_content;
-      qna.q_content = qna.q_content.replace("\r\n","<br>");
+      qna.q_content = qna.q_content.replace("\r\n", "<br>");
       this.qna = qna;
     }
 
@@ -43,16 +43,24 @@ export class QnaDetailComponent implements OnInit {
     }
   }
 
+
+
+
   setQnaObject() {
     this.qnaService.setQnaObject(this.qna);
   }
 
   deleteQna(q_no: number) {
-    return this.qnaService.deleteQna(q_no)
-      .subscribe(() => {
-        alert("고객님의 질문이 삭제되었습니다.");
-        // this.tokenService.removeToken("qnaToken");
-        this.router.navigate(["notice/qna"]);
-      });
+    var confirm = window.confirm('질문을 삭제하시겠습니까?');
+    if (confirm) {
+      return this.qnaService.deleteQna(q_no)
+        .subscribe(() => {
+          alert("고객님의 질문이 삭제되었습니다.");
+          // this.tokenService.removeToken("qnaToken");
+          this.router.navigate(["notice/qna"]);
+        });
+    } else {
+      return;
+    }
   }
 }

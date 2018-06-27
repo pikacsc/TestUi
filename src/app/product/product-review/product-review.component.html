@@ -17,10 +17,10 @@
 
   <tbody>
 
-    <tr *ngFor="let review of reviews | paginate : {itemsPerPage: 10, currentPage : page }">
-    <th>{{review.rev_no}}</th>
+    <tr *ngFor="let review of reviews | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+    <th>{{i+1}}</th>
     <th>
-      <a [routerLink]="['/review']" routerLinkActive="router-link-active"
+      <a [routerLink]="['/products/review', review.rev_no]" routerLinkActive="router-link-active"
       (click)="setReviewNo(review.rev_no)">
       {{review.rev_title}}
     </a>
@@ -32,5 +32,15 @@
   </tr>
 
   </tbody>
+
+  <div class="text-center mt-3">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+
+
+
+  <button type="button" class="btn btn-outline-info waves-effect" id="qna_button"
+    [routerLink]="['/products/productreview/write']">후기쓰기
+  </button>
 
 </table>

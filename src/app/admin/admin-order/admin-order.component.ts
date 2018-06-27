@@ -12,8 +12,7 @@ import { TokenService } from "../../shared/services/token.service";
 export class AdminOrderComponent implements OnInit {
 
   constructor(
-    private http:HttpClient,
-    private tokenService: TokenService
+    private http:HttpClient
   ) { }
 
   source: LocalDataSource;
@@ -84,7 +83,6 @@ updateRecord(event) {
           console.log(res);
           event.confirm.resolve(event.newData);
           alert("주문처리가 변경되었습니다");
-          this.tokenService.removeToken("adminOrderToken");
           this.ngOnInit();
       },
       (err: HttpErrorResponse) => {
@@ -100,7 +98,6 @@ getOrderList(){
     this.http.get<Order[]>('http://localhost:8080/toma/order/')
     .subscribe((orderList: Order[]) => {
       this.orderList = orderList;
-      this.tokenService.saveToken("adminOrderToken",this.orderList);
     },(err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
         alert("Client-side error occured.");
@@ -112,12 +109,7 @@ getOrderList(){
 
 
   ngOnInit() {
-    if(this.tokenService.isToken("adminOrderToken")){
-        this.orderList = this.tokenService.getToken("adminOrderToken");
-    }else{
         this.getOrderList();
-        this.tokenService.saveToken("adminOrderToken",this.orderList);
-    }
   }
 
 

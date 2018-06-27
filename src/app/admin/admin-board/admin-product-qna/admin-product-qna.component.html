@@ -26,7 +26,7 @@
       </tr>
       <tr>
         <th scope="row" class="font-weight-bold">제목</th>
-        <td>{{qnaProduct.pq_title}}
+        <td>{{navProductQna.pq_title}}
         </td>
       </tr>
       <tr>
@@ -47,5 +47,5 @@
     </span>
   </li>
   <button type="button" class="btn btn-primary" (click)="confirmEdit()" *ngIf="navState==='상품 질문 답변하기'">답변</button>
-  <button type="button" class="btn btn-primary" (click)="closeNav()">취소</button>
+  <button type="button" class="btn btn-primary" (click)="sideNavService.closeNav()">취소</button>
 </div>

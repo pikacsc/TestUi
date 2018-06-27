@@ -36,47 +36,19 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.sub = this.route.params.subscribe(params => {
-    //   const id = params["id"]; // (+) converts string 'id' to a number
-    //   this.getProductDetail(id);
-    // });
 
-    if (this.tokenService.isToken("productListToken")) {
-      var p_code = this.productService.getProductCode();
+    // this.p_code = this.tokenService.getToken("p_code");
+    this.p_code = this.productService.getProductCode();
 
-      if (p_code == null) {
-        p_code = this.tokenService.getToken("pcodeToken");
-      }
-      this.productList = this.tokenService.getToken("productListToken");
-      this.product = this.productList.find(function(item) {
-        return item.p_code == p_code;
+    this.productService.getProductById(this.p_code)
+      .subscribe((product: Product) => {
+        this.product = product;
+        this.tokenService.removeToken("p_code");
+        this.tokenService.saveToken("p_code", this.product.p_code);
+
       });
 
-
-
-    } else {
-
-      this.productService.getProductById(this.p_code)
-        .subscribe((product: Product) => {
-this.product = product;
-          this.tokenService.saveToken("productDetailToken", product);
-          console.log(this.product.p_price);
-          console.log(this.product.p_sellPrice);
-          console.log(this.product.p_name);
-          console.log(this.product.p_profit);
-        });
-
-    }
-
-
-
-    // getOneProductFromToken(p_code){
-    //   var result = this.tokenService.getToken("productListToken").find(function (item) {
-    //       return item.p_code === p_code;
-    //   });
-    // }
-
-
+    // alert(this.tokenService.getToken("p_code"));
 
   }
 
@@ -84,23 +56,8 @@ this.product = product;
     this.productService.setProductCode(p_code);
   }
 
-
-
-
-  getProductDetail(p_code: string) {
-    // this.spinnerService.show();
-    // const x = this.productService.getProductById(p_code);
-    // x.snapshotChanges().subscribe(product => {
-    //   this.spinnerService.hide();
-    //   const y = product.payload.toJSON() as Product;
-    //
-    //   y["$key"] = id;
-    //   this.product = y;
-    // });
-  }
-
   addToCart() {
-    if(this.authService.getLoggedInUser()==null){
+    if (this.authService.getLoggedInUser() == null) {
       alert('로그인 후 이용해주세요.');
       this.router.navigate(['/index/login']);
       return;
@@ -115,31 +72,31 @@ this.product = product;
     });
   }
 
-  gotoOrderWirte(){
-    if(this.authService.getLoggedInUser()==null){
+  gotoOrderWirte() {
+    if (this.authService.getLoggedInUser() == null) {
       alert('로그인 후 이용해주세요.');
       this.router.navigate(['/index/login']);
       return;
     }
-    this.cart=new Cart();
-    this.cart.uid=this.authService.getLoggedInUser().uid;
-    this.cart.pcode=this.product.p_code;
-    this.cart.camount=this.pQuantity;
-    this.cart.p_img=this.product.p_img;
-    this.cart.p_sellprice=this.product.p_sellPrice;
-    this.cart.p_name=this.product.p_name;
-    this.cart.p_kind=this.product.p_kind;
-    this.cart.p_content=this.product.p_content;
+    this.cart = new Cart();
+    this.cart.uid = this.authService.getLoggedInUser().uid;
+    this.cart.pcode = this.product.p_code;
+    this.cart.camount = this.pQuantity;
+    this.cart.p_img = this.product.p_img;
+    this.cart.p_sellprice = this.product.p_sellPrice;
+    this.cart.p_name = this.product.p_name;
+    this.cart.p_kind = this.product.p_kind;
+    this.cart.p_content = this.product.p_content;
 
-    if(this.tokenService.isToken('OWCart')){
-      this.tokenService.updateToken('OWcart',this.cart);
-    }else{
-      this.tokenService.saveToken('OWcart',this.cart);
+    if (this.tokenService.isToken('OWCart')) {
+      this.tokenService.updateToken('OWcart', this.cart);
+    } else {
+      this.tokenService.saveToken('OWcart', this.cart);
     }
-    if(this.tokenService.isToken('fromCart')){
-      this.tokenService.updateToken('fromCart',false);
-    }else{
-      this.tokenService.saveToken('fromCart',false);
+    if (this.tokenService.isToken('fromCart')) {
+      this.tokenService.updateToken('fromCart', false);
+    } else {
+      this.tokenService.saveToken('fromCart', false);
     }
 
     //this.productService.cart=this.cart;

@@ -12,7 +12,7 @@ import { TokenService } from '../shared/services/token.service';
 })
 export class NoticeComponent implements OnInit {
   page = 1;
-  categoryList = ["전체조회", "공지", "이벤트"];
+  categoryList = ["전체조회", "공지", "상품", "배송"];
   noticeList: Notice[];
   search = '';
 

@@ -10,15 +10,15 @@ import { Product } from "../models/product";
 // import { AuthService } from "./auth.service";
 //*****동현임포트수정
 import { UserService } from "./user.service";
-import { HttpClientModule,HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import { CommonModule } from "@angular/common";
 import { User } from "../models/user";
 import { AuthService } from "./auth.service";
-import {Cart} from '../models/cart';
-import {Order} from '../../shared/models/order';
-import {OrderDetail} from '../../shared/models/orderDetail';
+import { Cart } from '../models/cart';
+import { Order } from '../../shared/models/order';
+import { OrderDetail } from '../../shared/models/orderDetail';
 //*****  동현임포트수정끝
 import { CachcingServiceBase } from "./cachcing.service";
 import { TokenService } from "./token.service";
@@ -27,80 +27,40 @@ let count = 0;
 
 
 @Injectable()
-export class ProductService extends CachcingServiceBase{
+export class ProductService extends CachcingServiceBase {
 
 
   private productListUrl = 'http://localhost:8080/toma/';
   private productReviewUrl = 'http://localhost:8080/toma/review/';
   private productQnaUrl = 'http://localhost:8080/toma/productqna/';
 
-
-
-
   private products: Observable<Product[]>;
+  p_code: string;
 
-  // products: AngularFireList<Product>;
-  // product: AngularFireObject<Product>;
-
-  // favouriteProducts
-  // favouriteProducts: AngularFireList<FavouriteProduct>;
-  // cartProducts: AngularFireList<FavouriteProduct>;
-
-  // NavbarCounts
   navbarCartCount = 0;
   navbarFavProdCount = 0;
 
-  // constructor()(
-  //   // private db: AngularFireDatabase,
-  //   // private authService: AuthService,
-  //   // 동현생성자수정
-  //   private userService: UserService,
-  //   private http:HttpClient,
-  //   // 동현생성자수정끝
-  //   private toastyService: ToastyService,
-  //   private toastyConfig: ToastyConfig
-  // ) {
-  //   // Toaster Config
-  //   this.toastyConfig.position = "top-right";
-  //   this.toastyConfig.theme = "material";
-  //
-  //   // if (this.authService.isLoggedIn()) {
-  //   //   this.calculateFavProductCounts();
-  //   //   this.calculateCartProductCounts();
-  //   // } else {
-  //   //   this.calculateLocalFavProdCounts();
-  //   //   this.calculateLocalCartProdCounts();
-  //   // }
-  // }
-//동현변수
-  cartToOrder:number[]=[];
-  cart:Cart;
-  fromCart:boolean=false;
-//동현변수끝
+  cartToOrder: number[] = [];
+  cart: Cart;
+  fromCart: boolean = false;
+
+  //동현변수끝
   public constructor(
     // 동현생성자수정
     private userService: UserService,
     private authService: AuthService,
-    private http:HttpClient,
+    private http: HttpClient,
     // 동현생성자수정끝
     private toastyService: ToastyService,
-    private tokenService : TokenService,
-    private toastyConfig: ToastyConfig){
+    private tokenService: TokenService,
+    private toastyConfig: ToastyConfig) {
 
-      super();
-      this.toastyConfig.position = "top-right";
-      this.toastyConfig.theme = "material";
-
-
-
+    super();
+    this.toastyConfig.position = "top-right";
+    this.toastyConfig.theme = "material";
   }
 
-  p_code : string;
-
-
-
-
-  getProductQna(){
+  getProductQna() {
     return this.http.get(this.productQnaUrl + this.p_code);
   }
 
@@ -109,32 +69,15 @@ export class ProductService extends CachcingServiceBase{
     this.p_code = p_code;
   }
 
-  getProductCode(){
+  getProductCode() {
     return this.p_code;
   }
 
-  getReview(){
-    if(this.tokenService.isToken("productReviewToken")){
-      this.tokenService.removeToken("productReviewToken");
-    }
+  getReview() {
     return this.http.get(this.productReviewUrl + this.p_code);
   }
 
-
-  public getProducts(){
-    // this.products = this.db.list("products");
-    // return this.products;
-
-    // return this.cache<Product[]>(() => this.products,
-    //                            (val: Observable<Product[]>) => this.products = val,
-    //                            () => this.http
-    //                                      .get("http://localhost:8080/toma")
-    //                                      .map((response) => response.json()
-    //                                                                 .map((item) => {
-    //                                                                   let model = new Product();
-    //                                                                   model.updateFrom(item);
-    //                                                                   return model;
-    //                                                                 })));
+  public getProducts() {
 
     return this.http.get(this.productListUrl);
 
@@ -148,7 +91,7 @@ export class ProductService extends CachcingServiceBase{
     // this.product = this.db.object("products/" + key);
     // return this.product;
 
-    return this.http.get(this.productListUrl + 'product/'+ p_kind);
+    return this.http.get(this.productListUrl + 'product/' + p_kind);
 
 
   }
@@ -157,12 +100,9 @@ export class ProductService extends CachcingServiceBase{
     // this.product = this.db.object("products/" + key);
     // return this.product;
 
-    return this.http.get(this.productListUrl + 'detail/product/'+p_code);
-
+    return this.http.get(this.productListUrl + 'detail/product/' + p_code);
 
   }
-
-
 
   updateProduct(data: Product) {
     // this.products.update(data.$key, data);
@@ -222,17 +162,17 @@ export class ProductService extends CachcingServiceBase{
     //
     //   delete data.$key;
 
-      // this.toastyService.wait(toastAdd);
-      // setTimeout(() => {
-      //   this.favouriteProducts.push({
-      //     product: data,
-          // productId: productKey,
-      //     userId: user.$key
-      //   });
-      //
-      //   this.calculateFavProductCounts();
-      // }, 1500);
-    }
+    // this.toastyService.wait(toastAdd);
+    // setTimeout(() => {
+    //   this.favouriteProducts.push({
+    //     product: data,
+    // productId: productKey,
+    //     userId: user.$key
+    //   });
+    //
+    //   this.calculateFavProductCounts();
+    // }, 1500);
+  }
   // }
 
   // Fetching unsigned users favourite proucts
@@ -272,11 +212,11 @@ export class ProductService extends CachcingServiceBase{
 
   // Calculating FavProductsCount and storing it in variable
   // calculateFavProductCounts() {
-    // const x = this.getUsersFavouriteProduct()
-    //   .snapshotChanges()
-    //   .subscribe(data => {
-    //     this.navbarFavProdCount = data.length;
-    //   });
+  // const x = this.getUsersFavouriteProduct()
+  //   .snapshotChanges()
+  //   .subscribe(data => {
+  //     this.navbarFavProdCount = data.length;
+  //   });
   // }
 
   /*
@@ -285,51 +225,51 @@ export class ProductService extends CachcingServiceBase{
 
   // Fetching Cart Products based on userId
   // **********동현카트구현중*************
-  cartUrl='http://localhost:8080/toma/cart/';
+  cartUrl = 'http://localhost:8080/toma/cart/';
   getUsersCartProducts() {
-  return this.http.get(this.cartUrl+this.authService.getLoggedInUser().uid);
-  //   const user = this.authService.getLoggedInUser();
+    return this.http.get(this.cartUrl + this.authService.getLoggedInUser().uid);
+    //   const user = this.authService.getLoggedInUser();
     // this.cartProducts = this.db.list("cartProducts", ref =>
     //   ref.orderByChild("userId").equalTo(user.$key)
     // );
     // return this.cartProducts;
   }
-  removeFromCart(cno:number){
-    console.log('serviceremove'+cno);
-    return this.http.delete(this.cartUrl+cno);
+  removeFromCart(cno: number) {
+    console.log('serviceremove' + cno);
+    return this.http.delete(this.cartUrl + cno);
   }
 
-  addToCart(cart:Cart){
+  addToCart(cart: Cart) {
     return this.http.post(this.cartUrl, cart);
   }
 
-  updateCart(cart:Cart){
-    return this.http.put(this.cartUrl,cart);
+  updateCart(cart: Cart) {
+    return this.http.put(this.cartUrl, cart);
   }
   //************동현카트끝***********************
   //*************동현orderWrite*****************
 
-  orderUrl='http://localhost:8080/toma/order/';
-  orderListToOrderWrite(cartToOrder:number[]) {
-    return this.http.put(this.cartUrl+'goOrderWrite',cartToOrder);
+  orderUrl = 'http://localhost:8080/toma/order/';
+  orderListToOrderWrite(cartToOrder: number[]) {
+    return this.http.put(this.cartUrl + 'goOrderWrite', cartToOrder);
   }
-  checkOutOrder(order:Order){
-    return this.http.post(this.orderUrl+'insert/order',order);
+  checkOutOrder(order: Order) {
+    return this.http.post(this.orderUrl + 'insert/order', order);
   }
 
-  checkOutOrderDetail(orderDetails:OrderDetail[]){
-    return this.http.post(this.orderUrl+'insert/detail',orderDetails);
+  checkOutOrderDetail(orderDetails: OrderDetail[]) {
+    return this.http.post(this.orderUrl + 'insert/detail', orderDetails);
   }
   //*************동현orderwrite끝*****************
   //*************동현 orderList*******************
-  getOrderList(uid:string){
-    return this.http.get(this.orderUrl+uid);
+  getOrderList(uid: string) {
+    return this.http.get(this.orderUrl + uid);
   }
-  getDetailList(ono:number){
-    return this.http.get(this.orderUrl+'orderdetail/'+ono);
+  getDetailList(ono: number) {
+    return this.http.get(this.orderUrl + 'orderdetail/' + ono);
   }
-  cancleOrder(ono:number){
-    return this.http.put(this.orderUrl+'cancle',ono);
+  cancleOrder(ono: number) {
+    return this.http.put(this.orderUrl + 'cancle', ono);
   }
   // Adding new Product to cart db if logged in else localStorage
   // addToCart(data: Product): void {
@@ -368,21 +308,21 @@ export class ProductService extends CachcingServiceBase{
   //       theme: "material"
   //     };
   //     this.toastyService.wait(toastOption);
-      // setTimeout(() => {
-      //   this.cartProducts.push({
-      //     product: data,
-      //     productId: productKey,
-      //     userId: user.$key
-      //   });
-      //
-      //   this.calculateCartProductCounts();
-      // }, 1500);
+  // setTimeout(() => {
+  //   this.cartProducts.push({
+  //     product: data,
+  //     productId: productKey,
+  //     userId: user.$key
+  //   });
+  //
+  //   this.calculateCartProductCounts();
+  // }, 1500);
   //   }
   // }
 
   // Removing Cart product from db
   // removeCart(key: string) {
-    // this.cartProducts.remove(key);
+  // this.cartProducts.remove(key);
   // }
 
   // Removing cart from local
@@ -417,12 +357,12 @@ export class ProductService extends CachcingServiceBase{
 
   // Calculating Cart products count and assigning to variable
   // calculateCartProductCounts() {
-    // const x = this.getUsersCartProducts()
-    //   .snapshotChanges()
-    //   .subscribe(data => {
-    //     this.navbarCartCount = data.length;
-    //   });
-//   }
+  // const x = this.getUsersCartProducts()
+  //   .snapshotChanges()
+  //   .subscribe(data => {
+  //     this.navbarCartCount = data.length;
+  //   });
+  //   }
 }
 
 
