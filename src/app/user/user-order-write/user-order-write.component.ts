@@ -46,20 +46,13 @@ export class UserOrderWriteComponent implements OnInit {
 
   ngOnInit() {
     this.loggedUser=this.authService.getLoggedInUser();
-
-    // if(this.tokenService.isToken('orderWriteLists')){
-    //   this.cartList=this.tokenService.getToken('orderWriteLists');
-    // }else{
       if(this.tokenService.getToken('fromCart')==true){//장바구니에서 온 경우
         this.orderList=this.tokenService.getToken('cartToOrder');
         this.orderListToOrderWrite();
       }else if(this.tokenService.getToken('fromCart')==false){//즉시구매에서 온 경우
         this.cartList[0]=this.tokenService.getToken('OWcart');
-        // this.tokenService.saveToken('orderWriteLists',this.cartList);
         this.getTotalPrice();
       }
-    // }
-
   }
 
   orderListToOrderWrite(){
@@ -130,7 +123,6 @@ export class UserOrderWriteComponent implements OnInit {
     let i=0;
     while(i<this.cartList.length){
       this.totalPrice+=this.cartList[i].p_sellprice*this.cartList[i].camount;
-
       i++;
       console.log(this.totalPrice);
     }

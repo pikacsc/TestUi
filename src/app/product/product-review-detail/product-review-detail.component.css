@@ -1,0 +1,23 @@
+#delete_button{
+  float : left;
+}
+
+#update_button{
+  float : right;
+}
+#back_button{
+  float : right;
+}
+
+
+ol li {
+  font-weight: bold;
+}
+
+tbody th {
+
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(245,198,203);
+
+}

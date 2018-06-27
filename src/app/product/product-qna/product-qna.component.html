@@ -5,7 +5,7 @@
 </ol>
 
 <table class="table table-responsive-md">
-  <thead class="amber lighten-3">
+  <thead class="table-danger">
   <tr>
     <th>번호</th>
     <th>카테고리</th>
@@ -19,7 +19,7 @@
 
   <tbody>
 
-    <tr *ngFor="let productQna of productQnas | paginate: { itemsPerPage: 6, currentPage: page }; let i = index">
+    <tr *ngFor="let productQna of productQnas | paginate: { id:'qna', itemsPerPage: 5, currentPage: page }; let i = index">
     <th>{{i+1}}</th>
     <th>{{productQna.pq_category}}</th>
     <th>
@@ -36,13 +36,13 @@
   </tr>
 
   </tbody>
+  </table>
 
-  <div class="text-center mt-3">
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
-  </div>
-
-  <button type="button" class="btn btn-outline-info waves-effect" id="qna_button"
+  <button type="button" class="btn btn-outline-info waves-effect btn-sm float-right" id="qna_button"
     [routerLink]="['/products/productqna/write']">문의하기
   </button>
 
-</table>
+
+  <div class="text-center mt-3">
+    <pagination-controls id="qna" (pageChange)="page = $event"></pagination-controls>
+  </div>
