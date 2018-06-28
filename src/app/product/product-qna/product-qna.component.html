@@ -12,6 +12,7 @@
     <th>제목</th>
     <th>작성자</th>
     <th>작성일</th>
+    <th>답변여부</th>
     <th>조회</th>
 
   </tr>
@@ -30,6 +31,8 @@
     </th>
     <th>{{productQna.u_id}}</th>
     <th>{{productQna.pq_date | date : 'yyyy-MM-dd'}}</th>
+    <th *ngIf="productQna.pq_replyyn == 'n'">{{productQna.pq_replyyn | uppercase}}</th>
+    <th *ngIf="productQna.pq_replyyn !== 'n'">{{productQna.pq_replyyn | uppercase}}</th>
     <th>{{productQna.pq_hits}}</th>
 
   </tr>
